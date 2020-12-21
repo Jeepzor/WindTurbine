@@ -7,7 +7,7 @@
 
 
 
-namespace wind_turbine {
+namespace wind {
 	class StateManager {
 	public:
 		StateManager();

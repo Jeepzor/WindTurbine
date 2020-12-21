@@ -2,8 +2,8 @@
 #include "state_manager.h"
 #include "image.h"
 
-namespace wind_turbine {
-	Engine::Engine() {
+namespace wind {
+	Turbine::Turbine() {
 		is_active = false;
 		window = nullptr;
 		renderer = nullptr;
@@ -13,12 +13,12 @@ namespace wind_turbine {
 		keyboard_state = SDL_GetKeyboardState(NULL);
 	}
 
-	Engine::~Engine() {
+	Turbine::~Turbine() {
 		clean();
 	}
 
 	//Initializes all of the essential SDL components.
-	void Engine::create(const char* title, int screen_width, int screen_height) {
+	void Turbine::create(const char* title, int screen_width, int screen_height) {
 		//Garbage -> Remove when done testing
 
 		//Initializes SDL-base and and validates it succeded.
@@ -85,7 +85,7 @@ namespace wind_turbine {
 		}
 			*/
 
-	void Engine::run() {
+	void Turbine::run() {
 		while (active()) {
 			handleEvents();
 			update();
@@ -93,13 +93,13 @@ namespace wind_turbine {
 		}
 	}
 	
-	bool Engine::keyboard_is_down(std::string key) {
+	bool Turbine::keyboard_is_down(std::string key) {
 		SDL_PumpEvents();
 		const char* c = key.c_str();
 		return (keyboard_state[SDL_GetScancodeFromName(c)]);
 	}
 
-	void Engine::handleEvents() {
+	void Turbine::handleEvents() {
 		
 
 
@@ -118,7 +118,7 @@ namespace wind_turbine {
 		*/
 	}
 
-	void Engine::update() {
+	void Turbine::update() {
 		currentFrameTime = SDL_GetTicks();
 		dt = (currentFrameTime - previousFrameTime) / 1000;
 
@@ -127,24 +127,24 @@ namespace wind_turbine {
 		previousFrameTime = currentFrameTime;
 	};
 
-	void Engine::draw() {
+	void Turbine::draw() {
 		SDL_RenderClear(renderer);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 		state_manager.draw();
 		SDL_RenderPresent(renderer);
 	}
 
-	bool Engine::active() { return is_active; }
+	bool Turbine::active() { return is_active; }
 
-	void Engine::setActive(bool state) {
+	void Turbine::setActive(bool state) {
 		is_active = state;
 	}
 
-	SDL_Renderer* Engine::getRenderer() const {
+	SDL_Renderer* Turbine::getRenderer() const {
 		return renderer;
 	}
 
-	void Engine::clean() {
+	void Turbine::clean() {
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 
@@ -153,5 +153,5 @@ namespace wind_turbine {
 		SDL_Quit();
 	}
 
-	Engine engine;
+	Turbine turbine;
 }

@@ -2,11 +2,11 @@
 
 //void handleEvents();
 void TestState::update(double dt) {
-	if (wind_turbine::engine.keyboard_is_down("w")) {
+	if (wind::turbine.keyboard_is_down("w")) {
 		std::cout << "[W] - is pressed" <<  dt <<  "\n";
 	}
 	
-	if (wind_turbine::engine.keyboard_is_down("S")) {
+	if (wind::turbine.keyboard_is_down("S")) {
 		std::cout << "[S] - is pressed" << "\n";
 	}
 }

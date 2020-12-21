@@ -8,7 +8,7 @@
 #include "state_manager.h"
 
 
-namespace wind_turbine {
+namespace wind {
 	StateManager::StateManager() {
 		states;
 		active_state = nullptr;

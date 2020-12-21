@@ -15,7 +15,7 @@ Image::Image(std::string path) {
 	width = surface->w;
 	height = surface->h;
 	destination = { 0, 0, width, height };
-	asset = SDL_CreateTextureFromSurface(wind_turbine::engine.getRenderer(), surface);
+	asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 	SDL_FreeSurface(surface);
 }
 	
@@ -38,7 +38,7 @@ Image::Image(const Image& source) {
 	width = source.width;
 	height = source.height;
 	destination = { 0, 0, width, height };
-	asset = SDL_CreateTextureFromSurface(wind_turbine::engine.getRenderer(), surface);
+	asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 	SDL_FreeSurface(surface);
 }
 
@@ -54,7 +54,7 @@ Image& Image::operator = (const Image& source) {
 	width = source.width;
 	height = source.height;
 	destination = { 0, 0, width, height };
-	asset = SDL_CreateTextureFromSurface(wind_turbine::engine.getRenderer(), surface);
+	asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 	SDL_FreeSurface(surface);
 	return *this;
 }
@@ -84,5 +84,5 @@ SDL_Texture* Image::getAsset() {
 
 void Image::draw(int x, int y) {
 	setPosition(x, y);
-	SDL_RenderCopy(wind_turbine::engine.getRenderer(), getAsset(), NULL, &destination);
+	SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, &destination);
 }

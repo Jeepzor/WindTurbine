@@ -7,11 +7,11 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-namespace wind_turbine {
-	class Engine {
+namespace wind {
+	class Turbine {
 	public:
-		Engine();
-		~Engine();
+		Turbine();
+		~Turbine();
 
 		void create(const char* title, int screen_width, int screen_height);
 		void run();
@@ -34,6 +34,6 @@ namespace wind_turbine {
 		const Uint8* keyboard_state;
 	};
 
-	extern Engine engine;
+	extern Turbine turbine;
 }
 #endif

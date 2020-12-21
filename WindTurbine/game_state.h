@@ -3,7 +3,7 @@
 #include <string>
 #include <iostream>
 
-namespace wind_turbine {
+namespace wind {
 	class GameState {
 	public:
 		virtual void handleEvents();

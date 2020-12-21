@@ -3,7 +3,7 @@
 
 #include "game_state.h"
 
-namespace wind_turbine {
+namespace wind {
 	void GameState::handleEvents() {
 
 	}

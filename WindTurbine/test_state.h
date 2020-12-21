@@ -3,7 +3,7 @@
 #include "state_manager.h"
 #include "game_state.h"
 
-class TestState : public wind_turbine::GameState {
+class TestState : public wind::GameState {
 public:
 	void handleEvents();
 	void update(double);
