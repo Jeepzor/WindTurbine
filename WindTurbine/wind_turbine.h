@@ -20,9 +20,11 @@ namespace wind {
 		void draw();
 		void clean();
 		void setActive(bool);
+		void setMaxFPS(int limit);
+		void delay(double dt);
 		bool active();
 		SDL_Renderer* getRenderer() const;
-		bool keyboard_is_down(std::string);
+		bool keyboardIsDown(std::string);
 
 	private:
 		bool is_active;
@@ -32,6 +34,7 @@ namespace wind {
 		double currentFrameTime;
 		double dt;
 		const Uint8* keyboard_state;
+		int fpsLimit;
 	};
 
 	extern Turbine turbine;

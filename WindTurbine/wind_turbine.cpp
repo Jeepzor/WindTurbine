@@ -9,6 +9,7 @@ namespace wind {
 		renderer = nullptr;
 		previousFrameTime = 0;
 		currentFrameTime = 0;
+		fpsLimit = 0;
 		dt = 0;
 		keyboard_state = SDL_GetKeyboardState(NULL);
 	}
@@ -64,26 +65,10 @@ namespace wind {
 		setActive(true);
 	}
 
-	/*
-		const Uint8* state = SDL_GetKeyboardState(NULL);
-		//SDL_Event event;
-		while (active) {
-
-			SDL_PumpEvents();
-			if (state[SDL_SCANCODE_D]) {
-
-			}else if (state[SDL_SCANCODE_A]) {
-
-			}
-
-			if (state[SDL_SCANCODE_W]) {
-
-			}else if (state[SDL_SCANCODE_S]) {
-
-			}
-
-		}
-			*/
+	//Caps the framerate, 0 = uncapped.
+	void Turbine::setMaxFPS(int limit) {
+		fpsLimit = limit;
+	}
 
 	void Turbine::run() {
 		while (active()) {
@@ -93,16 +78,14 @@ namespace wind {
 		}
 	}
 	
-	bool Turbine::keyboard_is_down(std::string key) {
+	//Return true if passed in key is currently down.
+	bool Turbine::keyboardIsDown(std::string key) {
 		SDL_PumpEvents();
 		const char* c = key.c_str();
 		return (keyboard_state[SDL_GetScancodeFromName(c)]);
 	}
 
 	void Turbine::handleEvents() {
-		
-
-
 		/*
 		SDL_Event event;
 		SDL_PollEvent(&event);
@@ -123,9 +106,21 @@ namespace wind {
 		dt = (currentFrameTime - previousFrameTime) / 1000;
 
 		state_manager.update(dt);
-
 		previousFrameTime = currentFrameTime;
+		delay(dt);
 	};
+
+	void Turbine::delay(double dt) {
+		if (fpsLimit > 0) {
+			double minimum_dt = 1000 / fpsLimit;
+			double delay_amount = minimum_dt - dt;
+
+			if (delay_amount > 0) {
+				SDL_Delay(delay_amount);
+			}
+
+		}
+	}
 
 	void Turbine::draw() {
 		SDL_RenderClear(renderer);
