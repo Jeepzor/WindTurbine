@@ -66,13 +66,19 @@ namespace wind {
 	}
 
 	void State::update(double dt) {
-		//getActiveState()->update(dt);
+		for (auto current_module : modules) {
+			if (current_module->inUpdateList(currentState)) {
+				current_module->update(dt);
+			}
+		}
 	}
 	
 	void State::draw() {
-		
-		//getActiveState()->draw();
-		
+		for (auto current_module : modules) {
+			if (current_module->inDrawList(currentState)) {
+				current_module->draw();
+			}
+		}
 	}
 
 	State state;

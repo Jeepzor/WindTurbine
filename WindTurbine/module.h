@@ -14,15 +14,16 @@ namespace wind {
 		virtual void clean();
 		virtual std::string getName() { return "Game State"; };
 
-		bool exist(std::vector<std::string> list, std::string state);
-		bool inUpdateList(std::string state);
-		bool inDrawList(std::string state);
-		bool inEventList(std::string state);
+		virtual bool exist(std::vector<std::string> list, std::string state);
+		virtual bool inUpdateList(std::string state);
+		virtual bool inDrawList(std::string state);
+		virtual bool inEventList(std::string state);
 
 		virtual std::vector<std::string> getUpdateList() { return updateOn; };
 		virtual std::vector<std::string> getDrawList() { return drawOn; };
 		virtual std::vector<std::string> getEventList() { return eventOn; };
-	private:
+	
+	protected:
 		std::vector<std::string> updateOn;
 		std::vector<std::string> drawOn;
 		std::vector<std::string> eventOn;

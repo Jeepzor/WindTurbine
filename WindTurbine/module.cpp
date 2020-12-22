@@ -38,6 +38,7 @@ namespace wind {
 		return(exist(updateOn, state));
 	}
 
+	//Returns true if the module is subscribed to that state.
 	bool Module::exist(std::vector<std::string> list, std::string state) {
 		if (std::find(list.begin(), list.end(), state) != list.end())
 		{

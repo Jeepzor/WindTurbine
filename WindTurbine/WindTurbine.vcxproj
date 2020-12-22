@@ -146,6 +146,7 @@
     <ClCompile Include="module.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="test_module.cpp" />
+    <ClCompile Include="test_module_2.cpp" />
     <ClCompile Include="wind_turbine.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
@@ -154,6 +155,7 @@
     <ClInclude Include="module.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="test_module.h" />
+    <ClInclude Include="test_module_2.h" />
     <ClInclude Include="wind_turbine.h" />
     <ClInclude Include="image.h" />
   </ItemGroup>

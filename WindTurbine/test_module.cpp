@@ -9,7 +9,7 @@ TestModule::TestModule() {
 //void handleEvents();
 void TestModule::update(double dt) {
 	if (wind::turbine.keyboardIsDown("w")) {
-		std::cout << "[W] - is pressed" <<  dt <<  "\n";
+		std::cout << "[W] - is pressed" <<  "\n";
 	}
 	
 	if (wind::turbine.keyboardIsDown("S")) {
