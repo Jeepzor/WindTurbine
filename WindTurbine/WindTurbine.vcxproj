@@ -143,17 +143,17 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="game_state.cpp" />
-    <ClCompile Include="state_manager.cpp" />
-    <ClCompile Include="test_state.cpp" />
+    <ClCompile Include="module.cpp" />
+    <ClCompile Include="state.cpp" />
+    <ClCompile Include="test_module.cpp" />
     <ClCompile Include="wind_turbine.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="game_state.h" />
-    <ClInclude Include="state_manager.h" />
-    <ClInclude Include="test_state.h" />
+    <ClInclude Include="module.h" />
+    <ClInclude Include="state.h" />
+    <ClInclude Include="test_module.h" />
     <ClInclude Include="wind_turbine.h" />
     <ClInclude Include="image.h" />
   </ItemGroup>

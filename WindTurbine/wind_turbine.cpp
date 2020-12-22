@@ -1,5 +1,5 @@
 #include "wind_turbine.h"
-#include "state_manager.h"
+#include "state.h"
 #include "image.h"
 
 namespace wind {
@@ -105,7 +105,7 @@ namespace wind {
 		currentFrameTime = SDL_GetTicks();
 		dt = (currentFrameTime - previousFrameTime) / 1000;
 
-		state_manager.update(dt);
+		state.update(dt);
 		previousFrameTime = currentFrameTime;
 		delay(dt);
 	};
@@ -118,14 +118,14 @@ namespace wind {
 			if (delay_amount > 0) {
 				SDL_Delay(delay_amount);
 			}
-
+			 
 		}
 	}
 
 	void Turbine::draw() {
 		SDL_RenderClear(renderer);
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-		state_manager.draw();
+		state.draw();
 		SDL_RenderPresent(renderer);
 	}
 
