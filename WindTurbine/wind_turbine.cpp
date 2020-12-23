@@ -79,26 +79,24 @@ namespace wind {
 	}
 	
 	//Return true if passed in key is currently down.
-	bool Turbine::keyboardIsDown(std::string key) {
+	bool Turbine::keyDown(std::string key) {
 		SDL_PumpEvents();
 		const char* c = key.c_str();
 		return (keyboard_state[SDL_GetScancodeFromName(c)]);
 	}
 
 	void Turbine::handleEvents() {
-		/*
-		SDL_Event event;
-		SDL_PollEvent(&event);
+		SDL_Event current_event;
+		SDL_PollEvent(&current_event);
 
-		switch (event.type) {
+		switch (current_event.type) {
 		case SDL_QUIT:
 			setActive(false);
 			break;
-
 		default:
+			state.handleEvents(&current_event);
 			break;
 		}
-		*/
 	}
 
 	void Turbine::update() {

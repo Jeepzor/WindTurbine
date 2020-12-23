@@ -8,11 +8,11 @@
 class PauseModule : public wind::GameModule {
 public:
 	PauseModule();
-	void handleEvents();
-	void update(double);
+	void handleEvents(SDL_Event* current_event);
+	void update(double dt);
 	void draw();
 	void clean();
-	std::string getName() { return "test"; }
+	std::string getName() { return "paused"; }
 
 private: 
 	wind::Image pauseImg;

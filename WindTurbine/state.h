@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <SDL.h>
+
 #include "game_module.h"
 
 
@@ -15,6 +17,7 @@ namespace wind {
 		bool exist(std::string state);
 		void setCurrentState(std::string state);
 		void addModule(GameModule*);
+		void handleEvents(SDL_Event* curent_event);
 		void update(double);
 		void draw();
 	private:

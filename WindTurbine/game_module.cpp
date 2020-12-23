@@ -10,7 +10,7 @@ namespace wind {
 		eventOn;
 	}
 
-	void GameModule::handleEvents() {
+	void GameModule::handleEvents(SDL_Event* current_event) {
 
 	}
 

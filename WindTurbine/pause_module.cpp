@@ -8,13 +8,16 @@ PauseModule::PauseModule() {
 	pauseImg = wind::Image("../assets/paused.png");
 }
 
-//void handleEvents();
+void PauseModule::handleEvents(SDL_Event* current_event) {
+
+}
+
 void PauseModule::update(double dt) {
-	if (wind::turbine.keyboardIsDown("w")) {
+	if (wind::turbine.keyDown("w")) {
 		std::cout << "Game is paused" << dt << "\n";
 	}
 
-	if (wind::turbine.keyboardIsDown("t")) {
+	if (wind::turbine.keyDown("t")) {
 		wind::state.setCurrentState("play");
 	}
 }
@@ -26,8 +29,4 @@ void PauseModule::draw() {
 
 void PauseModule::clean() {
 	//std::cout << "State was cleaned" << "\n";
-}
-
-void PauseModule::handleEvents() {
-	//std::cout << "State-events being managed" << "\n";
 }

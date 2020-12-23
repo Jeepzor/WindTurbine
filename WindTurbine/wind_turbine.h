@@ -28,7 +28,7 @@ namespace wind {
 		void delay(double dt);
 		bool active();
 		SDL_Renderer* getRenderer() const;
-		bool keyboardIsDown(std::string);
+		bool keyDown(std::string);
 
 	private:
 		bool is_active;

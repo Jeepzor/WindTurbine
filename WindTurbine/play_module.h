@@ -6,11 +6,11 @@
 class PlayModule : public wind::GameModule {
 public:
 	PlayModule();
-	void handleEvents();
-	void update(double);
+	void handleEvents(SDL_Event* current_event);
+	void update(double dt);
 	void draw();
 	void clean();
-	std::string getName() { return "test"; };
+	std::string getName() { return "playing"; };
 
 private:
 	wind::Image test;

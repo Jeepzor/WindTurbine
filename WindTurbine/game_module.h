@@ -3,12 +3,14 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <SDL.h>
+
 
 namespace wind {
 	class GameModule {
 	public:
 		GameModule();
-		virtual void handleEvents();
+		virtual void handleEvents(SDL_Event* current_event);
 		virtual void update(double);
 		virtual void draw();
 		virtual void clean();

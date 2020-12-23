@@ -4,7 +4,7 @@
 #include <iostream>
 
 
-#include "wind_turbine.h"
+#include "state.h"
 
 
 namespace wind {
@@ -61,6 +61,14 @@ namespace wind {
 		}
 		else{
 			return false;
+		}
+	}
+
+	void State::handleEvents(SDL_Event* curent_event) {
+		for (auto current_game_module : game_modules) {
+			if (current_game_module->inEventList(currentState)) {
+				current_game_module->handleEvents(curent_event);
+			}
 		}
 	}
 
