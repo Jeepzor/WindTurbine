@@ -4,20 +4,23 @@ PauseModule::PauseModule() {
 	updateOn = { "paused" };
 	drawOn = { "paused" };
 	eventOn = { "paused"};
+
+	pauseImg = Image("../assets/paused.png");
 }
 
 //void handleEvents();
 void PauseModule::update(double dt) {
 	if (wind::turbine.keyboardIsDown("w")) {
-		std::cout << "[W] - hurr durr" << dt << "\n";
+		std::cout << "Game is paused" << dt << "\n";
 	}
 
-	if (wind::turbine.keyboardIsDown("S")) {
-		std::cout << "[S] - durr hurr" << "\n";
+	if (wind::turbine.keyboardIsDown("t")) {
+		wind::state.setCurrentState("play");
 	}
 }
 
 void PauseModule::draw() {
+	pauseImg.draw(0, 0, 255,255,255, 175);
 	//std::cout << "State is drawing" << "\n";
 }
 

@@ -13,7 +13,8 @@ public:
 	std::string getName() { return "test"; };
 
 private:
-
+	Image test;
+	Image bg;
 };
 
 #endif

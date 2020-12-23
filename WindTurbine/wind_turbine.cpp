@@ -124,7 +124,6 @@ namespace wind {
 
 	void Turbine::draw() {
 		SDL_RenderClear(renderer);
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 		state.draw();
 		SDL_RenderPresent(renderer);
 	}
@@ -140,6 +139,7 @@ namespace wind {
 	}
 
 	void Turbine::clean() {
+		std::cout << "Well this is strange";
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 

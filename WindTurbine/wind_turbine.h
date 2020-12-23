@@ -9,6 +9,7 @@
 
 #include "game_module.h"
 #include "state.h"
+#include "image.h"
 
 namespace wind {
 	class Turbine {

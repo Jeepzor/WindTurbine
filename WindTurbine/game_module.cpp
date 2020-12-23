@@ -31,11 +31,11 @@ namespace wind {
 	}
 	
 	bool GameModule::inDrawList(std::string state) {
-		return(exist(updateOn, state));
+		return(exist(drawOn, state));
 	}
 	
 	bool GameModule::inEventList(std::string state) {
-		return(exist(updateOn, state));
+		return(exist(eventOn, state));
 	}
 
 	//Returns true if the module is subscribed to that state.

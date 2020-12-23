@@ -13,6 +13,9 @@ public:
 	void draw();
 	void clean();
 	std::string getName() { return "test"; }
+
+private: 
+	Image pauseImg;
 };
 
 #endif

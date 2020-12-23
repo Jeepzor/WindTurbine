@@ -11,12 +11,16 @@ public:
 	Image();
 	~Image();
 
-	void draw(int, int);
+	void draw(int x, int y);
+	void draw(int x, int y, int r, int g, int b);
+	void draw(int x, int y, int r, int g, int b, int a);
 	void setPosition(int, int);
+
+	
 
 	int getWidth();
 	int getHeight();
-
+	SDL_Rect* getDestination();
 	SDL_Texture* getAsset();
 
 private:

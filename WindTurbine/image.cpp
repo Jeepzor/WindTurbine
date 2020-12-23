@@ -59,8 +59,13 @@ Image& Image::operator = (const Image& source) {
 	return *this;
 }
 
+SDL_Rect* Image::getDestination() {
+	return &destination;
+}
+
 //Destructor 
 Image::~Image() {
+	std::cout << "destructor was called" << "\n";
 	SDL_DestroyTexture(asset);
 }
 
@@ -83,6 +88,19 @@ SDL_Texture* Image::getAsset() {
 
 
 void Image::draw(int x, int y) {
+	setPosition(x, y);
+	SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, &destination);
+}
+
+void Image::draw(int x, int y, int r, int g, int b) {
+	SDL_SetTextureColorMod(asset, r, g, b);
+	setPosition(x, y);
+	SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, &destination);
+}
+
+void Image::draw(int x, int y, int r, int g, int b, int a) {
+	SDL_SetTextureAlphaMod(asset, a);
+	SDL_SetTextureColorMod(asset, r, g, b);
 	setPosition(x, y);
 	SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, &destination);
 }
