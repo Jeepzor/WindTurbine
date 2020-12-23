@@ -19,7 +19,7 @@ namespace wind {
 		void draw();
 	private:
 		void extractStates(GameModule*);
-		std::vector<GameModule*> modules; //Vector containing all modules.
+		std::vector<GameModule*> game_modules; //Vector containing all game-modules.
 		std::vector<std::string> states; //Vector containing all names of states.
 		std::string currentState;
 	};

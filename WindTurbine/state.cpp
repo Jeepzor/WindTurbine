@@ -10,7 +10,7 @@
 namespace wind {
 	State::State() {
 		states;
-		modules;
+		game_modules;
 		currentState = "";
 	}
 
@@ -29,25 +29,25 @@ namespace wind {
 		}
 	}
 	
-	void State::addModule(GameModule* newModule) {
-		extractStates(newModule);
-		modules.push_back(newModule);
+	void State::addModule(GameModule* new_game_module) {
+		extractStates(new_game_module);
+		game_modules.push_back(new_game_module);
 	}
 
-	void State::extractStates(GameModule* module) {
-		for (auto new_state : module->getUpdateList()) {
+	void State::extractStates(GameModule* game_module) {
+		for (auto new_state : game_module->getUpdateList()) {
 			if (!exist(new_state)) {
 				states.push_back(new_state);
 			}
 		}
 		
-		for (auto new_state : module->getDrawList()) {
+		for (auto new_state : game_module->getDrawList()) {
 			if (!exist(new_state)) {
 				states.push_back(new_state);
 			}
 		}
 		
-		for (auto new_state : module->getEventList()) {
+		for (auto new_state : game_module->getEventList()) {
 			if (!exist(new_state)) {
 				states.push_back(new_state);
 			}
@@ -65,17 +65,17 @@ namespace wind {
 	}
 
 	void State::update(double dt) {
-		for (auto current_module : modules) {
-			if (current_module->inUpdateList(currentState)) {
-				current_module->update(dt);
+		for (auto current_game_module : game_modules) {
+			if (current_game_module->inUpdateList(currentState)) {
+				current_game_module->update(dt);
 			}
 		}
 	}
 	
 	void State::draw() {
-		for (auto current_module : modules) {
-			if (current_module->inDrawList(currentState)) {
-				current_module->draw();
+		for (auto current_game_module : game_modules) {
+			if (current_game_module->inDrawList(currentState)) {
+				current_game_module->draw();
 			}
 		}
 	}
