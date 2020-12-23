@@ -18,7 +18,6 @@ public:
 	int getHeight();
 
 	SDL_Texture* getAsset();
-	SDL_Rect* getDestination();
 
 private:
 	SDL_Surface* surface;

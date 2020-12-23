@@ -1,13 +1,13 @@
-#include "test_module_2.h"
+#include "pause_module.h"
 
-TestModule2::TestModule2() {
-	updateOn = { "test","somethingElse" };
-	drawOn = { "test","somethingElse" };
-	eventOn = { "test","somethingElse" };
+PauseModule::PauseModule() {
+	updateOn = { "paused" };
+	drawOn = { "paused" };
+	eventOn = { "paused"};
 }
 
 //void handleEvents();
-void TestModule2::update(double dt) {
+void PauseModule::update(double dt) {
 	if (wind::turbine.keyboardIsDown("w")) {
 		std::cout << "[W] - hurr durr" << dt << "\n";
 	}
@@ -17,14 +17,14 @@ void TestModule2::update(double dt) {
 	}
 }
 
-void TestModule2::draw() {
+void PauseModule::draw() {
 	//std::cout << "State is drawing" << "\n";
 }
 
-void TestModule2::clean() {
+void PauseModule::clean() {
 	//std::cout << "State was cleaned" << "\n";
 }
 
-void TestModule2::handleEvents() {
+void PauseModule::handleEvents() {
 	//std::cout << "State-events being managed" << "\n";
 }

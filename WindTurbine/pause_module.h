@@ -1,15 +1,13 @@
 
-#ifndef TEST_MODULE_2_H
-#define TEST_MODULE_2_H
+#ifndef PAUSE_MODULE_H
+#define PAUSE_MODULE_H
 
 
 #include "wind_turbine.h"
-#include "state.h"
-#include "module.h"
 
-class TestModule2 : public wind::Module {
+class PauseModule : public wind::GameModule {
 public:
-	TestModule2();
+	PauseModule();
 	void handleEvents();
 	void update(double);
 	void draw();

@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-#include "module.h"
+#include "game_module.h"
 
 
 
@@ -14,12 +14,12 @@ namespace wind {
 		std::string getActiveState();
 		bool exist(std::string state);
 		void setCurrentState(std::string state);
-		void addModule(Module*);
+		void addModule(GameModule*);
 		void update(double);
 		void draw();
 	private:
-		void extractStates(Module*);
-		std::vector<Module*> modules; //Vector containing all modules.
+		void extractStates(GameModule*);
+		std::vector<GameModule*> modules; //Vector containing all modules.
 		std::vector<std::string> states; //Vector containing all names of states.
 		std::string currentState;
 	};

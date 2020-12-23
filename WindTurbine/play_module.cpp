@@ -1,13 +1,13 @@
-#include "test_module.h"
+#include "play_module.h"
 
-TestModule::TestModule() {
-	updateOn = { "test","testing" };
-	drawOn = { "test","testing" };
-	eventOn = { "test","testing" };
+PlayModule::PlayModule() {
+	updateOn = { "play" };
+	drawOn = { "play","pause" };
+	eventOn = { "play" };
 }
 
 //void handleEvents();
-void TestModule::update(double dt) {
+void PlayModule::update(double dt) {
 	if (wind::turbine.keyboardIsDown("w")) {
 		std::cout << "[W] - is pressed" <<  "\n";
 	}
@@ -17,14 +17,14 @@ void TestModule::update(double dt) {
 	}
 }
 
-void TestModule::draw() {
+void PlayModule::draw() {
 	//std::cout << "State is drawing" << "\n";
 }
 
-void TestModule::clean() {
+void PlayModule::clean() {
 	//std::cout << "State was cleaned" << "\n";
 }
 
-void TestModule::handleEvents() {
+void PlayModule::handleEvents() {
 	//std::cout << "State-events being managed" << "\n";
 }

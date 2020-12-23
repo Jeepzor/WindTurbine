@@ -7,6 +7,9 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
+#include "game_module.h"
+#include "state.h"
+
 namespace wind {
 	class Turbine {
 	public:

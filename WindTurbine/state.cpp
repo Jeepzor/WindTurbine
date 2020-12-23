@@ -4,8 +4,7 @@
 #include <iostream>
 
 
-#include "state.h"
-#include "module.h"
+#include "wind_turbine.h"
 
 
 namespace wind {
@@ -30,12 +29,12 @@ namespace wind {
 		}
 	}
 	
-	void State::addModule(Module* newModule) {
+	void State::addModule(GameModule* newModule) {
 		extractStates(newModule);
 		modules.push_back(newModule);
 	}
 
-	void State::extractStates(Module* module) {
+	void State::extractStates(GameModule* module) {
 		for (auto new_state : module->getUpdateList()) {
 			if (!exist(new_state)) {
 				states.push_back(new_state);

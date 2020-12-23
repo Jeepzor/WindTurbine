@@ -1,13 +1,13 @@
-#ifndef GAME_STATE_H
-#define GAME_STATE_H
+#ifndef GAME_MODULE_H
+#define GAME_MODULE_H
 #include <string>
 #include <vector>
 #include <iostream>
 
 namespace wind {
-	class Module {
+	class GameModule {
 	public:
-		Module();
+		GameModule();
 		virtual void handleEvents();
 		virtual void update(double);
 		virtual void draw();
