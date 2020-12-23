@@ -7,8 +7,8 @@ PlayModule::PlayModule() {
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
 
-	test = Image("../assets/player.png");
-	bg = Image("../assets/bg.png");
+	test = wind::Image("../assets/player.png");
+	bg = wind::Image("../assets/bg.png");
 }
 
 //void handleEvents();
@@ -28,7 +28,7 @@ void PlayModule::update(double dt) {
 }
 
 void PlayModule::draw() {
-	bg.draw(0, 0);
+	bg.draw();
 	test.draw(200, 200);
 	//std::cout << "State is drawing" << "\n";
 }

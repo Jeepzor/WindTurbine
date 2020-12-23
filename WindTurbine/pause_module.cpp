@@ -5,7 +5,7 @@ PauseModule::PauseModule() {
 	drawOn = { "paused" };
 	eventOn = { "paused"};
 
-	pauseImg = Image("../assets/paused.png");
+	pauseImg = wind::Image("../assets/paused.png");
 }
 
 //void handleEvents();
