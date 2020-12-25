@@ -10,13 +10,16 @@ PlayModule::PlayModule() {
 	test = wind::Image("../assets/player.png");
 	bg = wind::Image("../assets/bg.png");
 }
- 
-void PlayModule::handleEvents(SDL_Event* current_event) {
 
+void PlayModule::keyPressed(std::string key) {
+	if (key == "1") {
+		wind::state.setCurrentState("paused");
+	}
 }
 
+
 void PlayModule::update(double dt) {
-	if (wind::turbine.keyDown("w")) {
+	if (wind::turbine.keyDown("W")) {
 		std::cout << "[W] - is pressed" <<  "\n";
 	}
 	

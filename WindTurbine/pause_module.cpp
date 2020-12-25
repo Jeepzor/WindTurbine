@@ -8,17 +8,15 @@ PauseModule::PauseModule() {
 	pauseImg = wind::Image("../assets/paused.png");
 }
 
-void PauseModule::handleEvents(SDL_Event* current_event) {
-
+void PauseModule::keyPressed(std::string key) {
+	if (key == "2") {
+		wind::state.setCurrentState("play");
+	}
 }
 
 void PauseModule::update(double dt) {
-	if (wind::turbine.keyDown("w")) {
+	if (wind::turbine.keyDown("W")) {
 		std::cout << "Game is paused" << dt << "\n";
-	}
-
-	if (wind::turbine.keyDown("t")) {
-		wind::state.setCurrentState("play");
 	}
 }
 

@@ -89,12 +89,16 @@ namespace wind {
 		SDL_Event current_event;
 		SDL_PollEvent(&current_event);
 
+		std::string key;
 		switch (current_event.type) {
 		case SDL_QUIT:
 			setActive(false);
 			break;
+		case SDL_KEYDOWN:
+			key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
+			state.keyPressed(key);
+			break;
 		default:
-			state.handleEvents(&current_event);
 			break;
 		}
 	}
@@ -137,7 +141,6 @@ namespace wind {
 	}
 
 	void Turbine::clean() {
-		std::cout << "Well this is strange";
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
 

@@ -64,10 +64,10 @@ namespace wind {
 		}
 	}
 
-	void State::handleEvents(SDL_Event* curent_event) {
+	void State::keyPressed(std::string key) {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inEventList(currentState)) {
-				current_game_module->handleEvents(curent_event);
+				current_game_module->keyPressed(key);
 			}
 		}
 	}

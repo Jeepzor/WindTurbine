@@ -10,11 +10,11 @@ namespace wind {
 	class GameModule {
 	public:
 		GameModule();
-		virtual void handleEvents(SDL_Event* current_event);
-		virtual void update(double);
-		virtual void draw();
-		virtual void clean();
-		virtual std::string getName() { return "Game State"; };
+		virtual void keyPressed(std::string key) = 0;
+		virtual void update(double) = 0;
+		virtual void draw() = 0;
+		virtual void clean() = 0;
+		virtual std::string getName() = 0;
 
 		virtual bool exist(std::vector<std::string> list, std::string state);
 		virtual bool inUpdateList(std::string state);

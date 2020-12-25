@@ -10,22 +10,6 @@ namespace wind {
 		eventOn;
 	}
 
-	void GameModule::handleEvents(SDL_Event* current_event) {
-
-	}
-
-	void GameModule::update(double dt) {
-
-	}
-
-	void GameModule::draw() {
-
-	}
-
-	void GameModule::clean() {
-
-	}
-
 	bool GameModule::inUpdateList(std::string state) {
 		return(exist(updateOn, state));
 	}

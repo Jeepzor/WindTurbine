@@ -8,7 +8,7 @@
 class PauseModule : public wind::GameModule {
 public:
 	PauseModule();
-	void handleEvents(SDL_Event* current_event);
+	void keyPressed(std::string key);
 	void update(double dt);
 	void draw();
 	void clean();

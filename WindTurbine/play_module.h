@@ -6,7 +6,7 @@
 class PlayModule : public wind::GameModule {
 public:
 	PlayModule();
-	void handleEvents(SDL_Event* current_event);
+	void keyPressed(std::string key);
 	void update(double dt);
 	void draw();
 	void clean();
