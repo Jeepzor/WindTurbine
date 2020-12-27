@@ -17,7 +17,10 @@ namespace wind {
 		bool exist(std::string state);
 		void setCurrentState(std::string state);
 		void addModule(GameModule*);
+
 		void keyPressed(std::string key);
+		void keyReleased(std::string key);
+		
 		void update(double);
 		void draw();
 	private:

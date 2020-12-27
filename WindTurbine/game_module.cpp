@@ -22,11 +22,6 @@ namespace wind {
 		return(exist(eventOn, state));
 	}
 
-	void GameModule::keyPressed(std::string key) {}
-	void GameModule::update(double) {}
-	void GameModule::draw() {}
-	void GameModule::clean() {}
-
 	//Returns true if the module is subscribed to that state.
 	bool GameModule::exist(std::vector<std::string> list, std::string state) {
 		if (std::find(list.begin(), list.end(), state) != list.end())

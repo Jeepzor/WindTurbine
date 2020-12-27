@@ -11,6 +11,7 @@ namespace wind {
 	public:
 		GameModule();
 		virtual void keyPressed(std::string key){};
+		virtual void keyReleased(std::string key){};
 		virtual void update(double){};
 		virtual void draw(){};
 		virtual void clean(){};

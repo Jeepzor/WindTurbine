@@ -70,6 +70,14 @@ namespace wind {
 				current_game_module->keyPressed(key);
 			}
 		}
+	}	
+	
+	void State::keyReleased(std::string key) {
+		for (auto current_game_module : game_modules) {
+			if (current_game_module->inEventList(currentState)) {
+				current_game_module->keyReleased(key);
+			}
+		}
 	}
 
 	void State::update(double dt) {

@@ -23,22 +23,28 @@ namespace wind {
 		void update();
 		void draw();
 		void clean();
-		void setActive(bool);
+		void setActive(bool next_state);
 		void setMaxFPS(int limit);
 		void delay(double dt);
-		bool active();
+
 		SDL_Renderer* getRenderer() const;
-		bool keyDown(std::string);
+
+		bool active();
+		bool keyDown(std::string key);
+		bool mouseDown(int button);
 
 	private:
+		int fpsLimit;
 		bool is_active;
-		SDL_Renderer* renderer;
-		SDL_Window* window;
 		double previousFrameTime;
 		double currentFrameTime;
 		double dt;
+
 		const Uint8* keyboard_state;
-		int fpsLimit;
+		Uint32 mouse_state;
+
+		SDL_Renderer* renderer;
+		SDL_Window* window;
 	};
 
 	extern Turbine turbine;
