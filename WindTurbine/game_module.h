@@ -10,10 +10,10 @@ namespace wind {
 	class GameModule {
 	public:
 		GameModule();
-		virtual void keyPressed(std::string key) = 0;
-		virtual void update(double) = 0;
-		virtual void draw() = 0;
-		virtual void clean() = 0;
+		virtual void keyPressed(std::string key){};
+		virtual void update(double){};
+		virtual void draw(){};
+		virtual void clean(){};
 		virtual std::string getName() = 0;
 
 		virtual bool exist(std::vector<std::string> list, std::string state);
