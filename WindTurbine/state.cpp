@@ -79,6 +79,22 @@ namespace wind {
 			}
 		}
 	}
+	
+	void State::mousePressed(int button) {
+		for (auto current_game_module : game_modules) {
+			if (current_game_module->inEventList(currentState)) {
+				current_game_module->mousePressed(button);
+			}
+		}
+	}	
+	
+	void State::mouseReleased(int button) {
+		for (auto current_game_module : game_modules) {
+			if (current_game_module->inEventList(currentState)) {
+				current_game_module->mouseReleased(button);
+			}
+		}
+	}
 
 	void State::update(double dt) {
 		for (auto current_game_module : game_modules) {

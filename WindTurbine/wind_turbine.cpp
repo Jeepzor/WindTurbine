@@ -80,8 +80,7 @@ namespace wind {
 
 	//Return true if passed in button is currently down; LMB = 1, MMB = 2, RMB = 3
 	bool Turbine::mouseDown(int button) {
-		SDL_PumpEvents();
-		return SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(button);
+		return (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(button));
 	}
 
 	//Return true if passed in key is currently down.
@@ -102,11 +101,21 @@ namespace wind {
 			break;
 		case SDL_KEYDOWN:
 			key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
-			state.keyPressed(key);
+			if (!current_event.key.repeat) {
+				state.keyPressed(key);
+			}
 			break;
 		case SDL_KEYUP:
 			key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
-			state.keyReleased(key);
+			if (!current_event.key.repeat) {
+				state.keyReleased(key);
+			}
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			state.mousePressed(current_event.button.button);
+			break;
+		case SDL_MOUSEBUTTONUP:
+			state.mouseReleased(current_event.button.button);
 			break;
 		default:
 			break;
@@ -114,18 +123,6 @@ namespace wind {
 	}
 
 	void Turbine::update() {
-		if (mouseDown(3)) {
-			std::cout << "RMB is down" << "\n";
-		}
-		
-		if (mouseDown(2)) {
-			std::cout << "Scrollwheel is down" << "\n";
-		}
-		
-		if (mouseDown(1)) {
-			std::cout << "LMB is down" << "\n";
-		}
-
 		currentFrameTime = SDL_GetTicks();
 		dt = (currentFrameTime - previousFrameTime) / 1000;
 
@@ -141,8 +138,7 @@ namespace wind {
 
 			if (delay_amount > 0) {
 				SDL_Delay(delay_amount);
-			}
-			 
+			} 
 		}
 	}
 

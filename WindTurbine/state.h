@@ -20,6 +20,8 @@ namespace wind {
 
 		void keyPressed(std::string key);
 		void keyReleased(std::string key);
+		void mousePressed(int button);
+		void mouseReleased(int button);
 		
 		void update(double);
 		void draw();

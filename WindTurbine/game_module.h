@@ -12,10 +12,14 @@ namespace wind {
 		GameModule();
 		virtual void keyPressed(std::string key){};
 		virtual void keyReleased(std::string key){};
+		virtual void mousePressed(int button){};
+		virtual void mouseReleased(int button){};
+
 		virtual void update(double){};
 		virtual void draw(){};
 		virtual void clean(){};
-		virtual std::string getName() = 0;
+
+		virtual std::string getName() = 0; //Explicitly abstract; needs to be overridden in child.
 
 		virtual bool exist(std::vector<std::string> list, std::string state);
 		virtual bool inUpdateList(std::string state);

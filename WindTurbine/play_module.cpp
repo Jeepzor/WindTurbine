@@ -12,9 +12,22 @@ PlayModule::PlayModule() {
 }
 
 void PlayModule::keyPressed(std::string key) {
+	std::cout << "Key [" << key << "] was pressed" << "\n";
 	if (key == "1") {
 		wind::state.setCurrentState("paused");
 	}
+}
+
+void PlayModule::keyReleased(std::string key) {
+	std::cout << "Key [" << key << "] was released" << "\n";
+}
+
+void PlayModule::mousePressed(int button) {
+	std::cout << "button [" << button << "] was pressed" << "\n";
+}
+
+void PlayModule::mouseReleased(int button) {
+	std::cout << "button [" << button << "] was released" << "\n";
 }
 
 
