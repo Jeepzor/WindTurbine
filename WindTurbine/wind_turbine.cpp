@@ -117,9 +117,28 @@ namespace wind {
 		case SDL_MOUSEBUTTONUP:
 			state.mouseReleased(current_event.button.button);
 			break;
+		case SDL_MOUSEMOTION:
+			storeMousePosition(current_event.motion.x, current_event.motion.y);
+			break;
 		default:
 			break;
 		}
+	}
+
+	void Turbine::storeMousePosition(int x, int y) {
+		mousePosition = std::make_pair(x, y);
+	}
+	
+	std::pair<int, int> Turbine::getMousePosition() {
+		return mousePosition;
+	}
+
+	int Turbine::getMouseX() {
+		return mousePosition.first;
+	}
+	
+	int Turbine::getMouseY() {
+		return mousePosition.second;
 	}
 
 	void Turbine::update() {

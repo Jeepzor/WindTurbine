@@ -26,8 +26,12 @@ namespace wind {
 		void setActive(bool next_state);
 		void setMaxFPS(int limit);
 		void delay(double dt);
+		void storeMousePosition(int x, int y);
 
 		SDL_Renderer* getRenderer() const;
+		std::pair<int, int> getMousePosition();
+		int getMouseX();
+		int getMouseY();
 
 		bool active();
 		bool keyDown(std::string key);
@@ -42,6 +46,7 @@ namespace wind {
 
 		const Uint8* keyboard_state;
 		Uint32 mouse_state;
+		std::pair<int, int> mousePosition;
 
 		SDL_Renderer* renderer;
 		SDL_Window* window;
