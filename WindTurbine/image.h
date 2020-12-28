@@ -17,7 +17,6 @@ namespace wind {
 		void draw(int x, int y, int r, int g, int b);
 		void draw(int x, int y, int r, int g, int b, int a);
 		void setFlip(bool x_axis, bool y_axis);
-		void setPosition(int, int);
 		void setAngle(double new_angle);
 		
 		double getAngle();
@@ -27,6 +26,7 @@ namespace wind {
 		SDL_Texture* getAsset();
 
 	private:
+		void setPosition(int, int);
 		SDL_Surface* surface;
 		SDL_Rect destination;
 		SDL_Texture* asset;

@@ -41,7 +41,6 @@ void PlayModule::mouseReleased(int button) {
 	std::cout << "button [" << button << "] was released" << "\n";
 }
 
-
 void PlayModule::update(double dt) {
 	/*
 	if (wind::turbine.keyDown("W")) {

@@ -4,11 +4,7 @@
 #include "game_module.h"
 
 namespace wind {
-	GameModule::GameModule() {
-		updateOn;
-		drawOn;
-		eventOn;
-	}
+	GameModule::GameModule() {}
 
 	bool GameModule::inUpdateList(std::string state) {
 		return(exist(updateOn, state));

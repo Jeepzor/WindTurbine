@@ -9,7 +9,6 @@
 namespace wind {
 	class GameModule {
 	public:
-		GameModule();
 		virtual void keyPressed(std::string key){};
 		virtual void keyReleased(std::string key){};
 		virtual void mousePressed(int button){};
@@ -31,6 +30,7 @@ namespace wind {
 		virtual std::vector<std::string> getEventList() { return eventOn; };
 	
 	protected:
+		GameModule();
 		std::vector<std::string> updateOn;
 		std::vector<std::string> drawOn;
 		std::vector<std::string> eventOn;

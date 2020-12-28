@@ -1,33 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="wind_turbine.cpp" />
-    <ClCompile Include="image.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="state.cpp" />
-    <ClCompile Include="game_module.cpp" />
     <ClCompile Include="pause_module.cpp">
-      <Filter>Test</Filter>
+      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="play_module.cpp">
-      <Filter>Test</Filter>
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="game_module.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="state.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="wind_turbine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="wind_turbine.h" />
-    <ClInclude Include="image.h" />
-    <ClInclude Include="state.h" />
-    <ClInclude Include="game_module.h" />
     <ClInclude Include="pause_module.h">
-      <Filter>Test</Filter>
+      <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="play_module.h">
-      <Filter>Test</Filter>
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="game_module.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="state.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="wind_turbine.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Test">
+    <Filter Include="Game">
       <UniqueIdentifier>{62d02225-27da-4986-a74b-574d4416dac2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{5b10cf76-8145-4fe1-ac9d-f6e58e33280c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
