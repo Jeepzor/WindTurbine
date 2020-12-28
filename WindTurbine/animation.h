@@ -1,17 +1,18 @@
-#ifndef IMAGE_H
-#define IMAGE_H
+#ifndef ANIMATION_H
+#define ANIMATION_H
 #include <SDL_image.h>
 #include <string>
 
+#include "wind_turbine.h"
+
 namespace wind {
-	class Image {
+	class Animation {
 	public:
-		Image(std::string path);
-		Image(std::string path, int frames, int rate);
-		Image(const Image& source);
-		Image& operator = (const Image& source);
-		Image();
-		~Image();
+		Animation(std::string path);
+		Animation(const Animation& source);
+		Animation& operator = (const Animation& source);
+		Animation();
+		~Animation();
 
 		void draw();
 		void draw(int x, int y);
@@ -19,29 +20,24 @@ namespace wind {
 		void draw(int x, int y, int r, int g, int b, int a);
 		void setFlip(bool x_axis, bool y_axis);
 		void setAngle(double new_angle);
-		
+
 		double getAngle();
-		
+		int getWidth();
+		int getHeight();
 		SDL_Rect* getDestination();
-		SDL_Rect* getPortion();
 		SDL_Texture* getAsset();
-		SDL_Point* getOriginPoint();
 
 	private:
 		void setPosition(int, int);
 		SDL_Surface* surface;
 		SDL_Rect destination;
-		SDL_Rect portion;
-		SDL_Point originPoint;
 		SDL_Texture* asset;
 		SDL_RendererFlip flip;
 
-		int frames;
-		int frameWidth;
 		int width;
 		int height;
 		double angle;
-		
+
 		std::string assetPath;
 	};
 }

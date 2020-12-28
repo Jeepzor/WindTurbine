@@ -1,5 +1,5 @@
-#ifndef TEST_MODULE_H
-#define TEST_MODULE_H
+#ifndef PLAY_MODULE_H
+#define PLAY_MODULE_H
 
 #include "wind_turbine.h"
 
