@@ -16,6 +16,14 @@ void PlayModule::keyPressed(std::string key) {
 	if (key == "1") {
 		wind::state.setCurrentState("paused");
 	}
+	
+	if (key == "D") {
+		test.setFlip(false, false);
+	}
+	
+	if (key == "A") {
+		test.setFlip(true, false);
+	}
 }
 
 void PlayModule::keyReleased(std::string key) {
@@ -32,22 +40,17 @@ void PlayModule::mouseReleased(int button) {
 
 
 void PlayModule::update(double dt) {
+	/*
 	if (wind::turbine.keyDown("W")) {
 		std::cout << "[W] - is pressed" <<  "\n";
 	}
+	*/
 	
-	if (wind::turbine.keyDown("S")) {
-		std::cout << "[S] - is pressed" << "\n";
-	}
-
-	if (wind::turbine.keyDown("R")) {
-		std::cout << "[R] - is pressed" << "\n";
-		wind::state.setCurrentState("paused");
-	}
 }
 
 void PlayModule::draw() {
 	bg.draw();
+	test.setAngle(90);
 	test.draw(200, 200);
 	//std::cout << "State is drawing" << "\n";
 }

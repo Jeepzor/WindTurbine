@@ -15,6 +15,7 @@ namespace wind {
 		surface = IMG_Load(path.c_str());
 		width = surface->w;
 		height = surface->h;
+		angle = 0;
 		destination = { 0, 0, width, height };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
@@ -27,6 +28,7 @@ namespace wind {
 		surface = nullptr;
 		width = 0;
 		height = 0;
+		angle = 0;
 		destination = { 0, 0, width, height };
 		asset = nullptr;
 	}
@@ -38,6 +40,7 @@ namespace wind {
 		surface = IMG_Load(assetPath.c_str());
 		width = source.width;
 		height = source.height;
+		angle = source.angle;
 		destination = { 0, 0, width, height };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
@@ -54,6 +57,7 @@ namespace wind {
 		surface = IMG_Load(assetPath.c_str());
 		width = source.width;
 		height = source.height;
+		angle = source.angle;
 		destination = { 0, 0, width, height };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
@@ -78,35 +82,58 @@ namespace wind {
 		return height;
 	}
 
+	void Image::setFlip(bool x_axis, bool y_axis) {
+		if (x_axis && y_axis) {
+			flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
+		}
+		else if(x_axis) {
+			flip = SDL_FLIP_HORIZONTAL;
+		}
+		else if(y_axis) {
+			flip = SDL_FLIP_VERTICAL;
+		}
+		else {
+			flip = SDL_FLIP_NONE;
+		}
+	}
+
 	void Image::setPosition(int x, int y) {
 		destination.x = x;
 		destination.y = y;
 	};
 
+	void Image::setAngle(double new_angle) {
+		angle = new_angle;
+	}
+
 	SDL_Texture* Image::getAsset() {
 		return asset;
 	}
 
+	double Image::getAngle() {
+		return angle;
+	}
+
 	void Image::draw() {
 		setPosition(0, 0);
-		SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, getDestination());
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), NULL, getDestination(), angle, NULL, flip);
 	}
 
 	void Image::draw(int x, int y) {
 		setPosition(x, y);
-		SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, getDestination());
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), NULL, getDestination(), angle, NULL, flip);
 	}
 
 	void Image::draw(int x, int y, int r, int g, int b) {
 		SDL_SetTextureColorMod(asset, r, g, b);
 		setPosition(x, y);
-		SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, getDestination());
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), NULL, getDestination(), angle, NULL, flip);
 	}
 
 	void Image::draw(int x, int y, int r, int g, int b, int a) {
 		SDL_SetTextureAlphaMod(asset, a);
 		SDL_SetTextureColorMod(asset, r, g, b);
 		setPosition(x, y);
-		SDL_RenderCopy(wind::turbine.getRenderer(), getAsset(), NULL, &destination);
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), NULL, &destination, angle, NULL, flip);
 	}
 }
