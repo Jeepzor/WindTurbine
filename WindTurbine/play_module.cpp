@@ -10,8 +10,6 @@ PlayModule::PlayModule() {
 
 	bg = wind::Image("../assets/bg.png");
 	testPlayer = new Player();
-
-	//std::cout << "Wooop:___" << testPlayer->getX() << "\n";
 }
 
 void PlayModule::keyPressed(std::string key) {

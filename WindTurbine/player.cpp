@@ -5,10 +5,11 @@ Player::Player() {
 	yPos = 40;
 	yVel = 0;
 	xVel = 0;
+	dir = 0;
 	maxSpeed = 300.0;
 	acceleration = 4000.0;
 	friction = 2000;
-	sprite = wind::Image("../assets/player.png");
+	sprite = wind::Image("../assets/player.png", 2, 1);
 }
 
 void Player::update(double dt) {
@@ -33,6 +34,10 @@ void Player::move(double dt) {
 	
 	if (wind::turbine.keyDown("W")) {
 		yVel = std::max(yVel - acceleration * dt, -maxSpeed);
+	}
+	if (wind::turbine.keyDown("R")) {
+		dir = dir + 1;
+		sprite.setAngle(dir);
 	}
 }
 

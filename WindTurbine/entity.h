@@ -21,7 +21,6 @@ namespace wind {
 		Entity(const Entity&) = delete;
 		const Entity& operator=(const Entity&) = delete;
 	};
-
 }
 
 #endif

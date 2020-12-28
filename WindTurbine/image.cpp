@@ -18,8 +18,8 @@ namespace wind {
 		angle = 0;
 		destination = { 0, 0, width, height };
 		portion = { 0,0,width,height };
-		originPoint = { width / frames,height / 2 };
 		frames = 1;
+		originPoint = { width / frames / 2,height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
@@ -35,7 +35,7 @@ namespace wind {
 		frames = amout_of_frames;
 		destination = { 0, 0, width / frames, height };
 		portion = { 0,0,width / frames, height };
-		originPoint = { width / frames,height / 2 };
+		originPoint = { width / frames / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
@@ -52,7 +52,7 @@ namespace wind {
 		frameWidth = width / frames;
 		destination = { 0, 0, frameWidth, height };
 		portion = { 0,0,width / frames / 2,height };
-		originPoint = { width / frames,height / 2 };
+		originPoint = { width / frames / 2,height / 2 };
 		asset = nullptr;
 	}
 
@@ -68,7 +68,7 @@ namespace wind {
 		frameWidth = width / frames;
 		portion = { 0,0, frameWidth,height };
 		destination = { 0, 0, width / frames, height };
-		originPoint = { width / frames,height / 2 };
+		originPoint = { width / frames / 2,height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
@@ -89,7 +89,7 @@ namespace wind {
 		frameWidth = width / frames;
 		portion = { 0,0, frameWidth,height };
 		destination = { 0, 0, width / frames, height };
-		originPoint = { width / frames,height / 2 };
+		originPoint = { width / frames / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 		return *this;
@@ -104,6 +104,7 @@ namespace wind {
 	}
 
 	SDL_Point* Image::getOriginPoint() {
+		originPoint.x = 100;
 		return &originPoint;
 	}
 

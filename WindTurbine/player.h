@@ -22,6 +22,7 @@ private:
 	double acceleration;
 	double friction;
 	double maxSpeed;
+	double dir;
 	wind::Image sprite;
 };
 
