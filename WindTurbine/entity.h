@@ -7,7 +7,7 @@ namespace wind {
 	{
 	public:
 		virtual ~Entity() {};
-		virtual void draw() const = 0;
+		virtual void draw() = 0;
 		//Add function to get distance to another entity
 		//Add function to get angle to another entity
 	protected:

@@ -1,4 +1,5 @@
 #include "play_module.h"
+#include "player.h"
 
 
 
@@ -9,6 +10,9 @@ PlayModule::PlayModule() {
 
 	test = wind::Image("../assets/player.png");
 	bg = wind::Image("../assets/bg.png");
+	testPlayer = new Player();
+
+	//std::cout << "Wooop:___" << testPlayer->getX() << "\n";
 }
 
 void PlayModule::keyPressed(std::string key) {
@@ -54,6 +58,7 @@ void PlayModule::draw() {
 	bg.draw();
 	test.setAngle(90);
 	test.draw(200, 200);
+	testPlayer->draw();
 	//std::cout << "State is drawing" << "\n";
 }
 

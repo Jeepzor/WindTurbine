@@ -7,6 +7,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
+#include "entity.h"
 #include "game_module.h"
 #include "state.h"
 #include "image.h"

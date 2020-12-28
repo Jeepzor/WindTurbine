@@ -25,6 +25,9 @@
     <ClCompile Include="entity.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pause_module.h">
@@ -47,6 +50,9 @@
     </ClInclude>
     <ClInclude Include="wind_turbine.h">
       <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
