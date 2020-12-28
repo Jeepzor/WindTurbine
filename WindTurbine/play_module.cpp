@@ -8,7 +8,6 @@ PlayModule::PlayModule() {
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
 
-	test = wind::Image("../assets/player.png");
 	bg = wind::Image("../assets/bg.png");
 	testPlayer = new Player();
 
@@ -19,14 +18,6 @@ void PlayModule::keyPressed(std::string key) {
 	std::cout << "Key [" << key << "] was pressed" << "\n";
 	if (key == "1") {
 		wind::state.setCurrentState("paused");
-	}
-	
-	if (key == "D") {
-		test.setFlip(false, false);
-	}
-	
-	if (key == "A") {
-		test.setFlip(true, false);
 	}
 }
 
@@ -46,18 +37,11 @@ void PlayModule::mouseReleased(int button) {
 }
 
 void PlayModule::update(double dt) {
-	/*
-	if (wind::turbine.keyDown("W")) {
-		std::cout << "[W] - is pressed" <<  "\n";
-	}
-	*/
-	
+	testPlayer->update(dt);
 }
 
 void PlayModule::draw() {
 	bg.draw();
-	test.setAngle(90);
-	test.draw(200, 200);
 	testPlayer->draw();
 	//std::cout << "State is drawing" << "\n";
 }

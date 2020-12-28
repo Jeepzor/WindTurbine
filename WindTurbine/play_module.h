@@ -16,7 +16,6 @@ public:
 	std::string getName() { return "playing"; };
 
 private:
-	wind::Image test;
 	wind::Image bg;
 	wind::Entity* testPlayer;
 };

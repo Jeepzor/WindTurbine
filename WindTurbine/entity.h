@@ -8,13 +8,14 @@ namespace wind {
 	public:
 		virtual ~Entity() {};
 		virtual void draw() = 0;
+		virtual void update(double dt) = 0;
 		//Add function to get distance to another entity
 		//Add function to get angle to another entity
 	protected:
 		Entity();
 
-		int yPos;
-		int xPos;
+		double yPos;
+		double xPos;
 
 	private:
 		Entity(const Entity&) = delete;
