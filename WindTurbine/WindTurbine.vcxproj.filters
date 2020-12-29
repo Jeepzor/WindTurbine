@@ -31,6 +31,12 @@
     <ClCompile Include="animation.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="collider.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="physics_world.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -59,6 +65,12 @@
     </ClInclude>
     <ClInclude Include="player.h">
       <Filter>Game\header</Filter>
+    </ClInclude>
+    <ClInclude Include="collider.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="physics_world.h">
+      <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

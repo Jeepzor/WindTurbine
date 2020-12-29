@@ -144,8 +144,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="collider.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game_module.cpp" />
+    <ClCompile Include="physics_world.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="play_module.cpp" />
@@ -156,8 +158,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
+    <ClInclude Include="collider.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_module.h" />
+    <ClInclude Include="physics_world.h" />
     <ClInclude Include="player.h" />
     <ClInclude Include="state.h" />
     <ClInclude Include="play_module.h" />

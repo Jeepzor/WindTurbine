@@ -30,7 +30,6 @@ namespace wind {
 	void Animation::update(double dt) {
 		timer += dt;
 		if (timer >= rate) {
-		std::cout << timer << "\n";
 			timer = 0;
 			incrementFrame();
 		}
