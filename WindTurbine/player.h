@@ -23,7 +23,7 @@ private:
 	double friction;
 	double maxSpeed;
 	double dir;
-	wind::Image sprite;
+	wind::Image* sprite;
 };
 
 #endif

@@ -5,7 +5,7 @@ PauseModule::PauseModule() {
 	drawOn = { "paused" };
 	eventOn = { "paused"};
 
-	pauseImg = wind::Image("../assets/paused.png");
+	pauseImg = new wind::Image("../assets/paused.png");
 }
 
 void PauseModule::keyPressed(std::string key) {
@@ -21,7 +21,7 @@ void PauseModule::update(double dt) {
 }
 
 void PauseModule::draw() {
-	pauseImg.draw(0, 0, 255,255,255, 175);
+	pauseImg->draw(0, 0, 255,255,255, 175);
 	//std::cout << "State is drawing" << "\n";
 }
 

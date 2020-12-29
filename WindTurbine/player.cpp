@@ -9,11 +9,11 @@ Player::Player() {
 	maxSpeed = 300.0;
 	acceleration = 4000.0;
 	friction = 2000;
-	sprite = wind::Image("../assets/run.png", 6, 0.09);
+	sprite = new wind::Image("../assets/run.png", 6, 0.09);
 }
 
 void Player::update(double dt) {
-	sprite.animate(dt);
+	sprite->animate(dt);
 	move(dt);
 	applyVelocity(dt);
 	applyFriction(dt);
@@ -38,7 +38,7 @@ void Player::move(double dt) {
 	}
 	if (wind::turbine.keyDown("R")) {
 		dir = dir + 1;
-		sprite.setAngle(dir);
+		sprite->setAngle(dir);
 	}
 }
 
@@ -65,12 +65,12 @@ void Player::applyFriction(double dt) {
 
 void Player::updateDirection() {
 	if (xVel < 0) {
-		sprite.setFlip(true, false);
+		sprite->setFlip(true, false);
 	}else if (xVel > 0) {
-		sprite.setFlip(false, false);
+		sprite->setFlip(false, false);
 	}
 }
 
 void Player::draw() {
-	sprite.draw(xPos, yPos);
+	sprite->draw(xPos, yPos);
 }

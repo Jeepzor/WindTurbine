@@ -15,7 +15,7 @@ public:
 	std::string getName() { return "paused"; }
 
 private: 
-	wind::Image pauseImg;
+	wind::Image* pauseImg;
 };
 
 #endif

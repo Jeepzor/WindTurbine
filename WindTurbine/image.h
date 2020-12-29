@@ -8,9 +8,9 @@ namespace wind {
 	public:
 		Image(std::string path);
 		Image(std::string path, int amout_of_frames, double animation_rate);
-		Image(const Image& source);
-		Image& operator = (const Image& source);
-		Image();
+		//Image(const Image& source);
+		//Image& operator = (const Image& source);
+		//Image();
 		~Image();
 
 		void animate(double dt);
