@@ -13,29 +13,44 @@ namespace wind {
 		std::cout << "normal constructor called" << "\n";
 		assetPath = path;
 		surface = IMG_Load(path.c_str());
+
 		width = surface->w;
 		height = surface->h;
 		angle = 0;
-		destination = { 0, 0, width, height };
-		portion = { 0,0,width,height };
+
+		timer = 0;
+		rate = 0;
 		frames = 1;
-		originPoint = { width / frames / 2,height / 2 };
+		currentFrame = 1;
+		frameWidth = width / frames;
+
+		portion = { 0,0, frameWidth, height};
+		destination = { 0, 0, frameWidth, height };
+		originPoint = { frameWidth / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
 	
 	//Constructor for animated images: Move to own class, Animation, which inherits Image.
-	Image::Image(std::string path, int amout_of_frames, int rate) {
+	Image::Image(std::string path, int amout_of_frames, double animation_rate) {
 		std::cout << "normal constructor called" << "\n";
 		assetPath = path;
 		surface = IMG_Load(path.c_str());
+
 		width = surface->w;
 		height = surface->h;
 		angle = 0;
+
+		//Animation
+		timer = 0;
+		rate = animation_rate;
 		frames = amout_of_frames;
-		destination = { 0, 0, width / frames, height };
-		portion = { 0,0,width / frames, height };
-		originPoint = { width / frames / 2, height / 2 };
+		currentFrame = 1;
+		frameWidth = width / frames;
+
+		portion = { 0,0, frameWidth,height };
+		destination = { 0, 0, frameWidth, height };
+		originPoint = { frameWidth / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
@@ -45,14 +60,21 @@ namespace wind {
 		std::cout << "default constructor called" << "\n";
 		assetPath = "";
 		surface = nullptr;
+
 		width = 0;
 		height = 0;
 		angle = 0;
+
+		//Animation
+		timer = 0;
+		rate = 0;
 		frames = 1;
+		currentFrame = 1;
 		frameWidth = width / frames;
+
+		portion = { 0,0, frameWidth,height };
 		destination = { 0, 0, frameWidth, height };
-		portion = { 0,0,width / frames / 2,height };
-		originPoint = { width / frames / 2,height / 2 };
+		originPoint = { frameWidth / 2, height / 2 };
 		asset = nullptr;
 	}
 
@@ -61,14 +83,21 @@ namespace wind {
 		std::cout << "copy constructor was called" << "\n";
 		assetPath = source.assetPath;
 		surface = IMG_Load(assetPath.c_str());
+
 		width = source.width;
 		height = source.height;
 		angle = source.angle;
+
+		//Animation
+		timer = 0;
+		rate = source.rate;
 		frames = source.frames;
+		currentFrame = 1;
 		frameWidth = width / frames;
+
 		portion = { 0,0, frameWidth,height };
-		destination = { 0, 0, width / frames, height };
-		originPoint = { width / frames / 2,height / 2 };
+		destination = { 0, 0, frameWidth, height };
+		originPoint = { frameWidth / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
@@ -82,16 +111,24 @@ namespace wind {
 		SDL_DestroyTexture(asset);
 		assetPath = source.assetPath;
 		surface = IMG_Load(assetPath.c_str());
+
 		width = source.width;
 		height = source.height;
 		angle = source.angle;
+
+		//Animation
+		timer = 0;
+		rate = source.rate;
 		frames = source.frames;
+		currentFrame = 1;
 		frameWidth = width / frames;
+		
 		portion = { 0,0, frameWidth,height };
-		destination = { 0, 0, width / frames, height };
-		originPoint = { width / frames / 2, height / 2 };
+		destination = { 0, 0, frameWidth, height };
+		originPoint = { frameWidth / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
+
 		return *this;
 	}
 
@@ -100,11 +137,11 @@ namespace wind {
 	}
 	
 	SDL_Rect* Image::getPortion() {
+		portion.x = frameWidth * (currentFrame - 1);
 		return &portion;
 	}
 
 	SDL_Point* Image::getOriginPoint() {
-		originPoint.x = 100;
 		return &originPoint;
 	}
 
@@ -144,6 +181,24 @@ namespace wind {
 
 	double Image::getAngle() {
 		return angle;
+	}
+
+	void Image::incrementFrame() {
+		if (currentFrame < frames) {
+			currentFrame += 1;
+		}
+		else {
+			currentFrame = 1;
+		}
+	}
+
+	void Image::animate(double dt) {
+		timer += dt;
+		std::cout << timer << "\n";
+		if (timer >= rate) {
+			timer = 0;
+			incrementFrame();
+		}
 	}
 
 	void Image::draw() {

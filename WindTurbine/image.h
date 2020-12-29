@@ -7,11 +7,13 @@ namespace wind {
 	class Image {
 	public:
 		Image(std::string path);
-		Image(std::string path, int frames, int rate);
+		Image(std::string path, int amout_of_frames, double animation_rate);
 		Image(const Image& source);
 		Image& operator = (const Image& source);
 		Image();
 		~Image();
+
+		void animate(double dt);
 
 		void draw();
 		void draw(int x, int y);
@@ -28,6 +30,7 @@ namespace wind {
 		SDL_Point* getOriginPoint();
 
 	private:
+		void incrementFrame();
 		void setPosition(int, int);
 		SDL_Surface* surface;
 		SDL_Rect destination;
@@ -37,10 +40,13 @@ namespace wind {
 		SDL_RendererFlip flip;
 
 		int frames;
+		int currentFrame;
 		int frameWidth;
 		int width;
 		int height;
 		double angle;
+		double rate;
+		double timer;
 		
 		std::string assetPath;
 	};
