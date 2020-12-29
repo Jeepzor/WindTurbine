@@ -9,11 +9,11 @@ Player::Player() {
 	maxSpeed = 300.0;
 	acceleration = 4000.0;
 	friction = 2000;
-	sprite = new wind::Image("../assets/run.png", 6, 0.09);
+	sprite = new wind::Animation("../assets/run.png", 6, 0.09);
 }
 
 void Player::update(double dt) {
-	sprite->animate(dt);
+	sprite->update(dt);
 	move(dt);
 	applyVelocity(dt);
 	applyFriction(dt);

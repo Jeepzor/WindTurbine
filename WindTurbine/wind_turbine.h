@@ -11,6 +11,7 @@
 #include "game_module.h"
 #include "state.h"
 #include "image.h"
+#include "animation.h"
 
 namespace wind {
 	class Turbine {

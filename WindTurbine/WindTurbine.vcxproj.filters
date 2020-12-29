@@ -28,31 +28,37 @@
     <ClCompile Include="player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="animation.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pause_module.h">
-      <Filter>Game</Filter>
-    </ClInclude>
-    <ClInclude Include="play_module.h">
-      <Filter>Game</Filter>
+    <ClInclude Include="animation.h">
+      <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="game_module.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="state.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="wind_turbine.h">
-      <Filter>Engine</Filter>
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="game_module.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="pause_module.h">
+      <Filter>Game\header</Filter>
+    </ClInclude>
+    <ClInclude Include="play_module.h">
+      <Filter>Game\header</Filter>
     </ClInclude>
     <ClInclude Include="player.h">
-      <Filter>Game</Filter>
+      <Filter>Game\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +67,12 @@
     </Filter>
     <Filter Include="Engine">
       <UniqueIdentifier>{5b10cf76-8145-4fe1-ac9d-f6e58e33280c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\header">
+      <UniqueIdentifier>{b58fa346-db27-4304-b411-0990539851a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game\header">
+      <UniqueIdentifier>{d70c9d7b-efe6-4170-98c2-469b67928d82}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
