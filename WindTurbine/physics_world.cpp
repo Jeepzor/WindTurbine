@@ -1,4 +1,5 @@
 #include "physics_world.h"
+#include "collider.h"
 
 namespace wind {
 	PhysicsWorld::PhysicsWorld(double x_velocity, double y_velocity) {
@@ -10,4 +11,16 @@ namespace wind {
 	void PhysicsWorld::addObject(Collider* new_object) {
 		objects.push_back(new_object);
 	}
+
+	void PhysicsWorld::update(double dt) {
+		for (auto currrent_object : objects) {
+			currrent_object->update(dt);
+		}
+	}
+
+	std::vector<Collider*> PhysicsWorld::getObjects() {
+		return objects;
+	}
+
+
 }

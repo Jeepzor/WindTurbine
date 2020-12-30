@@ -18,6 +18,9 @@ public:
 private:
 	wind::Image* bg;
 	wind::Entity* testPlayer;
+	wind::PhysicsWorld* worldA;
+	wind::Collider* bodyA;
+	wind::Collider* bodyB;
 };
 
 #endif

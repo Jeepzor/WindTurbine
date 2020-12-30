@@ -8,7 +8,13 @@ PlayModule::PlayModule() {
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
 
+	worldA = new wind::PhysicsWorld(0, 0);
+	bodyA = new wind::Collider(worldA, 30, 30, 10, 10);
+	bodyB = new wind::Collider(worldA, 60, 30, 10, 10);
+
+	bodyB->setVelocity(-5, 0);
 	bg = new wind::Image("../assets/bg.png");
+	testPlayer = new Player();
 	testPlayer = new Player();
 }
 
@@ -36,6 +42,7 @@ void PlayModule::mouseReleased(int button) {
 
 void PlayModule::update(double dt) {
 	testPlayer->update(dt);
+	worldA->update(dt);
 }
 
 void PlayModule::draw() {
