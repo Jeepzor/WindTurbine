@@ -5,6 +5,7 @@
 
 
 #include "state.h"
+#include "graphics.h"
 
 
 namespace wind {
@@ -107,6 +108,7 @@ namespace wind {
 	void State::draw() {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inDrawList(currentState)) {
+				wind::graphics.clearColor();
 				current_game_module->draw();
 			}
 		}

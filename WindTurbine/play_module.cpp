@@ -50,7 +50,6 @@ void PlayModule::draw() {
 	testPlayer->draw();
 	wind::graphics.setColor(255, 0, 0);
 	worldA->draw();
-	wind::graphics.clearColor();
 	//std::cout << "State is drawing" << "\n";
 }
 
