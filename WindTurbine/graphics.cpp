@@ -22,6 +22,10 @@ namespace wind {
 			std::cerr << "Error: " + mode + "' is not a valid draw mode!" << "\n";
 		}
 	}
+	
+	void Graphics::line(int x1, int y1, int x2, int y2) {
+		SDL_RenderDrawLine(wind::turbine.getRenderer(),x1, y1, x2, y2);
+	}
 
 	void Graphics::setColor(int r, int g, int b) {
 		storeColors(r, g, b, 255);

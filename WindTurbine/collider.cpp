@@ -26,7 +26,7 @@ namespace wind {
 			move();
 		}
 		else {
-			std::cout << "Wooop diii fucking dooo";
+			//Collision callback function trigger.
 		}
 	}
 	

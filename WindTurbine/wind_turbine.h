@@ -31,7 +31,7 @@ namespace wind {
 		void setActive(bool next_state);
 		void setMaxFPS(int limit);
 		void delay(double dt);
-		void storeMousePosition(int x, int y);
+		void updateMousePosition();
 
 		SDL_Renderer* getRenderer() const;
 		std::pair<int, int> getMousePosition();

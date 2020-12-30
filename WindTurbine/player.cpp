@@ -73,4 +73,6 @@ void Player::updateDirection() {
 
 void Player::draw() {
 	sprite->draw(xPos, yPos);
+	wind::graphics.line(xPos + 50, yPos + 50, wind::turbine.getMouseX(), wind::turbine.getMouseY());
+	wind::graphics.rectangle("line",xPos, yPos, 100, 100);
 }

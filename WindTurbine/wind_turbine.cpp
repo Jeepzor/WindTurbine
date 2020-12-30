@@ -91,6 +91,7 @@ namespace wind {
 	}
 
 	void Turbine::handleEvents() {
+		updateMousePosition();
 		SDL_Event current_event;
 		SDL_PollEvent(&current_event);
 
@@ -118,14 +119,16 @@ namespace wind {
 			state.mouseReleased(current_event.button.button);
 			break;
 		case SDL_MOUSEMOTION:
-			storeMousePosition(current_event.motion.x, current_event.motion.y);
+			// This did not work, caused massive delay - storeMousePosition(current_event.motion.x, current_event.motion.y);
 			break;
 		default:
 			break;
 		}
 	}
 
-	void Turbine::storeMousePosition(int x, int y) {
+	void Turbine::updateMousePosition() {
+		int x, y;
+		SDL_GetMouseState(&x, &y);
 		mousePosition = std::make_pair(x, y);
 	}
 	

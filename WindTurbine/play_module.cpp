@@ -10,9 +10,9 @@ PlayModule::PlayModule() {
 
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = new wind::Collider(worldA, 30, 30, 10, 10);
-	bodyB = new wind::Collider(worldA, 60, 30, 10, 10);
+	bodyB = new wind::Collider(worldA, 300, 30, 30, 30);
 
-	bodyB->setVelocity(-5, 0);
+	bodyB->setVelocity(-50, 0);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player();
 	testPlayer = new Player();
@@ -47,8 +47,9 @@ void PlayModule::update(double dt) {
 
 void PlayModule::draw() {
 	bg->draw();
-	testPlayer->draw();
 	wind::graphics.setColor(255, 0, 0);
+	testPlayer->draw();
+	//wind::graphics.clearColor();
 	worldA->draw();
 	//std::cout << "State is drawing" << "\n";
 }
