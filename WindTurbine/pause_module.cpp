@@ -21,7 +21,9 @@ void PauseModule::update(double dt) {
 }
 
 void PauseModule::draw() {
-	pauseImg->draw(0, 0, 255,255,255, 175);
+	wind::graphics.setColor(0, 0, 0, 155);
+	pauseImg->draw(0, 0);
+	wind::graphics.clearColor();
 	//std::cout << "State is drawing" << "\n";
 }
 

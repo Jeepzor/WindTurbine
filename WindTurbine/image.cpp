@@ -17,17 +17,17 @@ namespace wind {
 		angle = 0;
 		flip = SDL_FLIP_NONE;
 
-		portion = { 0,0, width, height};
+		portion = { 0,0, width, height };
 		destination = { 0, 0, width, height };
 		originPoint = { width / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
 	}
-	
+
 	SDL_Rect* Image::getDestination() {
 		return &destination;
 	}
-	
+
 	SDL_Rect* Image::getPortion() {
 		return NULL;
 	}
@@ -46,10 +46,10 @@ namespace wind {
 		if (x_axis && y_axis) {
 			flip = static_cast<SDL_RendererFlip>(SDL_FLIP_HORIZONTAL | SDL_FLIP_VERTICAL);
 		}
-		else if(x_axis) {
+		else if (x_axis) {
 			flip = SDL_FLIP_HORIZONTAL;
 		}
-		else if(y_axis) {
+		else if (y_axis) {
 			flip = SDL_FLIP_VERTICAL;
 		}
 		else {
@@ -75,25 +75,24 @@ namespace wind {
 	}
 
 	void Image::draw() {
+		setColor();
 		setPosition(0, 0);
 		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
 	}
 
 	void Image::draw(int x, int y) {
+		setColor();
 		setPosition(x, y);
 		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
 	}
 
-	void Image::draw(int x, int y, int r, int g, int b) {
-		SDL_SetTextureColorMod(asset, r, g, b);
-		setPosition(x, y);
-		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
-	}
-
-	void Image::draw(int x, int y, int r, int g, int b, int a) {
+	void Image::setColor() {
+		int r = wind::graphics.getRed();
+		int g = wind::graphics.getGreen();
+		int b = wind::graphics.getBlue();
+		int a = wind::graphics.getAlpha();
 		SDL_SetTextureAlphaMod(asset, a);
 		SDL_SetTextureColorMod(asset, r, g, b);
-		setPosition(x, y);
-		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), &destination, angle, getOriginPoint(), flip);
 	}
+
 }

@@ -11,8 +11,6 @@ namespace wind {
 
 		void draw();
 		void draw(int x, int y);
-		void draw(int x, int y, int r, int g, int b);
-		void draw(int x, int y, int r, int g, int b, int a);
 		void setFlip(bool x_axis, bool y_axis);
 		void setAngle(double new_angle);
 		
@@ -26,6 +24,7 @@ namespace wind {
 	protected:
 		void incrementFrame();
 		void setPosition(int, int);
+		void setColor();
 		SDL_Surface* surface;
 		SDL_Rect destination;
 		SDL_Rect portion;

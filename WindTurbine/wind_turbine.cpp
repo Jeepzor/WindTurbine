@@ -162,6 +162,7 @@ namespace wind {
 	}
 
 	void Turbine::draw() {
+		wind::graphics.clearColor(); // Reset RGBA to 255,255,255,255
 		SDL_RenderClear(renderer);
 		state.draw();
 		SDL_RenderPresent(renderer);
