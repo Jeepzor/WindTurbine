@@ -14,6 +14,7 @@
 #include "animation.h"
 #include "collider.h"
 #include "physics_world.h"
+#include "graphics.h"
 
 namespace wind {
 	class Turbine {

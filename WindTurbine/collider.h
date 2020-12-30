@@ -10,6 +10,7 @@ namespace wind {
 	public:
 		Collider(PhysicsWorld* world, double x, double y, int width, int height);
 		void update(double dt);
+		void draw();
 		void move();
 		void setVelocity(double x, double y);
 		bool validateNextPosition(double dt);

@@ -17,6 +17,12 @@ namespace wind {
 			currrent_object->update(dt);
 		}
 	}
+	
+	void PhysicsWorld::draw() {
+		for (auto currrent_object : objects) {
+			currrent_object->draw();
+		}
+	}
 
 	std::vector<Collider*> PhysicsWorld::getObjects() {
 		return objects;

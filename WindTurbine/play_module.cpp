@@ -48,6 +48,7 @@ void PlayModule::update(double dt) {
 void PlayModule::draw() {
 	bg->draw();
 	testPlayer->draw();
+	worldA->draw();
 	//std::cout << "State is drawing" << "\n";
 }
 

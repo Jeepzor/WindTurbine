@@ -1,5 +1,6 @@
 #include "collider.h"
 #include "physics_world.h"
+#include "graphics.h"
 
 namespace wind {
 	Collider::Collider(PhysicsWorld* physics_world, double x, double y, int collider_width, int collider_height) {
@@ -57,6 +58,10 @@ namespace wind {
 				return false;
 			}
 		}
+	}
+
+	void Collider::draw() {
+		graphics.rectangle("fill", xPos, yPos, width, height);
 	}
 
 }

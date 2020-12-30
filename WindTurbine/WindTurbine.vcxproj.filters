@@ -37,6 +37,9 @@
     <ClCompile Include="physics_world.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="graphics.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -70,6 +73,9 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="physics_world.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>
