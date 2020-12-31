@@ -39,21 +39,28 @@ namespace wind {
 	}
 
 	void Collider::update(double dt) {
-		if (validateNextPosition(dt)) {
-			move();
+		validateNextX(dt);
+		validateNextY(dt);
+		move();
+	}
+
+	void Collider::validateNextX(double dt) {
+		nextX = xPos + xVel * dt;
+		if (!validateNextPosition()) {
+			nextX = xPos;
 		}
-		else {
-			//Collision callback function trigger.
+	}
+
+	void Collider::validateNextY(double dt) {
+		nextY = yPos + yVel * dt;
+		if (!validateNextPosition()) {
+			nextY = yPos;
 		}
 	}
 	
-	bool Collider::validateNextPosition(double dt) {
-		nextX = xPos + xVel * dt;
-		nextY = yPos + yVel * dt;
+	bool Collider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_object : world->getObjects()) { // TODO -> Dont check objects that are not moving!
-
-
 			if (this != other_object) { // Don't collide with yourself
 				if (shape == "rectangle" && other_object->shape == "rectangle") {
 					if (aabb(other_object)) {
@@ -66,24 +73,32 @@ namespace wind {
 					}
 				}
 				else if ((shape == "circle" && other_object->shape == "rectangle")) {
-					if (circleToRectangle(this, other_object)) {
+					if (circleToRectangle(other_object)) {
 						legal = false;
 					}
 				}
 				else if ((shape == "rectangle" && other_object->shape == "circle")) {
-					if (circleToRectangle(other_object, this)) {
+					if (rectangleToCircle(other_object)) {
 						legal = false;
 					}
 				}
 			}
 		}
-		
+
 		return legal;
 	}
-	
+
 	void Collider::move() {
 		xPos = nextX;
 		yPos = nextY;
+	}
+
+	double Collider::getX() {
+		return xPos;
+	}
+
+	double Collider::getY() {
+		return yPos;
 	}
 	
 	bool Collider::aabb(Collider* other) { //Axis Alligned Bounding Box
@@ -96,8 +111,8 @@ namespace wind {
 	
 	//Is the distance between the two circles less than their combined raidus?
 	bool Collider::circleToCircle(Collider* other) {
-		double dx = xPos - other->xPos;
-		double dy = yPos - other->yPos;
+		double dx = nextX - other->xPos;
+		double dy = nextY - other->yPos;
 		double distance = sqrt(dx * dx + dy * dy);
 		double combined_radius = radius + other->radius;
 		if (distance < combined_radius) {
@@ -108,20 +123,49 @@ namespace wind {
 	}
 	
 
-	bool Collider::circleToRectangle(Collider* circle, Collider* rectangle) {
-		double rx = circle->xPos;
-		double ry = circle->yPos;
-		if (circle->xPos < rectangle->xPos) {
+	bool Collider::circleToRectangle(Collider* rectangle) {
+		double rx = nextX;
+		double ry = nextY;
+		if (nextX < rectangle->xPos) {
 			rx = rectangle->xPos;
-		}else if (circle->xPos > rectangle->xPos + rectangle->width){
+		}else if (nextX > rectangle->xPos + rectangle->width){
 			rx = rectangle->xPos + rectangle->width;
 		}
 		
-		if (circle->yPos < rectangle->yPos) {
+		if (nextY < rectangle->yPos) {
 			ry = rectangle->yPos;
 		}
-		else if (circle->yPos > rectangle->yPos + rectangle->height) {
+		else if (nextY > rectangle->yPos + rectangle->height) {
 			ry = rectangle->yPos + rectangle->height;
+		}
+
+		double distanceX = nextX - rx;
+		double distanceY = nextY - ry;
+		double distance = sqrt(distanceX * distanceX + distanceY * distanceY);
+
+		if (distance < radius) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	bool Collider::rectangleToCircle(Collider* circle) {
+		double rx = circle->xPos;
+		double ry = circle->yPos;
+		if (circle->xPos < xPos) {
+			rx = xPos;
+		}
+		else if (circle->xPos > xPos + width) {
+			rx = xPos + width;
+		}
+
+		if (circle->yPos < yPos) {
+			ry = yPos;
+		}
+		else if (circle->yPos > yPos + height) {
+			ry = yPos + height;
 		}
 
 		double distanceX = circle->xPos - rx;

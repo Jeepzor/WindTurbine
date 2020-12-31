@@ -1,7 +1,10 @@
+#include <string>
 #include "player.h"
+#include "collider.h"
+#include "physics_world.h"
 
-Player::Player() {
-	xPos = 30;
+Player::Player(wind::PhysicsWorld* world) {
+	xPos = 300;
 	yPos = 40;
 	yVel = 0;
 	xVel = 0;
@@ -9,13 +12,15 @@ Player::Player() {
 	maxSpeed = 300.0;
 	acceleration = 4000.0;
 	friction = 2000;
+	collider = new wind::Collider(world,xPos, yPos, 30);
 	sprite = new wind::Animation("../assets/run.png", 6, 0.09);
 }
 
 void Player::update(double dt) {
 	sprite->update(dt);
 	move(dt);
-	applyVelocity(dt);
+	applyVelocity();
+	syncPosition();
 	applyFriction(dt);
 	updateDirection();
 }
@@ -42,9 +47,13 @@ void Player::move(double dt) {
 	}
 }
 
-void Player::applyVelocity(double dt) {
-	xPos = xPos + xVel * dt;
-	yPos = yPos + yVel * dt;
+void Player::applyVelocity() {
+	collider->setVelocity(xVel, yVel);
+}
+
+void Player::syncPosition() {
+	xPos = collider->getX() - 50;
+	yPos = collider->getY() - 50;
 }
 
 void Player::applyFriction(double dt) {
@@ -73,6 +82,5 @@ void Player::updateDirection() {
 
 void Player::draw() {
 	sprite->draw(xPos, yPos);
-	wind::graphics.line(xPos + 50, yPos + 50, wind::turbine.getMouseX(), wind::turbine.getMouseY());
-	wind::graphics.rectangle("line",xPos, yPos, 100, 100);
+	//wind::graphics.line(xPos + 50, yPos + 50, wind::turbine.getMouseX(), wind::turbine.getMouseY());
 }

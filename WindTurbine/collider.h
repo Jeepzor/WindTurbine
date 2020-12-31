@@ -14,10 +14,18 @@ namespace wind {
 		void draw();
 		void move();
 		void setVelocity(double x, double y);
-		bool validateNextPosition(double dt);
+
+		void validateNextX(double dt);
+		void validateNextY(double dt);
+		bool validateNextPosition();
+
 		bool aabb(Collider* other);
 		bool circleToCircle(Collider* other);
-		bool circleToRectangle(Collider* circle, Collider* rectangle);
+		bool circleToRectangle(Collider* rectangle);
+		bool rectangleToCircle(Collider* circle);
+
+		double getX();
+		double getY();
 	private:
 		PhysicsWorld* world;
 		std::string shape;

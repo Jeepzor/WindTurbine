@@ -4,17 +4,19 @@
 #include <algorithm>
 
 #include "wind_turbine.h"
+class wind::PhysicsWorld;
 
 class Player : public wind::Entity {
 public:
-	Player();
+	Player(wind::PhysicsWorld* world);
 	void draw()override;
 	void update(double dt)override;
 	
 private:
 	void move(double dt);
 	void applyFriction(double dt);
-	void applyVelocity(double dt);
+	void applyVelocity();
+	void syncPosition();
 	void updateDirection();
 
 	double xVel;
@@ -23,6 +25,7 @@ private:
 	double friction;
 	double maxSpeed;
 	double dir;
+	wind::Collider* collider;
 	wind::Animation* sprite;
 };
 

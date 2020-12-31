@@ -24,8 +24,7 @@ PlayModule::PlayModule() {
 	bodyF->setVelocity(-200, 0);
 	bodyG->setVelocity(-200, 0);
 	bg = new wind::Image("../assets/bg.png");
-	testPlayer = new Player();
-	testPlayer = new Player();
+	testPlayer = new Player(worldA);
 }
 
 void PlayModule::keyPressed(std::string key) {
