@@ -21,6 +21,11 @@ private:
 	wind::PhysicsWorld* worldA;
 	wind::Collider* bodyA;
 	wind::Collider* bodyB;
+	wind::Collider* bodyC;
+	wind::Collider* bodyD;
+	wind::Collider* bodyE;
+	wind::Collider* bodyF;
+	wind::Collider* bodyG;
 };
 
 #endif

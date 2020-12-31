@@ -9,10 +9,20 @@ PlayModule::PlayModule() {
 	eventOn = { "play" };
 
 	worldA = new wind::PhysicsWorld(0, 0);
-	bodyA = new wind::Collider(worldA, 30, 30, 10, 10);
-	bodyB = new wind::Collider(worldA, 300, 30, 30, 30);
+	bodyA = new wind::Collider(worldA, 30, 30, 40, 600);
+	bodyB = new wind::Collider(worldA, 300, 330, 75, 75);
+	bodyC = new wind::Collider(worldA, 500, 300, 10, 200);
+	bodyD = new wind::Collider(worldA, 750, 300, 35);
+	bodyE = new wind::Collider(worldA, 900, 360, 75);
+	bodyF = new wind::Collider(worldA, 1100, 330, 25, 75);
+	bodyG = new wind::Collider(worldA, 1350, 330, 10);
 
-	bodyB->setVelocity(-50, 0);
+	bodyB->setVelocity(-200, 0);
+	bodyC->setVelocity(-200, 0);
+	bodyD->setVelocity(-200, 0);
+	bodyE->setVelocity(-200, 0);
+	bodyF->setVelocity(-200, 0);
+	bodyG->setVelocity(-200, 0);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player();
 	testPlayer = new Player();
@@ -50,8 +60,8 @@ void PlayModule::draw() {
 	testPlayer->draw();
 	worldA->draw();
 	wind::graphics.setColor(255, 0, 0);
-	wind::graphics.circle("line", 300, 300, 40);
-	wind::graphics.circle("fill", 400, 400, 25);
+	//wind::graphics.circle("line", 300, 300, 40);
+	//wind::graphics.circle("fill", 400, 400, 25);
 	//std::cout << "State is drawing" << "\n";
 }
 
