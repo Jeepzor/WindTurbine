@@ -47,10 +47,11 @@ void PlayModule::update(double dt) {
 
 void PlayModule::draw() {
 	bg->draw();
-	wind::graphics.setColor(255, 0, 0);
 	testPlayer->draw();
-	//wind::graphics.clearColor();
 	worldA->draw();
+	wind::graphics.setColor(255, 0, 0);
+	wind::graphics.circle("line", 300, 300, 40);
+	wind::graphics.circle("fill", 400, 400, 25);
 	//std::cout << "State is drawing" << "\n";
 }
 
