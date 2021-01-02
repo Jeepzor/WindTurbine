@@ -5,11 +5,10 @@
 
 namespace wind {
 
-	PolygonCollider::PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector< std::pair <int, int> >) : wind::Collider::Collider(physics_world, x, y, radius) {
-		shape = circle;
+	PolygonCollider::PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector< std::pair <double, double> > poly_points) : wind::Collider::Collider(physics_world, x, y, 0) {
+		shape = polygon;
+		vertices = poly_points;
 	}
-
-	
 
 	bool PolygonCollider::validateNextPosition() const {
 		bool legal = true;
@@ -35,6 +34,10 @@ namespace wind {
 	}
 
 	void PolygonCollider::draw() const {
-		graphics.circle("line", xPos, yPos, radius);
+		graphics.line(vertices[0].first + xPos, vertices[0].second + yPos, vertices[vertices.size() - 1].first + xPos, vertices[vertices.size() - 1].second + yPos);
+		for (int i = 0; i < vertices.size() - 1; i++)
+		{
+			graphics.line(vertices[i].first + xPos, vertices[i].second + yPos, vertices[i + 1].first + xPos, vertices[i + 1].second + yPos);
+		};
 	}
 }

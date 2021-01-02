@@ -8,6 +8,7 @@ PlayModule::PlayModule() {
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
 
+	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
 	bodyB = new wind::RectangleCollider(worldA, 300, 330, 75, 75);
@@ -15,14 +16,18 @@ PlayModule::PlayModule() {
 	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
 	bodyF = new wind::CircleCollider(worldA, 900, 360, 75);
-	bodyG = new wind::CircleCollider(worldA, 1350, 330, 10);
+	std::vector < std::pair<double, double>> testPoly;
+	testPoly.push_back(std::make_pair(50, 50));
+	testPoly.push_back(std::make_pair(100, 50));	
+	testPoly.push_back(std::make_pair(50, 100));
+	bodyG = new wind::PolygonCollider(worldA, 500, 200, testPoly);
 
 	bodyB->setVelocity(-200, 0);
 	bodyC->setVelocity(-200, 0);
 	bodyD->setVelocity(-200, 0); 
 	bodyE->setVelocity(-200, 0);
 	bodyF->setVelocity(-200, 0);
-	bodyG->setVelocity(-200, 0);
+	//bodyG->setVelocity(-200, 0);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
 }

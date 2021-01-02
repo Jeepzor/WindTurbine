@@ -9,11 +9,12 @@ namespace wind {
 
 	class PolygonCollider : public wind::Collider {
 	public:
-		PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector< std::pair <int, int> >);
+		PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector< std::pair <double, double> > poly_points);
 
 	private:
 		void draw() const override;
 		bool validateNextPosition() const override;
+		std::vector< std::pair <double, double> > vertices;
 		//bool toCircle(CircleCollider* circle) const;
 		//bool toRectangle(wind::RectangleCollider* rectangle) const;
 	};
