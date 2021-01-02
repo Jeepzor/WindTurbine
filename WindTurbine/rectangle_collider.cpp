@@ -16,7 +16,7 @@ namespace wind {
 
 	bool RectangleCollider::validateNextPosition() const {
 		bool legal = true;
-		for (auto other_collider : world->getObjects()) { // TODO -> Dont check objects that are not moving!
+		for (auto other_collider : world->getColliders()) { // TODO -> Dont check objects that are not moving!
 			if (this != other_collider) { // Don't collide with yourself
 
 				if (shape == rectangle && other_collider->getShape() == rectangle) {

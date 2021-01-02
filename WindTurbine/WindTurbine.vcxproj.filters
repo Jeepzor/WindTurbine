@@ -46,6 +46,9 @@
     <ClCompile Include="circle_collider.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="polygon_collider.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -88,6 +91,9 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="circle_collider.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="polygon_collider.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

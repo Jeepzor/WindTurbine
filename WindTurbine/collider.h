@@ -4,7 +4,7 @@
 #include <iostream>
 
 namespace wind {
-	enum Shape {base, circle, rectangle };
+	enum Shape {base, circle, rectangle, polygon };
 	class PhysicsWorld; // Is this forward declaration?
 	class RectangleCollider;
 
