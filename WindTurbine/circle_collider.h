@@ -12,10 +12,10 @@ namespace wind {
 		CircleCollider(PhysicsWorld* physics_world, double x, double y, double radius);
 		
 	private:
-		void draw() override;
-		bool validateNextPosition() override;
-		bool toCircle(CircleCollider* circle);
-		bool toRectangle(wind::RectangleCollider* rectangle);
+		void draw() const override;
+		bool validateNextPosition() const override;
+		bool toCircle(CircleCollider* circle) const;
+		bool toRectangle(wind::RectangleCollider* rectangle) const;
 	};
 
 }

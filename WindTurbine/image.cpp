@@ -28,7 +28,7 @@ namespace wind {
 		return &destination;
 	}
 
-	SDL_Rect* Image::getPortion() {
+	SDL_Rect* Image::getPortion(){
 		return NULL;
 	}
 
@@ -66,11 +66,11 @@ namespace wind {
 		angle = new_angle;
 	}
 
-	SDL_Texture* Image::getAsset() {
+	SDL_Texture* Image::getAsset() const {
 		return asset;
 	}
 
-	double Image::getAngle() {
+	double Image::getAngle() const {
 		return angle;
 	}
 

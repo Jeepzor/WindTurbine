@@ -13,7 +13,6 @@ PlayModule::PlayModule() {
 	bodyB = new wind::RectangleCollider(worldA, 300, 330, 75, 75);
 	bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
 	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
-	
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
 	bodyF = new wind::CircleCollider(worldA, 900, 360, 75);
 	bodyG = new wind::CircleCollider(worldA, 1350, 330, 10);

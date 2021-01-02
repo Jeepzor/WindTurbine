@@ -12,19 +12,19 @@ namespace wind {
 		objects.push_back(new_object);
 	}
 
-	void PhysicsWorld::update(double dt) {
+	void PhysicsWorld::update(double dt) const {
 		for (auto currrent_object : objects) {
 			currrent_object->update(dt);
 		}
 	}
 	
-	void PhysicsWorld::draw() {
+	void PhysicsWorld::draw() const {
 		for (auto currrent_object : objects) {
 			currrent_object->draw();
 		}
 	}
 
-	std::vector<Collider*> PhysicsWorld::getObjects() {
+	std::vector<Collider*> PhysicsWorld::getObjects() const {
 		return objects;
 	}
 

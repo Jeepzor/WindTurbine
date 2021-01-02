@@ -9,7 +9,7 @@ namespace wind {
 	}
 
 	//Is the distance between the two circles less than their combined raidus?
-	bool CircleCollider::toCircle(CircleCollider* other) {
+	bool CircleCollider::toCircle(CircleCollider* other) const {
 		double dx = nextX - other->xPos;
 		double dy = nextY - other->yPos;
 		double distance = sqrt(dx * dx + dy * dy);
@@ -22,7 +22,7 @@ namespace wind {
 		}
 	}
 
-	bool CircleCollider::toRectangle(RectangleCollider* rectangle) {
+	bool CircleCollider::toRectangle(RectangleCollider* rectangle) const {
 		double rx = nextX;
 		double ry = nextY;
 		if (nextX < rectangle->getX()) {
@@ -51,7 +51,7 @@ namespace wind {
 		}
 	}
 
-	bool CircleCollider::validateNextPosition() {
+	bool CircleCollider::validateNextPosition() const {
 		bool legal = true;
 		for (auto other_collider : world->getObjects()) { // TODO -> Dont check objects that are not moving!
 			if (this != other_collider) { // Don't collide with yourself
@@ -73,60 +73,7 @@ namespace wind {
 		return legal;
 	}
 
-	void CircleCollider::draw() {
+	void CircleCollider::draw() const {
 		graphics.circle("line", xPos, yPos, radius);
 	}
-
-
-
-
-
-
-
-
-	/*
-	* 
-	* else if ((shape == rectangle && other_object->shape == circle)) {
-	if (rectangleToCircle(other_object)) {
-		legal = false;
-	}
-			}
-
-			if (shape == rectangle && other_object->shape == rectangle) {
-				if (aabb(other_object)) {
-					legal = false;
-				}
-			}
-	}
-	bool legal = true;
-		for (auto other_object : world->getObjects()) { // TODO -> Dont check objects that are not moving!
-			if (this != other_object) { // Don't collide with yourself
-
-				if (shape == circle && other_object->shape == circle) {
-					if (circleToCircle(other_object)) {
-						legal = false;
-					}
-				}
-				else if ((shape == circle && other_object->shape == rectangle)) {
-					RectangleCollider* rectangle_object{ dynamic_cast<RectangleCollider*>(other_object) };
-					if (circleToRectangle(rectangle_object)) {
-						legal = false;
-					}
-				}
-
-			}
-		}
-	else if ((shape == rectangle && other_object->shape == circle)) {
-				if (rectangleToCircle(other_object)) {
-					legal = false;
-				}
-			}
-
-		if (shape == rectangle && other_object->shape == rectangle) {
-			if (aabb(other_object)) {
-				legal = false;
-			}
-		}
-
-	*/
 }

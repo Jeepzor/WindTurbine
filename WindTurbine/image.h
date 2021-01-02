@@ -14,11 +14,11 @@ namespace wind {
 		void setFlip(bool x_axis, bool y_axis);
 		void setAngle(double new_angle);
 		
-		double getAngle();
+		double getAngle() const;
 		
 		SDL_Rect* getDestination();
 		virtual SDL_Rect* getPortion();
-		SDL_Texture* getAsset();
+		SDL_Texture* getAsset() const;
 		SDL_Point* getOriginPoint();
 
 	protected:

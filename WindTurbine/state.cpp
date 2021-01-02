@@ -15,7 +15,7 @@ namespace wind {
 		currentState = "";
 	}
 
-	std::string State::getActiveState() {
+	std::string State::getActiveState() const {
 		return currentState;
 	}
 
@@ -55,7 +55,7 @@ namespace wind {
 		}
 	}
 
-	bool State::exist(std::string state_to_find) {
+	bool State::exist(std::string state_to_find) const {
 		if (std::find(states.begin(), states.end(), state_to_find) != states.end())
 		{
 			return true;
@@ -65,7 +65,7 @@ namespace wind {
 		}
 	}
 
-	void State::keyPressed(std::string key) {
+	void State::keyPressed(std::string key) const {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inEventList(currentState)) {
 				current_game_module->keyPressed(key);
@@ -73,7 +73,7 @@ namespace wind {
 		}
 	}	
 	
-	void State::keyReleased(std::string key) {
+	void State::keyReleased(std::string key) const {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inEventList(currentState)) {
 				current_game_module->keyReleased(key);
@@ -81,7 +81,7 @@ namespace wind {
 		}
 	}
 	
-	void State::mousePressed(int button) {
+	void State::mousePressed(int button) const {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inEventList(currentState)) {
 				current_game_module->mousePressed(button);
@@ -89,7 +89,7 @@ namespace wind {
 		}
 	}	
 	
-	void State::mouseReleased(int button) {
+	void State::mouseReleased(int button) const {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inEventList(currentState)) {
 				current_game_module->mouseReleased(button);
@@ -97,7 +97,7 @@ namespace wind {
 		}
 	}
 
-	void State::update(double dt) {
+	void State::update(double dt) const {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inUpdateList(currentState)) {
 				current_game_module->update(dt);
@@ -105,7 +105,7 @@ namespace wind {
 		}
 	}
 	
-	void State::draw() {
+	void State::draw() const {
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inDrawList(currentState)) {
 				wind::graphics.clearColor();

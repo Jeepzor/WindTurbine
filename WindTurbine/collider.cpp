@@ -82,19 +82,19 @@ namespace wind {
 		yPos = nextY;
 	}
 
-	double Collider::getX() {
+	double Collider::getX() const {
 		return xPos;
 	}
 
-	double Collider::getY() {
+	double Collider::getY() const {
 		return yPos;
 	}
 	
-	int Collider::getRadius() {
+	int Collider::getRadius() const {
 		return radius;
 	}
 
-	Shape Collider::getShape() {
+	Shape Collider::getShape() const {
 		return shape;
 	}
 }

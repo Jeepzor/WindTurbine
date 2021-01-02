@@ -79,12 +79,12 @@ namespace wind {
 	}
 
 	//Return true if passed in button is currently down; LMB = 1, MMB = 2, RMB = 3
-	bool Turbine::mouseDown(int button) {
+	bool Turbine::mouseDown(int button) const {
 		return (SDL_GetMouseState(NULL, NULL) & SDL_BUTTON(button));
 	}
 
 	//Return true if passed in key is currently down.
-	bool Turbine::keyDown(std::string key) {
+	bool Turbine::keyDown(std::string key) const {
 		SDL_PumpEvents();
 		const char* c = key.c_str();
 		return (keyboard_state[SDL_GetScancodeFromName(c)]);
@@ -132,15 +132,15 @@ namespace wind {
 		mousePosition = std::make_pair(x, y);
 	}
 	
-	std::pair<int, int> Turbine::getMousePosition() {
+	std::pair<int, int> Turbine::getMousePosition() const {
 		return mousePosition;
 	}
 
-	int Turbine::getMouseX() {
+	int Turbine::getMouseX() const {
 		return mousePosition.first;
 	}
 	
-	int Turbine::getMouseY() {
+	int Turbine::getMouseY() const  {
 		return mousePosition.second;
 	}
 
@@ -164,13 +164,13 @@ namespace wind {
 		}
 	}
 
-	void Turbine::draw() {
+	void Turbine::draw() const {
 		SDL_RenderClear(renderer);
 		state.draw();
 		SDL_RenderPresent(renderer);
 	}
 
-	bool Turbine::active() { return is_active; }
+	bool Turbine::active() const { return is_active; }
 
 	void Turbine::setActive(bool state) {
 		is_active = state;

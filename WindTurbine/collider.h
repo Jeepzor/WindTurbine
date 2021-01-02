@@ -13,17 +13,17 @@ namespace wind {
 		Collider(PhysicsWorld* world, double x, double y, int radius); // for circle, break out into class later.
 		virtual ~Collider() {}
 		virtual void update(double dt);
-		virtual void draw() = 0;
+		virtual void draw() const = 0;
 		virtual void move();
 		virtual void setVelocity(double x, double y);
 
-		double getX();
-		double getY();
-		int getRadius();
-		Shape getShape();
+		double getX() const;
+		double getY() const;
+		int getRadius() const;
+		Shape getShape() const;
 		
 	protected:
-		virtual bool validateNextPosition() = 0;
+		virtual bool validateNextPosition() const = 0;
 		void validateNextX(double dt);
 		void validateNextY(double dt);
 

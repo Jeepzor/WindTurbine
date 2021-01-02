@@ -10,15 +10,15 @@ namespace wind {
 	class RectangleCollider : public wind::Collider {
 	public:
 		RectangleCollider(PhysicsWorld* physics_world, double x, double y, double width, double height);
-		int getWidth();
-		int getHeight();
+		int getWidth() const;
+		int getHeight() const;
 	private:
-		bool validateNextPosition() override;
-		bool toCircle(Collider* circle);
-		bool aabb(RectangleCollider* rectangle);
+		bool validateNextPosition() const override;
+		bool toCircle(Collider* circle) const;
+		bool aabb(RectangleCollider* rectangle) const;
 		int width;
 		int height;
-		void draw();
+		void draw() const;
 	};
 
 }

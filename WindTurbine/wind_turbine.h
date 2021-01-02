@@ -26,7 +26,7 @@ namespace wind {
 		void run();
 		void handleEvents();
 		void update();
-		void draw();
+		void draw() const;
 		void clean();
 		void setActive(bool next_state);
 		void setMaxFPS(int limit);
@@ -34,13 +34,13 @@ namespace wind {
 		void updateMousePosition();
 
 		SDL_Renderer* getRenderer() const;
-		std::pair<int, int> getMousePosition();
-		int getMouseX();
-		int getMouseY();
+		std::pair<int, int> getMousePosition() const;
+		int getMouseX() const;
+		int getMouseY() const;
 
-		bool active();
-		bool keyDown(std::string key);
-		bool mouseDown(int button);
+		bool active() const;
+		bool keyDown(std::string key) const;
+		bool mouseDown(int button) const;
 
 	private:
 		int fpsLimit;

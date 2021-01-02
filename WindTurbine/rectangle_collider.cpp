@@ -10,11 +10,11 @@ namespace wind {
 	RectangleCollider::RectangleCollider(PhysicsWorld* physics_world, double x, double y, double rect_width, double rect_height) : wind::Collider::Collider(physics_world, x, y, 0) {
 		width = rect_width;
 		height = rect_height;
-		radius = std::sqrt(width * width + height * height); // get the distance between two oposite corners. Used for the first pass of the faster circle to circle detection.
+		radius = std::sqrt(width * width + height * height) / 2; // get the distance between two oposite corners. Used for the first pass of the faster circle to circle detection.
 		shape = rectangle;
 	}
 
-	bool RectangleCollider::validateNextPosition() {
+	bool RectangleCollider::validateNextPosition() const {
 		bool legal = true;
 		for (auto other_collider : world->getObjects()) { // TODO -> Dont check objects that are not moving!
 			if (this != other_collider) { // Don't collide with yourself
@@ -36,10 +36,7 @@ namespace wind {
 		return legal;
 	}
 
-
-
-
-	bool RectangleCollider::toCircle(Collider* circle) {
+	bool RectangleCollider::toCircle(Collider* circle) const {
 		double rx = circle->getX();
 		double ry = circle->getY();
 		if (circle->getX() < xPos) {
@@ -68,7 +65,7 @@ namespace wind {
 		}
 	}
 
-	bool RectangleCollider::aabb(RectangleCollider* other) { //Axis Alligned Bounding Box
+	bool RectangleCollider::aabb(RectangleCollider* other) const { //Axis Alligned Bounding Box
 		if (nextX + width > other->xPos && nextX < other->xPos + other->width && nextY + height > other->yPos && nextY < other->yPos + other->height) {
 			return true;
 		}
@@ -77,15 +74,16 @@ namespace wind {
 		}
 	}
 
-	int RectangleCollider::getWidth() {
+	int RectangleCollider::getWidth() const {
 		return width;
 	}
 	
-	int RectangleCollider::getHeight() {
+	int RectangleCollider::getHeight() const {
 		return height;
 	}
 
-	void RectangleCollider::draw() {
+	void RectangleCollider::draw() const {
 		graphics.rectangle("line", xPos, yPos, width, height);
+		//graphics.circle("line", xPos + width / 2, yPos + height / 2, radius);
 	}
 }

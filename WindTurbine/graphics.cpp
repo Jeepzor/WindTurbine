@@ -14,11 +14,11 @@ namespace wind {
 		alpha = 255;
 	}
 
-	void Graphics::rectangle(int x, int y, int width, int height) {
+	void Graphics::rectangle(int x, int y, int width, int height) const {
 		rectangle("fill", x, y, width, height);
 	}
 
-	void Graphics::rectangle(std::string mode, int x, int y, int width, int height) {
+	void Graphics::rectangle(std::string mode, int x, int y, int width, int height) const {
 		SDL_Rect dimensions = {x, y, width, height};
 		if (mode == "fill") {
 			SDL_RenderFillRect(wind::turbine.getRenderer(), &dimensions);
@@ -31,15 +31,15 @@ namespace wind {
 		}
 	}
 	
-	void Graphics::line(int x1, int y1, int x2, int y2) {
+	void Graphics::line(int x1, int y1, int x2, int y2) const {
 		SDL_RenderDrawLine(wind::turbine.getRenderer(),x1, y1, x2, y2);
 	}
 	
-	void Graphics::circle(int x, int y, int radius) {
+	void Graphics::circle(int x, int y, int radius) const {
 		circle("fill", x, y, radius);
 	}
 	
-	void Graphics::circle(std::string mode, int x, int y, int radius) {
+	void Graphics::circle(std::string mode, int x, int y, int radius) const {
 		int cx = x;
 		int cy = y;
 		if (mode == "line") {
