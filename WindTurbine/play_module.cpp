@@ -9,17 +9,18 @@ PlayModule::PlayModule() {
 	eventOn = { "play" };
 
 	worldA = new wind::PhysicsWorld(0, 0);
-	bodyA = new wind::Collider(worldA, 30, 30, 40, 600);
-	bodyB = new wind::Collider(worldA, 300, 330, 75, 75);
-	bodyC = new wind::Collider(worldA, 500, 300, 10, 200);
-	bodyD = new wind::Collider(worldA, 750, 300, 35);
-	bodyE = new wind::Collider(worldA, 900, 360, 75);
-	bodyF = new wind::Collider(worldA, 1100, 330, 25, 75);
-	bodyG = new wind::Collider(worldA, 1350, 330, 10);
+	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
+	bodyB = new wind::RectangleCollider(worldA, 300, 330, 75, 75);
+	bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
+	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
+	
+	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
+	bodyF = new wind::CircleCollider(worldA, 900, 360, 75);
+	bodyG = new wind::CircleCollider(worldA, 1350, 330, 10);
 
 	bodyB->setVelocity(-200, 0);
 	bodyC->setVelocity(-200, 0);
-	bodyD->setVelocity(-200, 0);
+	bodyD->setVelocity(-200, 0); 
 	bodyE->setVelocity(-200, 0);
 	bodyF->setVelocity(-200, 0);
 	bodyG->setVelocity(-200, 0);
@@ -60,7 +61,7 @@ void PlayModule::draw() {
 	worldA->draw();
 	wind::graphics.setColor(255, 0, 0);
 	//wind::graphics.circle("line", 300, 300, 40);
-	//wind::graphics.circle("fill", 400, 400, 25);
+	//wind::graphics.circle("line", 400, 400, 400);
 	//std::cout << "State is drawing" << "\n";
 }
 

@@ -1,6 +1,6 @@
 #include <string>
 #include "player.h"
-#include "collider.h"
+#include "circle_collider.h"
 #include "physics_world.h"
 
 Player::Player(wind::PhysicsWorld* world) {
@@ -12,7 +12,7 @@ Player::Player(wind::PhysicsWorld* world) {
 	maxSpeed = 300.0;
 	acceleration = 4000.0;
 	friction = 2000;
-	collider = new wind::Collider(world,xPos, yPos, 30);
+	collider = new wind::CircleCollider(world,xPos, yPos, 30);
 	sprite = new wind::Animation("../assets/run.png", 6, 0.09);
 }
 

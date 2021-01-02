@@ -11,7 +11,7 @@ namespace wind {
 		void addObject(Collider* obj);
 		void update(double dt);
 		void draw();
-		std::vector<Collider*> getObjects();
+		std::vector<Collider*> getObjects(); //TODO - Rename to Collider
 	private:
 		std::vector<Collider*> objects;
 		double yVel;

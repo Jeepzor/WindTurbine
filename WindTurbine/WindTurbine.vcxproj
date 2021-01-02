@@ -144,12 +144,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="circle_collider.cpp" />
     <ClCompile Include="collider.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="game_module.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="physics_world.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="rectangle_collider.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="play_module.cpp" />
     <ClCompile Include="pause_module.cpp" />
@@ -159,6 +161,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
+    <ClInclude Include="circle_collider.h" />
+    <ClInclude Include="rectangle_collider.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="entity.h" />
     <ClInclude Include="game_module.h" />

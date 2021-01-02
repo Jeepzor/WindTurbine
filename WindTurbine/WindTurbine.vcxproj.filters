@@ -40,6 +40,12 @@
     <ClCompile Include="graphics.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="rectangle_collider.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="circle_collider.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -76,6 +82,12 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="graphics.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="rectangle_collider.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="circle_collider.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

@@ -4,33 +4,31 @@
 #include <iostream>
 
 namespace wind {
+	enum Shape {base, circle, rectangle };
 	class PhysicsWorld; // Is this forward declaration?
+	class RectangleCollider;
 
 	class Collider{
 	public:
-		Collider(PhysicsWorld* world, double x, double y, int width, int height);
 		Collider(PhysicsWorld* world, double x, double y, int radius); // for circle, break out into class later.
-		void update(double dt);
-		void draw();
-		void move();
-		void setVelocity(double x, double y);
-
-		void validateNextX(double dt);
-		void validateNextY(double dt);
-		bool validateNextPosition();
-
-		bool aabb(Collider* other);
-		bool circleToCircle(Collider* other);
-		bool circleToRectangle(Collider* rectangle);
-		bool rectangleToCircle(Collider* circle);
+		virtual ~Collider() {}
+		virtual void update(double dt);
+		virtual void draw() = 0;
+		virtual void move();
+		virtual void setVelocity(double x, double y);
 
 		double getX();
 		double getY();
-	private:
+		int getRadius();
+		Shape getShape();
+		
+	protected:
+		virtual bool validateNextPosition() = 0;
+		void validateNextX(double dt);
+		void validateNextY(double dt);
+
 		PhysicsWorld* world;
-		std::string shape;
-		int width;
-		int height;
+		Shape shape;
 		double radius;
 		double yPos;
 		double xPos;
