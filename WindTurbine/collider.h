@@ -18,7 +18,9 @@ namespace wind {
 		virtual void setVelocity(double x, double y);
 
 		double getX() const;
-		double getY() const;
+		double getY() const;	
+		double getNextX() const;
+		double getNextY() const;
 		int getRadius() const;
 		Shape getShape() const;
 		

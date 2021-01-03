@@ -53,7 +53,7 @@ namespace wind {
 
 	bool CircleCollider::validateNextPosition() const {
 		bool legal = true;
-		for (auto other_collider : world->getColliders()) { // TODO -> Dont check objects that are not moving!
+		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
 
 				if (shape == circle && other_collider->getShape() == circle) {

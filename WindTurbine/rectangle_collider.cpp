@@ -16,7 +16,7 @@ namespace wind {
 
 	bool RectangleCollider::validateNextPosition() const {
 		bool legal = true;
-		for (auto other_collider : world->getColliders()) { // TODO -> Dont check objects that are not moving!
+		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
 
 				if (shape == rectangle && other_collider->getShape() == rectangle) {
@@ -84,6 +84,6 @@ namespace wind {
 
 	void RectangleCollider::draw() const {
 		graphics.rectangle("line", xPos, yPos, width, height);
-		//graphics.circle("line", xPos + width / 2, yPos + height / 2, radius);
+		graphics.circle("line", xPos + width / 2, yPos + height / 2, radius);
 	}
 }

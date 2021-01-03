@@ -44,39 +44,6 @@ namespace wind {
 		}
 	}
 
-	/*
-	bool legal = true;
-		for (auto other_object : world->getObjects()) { // TODO -> Dont check objects that are not moving!
-			if (this != other_object) { // Don't collide with yourself
-				
-				if (shape == circle && other_object->shape == circle) {
-					if (circleToCircle(other_object)) {
-						legal = false;
-					}
-				}
-				else if ((shape == circle && other_object->shape == rectangle)) {
-					RectangleCollider* rectangle_object{ dynamic_cast<RectangleCollider*>(other_object) };
-					if (circleToRectangle(rectangle_object)) {
-						legal = false;
-					}
-				}
-				
-			}
-		}
-	else if ((shape == rectangle && other_object->shape == circle)) {
-				if (rectangleToCircle(other_object)) {
-					legal = false;
-				}
-			}
-
-		if (shape == rectangle && other_object->shape == rectangle) {
-			if (aabb(other_object)) {
-				legal = false;
-			}
-		}
-
-	*/
-
 	void Collider::move() {
 		xPos = nextX;
 		yPos = nextY;
@@ -88,6 +55,14 @@ namespace wind {
 
 	double Collider::getY() const {
 		return yPos;
+	}
+	
+	double Collider::getNextX() const {
+		return nextX;
+	}
+
+	double Collider::getNextY() const {
+		return nextY;
 	}
 	
 	int Collider::getRadius() const {

@@ -1,6 +1,6 @@
 #include "play_module.h"
 #include "player.h"
-
+#include "vec2.h"
 
 
 PlayModule::PlayModule() {
@@ -15,19 +15,20 @@ PlayModule::PlayModule() {
 	bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
 	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
-	bodyF = new wind::CircleCollider(worldA, 900, 360, 75);
-	std::vector < std::pair<double, double>> testPoly;
-	testPoly.push_back(std::make_pair(50, 50));
-	testPoly.push_back(std::make_pair(100, 50));	
-	testPoly.push_back(std::make_pair(50, 100));
-	bodyG = new wind::PolygonCollider(worldA, 500, 200, testPoly);
+
+	std::vector < wind::Vec2> testPoly;
+	testPoly.push_back(wind::Vec2(50, 50));
+	testPoly.push_back(wind::Vec2(100, 50));
+	testPoly.push_back(wind::Vec2(50, 100));
+	bodyG = new wind::PolygonCollider(worldA, 450, 230, testPoly);
+	bodyF = new wind::PolygonCollider(worldA, 400, 200, testPoly);
 
 	bodyB->setVelocity(-200, 0);
 	bodyC->setVelocity(-200, 0);
 	bodyD->setVelocity(-200, 0); 
 	bodyE->setVelocity(-200, 0);
-	bodyF->setVelocity(-200, 0);
-	//bodyG->setVelocity(-200, 0);
+	bodyF->setVelocity(0, 0);
+	bodyG->setVelocity(-200, 0);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
 }
@@ -36,6 +37,12 @@ void PlayModule::keyPressed(std::string key) {
 	std::cout << "Key [" << key << "] was pressed" << "\n";
 	if (key == "1") {
 		wind::state.setCurrentState("paused");
+	}
+	else if (key == "3") {
+		bodyG->setVelocity(200, 0);
+	}
+	else if (key == "4") {
+		bodyG->setVelocity(-200, 0);
 	}
 }
 
