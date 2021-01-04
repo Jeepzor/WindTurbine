@@ -67,13 +67,25 @@ namespace wind {
 				y1 = ov[i].y + polygon->getY();
 				y2 = ov[i + 1].y + polygon->getY();
 			}
-			double length_of_line = wind::math.distance(x1, y1, x2, y2);
 
-			double distance1 = wind::math.distance(x1, y1, getNextX(), getNextY());
-			double distance2 = wind::math.distance(x2, y2, getNextX(), getNextY());
+			double distX = x1 - x2;
+			double distY = y1 - y2;
+			double len = sqrt((distX * distX) + (distY * distY));
 
-			if (distance1 + distance2 >= length_of_line - getRadius() * 0.99 && distance1 + distance2 <= length_of_line + getRadius() * 0.99) {
-				return true;
+			double dot = (((getNextX() - x1) * (x2 - x1)) + ((getNextY() - y1) * (y2 - y1))) / pow(len, 2);
+
+			double closestX = x1 + (dot * (x2 - x1));
+			double closestY = y1 + (dot * (y2 - y1));
+
+			bool onSegment = math.linePoint(x1, y1, x2, y2, closestX, closestY);
+			if (onSegment) {
+				// get distance to closest point
+				distX = closestX - (getNextX());
+				distY = closestY - (getNextY());
+				double distance = sqrt((distX * distX) + (distY * distY));
+				if (distance <= getRadius()) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -84,19 +96,19 @@ namespace wind {
 		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
 				if (toBoundry(other_collider)) { // Is the shape near enough to warrant more expensive calculations?
-					if (shape == circle && other_collider->getShape() == circle) {
+					if (other_collider->getShape() == circle) {
 						CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };
 						if (toBoundry(other_circle)) {
 							legal = false;
 						}
 					}
-					else if ((shape == circle && other_collider->getShape() == rectangle)) {
+					else if ((other_collider->getShape() == rectangle)) {
 						RectangleCollider* rectangle_collider{ dynamic_cast<RectangleCollider*>(other_collider) };
 						if (toRectangle(rectangle_collider)) {
 							legal = false;
 						}
 					}
-					else if ((shape == circle && other_collider->getShape() == polygon)) {
+					else if ((other_collider->getShape() == polygon)) {
 						PolygonCollider* polygon_collider{ dynamic_cast<PolygonCollider*>(other_collider) };
 						if (toPolygon(polygon_collider)) {
 							legal = false;

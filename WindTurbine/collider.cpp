@@ -38,12 +38,15 @@ namespace wind {
 		}
 	}
 
+	
 	void Collider::validateNextY(double dt) {
 		nextY = yPos + yVel * dt;
 		if (!validateNextPosition()) {
 			nextY = yPos;
 		}
 	}
+
+	
 
 	//Is the distance between the two boundry-circles less than their combined raidus?
 	bool Collider::toBoundry(Collider* other) const {

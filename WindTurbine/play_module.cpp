@@ -17,25 +17,21 @@ PlayModule::PlayModule() {
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
 
 	std::vector < wind::Vec2> testPoly;
-	testPoly.push_back(wind::Vec2(50, 50));
-	testPoly.push_back(wind::Vec2(100, 50));
-	testPoly.push_back(wind::Vec2(75, 10));
+	testPoly.push_back(wind::Vec2(0, 0));
+	testPoly.push_back(wind::Vec2(200, 50));
 	testPoly.push_back(wind::Vec2(50, 100));
 	bodyG = new wind::PolygonCollider(worldA, 480, 230, testPoly);
-	bodyF = new wind::PolygonCollider(worldA, 400, 200, testPoly);
+	bodyF = new wind::PolygonCollider(worldA, 700, 600, testPoly);
 
-	bodyA->setVelocity(100, 0);
+	//bodyA->setVelocity(100, 0);
 	//bodyB->setVelocity(-200, 0);
 	//bodyC->setVelocity(-200, 0);
 	//bodyD->setVelocity(-200, 0); 
 	//bodyE->setVelocity(-200, 0);
 	//bodyF->setVelocity(0, 0);
-	bodyG->setVelocity(-200, 10);
+	bodyG->setVelocity(-10, 10);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
-
-	double abc = 20;
-	std::cout << abc;
 }
 
 void PlayModule::keyPressed(std::string key) {

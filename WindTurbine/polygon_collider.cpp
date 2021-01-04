@@ -139,7 +139,7 @@ namespace wind {
 	}
 
 	bool PolygonCollider::toCircle(CircleCollider* circle) const{
-		for (int i = 0; i <= vertices.size() - 1; i++)
+		for (int i = 0; i < vertices.size(); i++)
 		{
 			double x1;
 			double x2;
@@ -162,15 +162,30 @@ namespace wind {
 				y1 = vertices[i].y + getNextY();
 				y2 = vertices[i + 1].y + getNextY();
 			}
-			double length_of_line = wind::math.distance(x1, y1, x2, y2);
+			
+			double distX = x1 - x2;
+			double distY = y1 - y2;
+			double len = sqrt((distX * distX) + (distY * distY));
 
-			double distance1 = wind::math.distance(x1, y1, circle->getX(), circle->getY());
-			double distance2 = wind::math.distance(x2, y2, circle->getX(), circle->getY());
+			double dot = (((circle->getX() - x1) * (x2 - x1)) + ((circle->getY() - y1) * (y2 - y1))) / pow(len, 2);
 
-			if (distance1 + distance2 >= length_of_line - circle->getRadius() * 0.99 && distance1 + distance2 <= length_of_line + circle->getRadius() * 0.99) {
-				return true;
+			double closestX = x1 + (dot * (x2 - x1));
+			double closestY = y1 + (dot * (y2 - y1));
+
+			bool onSegment = math.linePoint(x1, y1, x2, y2, closestX, closestY);
+			if (onSegment) {
+				// get distance to closest point
+				distX = closestX - circle->getX();
+				distY = closestY - circle->getY();
+				double distance = sqrt((distX * distX) + (distY * distY));
+
+				if (distance <= circle->getRadius()) {
+					return true;
+				}
 			}
+			
 		}
+
 		return false;
 	}
 

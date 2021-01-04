@@ -8,8 +8,12 @@ namespace wind {
 	struct Math {
 
 		double distance(double x, int y, double x2, double y2) const;
+		bool linePoint(double x1, double y1, double x2, double y2, double px, double py);
 		
-
+		/*
+		* 
+			
+		*/
 	};
 
 	extern Math math;
