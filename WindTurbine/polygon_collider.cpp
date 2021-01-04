@@ -2,6 +2,7 @@
 #include "circle_collider.h"
 #include "rectangle_collider.h"
 #include "graphics.h"
+#include "math.h"
 #include "vec2.h"
 
 namespace wind {
@@ -9,6 +10,18 @@ namespace wind {
 	PolygonCollider::PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector<wind::Vec2> poly_points) : wind::Collider::Collider(physics_world, x, y, 0) {
 		shape = polygon;
 		vertices = poly_points;
+		double smallestX = vertices[0].x;
+		double smallestY = vertices[0].y;
+		double largestX = vertices[0].x;
+		double largestY = vertices[0].y;
+		for (int i = 0; i < vertices.size() - 1; i++) {
+			if (vertices[i].x < smallestX){
+				smallestX = vertices[i].x;
+			}
+			else if (vertices[i].x > largestX) {
+
+			}
+		}
 	}
 
 	bool PolygonCollider::validateNextPosition() const {
@@ -22,14 +35,14 @@ namespace wind {
 						legal = false;
 					}
 				}
-				/*
-				else if ((shape == circle && other_collider->getShape() == rectangle)) {
-					RectangleCollider* rectangle_object{ dynamic_cast<RectangleCollider*>(other_collider) };
-					if (toRectangle(rectangle_object)) {
+				
+				else if ((shape == polygon && other_collider->getShape() == circle)) {
+					CircleCollider* circle_object{ dynamic_cast<CircleCollider*>(other_collider) };
+					if (toCircle(circle_object)) {
 						legal = false;
 					}
 				}
-				*/
+				
 			}
 		}
 		return legal;
@@ -99,6 +112,45 @@ namespace wind {
 		};
 		return coll;
 	}
+
+
+	bool PolygonCollider::toCircle(CircleCollider* circle) const{
+		for (int i = 0; i <= vertices.size() - 1; i++)
+		{
+			double x1;
+			double x2;
+			double y1;
+			double y2;
+
+			if (wind::math.distance(vertices[i].x + getNextX(), vertices[i].y + getNextY(), circle->getX(), circle->getY()) < circle->getRadius()) {
+				return true;
+			}
+
+			if (i == vertices.size() - 1) {
+				x1 = vertices[0].x + getNextX();
+				x2 = vertices[vertices.size() - 1].x + getNextX();
+				y1 = vertices[0].y + getNextY();
+				y2 = vertices[vertices.size() - 1].y + getNextY();
+			}
+			else {
+				x1 = vertices[i].x + getNextX();
+				x2 = vertices[i + 1].x + getNextX();
+				y1 = vertices[i].y + getNextY();
+				y2 = vertices[i + 1].y + getNextY();
+			}
+			double length_of_line = wind::math.distance(x1, y1, x2, y2);
+
+			double distance1 = wind::math.distance(x1, y1, circle->getX(), circle->getY());
+			double distance2 = wind::math.distance(x2, y2, circle->getX(), circle->getY());
+
+			if (distance1 + distance2 >= length_of_line - circle->getRadius() * 0.99 && distance1 + distance2 <= length_of_line + circle->getRadius() * 0.99) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+
 }
 
 /*

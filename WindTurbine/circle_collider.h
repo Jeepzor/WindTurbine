@@ -6,6 +6,7 @@
 
 namespace wind {
 	class Collider;
+	class PolygonCollider;
 
 	class CircleCollider : public wind::Collider {
 	public:
@@ -14,8 +15,8 @@ namespace wind {
 	private:
 		void draw() const override;
 		bool validateNextPosition() const override;
-		bool toCircle(CircleCollider* circle) const;
 		bool toRectangle(wind::RectangleCollider* rectangle) const;
+		bool toPolygon(wind::PolygonCollider* polygon) const;
 	};
 
 }

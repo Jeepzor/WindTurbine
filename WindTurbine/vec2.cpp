@@ -6,5 +6,4 @@ namespace wind {
 		x = xPos;
 		y = yPos;
 	}
-
 }

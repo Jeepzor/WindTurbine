@@ -11,9 +11,9 @@ PlayModule::PlayModule() {
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
-	bodyB = new wind::RectangleCollider(worldA, 300, 330, 75, 75);
-	bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
-	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
+	bodyB = new wind::RectangleCollider(worldA, 700, 350, 75, 75);
+	//bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
+	//bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
 
 	std::vector < wind::Vec2> testPoly;
@@ -24,8 +24,8 @@ PlayModule::PlayModule() {
 	bodyF = new wind::PolygonCollider(worldA, 400, 200, testPoly);
 
 	bodyB->setVelocity(-200, 0);
-	bodyC->setVelocity(-200, 0);
-	bodyD->setVelocity(-200, 0); 
+	//bodyC->setVelocity(-200, 0);
+	//bodyD->setVelocity(-200, 0); 
 	bodyE->setVelocity(-200, 0);
 	bodyF->setVelocity(0, 0);
 	bodyG->setVelocity(-200, 0);

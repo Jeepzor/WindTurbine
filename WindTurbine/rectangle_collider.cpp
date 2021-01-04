@@ -11,6 +11,8 @@ namespace wind {
 		width = rect_width;
 		height = rect_height;
 		radius = std::sqrt(width * width + height * height) / 2; // get the distance between two oposite corners. Used for the first pass of the faster circle to circle detection.
+		centerX = xPos - (xPos + width / 2); //Calculates the relative offset to the center X
+		centerY = yPos - (yPos + height / 2);//Calculates the relative offset to the center Y
 		shape = rectangle;
 	}
 
@@ -18,17 +20,19 @@ namespace wind {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
-
-				if (shape == rectangle && other_collider->getShape() == rectangle) {
-					RectangleCollider* rectangle_object{ dynamic_cast<RectangleCollider*>(other_collider) };
-					if (aabb(rectangle_object)) {
-						legal = false;
+				if (toBoundry(other_collider)) {
+					if (other_collider->getShape() == rectangle) {
+						RectangleCollider* rectangle_object{ dynamic_cast<RectangleCollider*>(other_collider) };
+						if (aabb(rectangle_object)) {
+							legal = false;
+						}
+						
 					}
-				}
-				else if ((shape == rectangle && other_collider->getShape() == circle)) {
-					CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };
-					if (toCircle(other_circle)) {
-						legal = false;
+					else if (other_collider->getShape() == circle) {
+						CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };
+						if (toCircle(other_circle)) {
+							legal = false;
+						}
 					}
 				}
 			}

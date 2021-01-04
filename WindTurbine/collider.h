@@ -18,7 +18,9 @@ namespace wind {
 		virtual void setVelocity(double x, double y);
 
 		double getX() const;
-		double getY() const;	
+		double getY() const;
+		double getCenterX() const;
+		double getCenterY() const;
 		double getNextX() const;
 		double getNextY() const;
 		int getRadius() const;
@@ -28,12 +30,15 @@ namespace wind {
 		virtual bool validateNextPosition() const = 0;
 		void validateNextX(double dt);
 		void validateNextY(double dt);
+		bool toBoundry(Collider* circle) const;
 
 		PhysicsWorld* world;
 		Shape shape;
 		double radius;
 		double yPos;
 		double xPos;
+		double centerX;
+		double centerY;
 		double xVel;
 		double yVel;
 		double nextX;

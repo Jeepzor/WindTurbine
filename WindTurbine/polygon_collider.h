@@ -7,6 +7,7 @@
 
 namespace wind {
 	class Collider;
+	class CircleCollider;
 
 	class PolygonCollider : public wind::Collider {
 	public:
@@ -15,8 +16,8 @@ namespace wind {
 	private:
 		void draw() const override;
 		bool validateNextPosition() const override;
+		bool toCircle(CircleCollider* circle) const;
 		std::vector< wind::Vec2> vertices;
-		//bool toCircle(CircleCollider* circle) const;
 		//bool toRectangle(wind::RectangleCollider* rectangle) const;
 		bool toPolygon(wind::PolygonCollider* polygon) const;
 	};

@@ -52,6 +52,9 @@
     <ClCompile Include="vec2.cpp">
       <Filter>Engine\header</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -100,6 +103,9 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="vec2.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="math.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>
