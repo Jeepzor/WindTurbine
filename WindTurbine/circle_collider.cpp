@@ -30,9 +30,7 @@ namespace wind {
 			ry = rectangle->getY() + rectangle->getHeight();
 		}
 
-		double distanceX = nextX - rx;
-		double distanceY = nextY - ry;
-		double distance = sqrt(distanceX * distanceX + distanceY * distanceY);
+		double distance = math.distance(nextX, nextY, rx, ry);
 
 		if (distance < radius) {
 			return true;
@@ -68,21 +66,17 @@ namespace wind {
 				y2 = ov[i + 1].y + polygon->getY();
 			}
 
-			double distX = x1 - x2;
-			double distY = y1 - y2;
-			double len = sqrt((distX * distX) + (distY * distY));
+			double distance_x = x1 - x2;
+			double distance_y = y1 - y2;
+			double line_length = sqrt((distance_x * distance_x) + (distance_y * distance_y));
 
-			double dot = (((getNextX() - x1) * (x2 - x1)) + ((getNextY() - y1) * (y2 - y1))) / pow(len, 2);
+			double dot_product = (((getNextX() - x1) * (x2 - x1)) + ((getNextY() - y1) * (y2 - y1))) / pow(line_length, 2);
 
-			double closestX = x1 + (dot * (x2 - x1));
-			double closestY = y1 + (dot * (y2 - y1));
+			double min_x = x1 + (dot_product * (x2 - x1));
+			double min_y = y1 + (dot_product * (y2 - y1));
 
-			bool onSegment = math.linePoint(x1, y1, x2, y2, closestX, closestY);
-			if (onSegment) {
-				// get distance to closest point
-				distX = closestX - (getNextX());
-				distY = closestY - (getNextY());
-				double distance = sqrt((distX * distX) + (distY * distY));
+			if (math.pointInLine(x1, y1, x2, y2, min_x, min_y)) {
+				double distance = math.distance(min_x, min_y, getNextX(), getNextY());
 				if (distance <= getRadius()) {
 					return true;
 				}
