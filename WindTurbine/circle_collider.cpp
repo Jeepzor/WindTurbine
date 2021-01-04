@@ -83,22 +83,24 @@ namespace wind {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
-
-				if (shape == circle && other_collider->getShape() == circle) {
-					CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };
-					if (toBoundry(other_circle)) {
-						legal = false;
+				if (toBoundry(other_collider)) { // Is the shape near enough to warrant more expensive calculations?
+					if (shape == circle && other_collider->getShape() == circle) {
+						CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };
+						if (toBoundry(other_circle)) {
+							legal = false;
+						}
 					}
-				}
-				else if ((shape == circle && other_collider->getShape() == rectangle)) {
-					RectangleCollider* rectangle_collider{ dynamic_cast<RectangleCollider*>(other_collider) };
-					if (toRectangle(rectangle_collider)) {
-						legal = false;
+					else if ((shape == circle && other_collider->getShape() == rectangle)) {
+						RectangleCollider* rectangle_collider{ dynamic_cast<RectangleCollider*>(other_collider) };
+						if (toRectangle(rectangle_collider)) {
+							legal = false;
+						}
 					}
-				}else if ((shape == circle && other_collider->getShape() == polygon)) {
-					PolygonCollider* polygon_collider{ dynamic_cast<PolygonCollider*>(other_collider) };
-					if (toPolygon(polygon_collider)) {
-						legal = false;
+					else if ((shape == circle && other_collider->getShape() == polygon)) {
+						PolygonCollider* polygon_collider{ dynamic_cast<PolygonCollider*>(other_collider) };
+						if (toPolygon(polygon_collider)) {
+							legal = false;
+						}
 					}
 				}
 			}

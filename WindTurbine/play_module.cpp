@@ -11,7 +11,7 @@ PlayModule::PlayModule() {
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
-	bodyB = new wind::RectangleCollider(worldA, 700, 350, 75, 75);
+	bodyB = new wind::RectangleCollider(worldA, 700, 400, 75, 75);
 	//bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
 	//bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
@@ -19,18 +19,22 @@ PlayModule::PlayModule() {
 	std::vector < wind::Vec2> testPoly;
 	testPoly.push_back(wind::Vec2(50, 50));
 	testPoly.push_back(wind::Vec2(100, 50));
+	testPoly.push_back(wind::Vec2(75, 10));
 	testPoly.push_back(wind::Vec2(50, 100));
-	bodyG = new wind::PolygonCollider(worldA, 450, 230, testPoly);
+	bodyG = new wind::PolygonCollider(worldA, 480, 230, testPoly);
 	bodyF = new wind::PolygonCollider(worldA, 400, 200, testPoly);
 
-	bodyB->setVelocity(-200, 0);
+	//bodyB->setVelocity(-200, 0);
 	//bodyC->setVelocity(-200, 0);
 	//bodyD->setVelocity(-200, 0); 
-	bodyE->setVelocity(-200, 0);
-	bodyF->setVelocity(0, 0);
-	bodyG->setVelocity(-200, 0);
+	//bodyE->setVelocity(-200, 0);
+	//bodyF->setVelocity(0, 0);
+	bodyG->setVelocity(-200, 10);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
+
+	double abc = 20;
+	std::cout << abc;
 }
 
 void PlayModule::keyPressed(std::string key) {
