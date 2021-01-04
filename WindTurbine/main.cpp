@@ -17,3 +17,10 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 }
+
+/*
+* Poly -> Circle
+* "Squeeze past"
+* Rotation ?
+* "Square polys"
+*/

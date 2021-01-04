@@ -24,6 +24,7 @@ PlayModule::PlayModule() {
 	bodyG = new wind::PolygonCollider(worldA, 480, 230, testPoly);
 	bodyF = new wind::PolygonCollider(worldA, 400, 200, testPoly);
 
+	bodyA->setVelocity(100, 0);
 	//bodyB->setVelocity(-200, 0);
 	//bodyC->setVelocity(-200, 0);
 	//bodyD->setVelocity(-200, 0); 

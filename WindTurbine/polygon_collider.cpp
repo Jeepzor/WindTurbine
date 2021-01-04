@@ -184,11 +184,3 @@ namespace wind {
 	}
 }
 
-/*
-* Poly -> Square
-* Poly -> Circle
-* "First circle check"
-* "Squeeze past"
-* Rotation ?
-* "Square polys"
-*/

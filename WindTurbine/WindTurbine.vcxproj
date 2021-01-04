@@ -153,7 +153,7 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon_collider.cpp" />
     <ClCompile Include="rectangle_collider.cpp" />
-    <ClCompile Include="Math.cpp" />
+    <ClCompile Include="math.cpp" />
     <ClCompile Include="state.cpp" />
     <ClCompile Include="play_module.cpp" />
     <ClCompile Include="pause_module.cpp" />

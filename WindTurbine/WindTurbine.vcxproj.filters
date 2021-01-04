@@ -52,7 +52,7 @@
     <ClCompile Include="vec2.cpp">
       <Filter>Engine\header</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
+    <ClCompile Include="math.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
