@@ -49,10 +49,13 @@
     <ClCompile Include="polygon_collider.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="vec2.cpp">
-      <Filter>Engine\header</Filter>
-    </ClCompile>
     <ClCompile Include="math.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="poly_points.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="vec2.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -106,6 +109,9 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="math.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="poly_points.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

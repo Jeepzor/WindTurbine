@@ -3,6 +3,7 @@
 #include "vec2.h"
 
 
+
 PlayModule::PlayModule() {
 	updateOn = { "play" };
 	drawOn = { "play","paused" };
@@ -15,13 +16,10 @@ PlayModule::PlayModule() {
 	//bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
 	//bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
+	wind::PolyPoints triangle = wind::PolyPoints(0, 0, 200, 50, 50, 100);
 
-	std::vector < wind::Vec2> testPoly;
-	testPoly.push_back(wind::Vec2(0, 0));
-	testPoly.push_back(wind::Vec2(200, 50));
-	testPoly.push_back(wind::Vec2(50, 100));
-	bodyG = new wind::PolygonCollider(worldA, 480, 230, testPoly);
-	bodyF = new wind::PolygonCollider(worldA, 700, 600, testPoly);
+	bodyG = new wind::PolygonCollider(worldA, 600, 30, triangle);
+	bodyF = new wind::PolygonCollider(worldA, 480, 230, triangle);
 
 	//bodyA->setVelocity(100, 0);
 	//bodyB->setVelocity(-200, 0);

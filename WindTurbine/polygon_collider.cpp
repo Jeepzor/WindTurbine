@@ -7,9 +7,9 @@
 
 namespace wind {
 
-	PolygonCollider::PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector<wind::Vec2> poly_points) : wind::Collider::Collider(physics_world, x, y, 0) {
+	PolygonCollider::PolygonCollider(PhysicsWorld* physics_world, double x, double y, PolyPoints poly_points) : wind::Collider::Collider(physics_world, x, y, 0) {
 		shape = polygon;
-		vertices = poly_points;
+		vertices = poly_points.getVertices();
 
 		//Find the boundry cordinates
 		double smallestX = vertices[0].x;

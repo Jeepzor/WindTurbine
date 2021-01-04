@@ -11,7 +11,7 @@ namespace wind {
 
 	class PolygonCollider : public wind::Collider {
 	public:
-		PolygonCollider(PhysicsWorld* physics_world, double x, double y, std::vector<wind::Vec2> poly_points);
+		PolygonCollider(PhysicsWorld* physics_world, double x, double y, PolyPoints poly_points);
 		std::vector< wind::Vec2> getVertices() const;
 	private:
 		void draw() const override;

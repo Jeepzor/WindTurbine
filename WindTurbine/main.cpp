@@ -19,7 +19,6 @@ int main(int argc, char* argv[]) {
 }
 
 /*
-* Poly -> Circle
 * "Squeeze past"
 * Rotation ?
 * "Square polys"

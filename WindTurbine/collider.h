@@ -1,6 +1,6 @@
 #ifndef COLLIDER_H
 #define COLLIDER_H
-
+#include "poly_points.h"
 #include <iostream>
 
 namespace wind {

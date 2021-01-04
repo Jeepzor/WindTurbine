@@ -45,9 +45,7 @@ namespace wind {
 			nextY = yPos;
 		}
 	}
-
 	
-
 	//Is the distance between the two boundry-circles less than their combined raidus?
 	bool Collider::toBoundry(Collider* other) const {
 		double dx = (nextX - centerX) - (other->xPos - other->getCenterX());

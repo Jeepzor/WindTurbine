@@ -152,6 +152,7 @@
     <ClCompile Include="physics_world.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon_collider.cpp" />
+    <ClCompile Include="poly_points.cpp" />
     <ClCompile Include="rectangle_collider.cpp" />
     <ClCompile Include="math.cpp" />
     <ClCompile Include="state.cpp" />
@@ -167,6 +168,7 @@
     <ClInclude Include="circle_collider.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="polygon_collider.h" />
+    <ClInclude Include="poly_points.h" />
     <ClInclude Include="rectangle_collider.h" />
     <ClInclude Include="collider.h" />
     <ClInclude Include="entity.h" />
