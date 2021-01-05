@@ -17,9 +17,10 @@ PlayModule::PlayModule() {
 	//bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
 	wind::PolyPoints triangle = wind::PolyPoints(0, 0, 200, 50, 50, 100);
+	wind::PolyPoints octagon = wind::PolyPoints(-100,-100, 0,50, 50,100, 100,20, -20,80, -40, 180, 60, 50, 120, 120);
 
-	bodyG = new wind::PolygonCollider(worldA, 600, 30, triangle);
-	bodyF = new wind::PolygonCollider(worldA, 480, 230, triangle);
+	bodyG = new wind::PolygonCollider(worldA, 600, 30, octagon);
+	bodyF = new wind::PolygonCollider(worldA, 480, 230, octagon);
 	bodyF->setRotation(1);
 
 	//bodyA->setVelocity(100, 0);
