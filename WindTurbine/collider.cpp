@@ -14,6 +14,8 @@ namespace wind {
 		centerY = y;
 		xVel = 0;
 		yVel = 0;
+		rVel = 0;
+		angle = 0;
 		nextX = x;
 		nextY = y;
 
@@ -28,10 +30,12 @@ namespace wind {
 	void Collider::update(double dt) {
 		validateNextX(dt);
 		validateNextY(dt);
+		rotateVertices(dt);
 		move();
 	}
 
 	void Collider::validateNextX(double dt) {
+		if (xVel == 0) return; //If it doesn't move, don't do costly hit detection.
 		nextX = xPos + xVel * dt;
 		if (!validateNextPosition()) {
 			nextX = xPos;
@@ -40,6 +44,7 @@ namespace wind {
 
 	
 	void Collider::validateNextY(double dt) {
+		if (yVel == 0) return; //If it doesn't move, don't do costly hit detection.
 		nextY = yPos + yVel * dt;
 		if (!validateNextPosition()) {
 			nextY = yPos;
@@ -47,6 +52,8 @@ namespace wind {
 	}
 	
 	//Is the distance between the two boundry-circles less than their combined raidus?
+	//Each shape is surrounded by a circle, in order to only check for more complex
+	//collision detection if they are reasonably close.
 	bool Collider::toBoundry(Collider* other) const {
 		double dx = (nextX - centerX) - (other->xPos - other->getCenterX());
 		double dy = (nextY - centerY) - (other->yPos - other->getCenterY());

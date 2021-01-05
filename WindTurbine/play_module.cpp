@@ -20,6 +20,7 @@ PlayModule::PlayModule() {
 
 	bodyG = new wind::PolygonCollider(worldA, 600, 30, triangle);
 	bodyF = new wind::PolygonCollider(worldA, 480, 230, triangle);
+	bodyF->setRotation(1);
 
 	//bodyA->setVelocity(100, 0);
 	//bodyB->setVelocity(-200, 0);

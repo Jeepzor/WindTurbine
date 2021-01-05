@@ -8,6 +8,7 @@ namespace wind {
 	struct Math {
 
 		double distance(double x, int y, double x2, double y2) const;
+		double getAngle(double x, int y, double x2, double y2) const;
 		bool pointInLine(double x1, double y1, double x2, double y2, double px, double py);
 		
 	};

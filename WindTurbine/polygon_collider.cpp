@@ -41,6 +41,23 @@ namespace wind {
 
 	}
 
+	void PolygonCollider::setRotation(double amount) {
+		rVel = amount;
+	}
+
+	void PolygonCollider::rotateVertices(double dt) {
+		double center_x = -centerX; // Todo, fix this, stupid to have to negate all the time...
+		double center_y = -centerY;
+		double angle_change = rVel * dt;
+		for (int i = 0; i < vertices.size(); i++) {
+			double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y);
+			double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
+			double next_angle = current_angle + angle_change;
+			vertices[i].x = center_x + distance * cos(next_angle);
+			vertices[i].y = center_y + distance * sin(next_angle);
+		}
+	}
+
 	bool PolygonCollider::validateNextPosition() const {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {

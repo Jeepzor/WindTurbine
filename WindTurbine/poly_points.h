@@ -10,6 +10,8 @@ namespace wind {
 	{
 		PolyPoints(double x1, double y1, double x2, double y2, double x3, double y3);
 		std::vector <Vec2> getVertices();
+		void applyRotation(double dt);
+		void setRotation(double amount);
 	private:
 		std::vector <Vec2> vertices;
 

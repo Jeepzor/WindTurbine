@@ -16,7 +16,8 @@ namespace wind {
 		virtual void draw() const = 0;
 		virtual void move();
 		virtual void setVelocity(double x, double y);
-
+		virtual void rotateVertices(double dt) {};
+		virtual void setRotation(double amount) {};
 		double getX() const;
 		double getY() const;
 		double getCenterX() const;
@@ -34,6 +35,7 @@ namespace wind {
 
 		PhysicsWorld* world;
 		Shape shape;
+		double angle;
 		double radius;
 		double yPos;
 		double xPos;
@@ -41,6 +43,7 @@ namespace wind {
 		double centerY;
 		double xVel;
 		double yVel;
+		double rVel;
 		double nextX;
 		double nextY;
 	};

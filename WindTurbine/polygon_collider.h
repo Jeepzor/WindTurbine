@@ -13,6 +13,9 @@ namespace wind {
 	public:
 		PolygonCollider(PhysicsWorld* physics_world, double x, double y, PolyPoints poly_points);
 		std::vector< wind::Vec2> getVertices() const;
+		void setRotation(double amount) override;
+		void rotateVertices(double dt) override;
+
 	private:
 		void draw() const override;
 		bool validateNextPosition() const override;
