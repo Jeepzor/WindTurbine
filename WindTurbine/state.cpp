@@ -98,6 +98,7 @@ namespace wind {
 	}
 
 	void State::update(double dt) const {
+		if (dt > 0.1) { dt = 0.1; };
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inUpdateList(currentState)) {
 				current_game_module->update(dt);
