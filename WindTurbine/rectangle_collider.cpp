@@ -159,6 +159,6 @@ namespace wind {
 
 	void RectangleCollider::draw() const {
 		graphics.rectangle("line", xPos, yPos, width, height);
-		graphics.circle("line", xPos + width / 2, yPos + height / 2, radius);
+		//graphics.circle("line", xPos + width / 2, yPos + height / 2, radius);
 	}
 }

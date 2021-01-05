@@ -46,15 +46,27 @@ namespace wind {
 	}
 
 	void PolygonCollider::rotateVertices(double dt) {
+		if (rVel == 0) return; //If it doesn't rotate, well then it doesn't have to do this.
 		double center_x = -centerX; // Todo, fix this, stupid to have to negate all the time...
 		double center_y = -centerY;
 		double angle_change = rVel * dt;
 		for (int i = 0; i < vertices.size(); i++) {
-			double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y);
+			double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
 			double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
 			double next_angle = current_angle + angle_change;
 			vertices[i].x = center_x + distance * cos(next_angle);
 			vertices[i].y = center_y + distance * sin(next_angle);
+		}
+
+		if (!validateNextPosition()) {
+			double angle_change = -rVel * dt;
+			for (int i = 0; i < vertices.size(); i++) {
+				double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
+				double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
+				double next_angle = current_angle + angle_change;
+				vertices[i].x = center_x + distance * cos(next_angle);
+				vertices[i].y = center_y + distance * sin(next_angle);
+			}
 		}
 	}
 
@@ -206,7 +218,7 @@ namespace wind {
 		{
 			graphics.line(vertices[i].x + xPos, vertices[i].y + yPos, vertices[i + 1].x + xPos, vertices[i + 1].y + yPos);
 		};
-		graphics.circle("line", xPos - centerX, yPos - centerY, radius);
+		//graphics.circle("line", xPos - centerX, yPos - centerY, radius);
 	}
 }
 

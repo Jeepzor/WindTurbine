@@ -28,9 +28,9 @@ namespace wind {
 	}
 
 	void Collider::update(double dt) {
+		rotateVertices(dt);
 		validateNextX(dt);
 		validateNextY(dt);
-		rotateVertices(dt);
 		move();
 	}
 

@@ -28,7 +28,7 @@ PlayModule::PlayModule() {
 	//bodyD->setVelocity(-200, 0); 
 	//bodyE->setVelocity(-200, 0);
 	//bodyF->setVelocity(0, 0);
-	bodyG->setVelocity(-10, 10);
+	bodyG->setVelocity(-50, 50);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
 }
