@@ -3,31 +3,33 @@
 
 #include <iostream>
 #include <string>
+#include <SDL.h>
 
 namespace wind {
 	class Graphics {
 	public:
 		Graphics();
-		void rectangle(int x, int y, int width, int height) const;
-		void rectangle(std::string mode, int x, int y, int width, int height) const;
-		void line(int x1, int y1, int x2, int y2) const;
-		void circle(int x, int y, int radius) const;
-		void circle(std::string mode, int x, int y, int radius) const;
+		void rectangle(double x, double y, double width, double height) const;
+		void rectangle(std::string mode, double x, double y, double width, double height) const;
+		void line(double x1, double y1, double x2, double y2) const;
+		void circle(double x, double y, int radius) const;
+		void circle(std::string mode, double x, double y, int radius) const;
 
-		void setColor(int r, int g, int b);
-		void setColor(int r, int g, int b, int a);
+		void setColor(Uint8 r, Uint8 g, Uint8 b);
+		void setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 		void clearColor();
 
-		int getRed() const { return red; };
-		int getGreen() const { return green; };
-		int getBlue() const { return blue; };
-		int getAlpha() const { return alpha; };
+		SDL_Color getColor() { return { red , green, blue, alpha}; };
+		Uint8 getRed() const { return red; };
+		Uint8 getGreen() const { return green; };
+		Uint8 getBlue() const { return blue; };
+		Uint8 getAlpha() const { return alpha; };
 	private:
-		void storeColors(int r, int g, int b, int a);
-		int red;
-		int green;
-		int blue;
-		int alpha;
+		void storeColors(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+		Uint8 red;
+		Uint8 green;
+		Uint8 blue;
+		Uint8 alpha;
 	};
 
 	extern Graphics graphics;

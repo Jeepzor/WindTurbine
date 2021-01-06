@@ -32,7 +32,7 @@ namespace wind {
 		void validateNextX(double dt);
 		void validateNextY(double dt);
 		bool toBoundry(Collider* circle) const;
-
+		 
 		PhysicsWorld* world;
 		Shape shape;
 		double angle;

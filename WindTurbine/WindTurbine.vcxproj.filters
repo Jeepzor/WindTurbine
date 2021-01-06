@@ -58,6 +58,9 @@
     <ClCompile Include="vec2.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="font.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -112,6 +115,9 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="poly_points.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="font.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

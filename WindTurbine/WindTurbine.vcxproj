@@ -147,6 +147,7 @@
     <ClCompile Include="circle_collider.cpp" />
     <ClCompile Include="collider.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="font.cpp" />
     <ClCompile Include="game_module.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="physics_world.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="state.h" />
     <ClInclude Include="play_module.h" />
     <ClInclude Include="pause_module.h" />
+    <ClInclude Include="font.h" />
     <ClInclude Include="vec2.h" />
     <ClInclude Include="wind_turbine.h" />
     <ClInclude Include="image.h" />

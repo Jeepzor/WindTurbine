@@ -20,7 +20,7 @@ PlayModule::PlayModule() {
 	wind::PolyPoints octagon = wind::PolyPoints(-100,-100, 0,50, 50,100, 100,20, -20,80, -40, 180, 60, 50, 120, 120);
 
 	bodyG = new wind::PolygonCollider(worldA, 600, 30, octagon);
-	bodyF = new wind::PolygonCollider(worldA, 480, 230, rectangle );
+	bodyF = new wind::PolygonCollider(worldA, 480, 230, octagon);
 	bodyF->setRotation(1);
 
 	//bodyA->setVelocity(100, 0);

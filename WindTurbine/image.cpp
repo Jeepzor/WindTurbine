@@ -57,9 +57,9 @@ namespace wind {
 		}
 	}
 
-	void Image::setPosition(int x, int y) {
-		destination.x = x;
-		destination.y = y;
+	void Image::setPosition(double x, double y) {
+		destination.x = static_cast<int>(x + 0.5);
+		destination.y = static_cast<int>(y + 0.5);
 	};
 
 	void Image::setAngle(double new_angle) {
@@ -80,9 +80,9 @@ namespace wind {
 		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
 	}
 
-	void Image::draw(int x, int y) {
+	void Image::draw(double x, double y) {
 		setColor();
-		setPosition(x, y);
+		setPosition(static_cast<int>(x + 0.5), static_cast<int>(y + 0.5));
 		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
 	}
 

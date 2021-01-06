@@ -159,7 +159,7 @@ namespace wind {
 			double delay_amount = minimum_dt - dt;
 
 			if (delay_amount > 0) {
-				SDL_Delay(delay_amount);
+				SDL_Delay(static_cast<Uint32>(delay_amount));
 			} 
 		}
 	}

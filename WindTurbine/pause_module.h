@@ -4,6 +4,7 @@
 
 
 #include "wind_turbine.h"
+#include "font.h"
 
 class PauseModule : public wind::GameModule {
 public:
@@ -16,6 +17,7 @@ public:
 
 private: 
 	wind::Image* pauseImg;
+	wind::Font* pauseFont;
 };
 
 #endif

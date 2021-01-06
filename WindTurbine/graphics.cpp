@@ -11,17 +11,17 @@ namespace wind {
 		red = 255;
 		green = 255;
 		blue = 255;
-		alpha = 255;
+		alpha = 255; 
 	}
 
-	void Graphics::rectangle(int x, int y, int width, int height) const {
+	void Graphics::rectangle(double x, double y, double width, double height) const {
 		rectangle("fill", x, y, width, height);
 	}
 
-	void Graphics::rectangle(std::string mode, int x, int y, int width, int height) const {
-		SDL_Rect dimensions = {x, y, width, height};
+	void Graphics::rectangle(std::string mode, double x, double y, double width, double height) const {
+		SDL_Rect dimensions = { static_cast<int>(x + 0.5), static_cast<int>(y + 0.5), static_cast<int>(width + 0.5), static_cast<int>(height + 0.5) };
 		if (mode == "fill") {
-			SDL_RenderFillRect(wind::turbine.getRenderer(), &dimensions);
+			SDL_RenderFillRect(wind::turbine.getRenderer(), &dimensions); 
 		}
 		else if (mode == "line") {
 			SDL_RenderDrawRect(wind::turbine.getRenderer(), &dimensions);
@@ -31,17 +31,17 @@ namespace wind {
 		}
 	}
 	
-	void Graphics::line(int x1, int y1, int x2, int y2) const {
-		SDL_RenderDrawLine(wind::turbine.getRenderer(),x1, y1, x2, y2);
+	void Graphics::line(double x1, double y1, double x2, double y2) const {
+		SDL_RenderDrawLine(wind::turbine.getRenderer(), static_cast<int>(x1 + 0.5), static_cast<int>(y1 + 0.5), static_cast<int>(x2 + 0.5), static_cast<int>(y2 + 0.5));
 	}
 	
-	void Graphics::circle(int x, int y, int radius) const {
-		circle("fill", x, y, radius);
+	void Graphics::circle(double x, double y, int radius) const {
+		circle("fill", static_cast<int>(x + 0.5), static_cast<int>(y + 0.5), radius);
 	}
 	
-	void Graphics::circle(std::string mode, int x, int y, int radius) const {
-		int cx = x;
-		int cy = y;
+	void Graphics::circle(std::string mode, double x, double y, int radius) const {
+		int cx = static_cast<int>(x + 0.5);
+		int cy = static_cast<int>(x + 0.5);
 		if (mode == "line") {
 			double prev_x = x;
 			double prev_y = y;
@@ -56,7 +56,7 @@ namespace wind {
 				double angle = i * PI / 15;
 				double x2 = x + radius * std::cos(angle);
 				double y2 = y + radius * std::sin(angle);
-				SDL_RenderDrawLine(wind::turbine.getRenderer(), prev_x, prev_y, x2, y2);
+				SDL_RenderDrawLine(wind::turbine.getRenderer(), static_cast<int>(prev_x + 0.5), static_cast<int>(prev_y + 0.5), static_cast<int>(x2 + 0.5), static_cast<int>(y2 + 0.5));
 
 				prev_x = x2;
 				prev_y = y2;
@@ -71,7 +71,7 @@ namespace wind {
 			int end_x = start_x + radius * 2;
 			int end_y = start_y + radius;
 			//rectangle("line", start_x, start_y, radius, radius); //Use rectangle to visualize the slice
-			for (int i = start_x; i <= end_x; i++) {
+			for (int i = start_x; i <= end_x; i++) { 
 				for (int j = start_y; j <= end_y; j++) {
 					if (((i - cx) * (i - cx) + (j - cy) * (j - cy) - radius * radius) <= 0) {
 						SDL_RenderDrawPoint(wind::turbine.getRenderer(), i, j); // this is the validated point
@@ -85,12 +85,12 @@ namespace wind {
 		}
 	}
 
-	void Graphics::setColor(int r, int g, int b) {
+	void Graphics::setColor(Uint8 r, Uint8 g, Uint8 b) {
 		storeColors(r, g, b, 255);
 		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, b, g, 255);
 	}
 	
-	void Graphics::setColor(int r, int g, int b, int a) {
+	void Graphics::setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
 		storeColors(r, g, b, a);
 		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, b, g, a);
 	}
@@ -100,7 +100,7 @@ namespace wind {
 		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), 255, 255, 255, 255);
 	}
 
-	void Graphics::storeColors(int r, int g, int b, int a) {
+	void Graphics::storeColors(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
 		red = r;
 		green = g;
 		blue = b;

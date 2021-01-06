@@ -9,8 +9,8 @@
 namespace wind {
 
 	RectangleCollider::RectangleCollider(PhysicsWorld* physics_world, double x, double y, double rect_width, double rect_height) : wind::Collider::Collider(physics_world, x, y, 0) {
-		width = rect_width;
-		height = rect_height;
+		width = static_cast<int>(rect_width + 0.5);
+		height = static_cast<int>(rect_height + 0.5);
 		radius = std::sqrt(width * width + height * height) / 2; // get the distance between two oposite corners. Used for the first pass of the faster circle to circle detection.
 		centerX = xPos - (xPos + width / 2); //Calculates the relative offset to the center X
 		centerY = yPos - (yPos + height / 2);//Calculates the relative offset to the center Y

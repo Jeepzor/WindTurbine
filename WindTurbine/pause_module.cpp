@@ -1,10 +1,12 @@
+#include <string>
 #include "pause_module.h"
+
 
 PauseModule::PauseModule() {
 	updateOn = { "paused" };
 	drawOn = { "paused" };
 	eventOn = { "paused"};
-
+	pauseFont = new wind::Font("../assets/5x5.ttf", 64);
 	pauseImg = new wind::Image("../assets/paused.png");
 }
 
@@ -21,8 +23,11 @@ void PauseModule::update(double dt) {
 }
 
 void PauseModule::draw() {
+	int test = 10;
 	wind::graphics.setColor(255, 255, 255, 155);
 	pauseImg->draw(0, 0);
+	wind::graphics.setColor(255, 0, 0, 255);
+	pauseFont->draw("hello", 200, 200);
 	//std::cout << "State is drawing" << "\n";
 }
 
