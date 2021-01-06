@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 
-#include "wind_turbine.h"
+#include "wind.h"
 
 #include "play_module.h"
 #include "pause_module.h"

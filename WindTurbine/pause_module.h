@@ -3,8 +3,7 @@
 #define PAUSE_MODULE_H
 
 
-#include "wind_turbine.h"
-#include "font.h"
+#include "wind.h"
 
 class PauseModule : public wind::GameModule {
 public:

@@ -1,7 +1,5 @@
 #include <string>
 #include "player.h"
-#include "circle_collider.h"
-#include "physics_world.h"
 
 Player::Player(wind::PhysicsWorld* world) {
 	xPos = 300;

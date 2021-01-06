@@ -3,10 +3,8 @@
 
 #include <algorithm>
 
-#include "wind_turbine.h"
-#include "rectangle_collider.h"
-#include "circle_collider.h"
-#include "polygon_collider.h"
+#include "wind.h"
+
 class wind::PhysicsWorld;
 
 class Player : public wind::Entity {

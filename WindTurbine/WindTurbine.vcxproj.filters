@@ -120,6 +120,9 @@
     <ClInclude Include="font.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
+    <ClInclude Include="wind.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

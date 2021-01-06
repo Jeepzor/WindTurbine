@@ -3,7 +3,7 @@
 
 #include <string>
 
-#include "wind_turbine.h"
+#include "image.h"
 
 namespace wind {
 	class Animation : public wind::Image {

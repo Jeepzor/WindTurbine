@@ -3,6 +3,7 @@
 
 #include "font.h"
 #include "wind_turbine.h"
+#include "graphics.h"
 
 namespace wind {
 	Font::Font(std::string path, int font_size) {

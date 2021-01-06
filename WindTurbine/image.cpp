@@ -4,8 +4,9 @@
 #include <SDL_image.h>
 #include <SDL.h>
 
-#include "wind_turbine.h"
 #include "image.h"
+#include "graphics.h"
+#include "wind_turbine.h"
 
 namespace wind {
 	//Constructor

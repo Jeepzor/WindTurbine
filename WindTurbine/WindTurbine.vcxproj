@@ -182,6 +182,7 @@
     <ClInclude Include="pause_module.h" />
     <ClInclude Include="font.h" />
     <ClInclude Include="vec2.h" />
+    <ClInclude Include="wind.h" />
     <ClInclude Include="wind_turbine.h" />
     <ClInclude Include="image.h" />
   </ItemGroup>

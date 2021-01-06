@@ -1,7 +1,7 @@
 #ifndef PLAY_MODULE_H
 #define PLAY_MODULE_H
 
-#include "wind_turbine.h"
+#include "wind.h"
 
 class PlayModule : public wind::GameModule {
 public:

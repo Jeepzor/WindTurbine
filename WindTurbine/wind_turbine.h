@@ -7,15 +7,6 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
-#include "entity.h"
-#include "game_module.h"
-#include "state.h"
-#include "image.h"
-#include "animation.h"
-#include "collider.h"
-#include "physics_world.h"
-#include "graphics.h"
-
 namespace wind {
 	class Turbine {
 	public:
