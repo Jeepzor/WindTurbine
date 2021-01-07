@@ -147,11 +147,19 @@ namespace wind {
 	void Turbine::update() {
 		currentFrameTime = SDL_GetTicks();
 		dt = (currentFrameTime - previousFrameTime) / 1000;
-
+		updateCurrentFPS(dt);
 		state.update(dt);
 		previousFrameTime = currentFrameTime;
 		delay(dt);
 	};
+
+	void Turbine::updateCurrentFPS(double dt) {
+		fpsTimer += dt;
+		if (fpsTimer >= fpsRate) {
+			fpsTimer = 0;
+			fpsCurrent = 1 / dt;
+		}
+	}
 
 	void Turbine::delay(double dt) {
 		if (fpsLimit > 0) {
@@ -162,6 +170,10 @@ namespace wind {
 				SDL_Delay(static_cast<Uint32>(delay_amount));
 			} 
 		}
+	}
+
+	int Turbine::getFPS() const{
+		return static_cast<int>(fpsCurrent + 0.5);
 	}
 
 	void Turbine::draw() const {

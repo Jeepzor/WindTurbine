@@ -61,6 +61,12 @@
     <ClCompile Include="font.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="particle.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="particle_emitter.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -121,6 +127,12 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="wind.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="particle.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="particle_emitter.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

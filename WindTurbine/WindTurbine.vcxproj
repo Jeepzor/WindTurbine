@@ -150,6 +150,8 @@
     <ClCompile Include="font.cpp" />
     <ClCompile Include="game_module.cpp" />
     <ClCompile Include="graphics.cpp" />
+    <ClCompile Include="particle.cpp" />
+    <ClCompile Include="particle_emitter.cpp" />
     <ClCompile Include="physics_world.cpp" />
     <ClCompile Include="player.cpp" />
     <ClCompile Include="polygon_collider.cpp" />
@@ -168,6 +170,8 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="circle_collider.h" />
     <ClInclude Include="math.h" />
+    <ClInclude Include="particle.h" />
+    <ClInclude Include="particle_emitter.h" />
     <ClInclude Include="polygon_collider.h" />
     <ClInclude Include="poly_points.h" />
     <ClInclude Include="rectangle_collider.h" />

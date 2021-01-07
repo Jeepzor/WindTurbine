@@ -4,18 +4,19 @@
 
 
 
-
 PlayModule::PlayModule() {
 	updateOn = { "play" };
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
+
+	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 300, 300);
 
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
 	bodyB = new wind::RectangleCollider(worldA, 700, 400, 75, 75);
 	//bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
-	//bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
+	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
 	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
 	wind::PolyPoints rectangle = wind::PolyPoints(0, 0, 200, 50);
 	wind::PolyPoints octagon = wind::PolyPoints(-100,-100, 0,50, 50,100, 100,20, -20,80, -40, 180, 60, 50, 120, 120);
@@ -30,6 +31,7 @@ PlayModule::PlayModule() {
 	//bodyD->setVelocity(-200, 0); 
 	//bodyE->setVelocity(-200, 0);
 	//bodyF->setVelocity(0, 0);
+	fpsFont = new wind::Font("../assets/5x5.ttf", 32);
 	bodyG->setVelocity(-50, 50);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
@@ -64,6 +66,7 @@ void PlayModule::mouseReleased(int button) {
 }
 
 void PlayModule::update(double dt) {
+	particleEmitter->update(dt);
 	testPlayer->update(dt);
 	worldA->update(dt);
 }
@@ -76,6 +79,8 @@ void PlayModule::draw() {
 	//wind::graphics.circle("line", 300, 300, 40);
 	//wind::graphics.circle("line", 400, 400, 400);
 	//std::cout << "State is drawing" << "\n";
+	particleEmitter->draw();
+	fpsFont->draw("FPS            " + std::to_string(wind::turbine.getFPS()), 30, 30);
 }
 
 void PlayModule::clean() {

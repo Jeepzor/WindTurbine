@@ -26,7 +26,7 @@ namespace wind {
 		}
 		else {
 			std::cerr << "Error: State '" + next_active_state + "' does not exist" << "\n";
-			//throw std::runtime_error("Error: State '" + next_active_state + "' does not exist");
+			throw std::runtime_error("Error: State '" + next_active_state + "' does not exist");
 		}
 	}
 	

@@ -28,17 +28,24 @@ namespace wind {
 		std::pair<int, int> getMousePosition() const;
 		int getMouseX() const;
 		int getMouseY() const;
+		int getFPS() const;
 
 		bool active() const;
 		bool keyDown(std::string key) const;
 		bool mouseDown(int button) const;
 
 	private:
+		void updateCurrentFPS(double dt);
+		double fpsTimer = 0.0; //Time since last update of FPS counter (in seconds)
+		double fpsRate = 1.0; //How often should the FPS counter update (in seconds)
+
+		double fpsCurrent;
 		int fpsLimit;
 		bool is_active;
 		double previousFrameTime;
 		double currentFrameTime;
 		double dt;
+
 
 		const Uint8* keyboard_state;
 		Uint32 mouse_state;

@@ -2,7 +2,6 @@
 
 #include "wind_turbine.h"
 #include "graphics.h"
-
 #define PI 3.14159265
 
 namespace wind {

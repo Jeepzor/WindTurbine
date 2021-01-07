@@ -23,7 +23,6 @@ void PauseModule::update(double dt) {
 }
 
 void PauseModule::draw() {
-	int test = 10;
 	wind::graphics.setColor(255, 255, 255, 155);
 	pauseImg->draw(0, 0);
 	wind::graphics.setColor(255, 0, 0, 255);

@@ -9,7 +9,7 @@ namespace wind {
 		Image(std::string path);
 		~Image();
 
-		void draw();
+		virtual void draw();
 		void draw(double x, double y);
 		void setFlip(bool x_axis, bool y_axis);
 		void setAngle(double new_angle);
@@ -23,8 +23,8 @@ namespace wind {
 
 	protected:
 		void incrementFrame();
-		void setPosition(double x, double y);
-		void setColor();
+		virtual void setPosition(double x, double y);
+		virtual void setColor();
 		SDL_Surface* surface;
 		SDL_Rect destination;
 		SDL_Rect portion;
@@ -36,7 +36,6 @@ namespace wind {
 
 		int width;
 		int height;
-
 	};
 }
 

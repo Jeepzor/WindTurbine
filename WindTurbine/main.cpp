@@ -18,11 +18,3 @@ int main(int argc, char* argv[]) {
 
 	return 0;
 }
-
-/*
-* Add 4, 5, 6, 7, 8 Vec PolyPoints
-* Rotation ?
-* Add "2" vec PolyPoints -> "Square polys"
-* "Squeeze past"
-* 
-*/

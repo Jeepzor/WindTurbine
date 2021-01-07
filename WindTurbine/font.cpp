@@ -12,6 +12,7 @@ namespace wind {
 		destination = { 0, 0, 0, 0 };
 		if (!font) {
 			std::cerr << "Error: Font did not load properly!" << "\n";
+			throw std::runtime_error("Error: Font did not load properly!");
 		}
 	}
 
