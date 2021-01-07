@@ -157,7 +157,7 @@ namespace wind {
 		fpsTimer += dt;
 		if (fpsTimer >= fpsRate) {
 			fpsTimer = 0;
-			fpsCurrent = 1 / dt;
+			fpsCurrent = 1.0 / dt;
 		}
 	}
 
