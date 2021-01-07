@@ -1,3 +1,5 @@
+#include <math.h>
+
 #include "particle_emitter.h"
 #include "math.h"
 
@@ -17,7 +19,7 @@ namespace wind {
 		maxParticles = particleLife * emissionAmount;
 		currentParticles = 0;
 		direction = 0;
-		spread = 0;
+		spread = math.pi() / 4;
 
 		startRed = 255;
 		startGreen = 255;
@@ -29,6 +31,26 @@ namespace wind {
 		endBlue = 0;
 		endAlpha = 0;
 
+		speedMin = 10;
+		speedMax = 100;
+	}
+
+	void ParticleEmitter::setDirection(double new_angle) {
+		direction = new_angle;
+	}
+
+	void ParticleEmitter::setStartColor(double r, double g, double b, double a) {
+		startRed = r;
+		startGreen = g;
+		startBlue = b;
+		startAlpha = a;
+	}
+	
+	void ParticleEmitter::setEndColor(double r, double g, double b, double a) {
+		endRed = r;
+		endGreen = g;
+		endBlue = b;
+		endAlpha = a;
 	}
 
 	void ParticleEmitter::update(double dt) {
@@ -62,20 +84,29 @@ namespace wind {
 		for (auto current_particle : particles) {
 			if (!current_particle->alive() && !found) {
 				found = true;
-				current_particle->setColor(startRed, startBlue, startGreen, startAlpha);
-				current_particle->setTargetColor(endRed, endBlue, endGreen, endAlpha);
 				current_particle->resetPosition(xPos, yPos);
+				current_particle->setColor(startRed, startGreen, startBlue, startAlpha);
+				current_particle->setTargetColor(endRed, endGreen, endBlue, endAlpha);
+				
+				double speed_current = (speedMax - speedMin) * math.random() + speedMin;
+				double x_vel = speed_current * std::cos(direction - spread / 2 + spread * math.random());
+				double y_vel = speed_current * std::sin(direction - spread / 2 + spread * math.random());
+				current_particle->setVelcoity(x_vel, y_vel);
+
 				current_particle->setLifeTimer(particleLife);
-				current_particle->setVelcoity(math.random() * 200 - 100, math.random() * 200 - 100);
 			}
 		}
 	}
 	
 	void ParticleEmitter::emit() {
 		Particle* next_particle = new Particle(path, xPos, yPos, particleLife);
-		next_particle->setColor(startRed, startBlue, startGreen, startAlpha);
-		next_particle->setTargetColor(endRed, endBlue, endGreen, endAlpha);
-		next_particle->setVelcoity(math.random() * 200 - 100, math.random() * 200 - 100);
+		next_particle->setColor(startRed, startGreen, startBlue, startAlpha);
+		next_particle->setTargetColor(endRed, endGreen, endBlue, endAlpha);
+		double speed_current = (speedMax - speedMin) * math.random() + speedMin;
+		double x_vel = speed_current * std::cos(direction - spread / 2 + spread * math.random());
+		double y_vel = speed_current * std::sin(direction - spread / 2 + spread * math.random());
+
+		next_particle->setVelcoity(x_vel, y_vel);
 		particles.push_back(next_particle);
 	}
 }

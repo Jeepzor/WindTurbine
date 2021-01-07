@@ -2,6 +2,7 @@
 
 #include "particle.h"
 #include "wind_turbine.h"
+#include "math.h"
 
 namespace wind {
 	Particle::Particle(std::string path, double x, double y, double life_time) : Image::Image(path) {
@@ -67,6 +68,11 @@ namespace wind {
 		
 		double alpha_speed = (targetAlpha - alpha) / lifeTimer;
 		alpha += alpha_speed * dt;
+
+		red = math.clamp(0, 255, red);
+		green = math.clamp(0, 255, green);
+		blue = math.clamp(0, 255, blue);
+		alpha = math.clamp(0, 255, alpha);
 	}
 	
 	void Particle::updateLife(double dt) {

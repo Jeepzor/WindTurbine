@@ -10,6 +10,8 @@ PlayModule::PlayModule() {
 	eventOn = { "play" };
 
 	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 300, 300);
+	particleEmitter->setStartColor(255, 0, 0, 255);
+	particleEmitter->setEndColor(0, 0, 255, 0);
 
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
@@ -69,6 +71,10 @@ void PlayModule::update(double dt) {
 	particleEmitter->update(dt);
 	testPlayer->update(dt);
 	worldA->update(dt);
+
+	double angle_test = wind::math.getAngle(300, 300, wind::turbine.getMouseX(), wind::turbine.getMouseY());
+
+	particleEmitter->setDirection(angle_test);
 }
 
 void PlayModule::draw() {

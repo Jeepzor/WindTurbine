@@ -14,6 +14,9 @@ namespace wind {
 	public:
 		ParticleEmitter(std::string path, double xPos, double yPos);
 		void update(double dt);
+		void setStartColor(double r, double g, double b, double a);
+		void setEndColor(double r, double g, double b, double a);
+		void setDirection(double angle);
 		void draw();
 		void refresh();
 		
@@ -44,6 +47,9 @@ namespace wind {
 		double endGreen;
 		double endBlue;
 		double endAlpha;
+
+		double speedMin;
+		double speedMax;
 
 		std::string path;
 
