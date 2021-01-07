@@ -146,6 +146,7 @@
     <ClCompile Include="animation.cpp" />
     <ClCompile Include="circle_collider.cpp" />
     <ClCompile Include="collider.cpp" />
+    <ClCompile Include="color.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="font.cpp" />
     <ClCompile Include="game_module.cpp" />
@@ -169,6 +170,7 @@
   <ItemGroup>
     <ClInclude Include="animation.h" />
     <ClInclude Include="circle_collider.h" />
+    <ClInclude Include="color.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="particle.h" />
     <ClInclude Include="particle_emitter.h" />

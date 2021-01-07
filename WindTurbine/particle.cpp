@@ -8,7 +8,8 @@ namespace wind {
 	Particle::Particle(std::string path, double x, double y, double life_time) : Image::Image(path) {
 		xPos = x;
 		yPos = y;
-		lifeTimer = life_time;
+		lifeTimer = 0;
+		duration = life_time;
 		red = 0;
 		green = 0;
 		blue = 0;
@@ -16,17 +17,12 @@ namespace wind {
 
 		xVel = 0;
 		yVel = 0;
-		
-		targetRed = 255;
-		targetGreen = 255;
-		targetBlue = 255;
-		targetAlpha = 255;
 	}
 
 	void Particle::update(double dt) {
 		updateLife(dt);
 
-		if (lifeTimer > 0) {
+		if (lifeTimer < duration) {
 			move(dt);
 			updatePosition();
 			tweenColors(dt);
@@ -43,8 +39,8 @@ namespace wind {
 		yPos = y;
 	}
 	
-	void Particle::setLifeTimer(double time) {
-		lifeTimer = time;
+	void Particle::resetLifeTimer(double time) {
+		lifeTimer = 0;
 	}
 
 	void Particle::move(double dt) {
@@ -57,16 +53,27 @@ namespace wind {
 	}
 
 	void Particle::tweenColors(double dt) {
-		double red_speed = (targetRed - red) / lifeTimer;
+		double amount = targetColors.size();
+		double interval = duration / amount;
+		
+		int number = (lifeTimer / interval);
+		double targetRed = targetColors[number]->red;
+		double targetGreen = targetColors[number]->green;
+		double targetBlue = targetColors[number]->blue;
+		double targetAlpha = targetColors[number]->alpha;
+		double timeLeft = std::fmod(interval,lifeTimer);
+
+		//std::cout << targetRed << " " << targetGreen << " " << targetBlue << " " << targetAlpha << "\n";
+		double red_speed = (targetRed - red) / timeLeft;
 		red += red_speed * dt;
 		
-		double green_speed = (targetGreen - green) / lifeTimer;
+		double green_speed = (targetGreen - green) / timeLeft;
 		green += green_speed * dt;
 		
-		double blue_speed = (targetBlue - blue) / lifeTimer;
+		double blue_speed = (targetBlue - blue) / timeLeft;
 		blue += blue_speed * dt;
 		
-		double alpha_speed = (targetAlpha - alpha) / lifeTimer;
+		double alpha_speed = (targetAlpha - alpha) / timeLeft;
 		alpha += alpha_speed * dt;
 
 		red = math.clamp(0, 255, red);
@@ -76,7 +83,7 @@ namespace wind {
 	}
 	
 	void Particle::updateLife(double dt) {
-		lifeTimer -= dt;
+		lifeTimer += dt;
 	}
 
 	void Particle::setColor(double r, double g, double b, double a) {
@@ -86,11 +93,8 @@ namespace wind {
 		alpha = a;
 	}
 	
-	void Particle::setTargetColor(double r, double g, double b, double a) {
-		targetRed = r;
-		targetGreen = g;
-		targetBlue = b;
-		targetAlpha = a;
+	void Particle::setTargetColor(std::vector<Color*> target) {
+		targetColors = target;
 	}
 
 	void Particle::draw() {
