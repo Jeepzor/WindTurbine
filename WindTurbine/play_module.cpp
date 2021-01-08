@@ -10,7 +10,7 @@ PlayModule::PlayModule() {
 	eventOn = { "play" };
 
 	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 300, 300);
-	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,125, 0,0,0,0);
+	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
 
 
 	//TODO add removal of collider from physicsWorld in their destructor

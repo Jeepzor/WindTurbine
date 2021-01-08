@@ -53,17 +53,24 @@ namespace wind {
 	}
 
 	void Particle::tweenColors(double dt) {
+		//How many different colors it needs to loop through in it's lifetime.
 		double amount = targetColors.size();
+		//How much time it should spend on each color.
 		double interval = duration / amount;
 		
-		int number = (lifeTimer / interval);
+		//Which color is it currently tweening towards
+		int number = static_cast<int>(lifeTimer / interval); 
+
+		//Get the target colors
 		double targetRed = targetColors[number]->red;
 		double targetGreen = targetColors[number]->green;
 		double targetBlue = targetColors[number]->blue;
 		double targetAlpha = targetColors[number]->alpha;
-		double timeLeft = std::fmod(interval,lifeTimer);
 
-		//std::cout << targetRed << " " << targetGreen << " " << targetBlue << " " << targetAlpha << "\n";
+		//Get the time remaining until it will get a new color
+		double timeLeft = interval - std::fmod(lifeTimer, interval);
+
+		//Calculate the speed that it needs to tween at, in order to reach the target in time.
 		double red_speed = (targetRed - red) / timeLeft;
 		red += red_speed * dt;
 		
@@ -76,6 +83,7 @@ namespace wind {
 		double alpha_speed = (targetAlpha - alpha) / timeLeft;
 		alpha += alpha_speed * dt;
 
+		//Clamp the colors to stay within the 0-255 range.
 		red = math.clamp(0, 255, red);
 		green = math.clamp(0, 255, green);
 		blue = math.clamp(0, 255, blue);
