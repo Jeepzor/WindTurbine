@@ -46,8 +46,9 @@ namespace wind {
 		yPos = y;
 	}
 	
-	void Particle::resetLifeTimer(double time) {
+	void Particle::refresh() {
 		lifeTimer = 0;
+		currentColor = -1;
 	}
 
 	void Particle::move(double dt) {
@@ -69,11 +70,8 @@ namespace wind {
 		double targetGreen;
 		double targetBlue;
 		double targetAlpha;
-		double red_speed = 0;
-		double green_speed = 0;
-		double blue_speed = 0;
-		double alpha_speed = 0;
 		if (number > currentColor) {
+			currentColor = number;
 			targetRed = targetColors[number]->red;
 			targetGreen = targetColors[number]->green;
 			targetBlue = targetColors[number]->blue;

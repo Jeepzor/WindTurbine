@@ -92,7 +92,7 @@ namespace wind {
 		double y_vel = speed_current * std::sin(direction - spread / 2 + spread * math.random());
 		particles[nextParticle]->setVelcoity(x_vel, y_vel);
 
-		particles[nextParticle]->resetLifeTimer(particleLife);
+		particles[nextParticle]->refresh();
 
 		if (nextParticle < (maxParticles - 1)) {
 			nextParticle++;
