@@ -144,6 +144,7 @@ namespace wind {
 	}
 	
 	void Particle::setTargetColor(Color* target[], int size) {
+		delete[] targetColors;
 		targetColors = new Color * [size];
 		for (int i = 0; i < size; i++)
 		{

@@ -22,7 +22,7 @@ namespace wind {
 	
 		particles = new Particle * [maxParticles];
 		direction = 0;
-		spread = math.pi() / 4;
+		spread = math.pi() * 2;
 
 		Color* temp_color = new Color(0, 0, 0, 0);
 		colors = new Color * [1];
@@ -34,8 +34,8 @@ namespace wind {
 		startBlue = 255;
 		startAlpha = 255;
 
-		speedMin = 60;
-		speedMax = 100;
+		speedMin = 160;
+		speedMax = 160;
 	}
 
 	void ParticleEmitter::setDirection(double new_angle) {
@@ -57,11 +57,11 @@ namespace wind {
 
 	void ParticleEmitter::update(double dt) {
 		emissionTimer += dt;
-		int particles_per_frame = static_cast<int>(dt / emissionRate);
+		int particles_per_frame = static_cast<int>(dt / emissionRate) + 1;
 		if (emissionTimer > emissionRate) {
+			emissionTimer = 0;
 			for (int i = 1; i <= particles_per_frame; i++){
 				if (currentParticles < maxParticles) {
-					emissionTimer = 0;
 					emit();
 					currentParticles += 1;
 				}
@@ -88,8 +88,9 @@ namespace wind {
 		particles[nextParticle]->setTargetColor(colors, colorCount);
 				
 		double speed_current = (speedMax - speedMin) * math.random() + speedMin;
-		double x_vel = speed_current * std::cos(direction - spread / 2 + spread * math.random());
-		double y_vel = speed_current * std::sin(direction - spread / 2 + spread * math.random());
+		double angle = (direction - spread / 2) + (spread * math.random());
+		double x_vel = speed_current * std::cos(angle);
+		double y_vel = speed_current * std::sin(angle);
 		particles[nextParticle]->setVelcoity(x_vel, y_vel);
 
 		particles[nextParticle]->refresh();
@@ -107,8 +108,9 @@ namespace wind {
 		next_particle->setColor(startRed, startGreen, startBlue, startAlpha);
 		next_particle->setTargetColor(colors, colorCount);
 		double speed_current = (speedMax - speedMin) * math.random() + speedMin;
-		double x_vel = speed_current * std::cos(direction - spread / 2 + spread * math.random());
-		double y_vel = speed_current * std::sin(direction - spread / 2 + spread * math.random());
+		double angle = (direction - spread / 2) + (spread * math.random());
+		double x_vel = speed_current * std::cos(angle);
+		double y_vel = speed_current * std::sin(angle);
 		next_particle->setVelcoity(x_vel, y_vel);
 
 		particles[currentParticles] = next_particle;
