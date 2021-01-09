@@ -20,16 +20,20 @@ namespace wind {
 		xVel = 0;
 		yVel = 0;
 
-		targetColors.push_back(new Color(0, 0, 0, 0));
+		Color* temp_color = new Color(0, 0, 0, 0);
+		targetColors = new Color * [1];
+		targetColors[0] = temp_color;
+
+		colorCount = 1;
+		currentColor = -1;
+
+		interval = duration / colorCount;
 	}
 
 	void Particle::update(double dt) {
 		updateLife(dt);
-
-		if (lifeTimer < duration) {
-			move(dt);
-			tweenColors(dt);
-		}
+		move(dt);
+		tweenColors(dt);
 	}
 
 	void Particle::setVelcoity(double x, double y) {
@@ -51,46 +55,85 @@ namespace wind {
 		yPos += yVel * dt;
 	}
 
-	void Particle::tweenColors(double dt) {
-		//How many different colors it needs to loop through in it's lifetime.
-		double amount = targetColors.size();
-		//How much time it should spend on each color.
-		double interval = duration / amount;
-		
+	void Particle::tweenColors(double dt) {	
 		//Which color is it currently tweening towards
 		int number = static_cast<int>(lifeTimer / interval); 
 
-		number = math.clamp(0, amount - 1, number);
+		if (number < 0) {
+			number = 0; 
+		}
+		else if (number > colorCount - 1) {
+			number = colorCount - 1;
+		}
+		double targetRed;
+		double targetGreen;
+		double targetBlue;
+		double targetAlpha;
+		double red_speed = 0;
+		double green_speed = 0;
+		double blue_speed = 0;
+		double alpha_speed = 0;
+		if (number > currentColor) {
+			targetRed = targetColors[number]->red;
+			targetGreen = targetColors[number]->green;
+			targetBlue = targetColors[number]->blue;
+			targetAlpha = targetColors[number]->alpha;
+
+			red_speed = (targetRed - red) / interval;
+			green_speed = (targetGreen - green) / interval;
+			blue_speed = (targetBlue - blue) / interval;
+			alpha_speed = (targetAlpha - alpha) / interval;
+		}
+		
+		//number = math.clamp(0, amount - 1, number);
 
 		//Get the target colors
-		double targetRed = targetColors[number]->red;
-		double targetGreen = targetColors[number]->green;
-		double targetBlue = targetColors[number]->blue;
-		double targetAlpha = targetColors[number]->alpha;
+		
 
 		//Get the time remaining until it will get a new color
-		double timeLeft = interval - std::fmod(lifeTimer, interval);
+		//double timeLeft = interval - std::fmod(lifeTimer, interval);
 
 		//Calculate the speed that it needs to tween at, in order to reach the target in time.
-		double red_speed = (targetRed - red) / timeLeft;
+		
 		red += red_speed * dt;
-		
-		double green_speed = (targetGreen - green) / timeLeft;
 		green += green_speed * dt;
-		
-		double blue_speed = (targetBlue - blue) / timeLeft;
 		blue += blue_speed * dt;
-		
-		double alpha_speed = (targetAlpha - alpha) / timeLeft;
 		alpha += alpha_speed * dt;
 
 		//Clamp the colors to stay within the 0-255 range.
-		red = math.clamp(0, 255, red);
-		green = math.clamp(0, 255, green);
-		blue = math.clamp(0, 255, blue);
-		alpha = math.clamp(0, 255, alpha);
+		
+		
+		if (red < 0){ 
+			red = 0;
+		} else if (red > 255){ red = 255;}
+
+		if (green < 0) { 
+			green = 0;
+		}else if (green > 255) {green = 255;}
+
+		if (blue < 0) {
+			blue = 0;
+		} else if (blue > 255) {
+			blue = 255;
+		}
+
+		if (alpha < 0) { 
+			alpha = 0; 
+		} else if (alpha > 255) {
+			alpha = 255;
+		}
+
+		
+		
+		/*
+			red = math.clamp(0, 255, red);
+			green = math.clamp(0, 255, green);
+			blue = math.clamp(0, 255, blue);
+			alpha = math.clamp(0, 255, alpha);
+		*/
+		
 	}
-	
+
 	void Particle::updateLife(double dt) {
 		lifeTimer += dt;
 	}
@@ -102,11 +145,14 @@ namespace wind {
 		alpha = a;
 	}
 	
-	void Particle::setTargetColor(std::vector<Color*> target) {
-		if (!target.empty()) {
-			targetColors.clear();
-			targetColors = target;
+	void Particle::setTargetColor(Color* target[], int size) {
+		targetColors = new Color * [size];
+		for (int i = 0; i < size; i++)
+		{
+			targetColors[i] = target[i];
 		}
+		colorCount = size;
+		interval = duration / colorCount;
 	}
 
 	void Particle::draw(Image* asset) {

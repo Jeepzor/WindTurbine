@@ -14,7 +14,7 @@ namespace wind {
 
 		void draw(Image* asset);
 		void setColor(double r, double g, double b, double a);
-		void setTargetColor(std::vector<Color*> colors);
+		void setTargetColor(Color* target[], int size);
 		void setVelcoity(double xVel, double yVel);
 		void resetPosition(double x, double y);
 		void resetLifeTimer(double time);
@@ -27,6 +27,9 @@ namespace wind {
 
 		double duration;
 		double lifeTimer;
+		double colorCount;
+		double currentColor;
+		double interval; //How much time it should spend on each color. 
 
 		double xVel;
 		double yVel;
@@ -37,9 +40,8 @@ namespace wind {
 		double red;
 		double green;
 		double blue;
-		double alpha;	
-
-		std::vector<Color*> targetColors; //<---2
+		double alpha;
+		Color** targetColors;
 
 	};
 }
