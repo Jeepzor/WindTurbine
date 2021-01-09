@@ -16,7 +16,6 @@ namespace wind {
 		ParticleEmitter(std::string path, double particle_life, double emission, double duration);
 		void update(double dt);
 
-	
 		void setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2);
 		void setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3);
 		void setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4);
@@ -24,7 +23,7 @@ namespace wind {
 		void setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5, double r6, double g6, double b6, double a6);
 		void setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5, double r6, double g6, double b6, double a6, double r7, double g7, double b7, double a7);
 		void setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5, double r6, double g6, double b6, double a6, double r7, double g7, double b7, double a7, double r8, double g8, double b8, double a8);
-		
+
 		void setDirection(double angle);
 		void setPosition(double x, double y);
 		void draw();
@@ -46,7 +45,6 @@ namespace wind {
 		int maxParticles;
 		int currentParticles;
 		int nextParticle;
-		int colorCount;
 		
 		double xPos;
 		double yPos;
@@ -70,8 +68,8 @@ namespace wind {
 
 		Image* asset;
 
-		Particle** particles; 
-		Color** colors; 
+		Particle** particles; // <---1
+		std::vector<Color*> colors; // <---3
 	};
 }
 

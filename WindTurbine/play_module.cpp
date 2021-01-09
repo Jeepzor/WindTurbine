@@ -3,8 +3,7 @@
 #include "player.h"
 
 
-double timer = 0;
-double rate = 0.3;
+
 PlayModule::PlayModule() {
 	updateOn = { "play" };
 	drawOn = { "play","paused" };
@@ -13,7 +12,7 @@ PlayModule::PlayModule() {
 	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 4, 15000, 9999999999 );
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
 
-	double our_dt = 0;
+
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
@@ -34,7 +33,7 @@ PlayModule::PlayModule() {
 	//bodyD->setVelocity(-200, 0); 
 	//bodyE->setVelocity(-200, 0);
 	//bodyF->setVelocity(0, 0);
-	fpsFont = new wind::Font("../assets/bit.ttf", 32);
+	fpsFont = new wind::Font("../assets/5x5.ttf", 32);
 	bodyG->setVelocity(-50, 50);
 	bg = new wind::Image("../assets/bg.png");
 	testPlayer = new Player(worldA);
@@ -69,11 +68,6 @@ void PlayModule::mouseReleased(int button) {
 }
 
 void PlayModule::update(double dt) {
-	timer += dt;
-	if (timer >= rate) {
-		timer = 0;
-		our_dt = dt;
-	}
 	particleEmitter->setPosition(testPlayer->getX(), testPlayer->getY());
 	particleEmitter->update(dt);
 	testPlayer->update(dt);
@@ -94,7 +88,7 @@ void PlayModule::draw() {
 	//std::cout << "State is drawing" << "\n";
 	particleEmitter->draw();
 	wind::graphics.setColor(255, 0, 0);
-	fpsFont->draw("DT            " + std::to_string(our_dt), 30, 30);
+	fpsFont->draw("FPS            " + std::to_string(wind::turbine.getFPS()), 30, 30);
 }
 
 void PlayModule::clean() {
