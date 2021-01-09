@@ -7,12 +7,12 @@
 #include "color.h"
 
 namespace wind {
-	class Particle 
+	class Particle : public Image
 	{
 	public:
-		Particle(double xPos, double yPos, double life_time);
+		Particle(std::string path, double xPos, double yPos, double life_time);
 
-		void draw(Image* asset);
+		void draw() override;
 		void setColor(double r, double g, double b, double a);
 		void setTargetColor(std::vector<Color*> colors);
 		void setVelcoity(double xVel, double yVel);
@@ -22,6 +22,7 @@ namespace wind {
 		bool alive() { return lifeTimer < duration; };
 	private:
 		void move(double dt);
+		void updatePosition();
 		void updateLife(double dt);
 		void tweenColors(double dt);
 
