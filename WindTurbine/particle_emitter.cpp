@@ -19,7 +19,8 @@ namespace wind {
 		maxParticles = particleLife * emissionAmount; // Maximum allowed particles
 		currentParticles = 0; //Amount of particles currently in existance
 		nextParticle = 0; // Next particle to refresh
-
+	
+		particles = new Particle * [maxParticles];
 		direction = 0;
 		spread = math.pi() / 4;
 
@@ -55,25 +56,25 @@ namespace wind {
 		if (emissionTimer > emissionRate) {
 			for (int i = 1; i <= particles_per_frame; i++){
 				if (currentParticles < maxParticles) {
-					currentParticles += 1;
 					emissionTimer = 0;
 					emit();
+					currentParticles += 1;
 				}
 				else {
 					refresh();
 				}
 			}
 		}
-		
-		for (auto current_particle : particles) {
-			current_particle->update(dt);
+		for (int i = 0; i < currentParticles; i++) {
+			particles[i]->update(dt);
 		}
 	}
 	
 	void ParticleEmitter::draw() {
-		for (auto current_particle : particles) {
-			if (current_particle->alive()) {
-				current_particle->draw(asset);
+
+		for (int i = 0; i < currentParticles; i++) {
+			if (particles[i]->alive()) { // TODO, can this be skipped for performance?
+				particles[i]->draw(asset);
 			}
 		}
 	}
@@ -105,9 +106,9 @@ namespace wind {
 		double speed_current = (speedMax - speedMin) * math.random() + speedMin;
 		double x_vel = speed_current * std::cos(direction - spread / 2 + spread * math.random());
 		double y_vel = speed_current * std::sin(direction - spread / 2 + spread * math.random());
-
 		next_particle->setVelcoity(x_vel, y_vel);
-		particles.push_back(next_particle);
+
+		particles[currentParticles] = next_particle;
 	}
 
 	void ParticleEmitter::setStartColor(double r, double g, double b, double a) {
