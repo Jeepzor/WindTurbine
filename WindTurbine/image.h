@@ -11,6 +11,7 @@ namespace wind {
 
 		virtual void draw();
 		void draw(double x, double y);
+		void draw(double x, double y, double r, double g, double b, double a);
 		void setFlip(bool x_axis, bool y_axis);
 		void setAngle(double new_angle);
 		
