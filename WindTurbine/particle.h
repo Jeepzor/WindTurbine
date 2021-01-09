@@ -39,7 +39,7 @@ namespace wind {
 		double blue;
 		double alpha;	
 
-		std::vector<Color*> targetColors;
+		std::vector<Color*> targetColors; //<---2
 
 	};
 }
