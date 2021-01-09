@@ -68,8 +68,8 @@ namespace wind {
 
 		Image* asset;
 
-		std::vector<Particle*> particles;
-		std::vector<Color*> colors;
+		Particle** particles; // <---1
+		std::vector<Color*> colors; // <---3
 	};
 }
 
