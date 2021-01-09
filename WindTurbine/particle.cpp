@@ -3,9 +3,11 @@
 #include "particle.h"
 #include "wind_turbine.h"
 #include "math.h"
+#include "color.h"
+#include "graphics.h"
 
 namespace wind {
-	Particle::Particle(std::string path, double x, double y, double life_time) : Image::Image(path) {
+	Particle::Particle(double x, double y, double life_time) {
 		xPos = x;
 		yPos = y;
 		lifeTimer = 0;
@@ -17,6 +19,8 @@ namespace wind {
 
 		xVel = 0;
 		yVel = 0;
+
+		targetColors.push_back(new Color(0, 0, 0, 0));
 	}
 
 	void Particle::update(double dt) {
@@ -24,7 +28,6 @@ namespace wind {
 
 		if (lifeTimer < duration) {
 			move(dt);
-			updatePosition();
 			tweenColors(dt);
 		}
 	}
@@ -48,10 +51,6 @@ namespace wind {
 		yPos += yVel * dt;
 	}
 
-	void Particle::updatePosition() {
-		setPosition(xPos, yPos);
-	}
-
 	void Particle::tweenColors(double dt) {
 		//How many different colors it needs to loop through in it's lifetime.
 		double amount = targetColors.size();
@@ -60,6 +59,8 @@ namespace wind {
 		
 		//Which color is it currently tweening towards
 		int number = static_cast<int>(lifeTimer / interval); 
+
+		number = math.clamp(0, amount - 1, number);
 
 		//Get the target colors
 		double targetRed = targetColors[number]->red;
@@ -102,16 +103,13 @@ namespace wind {
 	}
 	
 	void Particle::setTargetColor(std::vector<Color*> target) {
-		targetColors = target;
+		if (!target.empty()) {
+			targetColors.clear();
+			targetColors = target;
+		}
 	}
 
-	void Particle::draw() {
-		SDL_SetTextureAlphaMod(asset, alpha);
-		SDL_SetTextureColorMod(asset, red, green, blue);
-		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
+	void Particle::draw(Image* asset) {
+		asset->draw(xPos, yPos, red, green, blue, alpha);
 	}
-
-
 }
-
-//: wind::Collider::Collider(physics_world, x, y, 0)

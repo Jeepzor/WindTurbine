@@ -9,7 +9,7 @@ PlayModule::PlayModule() {
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
 
-	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 300, 300);
+	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 4, 15000, 9999999999 );
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
 
 
@@ -68,11 +68,12 @@ void PlayModule::mouseReleased(int button) {
 }
 
 void PlayModule::update(double dt) {
+	particleEmitter->setPosition(testPlayer->getX(), testPlayer->getY());
 	particleEmitter->update(dt);
 	testPlayer->update(dt);
 	worldA->update(dt);
 
-	double angle_test = wind::math.getAngle(300, 300, wind::turbine.getMouseX(), wind::turbine.getMouseY());
+	double angle_test = wind::math.getAngle(testPlayer->getX(), testPlayer->getY(), wind::turbine.getMouseX(), wind::turbine.getMouseY());
 
 	particleEmitter->setDirection(angle_test);
 }
@@ -86,6 +87,7 @@ void PlayModule::draw() {
 	//wind::graphics.circle("line", 400, 400, 400);
 	//std::cout << "State is drawing" << "\n";
 	particleEmitter->draw();
+	wind::graphics.setColor(255, 0, 0);
 	fpsFont->draw("FPS            " + std::to_string(wind::turbine.getFPS()), 30, 30);
 }
 

@@ -86,6 +86,13 @@ namespace wind {
 		setPosition(static_cast<int>(x + 0.5), static_cast<int>(y + 0.5));
 		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
 	}
+	
+	void Image::draw(double x, double y, double r, double g, double b, double a) {
+		SDL_SetTextureAlphaMod(asset, a);
+		SDL_SetTextureColorMod(asset, r, g, b);
+		setPosition(static_cast<int>(x + 0.5), static_cast<int>(y + 0.5));
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
+	}
 
 	void Image::setColor() {
 		int r = wind::graphics.getRed();
