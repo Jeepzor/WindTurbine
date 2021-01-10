@@ -10,7 +10,7 @@ Player::Player(wind::PhysicsWorld* world) {
 	maxSpeed = 300.0;
 	acceleration = 4000.0;
 	friction = 2000;
-	collider = new wind::CircleCollider(world,xPos, yPos, 30);
+	collider = wind::CircleCollider::getInstance(world,xPos, yPos, 30);
 	sprite = new wind::Animation("../assets/run.png", 6, 0.09);
 }
 

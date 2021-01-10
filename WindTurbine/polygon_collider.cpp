@@ -41,6 +41,10 @@ namespace wind {
 
 	}
 
+	PolygonCollider::~PolygonCollider() {
+
+	}
+
 	void PolygonCollider::setRotation(double amount) {
 		rVel = amount;
 	}

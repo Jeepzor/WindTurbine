@@ -15,16 +15,16 @@ PlayModule::PlayModule() {
 	double our_dt = 0;
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
-	bodyA = new wind::RectangleCollider(worldA, 30, 30, 40, 600);
-	bodyB = new wind::RectangleCollider(worldA, 700, 400, 75, 75);
+	bodyA = wind::RectangleCollider::getInstance(worldA, 30, 30, 40, 600);
+	bodyB = wind::RectangleCollider::getInstance(worldA, 700, 400, 75, 75);
 	//bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
-	bodyD = new wind::RectangleCollider(worldA, 1100, 330, 25, 75);
-	bodyE = new wind::CircleCollider(worldA, 750, 300, 35);
+	bodyD = wind::RectangleCollider::getInstance(worldA, 1100, 330, 25, 75);
+	bodyE = wind::CircleCollider::getInstance(worldA, 750, 300, 35);
 	wind::PolyPoints rectangle = wind::PolyPoints(0, 0, 200, 50);
 	wind::PolyPoints octagon = wind::PolyPoints(-100,-100, 0,50, 50,100, 100,20, -20,80, -40, 180, 60, 50, 120, 120);
 
-	bodyG = new wind::PolygonCollider(worldA, 600, 30, octagon);
-	bodyF = new wind::PolygonCollider(worldA, 480, 230, octagon);
+	bodyG = wind::PolygonCollider::getInstance(worldA, 600, 30, octagon);
+	bodyF = wind::PolygonCollider::getInstance(worldA, 480, 230, octagon);
 	bodyF->setRotation(1);
 
 	//bodyA->setVelocity(100, 0);

@@ -10,8 +10,7 @@ namespace wind {
 
 	class Collider{
 	public:
-		Collider(PhysicsWorld* world, double x, double y, int radius); // for circle, break out into class later.
-		virtual ~Collider() {}
+		virtual ~Collider()= 0 {};
 		virtual void update(double dt);
 		virtual void draw() const = 0;
 		virtual void move();
@@ -28,6 +27,10 @@ namespace wind {
 		Shape getShape() const;
 		
 	protected:
+		Collider(PhysicsWorld* world, double x, double y, int radius); 
+		Collider(const Collider& other) = delete;
+		const Collider& operator=(const Collider& other) = delete;
+
 		virtual bool validateNextPosition() const = 0;
 		void validateNextX(double dt);
 		void validateNextY(double dt);

@@ -3,17 +3,26 @@
 
 #include <string>
 #include "physics_world.h"
-
+#include "collider.h"
 namespace wind {
-	class Collider;
 	class PolygonCollider;
 
 	class CircleCollider : public wind::Collider {
 	public:
+		static CircleCollider* getInstance(PhysicsWorld* physics_world, double x, double y, double radius) {
+			return new CircleCollider(physics_world, x, y, radius);
+		}
+
+		~CircleCollider();
+	protected:
 		CircleCollider(PhysicsWorld* physics_world, double x, double y, double radius);
-		
 	private:
+		CircleCollider(const CircleCollider& other) = delete;
+
+		const CircleCollider& operator=(const CircleCollider& other) = delete;
+
 		void draw() const override;
+
 		bool validateNextPosition() const override;
 		bool toRectangle(wind::RectangleCollider* rectangle) const;
 		bool toPolygon(wind::PolygonCollider* polygon) const;

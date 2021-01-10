@@ -5,41 +5,29 @@
 
 namespace wind {
 	ParticleEmitter::ParticleEmitter(std::string asset_path, double particle_life, double emission, double emitter_duration) {
-		xPos = 0;
-		yPos = 0;
 		duration = emitter_duration;
 
 		asset = new Image(asset_path);
 
 		emissionAmount = emission; // Particles per second
-		emissionTimer = 0; 
 		emissionRate = 1 / emissionAmount; // Time between particles
 		particleLife = particle_life; //Particle duration
 
 		maxParticles = particleLife * emissionAmount; // Maximum allowed particles
-		currentParticles = 0; //Amount of particles currently in existance
-		nextParticle = 0; // Next particle to refresh
 	
 		particles = new Particle * [maxParticles];
-		direction = 0;
-		spread = math.pi() * 2;
 
 		Color* temp_color = new Color(0, 0, 0, 0);
 		colors = new Color * [1];
 		colors[0] = temp_color;
-		colorCount = 1;
-
-		startRed = 255;
-		startGreen = 255;
-		startBlue = 255;
-		startAlpha = 255;
-
-		speedMin = 160;
-		speedMax = 160;
 	}
 
 	void ParticleEmitter::setDirection(double new_angle) {
 		direction = new_angle;
+	}
+	
+	void ParticleEmitter::setSpread(double amount) {
+		spread = amount;
 	}
 
 	double ParticleEmitter::getX() {
@@ -121,6 +109,15 @@ namespace wind {
 		startGreen = g;
 		startBlue = b;
 		startAlpha = a;
+	}
+	
+	void ParticleEmitter::setSpeed(double speed) {
+		setSpeed(speed, speed);
+	}
+	
+	void ParticleEmitter::setSpeed(double min, double max) {
+		speedMin = min;
+		speedMax = max;
 	}
 
 	

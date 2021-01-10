@@ -13,6 +13,10 @@ namespace wind {
 		centerY = 0;
 	}
 
+	CircleCollider::~CircleCollider() {
+
+	}
+
 	bool CircleCollider::toRectangle(RectangleCollider* rectangle) const {
 		double rx = nextX;
 		double ry = nextY;

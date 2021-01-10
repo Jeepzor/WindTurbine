@@ -23,6 +23,10 @@ namespace wind {
 		vertices.push_back(wind::Vec2(0, height));
 	}
 
+	RectangleCollider::~RectangleCollider() {
+
+	}
+
 	std::vector<wind::Vec2> RectangleCollider::getVertices() const {
 		return vertices;
 	}
