@@ -9,9 +9,12 @@ PlayModule::PlayModule() {
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
 
-	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 5, 20000, 9999999999 );
+	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 2000);
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
-
+	particleEmitter->setEmission(50);
+	particleEmitter->setParticleLife(1);
+	particleEmitter->setSpread(1);
+	particleEmitter->setSpeed(200);
 	double our_dt = 0;
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);

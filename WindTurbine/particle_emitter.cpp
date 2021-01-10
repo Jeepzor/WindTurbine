@@ -4,22 +4,32 @@
 #include "math.h"
 
 namespace wind {
-	ParticleEmitter::ParticleEmitter(std::string asset_path, double particle_life, double emission, double emitter_duration) {
-		duration = emitter_duration;
+	ParticleEmitter::ParticleEmitter(std::string asset_path, double emitter_duration, double buffer) {
+		if (emitter_duration == 0) {
+			duration = 99999999999999999;
+		}
+		else {
+			duration = emitter_duration;
+		}
 
 		asset = new Image(asset_path);
 
-		emissionAmount = emission; // Particles per second
-		emissionRate = 1 / emissionAmount; // Time between particles
-		particleLife = particle_life; //Particle duration
-
-		maxParticles = particleLife * emissionAmount; // Maximum allowed particles
+		maxParticles = buffer; // Maximum allowed particles
 	
 		particles = new Particle * [maxParticles];
 
 		Color* temp_color = new Color(0, 0, 0, 0);
 		colors = new Color * [1];
 		colors[0] = temp_color;
+	}
+	
+	void ParticleEmitter::setEmission(double amount) {
+		emissionAmount = amount;
+		emissionRate = 1 / emissionAmount;
+	}
+	
+	void ParticleEmitter::setParticleLife(double duration) {
+		particleLife = duration;
 	}
 
 	void ParticleEmitter::setDirection(double new_angle) {
@@ -30,6 +40,20 @@ namespace wind {
 		spread = amount;
 	}
 
+	void ParticleEmitter::setSpeed(double speed) {
+		setSpeed(speed, speed);
+	}
+
+	void ParticleEmitter::setSpeed(double min, double max) {
+		speedMin = min;
+		speedMax = max;
+	}
+
+	void ParticleEmitter::setPosition(double x, double y) {
+		xPos = x;
+		yPos = y;
+	}
+
 	double ParticleEmitter::getX() {
 		return xPos;
 	}	
@@ -38,10 +62,7 @@ namespace wind {
 		return yPos;
 	}
 	
-	void ParticleEmitter::setPosition(double x, double y) {
-		xPos = x;
-		yPos = y;
-	}
+	
 
 	void ParticleEmitter::update(double dt) {
 		emissionTimer += dt;
@@ -110,16 +131,6 @@ namespace wind {
 		startBlue = b;
 		startAlpha = a;
 	}
-	
-	void ParticleEmitter::setSpeed(double speed) {
-		setSpeed(speed, speed);
-	}
-	
-	void ParticleEmitter::setSpeed(double min, double max) {
-		speedMin = min;
-		speedMax = max;
-	}
-
 	
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2) {
 		setStartColor(r, g, b, a);
