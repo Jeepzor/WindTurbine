@@ -8,6 +8,8 @@ PlayModule::PlayModule() {
 	updateOn = { "play" };
 	drawOn = { "play","paused" };
 	eventOn = { "play" };
+	initOn = { "play" };
+	cleanOn = { "restart" };
 
 	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 2000);
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);

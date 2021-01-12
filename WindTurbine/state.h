@@ -14,7 +14,6 @@ namespace wind {
 	public:
 		State();
 		std::string getActiveState() const;
-		bool exist(std::string state) const;
 		void setCurrentState(std::string state);
 		void addModule(GameModule*);
 
@@ -26,6 +25,8 @@ namespace wind {
 		void update(double) const;
 		void draw() const;
 	private:
+		void changed(std::string state)const;
+		bool exist(std::string state) const;
 		void extractStates(GameModule*);
 		std::vector<GameModule*> game_modules; //Vector containing all game-modules.
 		std::vector<std::string> states; //Vector containing all names of states.

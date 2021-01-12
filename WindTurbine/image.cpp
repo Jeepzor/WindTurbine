@@ -97,12 +97,8 @@ namespace wind {
 	}
 
 	void Image::setColor() {
-		int r = wind::graphics.getRed();
-		int g = wind::graphics.getGreen();
-		int b = wind::graphics.getBlue();
-		int a = wind::graphics.getAlpha();
-		SDL_SetTextureAlphaMod(asset, a);
-		SDL_SetTextureColorMod(asset, r, g, b);
+		SDL_SetTextureAlphaMod(asset, wind::graphics.getAlpha());
+		SDL_SetTextureColorMod(asset, wind::graphics.getRed(), wind::graphics.getGreen(), wind::graphics.getBlue());
 	}
 
 }
