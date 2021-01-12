@@ -4,7 +4,7 @@
 #include <string>
 
 #include "physics_world.h"
-#include "vec2.h"
+#include "point.h"
 #include "collider.h"
 
 namespace wind {
@@ -40,10 +40,10 @@ namespace wind {
 		int getHeight() const;
 
 		/// <summary>
-		/// Returns a Vector of Vec2 (Which contains an X and Y position).
+		/// Returns a Vector of Points (Which contains an X and Y position).
 		/// </summary>
-		/// <returns>Vector<Vec2></returns>
-		std::vector<Vec2> getVertices() const;
+		/// <returns>Vector of Points></returns>
+		std::vector<Point> getVertices() const;
 
 	protected:
 		RectangleCollider(PhysicsWorld* physics_world, double x, double y, double width, double height);
@@ -61,7 +61,7 @@ namespace wind {
 		bool toCircle(Collider* circle) const;
 		bool aabb(RectangleCollider* rectangle) const;
 		bool toPolygon(PolygonCollider* other_polygon) const;
-		std::vector< wind::Vec2> vertices;
+		std::vector< wind::Point> vertices;
 	};
 
 } 

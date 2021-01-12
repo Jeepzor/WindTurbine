@@ -15,7 +15,7 @@
 #include "rectangle_collider.h"
 #include "state.h"
 #include "font.h"
-#include "vec2.h"
+#include "point.h"
 #include "particle.h"
 #include "particle_emitter.h"
 #include "wind_turbine.h"

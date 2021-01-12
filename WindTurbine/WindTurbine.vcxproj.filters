@@ -55,9 +55,6 @@
     <ClCompile Include="poly_points.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="vec2.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="font.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -68,6 +65,9 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="color.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="point.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
@@ -117,9 +117,6 @@
     <ClInclude Include="polygon_collider.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
-    <ClInclude Include="vec2.h">
-      <Filter>Engine\header</Filter>
-    </ClInclude>
     <ClInclude Include="math.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
@@ -139,6 +136,9 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="color.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="point.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

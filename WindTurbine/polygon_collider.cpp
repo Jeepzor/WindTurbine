@@ -3,7 +3,6 @@
 #include "rectangle_collider.h"
 #include "graphics.h"
 #include "math.h"
-#include "vec2.h"
 
 namespace wind {
 
@@ -104,12 +103,12 @@ namespace wind {
 		return legal;
 	}
 
-	std::vector<wind::Vec2> PolygonCollider::getVertices() const {
+	std::vector<wind::Point> PolygonCollider::getVertices() const {
 		return vertices;
 	}
 
 	bool PolygonCollider::toPolygon(PolygonCollider* other_polygon) const {
-		std::vector<wind::Vec2> ov = other_polygon->getVertices();
+		std::vector<wind::Point> ov = other_polygon->getVertices();
 		return polygonIntersect(ov, other_polygon->getX(), other_polygon->getY());
 	}	
 	
@@ -119,7 +118,7 @@ namespace wind {
 	}
 
 
-	bool PolygonCollider::polygonIntersect(std::vector<wind::Vec2> ov, double other_x, double other_y) const {
+	bool PolygonCollider::polygonIntersect(std::vector<wind::Point> ov, double other_x, double other_y) const {
 		bool coll = false;
 		for (int i = 0; i <= vertices.size() - 1; i++)
 		{

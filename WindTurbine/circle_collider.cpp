@@ -2,7 +2,7 @@
 #include "rectangle_collider.h"
 #include "polygon_collider.h"
 #include "graphics.h"
-#include "vec2.h"
+#include "point.h"
 #include "math.h"
 
 namespace wind {
@@ -45,7 +45,7 @@ namespace wind {
 	}
 
 	bool CircleCollider::toPolygon(PolygonCollider* polygon) const {
-		std::vector<wind::Vec2> ov = polygon->getVertices();
+		std::vector<wind::Point> ov = polygon->getVertices();
 		for (int i = 0; i <= ov.size() - 1; i++)
 		{
 			double x1;

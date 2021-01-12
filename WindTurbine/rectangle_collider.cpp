@@ -17,17 +17,17 @@ namespace wind {
 		shape = rectangle;
 
 
-		vertices.push_back(wind::Vec2(0, 0));
-		vertices.push_back(wind::Vec2(width, 0));
-		vertices.push_back(wind::Vec2(width, height));
-		vertices.push_back(wind::Vec2(0, height));
+		vertices.push_back(wind::Point(0, 0));
+		vertices.push_back(wind::Point(width, 0));
+		vertices.push_back(wind::Point(width, height));
+		vertices.push_back(wind::Point(0, height));
 	}
 
 	RectangleCollider::~RectangleCollider() {
 
 	}
 
-	std::vector<wind::Vec2> RectangleCollider::getVertices() const {
+	std::vector<wind::Point> RectangleCollider::getVertices() const {
 		return vertices;
 	}
 
@@ -101,7 +101,7 @@ namespace wind {
 	}
 
 	bool RectangleCollider::toPolygon(PolygonCollider* other_polygon) const {
-		std::vector<wind::Vec2> ov = other_polygon->getVertices();
+		std::vector<wind::Point> ov = other_polygon->getVertices();
 		bool coll = false;
 		for (int i = 0; i <= vertices.size() - 1; i++)
 		{

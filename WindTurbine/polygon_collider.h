@@ -4,7 +4,7 @@
 #include <string>
 
 #include "physics_world.h"
-#include "vec2.h"
+#include "point.h"
 #include "collider.h"
 
 namespace wind {
@@ -28,10 +28,10 @@ namespace wind {
 		~PolygonCollider()override;
 
 		/// <summary>
-		/// Returns a Vector of Vec2 (each containing a set of X and Y coordinates)
+		/// Returns a Vector of Point (each containing a set of X and Y coordinates)
 		/// </summary>
-		/// <returns>Vector<Vec2></returns>
-		std::vector< wind::Vec2> getVertices() const;
+		/// <returns>Vector<Point></returns>
+		std::vector< wind::Point> getVertices() const;
 
 		/// <summary>
 		/// Sets the rotation of the PolygonCollider in Radians
@@ -53,11 +53,11 @@ namespace wind {
 
 		bool validateNextPosition() const override;
 		bool toCircle(CircleCollider* circle) const;
-		bool polygonIntersect(std::vector<wind::Vec2> ov, double other_x, double other_y) const;
+		bool polygonIntersect(std::vector<wind::Point> ov, double other_x, double other_y) const;
 		bool toRectangle(RectangleCollider* other_rectangle) const;
 		bool toPolygon(wind::PolygonCollider* polygon) const;
 
-		std::vector< wind::Vec2> vertices;
+		std::vector< wind::Point> vertices;
 	};
 
 }

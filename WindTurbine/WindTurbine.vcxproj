@@ -162,7 +162,7 @@
     <ClCompile Include="state.cpp" />
     <ClCompile Include="play_module.cpp" />
     <ClCompile Include="pause_module.cpp" />
-    <ClCompile Include="vec2.cpp" />
+    <ClCompile Include="point.cpp" />
     <ClCompile Include="wind_turbine.cpp" />
     <ClCompile Include="image.cpp" />
     <ClCompile Include="main.cpp" />
@@ -187,7 +187,7 @@
     <ClInclude Include="play_module.h" />
     <ClInclude Include="pause_module.h" />
     <ClInclude Include="font.h" />
-    <ClInclude Include="vec2.h" />
+    <ClInclude Include="point.h" />
     <ClInclude Include="wind.h" />
     <ClInclude Include="wind_turbine.h" />
     <ClInclude Include="image.h" />
