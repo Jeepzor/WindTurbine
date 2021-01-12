@@ -18,12 +18,12 @@ namespace wind {
 		/// <summary>
 		/// Used to instantiate new RectangleColliders.
 		/// </summary>
-		/// <param name="physics_world"> = Pointer to the PhysicsWorld that the body will inhabit.</param>
+		/// <param name="physics_world"> = Pointer to the PhysicsWorld that the body will inhabit</param>
 		/// <param name="x"> = Position on the X-axis</param>
 		/// <param name="y"> = Position on the Y-axis</param>
 		/// <param name="width"> = Width of the Rectangle</param>
 		/// <param name="height"> = Height of the Rectangle</param>
-		/// <returns>pointer to a new RectangleCollider* instance.</returns>
+		/// <returns>Pointer to a new RectangleCollider* instance</returns>
 		static RectangleCollider* getInstance(PhysicsWorld* physics_world, double x, double y, double width, double height) { 
 			return new RectangleCollider(physics_world, x, y, width, height); }
 
