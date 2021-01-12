@@ -4,6 +4,7 @@ namespace wind {
 	struct Point
 	{
 		Point(double xPos, double yPos);
+		Point(); //Default constructor
 		double x;
 		double y;
 

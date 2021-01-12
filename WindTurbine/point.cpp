@@ -5,4 +5,9 @@ namespace wind {
 		x = xPos;
 		y = yPos;
 	}
+	
+	Point::Point() {
+		x = 0;
+		y = 0;
+	}
 }

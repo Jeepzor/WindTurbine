@@ -64,7 +64,7 @@ void PlayModule::keyReleased(std::string key) {
 void PlayModule::mousePressed(int button) {
 	std::cout << "button [" << button << "] was pressed" << "\n";
 
-	std::cout << wind::turbine.getMousePosition().first << " " << wind::turbine.getMousePosition().second << "\n";
+	std::cout << wind::turbine.getMousePosition().x << " " << wind::turbine.getMousePosition().y << "\n";
 	std::cout << wind::turbine.getMouseX() << " " << wind::turbine.getMouseY()<< "\n";
 }
 
