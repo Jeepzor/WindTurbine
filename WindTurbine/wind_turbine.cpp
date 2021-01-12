@@ -93,36 +93,36 @@ namespace wind {
 	void Turbine::handleEvents() {
 		updateMousePosition();
 		SDL_Event current_event;
-		SDL_PollEvent(&current_event);
-
-		std::string key;
-		switch (current_event.type) {
-		case SDL_QUIT:
-			setActive(false);
-			break;
-		case SDL_KEYDOWN:
-			key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
-			if (!current_event.key.repeat) {
-				state.keyPressed(key);
+		while (SDL_PollEvent(&current_event)) { // Handle all queued up events this frame
+			std::string key;
+			switch (current_event.type) {
+			case SDL_QUIT:
+				setActive(false);
+				break;
+			case SDL_KEYDOWN:
+				key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
+				if (!current_event.key.repeat) {
+					state.keyPressed(key);
+				}
+				break;
+			case SDL_KEYUP:
+				key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
+				if (!current_event.key.repeat) {
+					state.keyReleased(key);
+				}
+				break;
+			case SDL_MOUSEBUTTONDOWN:
+				state.mousePressed(current_event.button.button);
+				break;
+			case SDL_MOUSEBUTTONUP:
+				state.mouseReleased(current_event.button.button);
+				break;
+			case SDL_MOUSEMOTION:
+				// This did not work, caused massive delay - storeMousePosition(current_event.motion.x, current_event.motion.y);
+				break;
+			default:
+				break;
 			}
-			break;
-		case SDL_KEYUP:
-			key = std::string(SDL_GetKeyName(current_event.key.keysym.sym));
-			if (!current_event.key.repeat) {
-				state.keyReleased(key);
-			}
-			break;
-		case SDL_MOUSEBUTTONDOWN:
-			state.mousePressed(current_event.button.button);
-			break;
-		case SDL_MOUSEBUTTONUP:
-			state.mouseReleased(current_event.button.button);
-			break;
-		case SDL_MOUSEMOTION:
-			// This did not work, caused massive delay - storeMousePosition(current_event.motion.x, current_event.motion.y);
-			break;
-		default:
-			break;
 		}
 	}
 

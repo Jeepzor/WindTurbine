@@ -9,19 +9,59 @@
 namespace wind {
 	class GameModule {
 	public:
+
+		/// <summary>
+		/// Callback function, triggers when a key is pressed down
+		/// </summary>
+		/// <param name="key"> = The key that was pressed</param>
 		virtual void keyPressed(std::string key){};
+
+		/// <summary>
+		/// Callback function, triggers when a key is released
+		/// </summary>
+		/// <param name="key"> = The key that was released</param>
 		virtual void keyReleased(std::string key){};
+
+		/// <summary>
+		/// Callback function, triggers when a mouse button is pressed
+		/// </summary>
+		/// <param name="key"> = The button id (int) that was pressed</param>
 		virtual void mousePressed(int button){};
+
+		/// <summary>
+		/// Callback function, triggers when a mouse button is released
+		/// </summary>
+		/// <param name="key"> = The button id (int) that was released</param>
 		virtual void mouseReleased(int button){};
 
+		/// <summary>
+		/// Updates the GameModule, should be used to for any logic/calculations which needs to be framerate independent.
+		/// </summary>
+		/// <param name=""> = Delta time</param>
 		virtual void update(double){};
+
+		/// <summary>
+		/// Draws the GameModule, should be used to render graphics on the screen.
+		/// </summary>
 		virtual void draw(){};
+
+		/// <summary>
+		/// Callback function which is called when the state changes to a state which is in the GameModules "cleanOn"-list.
+		/// </summary>
 		virtual void clean(){};
+
+		/// <summary>
+		/// Callback function which is called when the state changes to a state which is in the GameModules "cleanOn"-list.
+		/// Note: Only occurs if the GameModule is not initialized (clean(), de-initializes a GameModule).
+		/// </summary>
 		virtual void init(){};
 
+		/// <summary>
+		/// Get the name of the GameModule
+		/// </summary>
+		/// <returns>string name</returns>
 		virtual std::string getName() = 0; //Explicitly abstract; needs to be overridden in child.
 
-		virtual bool exist(std::vector<std::string> list, std::string state);
 		virtual bool inUpdateStates(std::string state);
 		virtual bool inDrawStates(std::string state);
 		virtual bool inEventStates(std::string state);
@@ -38,11 +78,12 @@ namespace wind {
 		void setInitialized(bool flag) {initialized = flag; };
 		virtual ~GameModule() = 0 {};
 	protected:
-		bool initialized = false;
+		virtual bool exist(std::vector<std::string> list, std::string state);
 		GameModule();
-
 		GameModule(const GameModule& other) = delete;
 		const GameModule& operator=(const GameModule& other) = delete;
+
+		bool initialized = false;
 
 		std::vector<std::string> updateOn;
 		std::vector<std::string> drawOn;
