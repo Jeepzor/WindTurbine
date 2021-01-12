@@ -15,13 +15,35 @@ namespace wind {
 	public:
 		~RectangleCollider()override;
 
+		/// <summary>
+		/// Used to instantiate new RectangleColliders.
+		/// </summary>
+		/// <param name="physics_world"> = Pointer to the PhysicsWorld that the body will inhabit.</param>
+		/// <param name="x"> = Position on the X-axis</param>
+		/// <param name="y"> = Position on the Y-axis</param>
+		/// <param name="width"> = Width of the Rectangle</param>
+		/// <param name="height"> = Height of the Rectangle</param>
+		/// <returns>pointer to a new RectangleCollider* instance.</returns>
 		static RectangleCollider* getInstance(PhysicsWorld* physics_world, double x, double y, double width, double height) { 
 			return new RectangleCollider(physics_world, x, y, width, height); }
 
+		/// <summary>
+		/// Returns the width of the rectangle.
+		/// </summary>
+		/// <returns>int width</returns>
 		int getWidth() const;
+
+		/// <summary>
+		/// Returns the height of the rectangle.
+		/// </summary>
+		/// <returns>int height</returns>
 		int getHeight() const;
 
-		std::vector< wind::Vec2> getVertices() const;
+		/// <summary>
+		/// Returns a Vector of Vec2 (Which contains an X and Y position).
+		/// </summary>
+		/// <returns>Vector<Vec2></returns>
+		std::vector<Vec2> getVertices() const;
 
 	protected:
 		RectangleCollider(PhysicsWorld* physics_world, double x, double y, double width, double height);

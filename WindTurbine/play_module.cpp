@@ -101,4 +101,5 @@ void PlayModule::draw() {
 
 void PlayModule::clean() {
 	//std::cout << "State was cleaned" << "\n";
+
 }
