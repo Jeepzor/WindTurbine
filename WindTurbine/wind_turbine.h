@@ -7,6 +7,8 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 
+#include "point.h"
+
 namespace wind {
 	class Turbine {
 	public:
@@ -39,10 +41,10 @@ namespace wind {
 		SDL_Renderer* getRenderer() const;
 
 		/// <summary>
-		/// Returns the current position of the mouse as a pair.
+		/// Returns the current position of the mouse as a Point (which contains an X and Y value).
 		/// </summary>
 		/// <returns>Pair of two ints (X and Y position of the mouse)</returns>
-		std::pair<int, int> getMousePosition() const;
+		Point getMousePosition() const;
 
 		/// <summary>
 		/// Returns the position of the mouse on the X-axis
@@ -100,7 +102,7 @@ namespace wind {
 
 		const Uint8* keyboard_state;
 		Uint32 mouse_state;
-		std::pair<int, int> mousePosition;
+		Point mousePosition;
 
 		SDL_Renderer* renderer;
 		SDL_Window* window;

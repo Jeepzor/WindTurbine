@@ -129,19 +129,19 @@ namespace wind {
 	void Turbine::updateMousePosition() {
 		int x, y;
 		SDL_GetMouseState(&x, &y);
-		mousePosition = std::make_pair(x, y);
+		mousePosition = Point(x, y);
 	}
 	
-	std::pair<int, int> Turbine::getMousePosition() const {
+	Point Turbine::getMousePosition() const {
 		return mousePosition;
 	}
 
 	int Turbine::getMouseX() const {
-		return mousePosition.first;
+		return mousePosition.x;
 	}
 	
 	int Turbine::getMouseY() const  {
-		return mousePosition.second;
+		return mousePosition.y;
 	}
 
 	void Turbine::update() {
