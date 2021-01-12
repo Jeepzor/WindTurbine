@@ -11,7 +11,7 @@ Player::Player(wind::PhysicsWorld* world) {
 	acceleration = 4000.0;
 	friction = 2000;
 	collider = wind::CircleCollider::getInstance(world,xPos, yPos, 30);
-	sprite = new wind::Animation("../assets/run.png", 6, 0.09);
+	sprite = wind::Animation::getInstance("../assets/run.png", 6, 0.09);
 }
 
 void Player::update(double dt) {

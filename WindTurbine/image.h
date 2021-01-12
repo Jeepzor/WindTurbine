@@ -1,43 +1,23 @@
 #ifndef IMAGE_H
 #define IMAGE_H
-#include <SDL_image.h>
+
 #include <string>
+#include "drawable.h"
 
 namespace wind {
-	class Image {
+	class Image : public Drawable {
 	public:
-		Image(std::string path);
-		~Image();
+		~Image()override;
 
-		virtual void draw();
-		void draw(double x, double y);
-		void draw(double x, double y, double r, double g, double b, double a);
-		void setFlip(bool x_axis, bool y_axis);
-		void setAngle(double new_angle);
-		
-		double getAngle() const;
-		
-		SDL_Rect* getDestination();
-		virtual SDL_Rect* getPortion();
-		SDL_Texture* getAsset() const;
-		SDL_Point* getOriginPoint();
+		static Image* getInstance(std::string path) {
+			return new Image(path);
+		}
 
-	protected:
-		void incrementFrame();
-		virtual void setPosition(double x, double y);
-		virtual void setColor();
-		SDL_Surface* surface;
-		SDL_Rect destination;
-		SDL_Rect portion;
-		SDL_Point originPoint;
-		SDL_Texture* asset;
-		SDL_RendererFlip flip;
-
-		double angle;
-
-		int width;
-		int height;
+	private:
+		Image(std::string path) : Drawable(path) {};
+		Image(const Image& other) = delete;
+		const Image& operator=(const Image& other) = delete;
 	};
-}
 
+}
 #endif

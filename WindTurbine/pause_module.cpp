@@ -7,7 +7,7 @@ PauseModule::PauseModule() {
 	drawOn = { "paused" };
 	eventOn = { "paused"};
 	pauseFont = new wind::Font("../assets/5x5.ttf", 64);
-	pauseImg = new wind::Image("../assets/paused.png");
+	pauseImg = wind::Image::getInstance("../assets/paused.png");
 }
 
 void PauseModule::keyPressed(std::string key) {

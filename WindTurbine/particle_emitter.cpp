@@ -12,7 +12,7 @@ namespace wind {
 			duration = emitter_duration;
 		}
 
-		asset = new Image(asset_path);
+		asset = Image::getInstance(asset_path);
 
 		maxParticles = buffer; // Maximum allowed particles
 	

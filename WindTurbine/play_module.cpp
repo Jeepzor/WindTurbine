@@ -17,11 +17,14 @@ PlayModule::PlayModule() {
 	particleEmitter->setParticleLife(1);
 	particleEmitter->setSpread(1);
 	particleEmitter->setSpeed(200);
-	double our_dt = 0;
+
+	double our_dt = 0; // Debug, remove later
+
 	//TODO add removal of collider from physicsWorld in their destructor
 	worldA = new wind::PhysicsWorld(0, 0);
 	bodyA = wind::RectangleCollider::getInstance(worldA, 30, 30, 40, 600);
 	bodyB = wind::RectangleCollider::getInstance(worldA, 700, 400, 75, 75);
+
 	//bodyC = new wind::RectangleCollider(worldA, 500, 300, 10, 200);
 	bodyD = wind::RectangleCollider::getInstance(worldA, 1100, 330, 25, 75);
 	bodyE = wind::CircleCollider::getInstance(worldA, 750, 300, 35);
@@ -40,7 +43,7 @@ PlayModule::PlayModule() {
 	//bodyF->setVelocity(0, 0);
 	fpsFont = new wind::Font("../assets/bit.ttf", 32);
 	bodyG->setVelocity(-50, 50);
-	bg = new wind::Image("../assets/bg.png");
+	bg = wind::Image::getInstance("../assets/bg.png");
 	testPlayer = new Player(worldA);
 }
 

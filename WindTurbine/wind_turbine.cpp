@@ -118,7 +118,7 @@ namespace wind {
 				state.mouseReleased(current_event.button.button);
 				break;
 			case SDL_MOUSEMOTION:
-				// This did not work, caused massive delay - storeMousePosition(current_event.motion.x, current_event.motion.y);
+				// Todo
 				break;
 			default:
 				break;

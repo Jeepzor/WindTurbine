@@ -10,9 +10,6 @@
     <ClCompile Include="game_module.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
-    <ClCompile Include="image.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -70,15 +67,18 @@
     <ClCompile Include="point.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="drawable.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="entity.h">
-      <Filter>Engine\header</Filter>
-    </ClInclude>
-    <ClInclude Include="image.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="state.h">
@@ -139,6 +139,12 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="point.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="drawable.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>
