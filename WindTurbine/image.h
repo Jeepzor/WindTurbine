@@ -9,6 +9,11 @@ namespace wind {
 	public:
 		~Image()override;
 
+		/// <summary>
+		/// Used to instantiate new Animations.
+		/// </summary>
+		/// <param name="path"> = Path to the file</param>
+		/// <returns>Pointer to an Image</returns>
 		static Image* getInstance(std::string path) {
 			return new Image(path);
 		}

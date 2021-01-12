@@ -8,20 +8,55 @@ namespace wind {
 	public:
 		virtual ~Drawable() = 0;
 
+		/// <summary>
+		/// Render it on the screen at X: 0, Y: 0. Useful for backgrounds
+		/// </summary>
 		virtual void draw();
+
+		/// <summary>
+		/// Render it to the screen at specific coordinates
+		/// </summary>
+		/// <param name="x"> = X-Position</param>
+		/// <param name="y"> = Y-Position</param>
 		void draw(double x, double y);
+
+		/// <summary>
+		/// Render it to the screen and override the global color. Useful for particles.
+		/// </summary>
+		/// <param name="x"> = X-Position</param>
+		/// <param name="y"> = Y-Position</param>
+		/// <param name="r"> = Red (0-255)</param>
+		/// <param name="g"> = Green (0-255)</param>
+		/// <param name="b"> = Blue (0-255)</param>
+		/// <param name="a"> = Alpha (0-255)</param>
 		void draw(double x, double y, double r, double g, double b, double a);
+
+		/// <summary>
+		/// Set the weather or not it should be mirrored on either the X or Y axis. 
+		/// </summary>
+		/// <param name="x_axis"> = Flip on X axis (true = mirror)</param>
+		/// <param name="y_axis"> = Flip on Y axis (true = mirror)</param>
 		void setFlip(bool x_axis, bool y_axis);
+
+		/// <summary>
+		/// Rotate it to a specific angle (in Radians)
+		/// </summary>
+		/// <param name="new_angle"> = New angle (in Radians)</param>
 		void setAngle(double new_angle);
 		
+		/// <summary>
+		/// Get the current rotation, in Radians
+		/// </summary>
+		/// <returns> Angle in Radians</returns>
 		double getAngle() const;
 		
+
+	protected:
 		SDL_Rect* getDestination();
 		virtual SDL_Rect* getPortion();
 		SDL_Texture* getAsset() const;
 		SDL_Point* getOriginPoint();
 
-	protected:
 		Drawable(std::string path);
 
 		Drawable(const Drawable& other) = delete;
