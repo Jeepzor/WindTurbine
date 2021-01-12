@@ -9,6 +9,15 @@ namespace wind {
 
 	class CircleCollider : public wind::Collider {
 	public:
+
+		/// <summary>
+		/// Used to instantiate new CircleColliders
+		/// </summary>
+		/// <param name="physics_world"></param>
+		/// <param name="x"> = Position on the X-axis</param>
+		/// <param name="y"> = Position on the Y-axis</param>
+		/// <param name="radius"> = Radius of the collider</param>
+		/// <returns>Pointer to a new CircleCollider* instance</returns>
 		static CircleCollider* getInstance(PhysicsWorld* physics_world, double x, double y, double radius) {
 			return new CircleCollider(physics_world, x, y, radius);
 		}

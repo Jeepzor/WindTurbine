@@ -14,7 +14,7 @@ namespace wind {
 	public:
 
 		/// <summary>
-		/// 
+		/// Used to instantiate new PolygonColliders
 		/// </summary>
 		/// <param name="physics_world">Pointer to the PhysicsWorld that the body will inhabit.</param>
 		/// <param name="x"> = Position on the X-axis</param>

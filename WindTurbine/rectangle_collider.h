@@ -16,7 +16,7 @@ namespace wind {
 		~RectangleCollider()override;
 
 		/// <summary>
-		/// Used to instantiate new RectangleColliders.
+		/// Used to instantiate new RectangleColliders
 		/// </summary>
 		/// <param name="physics_world"> = Pointer to the PhysicsWorld that the body will inhabit</param>
 		/// <param name="x"> = Position on the X-axis</param>
