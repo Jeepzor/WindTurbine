@@ -11,10 +11,10 @@ PlayModule::PlayModule() {
 	initOn = { "play" };
 	cleanOn = { "restart" };
 
-	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 2000);
+	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 1000000);
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
-	particleEmitter->setEmission(50);
-	particleEmitter->setParticleLife(1);
+	particleEmitter->setEmission(100000);
+	particleEmitter->setParticleLife(10);
 	particleEmitter->setSpread(1);
 	particleEmitter->setSpeed(200);
 

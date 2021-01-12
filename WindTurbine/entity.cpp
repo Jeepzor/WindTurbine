@@ -6,4 +6,8 @@ namespace wind {
 		yPos = 0;
 	}
 
+	Entity::~Entity() {
+
+	}
+
 }

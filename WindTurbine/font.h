@@ -9,6 +9,7 @@ namespace wind {
 	class Font
 	{
 	public:
+
 		Font(std::string path, int size);
 		void draw(std::string text, double x, double y);
 

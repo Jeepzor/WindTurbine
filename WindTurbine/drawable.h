@@ -70,6 +70,7 @@ namespace wind {
 		SDL_Point originPoint;
 		SDL_Texture* asset;
 		SDL_RendererFlip flip;
+		SDL_Renderer* testRenderer;
 
 		double angle;
 

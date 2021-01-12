@@ -83,7 +83,7 @@ namespace wind {
 		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
 	}
 	
-	//Exclusivly for particles.
+	//Mainly for particles.
 	void Drawable::draw(double x, double y, double r, double g, double b, double a) {
 		SDL_SetTextureAlphaMod(asset, a);
 		SDL_SetTextureColorMod(asset, r, g, b);
