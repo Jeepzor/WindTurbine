@@ -4,7 +4,8 @@
 void help(wind::Collider* coll_a, wind::Collider* coll_b) {
 	std::cout << "yey" << "\n";
 	if (Player* test = dynamic_cast<Player*>(coll_a->getEntity())) {
-		coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
+		//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
+		coll_b->destroy();
 	}
 }
 

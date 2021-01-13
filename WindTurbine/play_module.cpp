@@ -60,6 +60,8 @@ void PlayModule::keyPressed(std::string key) {
 	}
 	else if (key == "4") {
 		bodyG->setVelocity(-200, 0);
+	}else if (key == "9") {
+		
 	}
 }
 
@@ -72,6 +74,34 @@ void PlayModule::mousePressed(int button) {
 
 	std::cout << wind::turbine.getMousePosition().x << " " << wind::turbine.getMousePosition().y << "\n";
 	std::cout << wind::turbine.getMouseX() << " " << wind::turbine.getMouseY()<< "\n";
+	wind::Collider* temp = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp2 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp3 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp4 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp5 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp7 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp6 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp8 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp9 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp0 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp10 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp20 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp30 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp40 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp50 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp60 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp70 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp80 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp810 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp820 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp830 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp840 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp850 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp860 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp870 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp880 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp890 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
+	wind::Collider* temp800 = wind::CircleCollider::getInstance(worldA, wind::turbine.getMouseX(), wind::turbine.getMouseY(), 25);
 }
 
 void PlayModule::mouseReleased(int button) {

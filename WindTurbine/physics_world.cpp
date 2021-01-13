@@ -1,6 +1,10 @@
 #include "physics_world.h"
 #include "collider.h"
 
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
 namespace wind {
 	PhysicsWorld::PhysicsWorld(double x_velocity, double y_velocity) {
 		colliders;
@@ -12,10 +16,18 @@ namespace wind {
 		colliders.push_back(new_object);
 	}
 
-	void PhysicsWorld::update(double dt) const {
+	void PhysicsWorld::update(double dt)  {
+		removeDead();
+
 		for (auto currrent_object : colliders) {
 			currrent_object->update(dt);
 		}
+	}
+
+	
+	void PhysicsWorld::removeDead() {
+		colliders.erase(std::remove_if(colliders.begin(), colliders.end(),
+			[](Collider* i) { return !(i->isAlive()); }), colliders.end());
 	}
 	
 	void PhysicsWorld::draw() const {

@@ -89,12 +89,37 @@ namespace wind {
 		/// <returns>Enum Shape</returns>
 		Shape getShape() const;
 
+		/// <summary>
+		/// Used to pass a function that will be stored and used by the "onCollide"-callback function.
+		/// </summary>
+		/// <param name="call_back"> = A function of return type 'void' with two parameters: pointers to the colliders that triggered the callback.</param>
 		void setOnCollide(std::function<void(Collider* coll_a, Collider* coll_b)> call_back);
-		void onCollide(Collider* coll_a, Collider* coll_b) const;
+
+		/// <summary>
+		/// Set the Entity that this collider belongs to, can be used to resolve collisions in the collision callback-function.
+		/// </summary>
+		/// <param name="entity"> = Pointer to the entity</param>
 		void setEntity(Entity* entity);
+
+		/// <summary>
+		/// Get a pointer to the Entity which this collider belongs to.
+		/// </summary>
+		/// <returns> = Pointer to the entity</returns>
 		Entity* getEntity();
+
+		/// <summary>
+		/// Used to check if the collider is alive or if it should be removed from the physics world.
+		/// </summary>
+		/// <returns>True if the collider is alive, else false</returns>
+		bool isAlive() {return alive;};
+
+		/// <summary>
+		/// Used to flag the collider for destruction, when called it will be removed by the physics world the next frame.
+		/// </summary>
+		void destroy() { alive = false; }
 		
 	protected:
+		void onCollide(Collider* coll_a, Collider* coll_b) const;
 		Entity* connectedEntity;
 
 		static void emptyCallback(Collider* coll_a, Collider* coll_b) {};
@@ -106,14 +131,17 @@ namespace wind {
 		Collider(const Collider& other) = delete;
 		const Collider& operator=(const Collider& other) = delete;
 
-		virtual bool validateNextPosition() = 0;
 		void validateNextX(double dt);
 		void validateNextY(double dt);
+
+		virtual bool validateNextPosition() = 0;
 		bool toBoundry(Collider* circle) const;
 		PhysicsWorld* world;
 		Shape shape;
 
 		std::function<void(Collider* coll_a, Collider* coll_b)> callBack;
+
+		bool alive = true;
 		double angle;
 		double radius;
 		double yPos;

@@ -9,10 +9,11 @@ namespace wind {
 	public:
 		PhysicsWorld(double xVel, double yVel);
 		void addObject(Collider* obj);
-		void update(double dt) const;
+		void update(double dt);
 		void draw() const;
 		std::vector<Collider*> getColliders() const;
 	private:
+		void removeDead();
 		std::vector<Collider*> colliders;
 		double yVel;
 		double xVel;
