@@ -89,7 +89,7 @@ namespace wind {
 		return false;
 	}
 
-	bool CircleCollider::validateNextPosition() const {
+	bool CircleCollider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
@@ -111,6 +111,10 @@ namespace wind {
 						if (toPolygon(polygon_collider)) {
 							legal = false;
 						}
+					}
+
+					if (!legal) {
+						onCollide(this, other_collider);
 					}
 				}
 			}

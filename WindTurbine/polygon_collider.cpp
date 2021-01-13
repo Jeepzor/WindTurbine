@@ -73,7 +73,7 @@ namespace wind {
 		}
 	}
 
-	bool PolygonCollider::validateNextPosition() const {
+	bool PolygonCollider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
@@ -96,6 +96,9 @@ namespace wind {
 						if (toRectangle(rectangle_collider)) {
 							legal = false;
 						}
+					}
+					if (!legal) {
+						onCollide(this, other_collider);
 					}
 				}
 			}

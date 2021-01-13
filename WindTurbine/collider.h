@@ -1,10 +1,11 @@
 #ifndef COLLIDER_H
 #define COLLIDER_H
 #include <iostream>
+#include <functional>
 
 #include "poly_points.h"
+#include "entity.h"
 
-typedef void (*callback)();
 namespace wind {
 
 	enum Shape {base, circle, rectangle, polygon };
@@ -12,6 +13,7 @@ namespace wind {
 	class RectangleCollider;
 
 	class Collider{
+	typedef std::function<void(Collider* coll_a, Collider* coll_b)> Callback;
 	public:
 		virtual ~Collider()= 0 {};
 
@@ -87,10 +89,16 @@ namespace wind {
 		/// <returns>Enum Shape</returns>
 		Shape getShape() const;
 
-		void setOnCollide(void (* ptr)());
-		void onCollide();
+		void setOnCollide(std::function<void(Collider* coll_a, Collider* coll_b)> call_back);
+		void onCollide(Collider* coll_a, Collider* coll_b) const;
+		void setEntity(Entity* entity);
+		Entity* getEntity();
 		
 	protected:
+		Entity* connectedEntity;
+
+		static void emptyCallback(Collider* coll_a, Collider* coll_b) {};
+
 		virtual void move();
 		virtual void rotateVertices(double dt) {};
 
@@ -98,14 +106,14 @@ namespace wind {
 		Collider(const Collider& other) = delete;
 		const Collider& operator=(const Collider& other) = delete;
 
-		virtual bool validateNextPosition() const = 0;
+		virtual bool validateNextPosition() = 0;
 		void validateNextX(double dt);
 		void validateNextY(double dt);
 		bool toBoundry(Collider* circle) const;
 		PhysicsWorld* world;
 		Shape shape;
 
-		void (*callBack)();
+		std::function<void(Collider* coll_a, Collider* coll_b)> callBack;
 		double angle;
 		double radius;
 		double yPos;
@@ -117,6 +125,8 @@ namespace wind {
 		double rVel;
 		double nextX;
 		double nextY;
+
+
 	};
 }
 #endif

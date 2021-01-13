@@ -1,6 +1,13 @@
 #include <string>
 #include "player.h"
 
+void help(wind::Collider* coll_a, wind::Collider* coll_b) {
+	std::cout << "yey" << "\n";
+	if (Player* test = dynamic_cast<Player*>(coll_a->getEntity())) {
+		coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
+	}
+}
+
 Player::Player(wind::PhysicsWorld* world) {
 	xPos = 300;
 	yPos = 40;
@@ -11,6 +18,8 @@ Player::Player(wind::PhysicsWorld* world) {
 	acceleration = 4000.0;
 	friction = 2000;
 	collider = wind::CircleCollider::getInstance(world,xPos, yPos, 30);
+	collider->setOnCollide(help);
+	collider->setEntity(this);
 	sprite = wind::Animation::getInstance("../assets/run.png", 6, 0.09);
 }
 

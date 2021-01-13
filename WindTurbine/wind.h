@@ -1,9 +1,9 @@
 #ifndef WIND_H
 #define WIND_H
 
+#include "collider.h"
 #include "animation.h"
 #include "circle_collider.h"
-#include "collider.h"
 #include "entity.h"
 #include "game_module.h"
 #include "graphics.h"

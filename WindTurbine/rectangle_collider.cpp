@@ -31,7 +31,7 @@ namespace wind {
 		return vertices;
 	}
 
-	bool RectangleCollider::validateNextPosition() const {
+	bool RectangleCollider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
 			if (this != other_collider) { // Don't collide with yourself
@@ -47,6 +47,7 @@ namespace wind {
 						CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };
 						if (toCircle(other_circle)) {
 							legal = false;
+							onCollide(this, other_collider);
 						}
 					}else if (other_collider->getShape() == polygon) {
 						PolygonCollider* polygon_collider{ dynamic_cast<PolygonCollider*>(other_collider) };
@@ -54,7 +55,11 @@ namespace wind {
 							legal = false;
 						}
 					}
+					if (!legal) {
+						onCollide(this, other_collider);
+					}
 				}
+
 			}
 		}
 		return legal;

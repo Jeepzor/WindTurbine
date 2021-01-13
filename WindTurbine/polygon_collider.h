@@ -51,7 +51,7 @@ namespace wind {
 
 		void draw() const override;
 
-		bool validateNextPosition() const override;
+		bool validateNextPosition() override;
 		bool toCircle(CircleCollider* circle) const;
 		bool polygonIntersect(std::vector<wind::Point> ov, double other_x, double other_y) const;
 		bool toRectangle(RectangleCollider* other_rectangle) const;

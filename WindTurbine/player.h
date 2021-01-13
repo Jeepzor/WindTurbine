@@ -12,7 +12,8 @@ public:
 	Player(wind::PhysicsWorld* world);
 	void draw()override;
 	void update(double dt)override;
-	
+	double getVelocityX() { return xVel; };
+	double getVelocityY() { return yVel; };
 private:
 	void move(double dt);
 	void applyFriction(double dt);
@@ -28,6 +29,7 @@ private:
 	double dir;
 	wind::Collider* collider;
 	wind::Animation* sprite;
+	
 };
 
 #endif

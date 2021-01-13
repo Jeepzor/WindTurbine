@@ -1,14 +1,9 @@
-
+#include "wind.h"
 #include "play_module.h"
 #include "player.h"
 
 double timer = 0;
 double rate = 0.3;
-
-void help() {
-	std::cout << "yey" << "\n";
-}
-
 
 PlayModule::PlayModule() {
 	updateOn = { "play" };
@@ -19,8 +14,8 @@ PlayModule::PlayModule() {
 
 	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 300);
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
-	particleEmitter->setEmission(300);
-	particleEmitter->setParticleLife(1);
+	particleEmitter->setEmission(100);
+	particleEmitter->setParticleLife(3);
 	particleEmitter->setSpread(1);
 	particleEmitter->setSpeed(100,200);
 
@@ -40,10 +35,6 @@ PlayModule::PlayModule() {
 	bodyG = wind::PolygonCollider::getInstance(worldA, 600, 30, octagon);
 	bodyF = wind::PolygonCollider::getInstance(worldA, 480, 230, octagon);
 	bodyF->setRotation(1);
-
-	bodyG->setOnCollide(help);
-	bodyF->onCollide();
-	bodyG->onCollide();
 
 
 
