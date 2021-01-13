@@ -4,6 +4,12 @@
 
 double timer = 0;
 double rate = 0.3;
+
+void help() {
+	std::cout << "yey" << "\n";
+}
+
+
 PlayModule::PlayModule() {
 	updateOn = { "play" };
 	drawOn = { "play","paused" };
@@ -11,12 +17,12 @@ PlayModule::PlayModule() {
 	initOn = { "play" };
 	cleanOn = { "restart" };
 
-	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 1000000);
+	particleEmitter = new wind::ParticleEmitter("../assets/particle.png", 0, 300);
 	particleEmitter->setColors(255,255,255,255, 255,0,0,255, 0,0,255,255, 0,255,0,255, 0,255,255,255, 255,255,0,255, 255,0,255,255, 255,255,255, 0);
-	particleEmitter->setEmission(100000);
-	particleEmitter->setParticleLife(10);
+	particleEmitter->setEmission(300);
+	particleEmitter->setParticleLife(1);
 	particleEmitter->setSpread(1);
-	particleEmitter->setSpeed(200);
+	particleEmitter->setSpeed(100,200);
 
 	double our_dt = 0; // Debug, remove later
 
@@ -34,6 +40,12 @@ PlayModule::PlayModule() {
 	bodyG = wind::PolygonCollider::getInstance(worldA, 600, 30, octagon);
 	bodyF = wind::PolygonCollider::getInstance(worldA, 480, 230, octagon);
 	bodyF->setRotation(1);
+
+	bodyG->setOnCollide(help);
+	bodyF->onCollide();
+	bodyG->onCollide();
+
+
 
 	//bodyA->setVelocity(100, 0);
 	//bodyB->setVelocity(-200, 0);

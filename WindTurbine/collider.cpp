@@ -3,6 +3,10 @@
 #include "rectangle_collider.h"
 #include "graphics.h"
 
+void emptyCallback() {
+	std::cout << "default on collide" << "\n";
+}
+
 namespace wind {
 	Collider::Collider(PhysicsWorld* physics_world, double x, double y, int circle_radius) {
 		shape = base;
@@ -18,8 +22,8 @@ namespace wind {
 		angle = 0;
 		nextX = x;
 		nextY = y;
-
 		physics_world->addObject(this);
+		setOnCollide(emptyCallback);
 	}
 
 	void Collider::setVelocity(double x, double y) {
@@ -102,5 +106,13 @@ namespace wind {
 
 	Shape Collider::getShape() const {
 		return shape;
+	}
+
+	void Collider::setOnCollide(void (*call_back) ()) {
+		callBack = call_back;
+	}
+	
+	void Collider::onCollide() {
+		callBack();
 	}
 }

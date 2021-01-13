@@ -49,7 +49,6 @@ namespace wind {
 		/// </summary>
 		/// <returns> Angle in Radians</returns>
 		double getAngle() const;
-		
 
 	protected:
 		SDL_Rect* getDestination();

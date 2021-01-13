@@ -1,9 +1,12 @@
 #ifndef COLLIDER_H
 #define COLLIDER_H
-#include "poly_points.h"
 #include <iostream>
 
+#include "poly_points.h"
+
+typedef void (*callback)();
 namespace wind {
+
 	enum Shape {base, circle, rectangle, polygon };
 	class PhysicsWorld; // Is this forward declaration?
 	class RectangleCollider;
@@ -77,12 +80,15 @@ namespace wind {
 		/// </summary>
 		/// <returns>double X</returns>
 		int getRadius() const;
-
+		
 		/// <summary>
 		/// Gets the shape of the collider.
 		/// </summary>
 		/// <returns>Enum Shape</returns>
 		Shape getShape() const;
+
+		void setOnCollide(void (* ptr)());
+		void onCollide();
 		
 	protected:
 		virtual void move();
@@ -96,9 +102,10 @@ namespace wind {
 		void validateNextX(double dt);
 		void validateNextY(double dt);
 		bool toBoundry(Collider* circle) const;
-		 
 		PhysicsWorld* world;
 		Shape shape;
+
+		void (*callBack)();
 		double angle;
 		double radius;
 		double yPos;
@@ -111,6 +118,5 @@ namespace wind {
 		double nextX;
 		double nextY;
 	};
-
 }
 #endif
