@@ -11,12 +11,14 @@ namespace wind {
 		void addObject(Collider* obj);
 		void update(double dt);
 		void draw() const;
+		void toggleDebug() { debug = !debug; };
 		std::vector<Collider*> getColliders() const;
 	private:
 		void removeDead();
 		std::vector<Collider*> colliders;
 		double yVel;
 		double xVel;
+		bool debug = false;
 	};
 }
 

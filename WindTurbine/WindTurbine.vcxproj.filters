@@ -73,6 +73,12 @@
     <ClCompile Include="image.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="hibernate.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="hibernated.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -145,6 +151,12 @@
       <Filter>Engine\header</Filter>
     </ClInclude>
     <ClInclude Include="image.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="hibernate.h">
+      <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="hibernated.h">
       <Filter>Engine\header</Filter>
     </ClInclude>
   </ItemGroup>

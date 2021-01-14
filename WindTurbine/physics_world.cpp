@@ -7,7 +7,6 @@
 
 namespace wind {
 	PhysicsWorld::PhysicsWorld(double x_velocity, double y_velocity) {
-		colliders;
 		xVel = x_velocity;
 		yVel = y_velocity;
 	}
@@ -31,8 +30,10 @@ namespace wind {
 	}
 	
 	void PhysicsWorld::draw() const {
-		for (auto currrent_object : colliders) {
-			currrent_object->draw();
+		if (debug) {
+			for (auto currrent_object : colliders) {
+				currrent_object->draw();
+			}
 		}
 	}
 

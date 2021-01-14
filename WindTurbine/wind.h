@@ -19,5 +19,6 @@
 #include "particle.h"
 #include "particle_emitter.h"
 #include "wind_turbine.h"
+#include "hibernate.h"
 
 #endif
