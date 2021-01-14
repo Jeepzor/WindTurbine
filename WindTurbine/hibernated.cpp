@@ -2,13 +2,14 @@
 
 namespace wind {
 
-	Hibernated::Hibernated(Target callback_target, double duration) {
+	Hibernated::Hibernated(std::function<void()> callback_target, double duration) {
 		timer = duration;
 		target = callback_target;
 	}
 
 	void Hibernated::update(double dt) {
 		timer -= dt;
+		checkDeath();
 	}
 
 	void Hibernated::checkDeath() {

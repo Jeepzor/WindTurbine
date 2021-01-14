@@ -1,6 +1,7 @@
 #include "wind_turbine.h"
 #include "state.h"
 #include "image.h"
+#include "hibernate.h"
 
 namespace wind {
 	Turbine::Turbine() {
@@ -126,6 +127,11 @@ namespace wind {
 		}
 	}
 
+	void Turbine::toggleCursor() {
+		cursorVisible = !cursorVisible;
+		SDL_ShowCursor(cursorVisible);
+	}
+
 	void Turbine::updateMousePosition() {
 		int x, y;
 		SDL_GetMouseState(&x, &y);
@@ -145,13 +151,19 @@ namespace wind {
 	}
 
 	void Turbine::update() {
-		currentFrameTime = SDL_GetTicks();
-		dt = (currentFrameTime - previousFrameTime) / 1000;
+		updateDeltaTime();
 		updateCurrentFPS(dt);
 		state.update(dt);
+		hibernate.update(dt);
+
 		previousFrameTime = currentFrameTime;
 		delay(dt);
 	};
+
+	void Turbine::updateDeltaTime() {
+		currentFrameTime = static_cast<double>(SDL_GetTicks());
+		dt = (currentFrameTime - previousFrameTime) / 1000;
+	}
 
 	void Turbine::updateCurrentFPS(double dt) {
 		fpsTimer += dt;
@@ -182,10 +194,10 @@ namespace wind {
 		SDL_RenderPresent(renderer);
 	}
 
-	bool Turbine::active() const { return is_active; }
+	bool Turbine::active() const { return isActive; }
 
 	void Turbine::setActive(bool state) {
-		is_active = state;
+		isActive = state;
 	}
 
 	SDL_Renderer* Turbine::getRenderer() const {

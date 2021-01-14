@@ -23,10 +23,8 @@ namespace wind {
 		}
 	}
 
-	
 	void PhysicsWorld::removeDead() {
-		colliders.erase(std::remove_if(colliders.begin(), colliders.end(),
-			[](Collider* i) { return !(i->isAlive()); }), colliders.end());
+		colliders.erase(std::remove_if(colliders.begin(), colliders.end(), [](Collider* i) { return !(i->isAlive()); }), colliders.end());
 	}
 	
 	void PhysicsWorld::draw() const {

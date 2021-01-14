@@ -2,6 +2,7 @@
 #define PLAY_MODULE_H
 
 #include "wind.h"
+#include<functional>
 
 
 class PlayModule : public wind::GameModule {
@@ -14,6 +15,7 @@ public:
 	void update(double dt);
 	void draw();
 	void clean();
+	void test();
 	std::string getName() { return "playing"; };
 
 private:

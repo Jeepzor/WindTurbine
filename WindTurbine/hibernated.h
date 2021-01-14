@@ -5,18 +5,17 @@
 #include<functional>
 
 namespace wind {
-	typedef std::function<void()> Target;
 	class Hibernated
 	{
 	public:
+		Hibernated(std::function<void()>  target, double duration);
 
-		Hibernated(Target target, double duration);
-
+		bool isAlive() { return alive; };
 		void update(double dt);
-		void checkDeath();
 
 	private:
-		Target target;
+		void checkDeath();
+		std::function<void()>  target;
 		bool alive = true;
 		double timer;
 	};

@@ -78,6 +78,11 @@ namespace wind {
 		/// <returns>True if the button is pressed down, else false</returns>
 		bool mouseDown(int button) const;
 
+		/// <summary>
+		/// Hides the cursor if it was visible and vice versa
+		/// </summary>
+		void toggleCursor();
+
 	private:
 		void handleEvents();
 		void update();
@@ -87,17 +92,19 @@ namespace wind {
 
 		void clean();
 		void setActive(bool next_state);
+		void updateDeltaTime();
 		void updateCurrentFPS(double dt);
 		void delay(double dt);
 		double fpsTimer = 0.0; //Time since last update of FPS counter (in seconds)
 		double fpsRate = 1.0; //How often should the FPS counter update (in seconds)
 
 		double fpsCurrent;
-		int fpsLimit;
-		bool is_active;
 		double previousFrameTime;
 		double currentFrameTime;
 		double dt;
+		int fpsLimit;
+		bool isActive;
+		bool cursorVisible = true;
 
 
 		const Uint8* keyboard_state;
