@@ -5,8 +5,8 @@
 
 #include "wind.h"
 
-#include "play_module.h"
-#include "pause_module.h"
+#include "game/play_module.h"
+#include "game/pause_module.h"
 
 int main(int argc, char* argv[]) {
 	wind::turbine.create("WindTurbine Test", 1280, 720); 

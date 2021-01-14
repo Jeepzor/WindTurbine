@@ -1,7 +1,7 @@
 #ifndef PLAY_MODULE_H
 #define PLAY_MODULE_H
 
-#include "wind.h"
+#include "../wind.h"
 #include<functional>
 
 

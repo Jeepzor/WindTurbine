@@ -5,7 +5,7 @@
 
 namespace wind {
 	Turbine::Turbine() {
-		is_active = false;
+		isActive = false;
 		window = nullptr;
 		renderer = nullptr;
 		previousFrameTime = 0;

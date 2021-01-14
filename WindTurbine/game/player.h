@@ -3,7 +3,7 @@
 
 #include <algorithm>
 
-#include "wind.h"
+#include "../wind.h"
 
 class wind::PhysicsWorld;
 

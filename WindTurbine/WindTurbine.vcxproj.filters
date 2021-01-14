@@ -1,12 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="pause_module.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
-    <ClCompile Include="play_module.cpp">
-      <Filter>Game</Filter>
-    </ClCompile>
     <ClCompile Include="game_module.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
@@ -21,9 +15,6 @@
     </ClCompile>
     <ClCompile Include="entity.cpp">
       <Filter>Engine</Filter>
-    </ClCompile>
-    <ClCompile Include="player.cpp">
-      <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="animation.cpp">
       <Filter>Engine</Filter>
@@ -79,6 +70,15 @@
     <ClCompile Include="hibernated.cpp">
       <Filter>Engine</Filter>
     </ClCompile>
+    <ClCompile Include="game\play_module.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\pause_module.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="game\player.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -95,15 +95,6 @@
     </ClInclude>
     <ClInclude Include="game_module.h">
       <Filter>Engine\header</Filter>
-    </ClInclude>
-    <ClInclude Include="pause_module.h">
-      <Filter>Game\header</Filter>
-    </ClInclude>
-    <ClInclude Include="play_module.h">
-      <Filter>Game\header</Filter>
-    </ClInclude>
-    <ClInclude Include="player.h">
-      <Filter>Game\header</Filter>
     </ClInclude>
     <ClInclude Include="collider.h">
       <Filter>Engine\header</Filter>
@@ -158,6 +149,15 @@
     </ClInclude>
     <ClInclude Include="hibernated.h">
       <Filter>Engine\header</Filter>
+    </ClInclude>
+    <ClInclude Include="game\pause_module.h">
+      <Filter>Game\header</Filter>
+    </ClInclude>
+    <ClInclude Include="game\player.h">
+      <Filter>Game\header</Filter>
+    </ClInclude>
+    <ClInclude Include="game\play_module.h">
+      <Filter>Game\header</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

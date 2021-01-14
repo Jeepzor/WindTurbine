@@ -1,9 +1,9 @@
-#include "wind.h"
 #include "play_module.h"
 #include "player.h"
 
 double timer = 0;
 double rate = 0.3;
+
 
 PlayModule::PlayModule() {
 	updateOn = { "play" };
