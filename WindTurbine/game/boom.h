@@ -7,7 +7,7 @@ public:
 	static Boom* getInstance(double x, double y) {
 		return new Boom(x, y);
 	}
-
+	~Boom()override;
 	void draw()override;
 	void update(double dt)override;
 private:

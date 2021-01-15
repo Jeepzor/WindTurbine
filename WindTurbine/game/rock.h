@@ -11,7 +11,7 @@ public:
 	static Rock* getInstance(PlayModule* play_module, double x, double y, double angle) {
 		return new Rock(play_module, x, y, angle);
 	}
-
+	~Rock()override;
 	void draw()override;
 	void update(double dt)override;
 	void setFalling() { falling = true; };
@@ -23,6 +23,7 @@ private:
 	void drawText() const;
 	void fall(double dt);
 	void syncCollider();
+	void checkOutOfBounds();
 
 	bool falling = false;
 

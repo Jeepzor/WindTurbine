@@ -65,7 +65,8 @@ void PlayModule::mousePressed(int button) {
 		}
 	}
 	else if (button == 3) {
-		
+		//wind::Entity* kebab = Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), "2");
+		//delete kebab;
 	}
 }
 
@@ -93,6 +94,7 @@ void PlayModule::updateEntities(double dt) {
 }
 
 void PlayModule::removeDeadEntities() {
+	
 	entities.erase(std::remove_if(entities.begin(), entities.end(), [](wind::Entity* i) { return !(i->isAlive()); }), entities.end());
 }
 

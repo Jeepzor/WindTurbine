@@ -12,6 +12,8 @@ public:
 		return new Missile(playModule, x, y, angle, input_text);
 	}
 
+	~Missile()override;
+
 	void draw()override;
 	void update(double dt)override;
 private:
@@ -21,6 +23,7 @@ private:
 
 	void syncCollider();
 	void updateThruster(double dt);
+	void checkOutOfBounds();
 
 	double width = 0;
 	double height = 0;

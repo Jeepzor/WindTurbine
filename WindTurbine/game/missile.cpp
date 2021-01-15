@@ -56,10 +56,27 @@ Missile::Missile(PlayModule* play_module, double x, double y, double a, std::str
 	thruster->setColors(220,220,255,255, 0,0,0,0);
 }
 
+Missile::~Missile() {
+	std::cout << "missile deleted";
+	delete asset;
+	delete thruster;
+}
+
 
 void Missile::update(double dt) {
 	syncCollider();
 	updateThruster(dt);
+	checkOutOfBounds();
+}
+
+void Missile::checkOutOfBounds() {
+	if (xPos > wind::turbine.getWindowWidth() + 100 ||
+		xPos < -100 ||
+		yPos < -100 ||
+		yPos > wind::turbine.getWindowHeight() + 100) {
+
+		destroy();
+	}
 }
 
 void Missile::syncCollider() {

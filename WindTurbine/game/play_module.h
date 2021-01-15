@@ -41,7 +41,8 @@ private:
 	Player* playerShip;
 	wind::PhysicsWorld* world;
 	wind::Font* text;
-	std::vector<wind::Entity*> entities;
+
+	std::vector<std::shared_ptr<wind::Entity>> entities;
 };
 
 #endif

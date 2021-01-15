@@ -42,6 +42,12 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	);
 }
 
+Rock::~Rock() {
+	std::cout << "rock deleted";
+	delete equationFont;
+	delete asset;
+}
+
 void Rock::draw() {
 	asset->draw(xPos, yPos);
 	
@@ -65,7 +71,18 @@ void Rock::update(double dt) {
 	yPos = collider->getY() - height / 2;
 	asset->setScale(scale, true);
 	fall(dt);
+	checkOutOfBounds();
 
+}
+
+void Rock::checkOutOfBounds() {
+	if (xPos > wind::turbine.getWindowWidth() + 200 ||
+		xPos < -100 ||
+		yPos < -100 ||
+		yPos > wind::turbine.getWindowHeight() + 100) {
+
+		destroy();
+	}
 }
 
 void Rock::fall(double dt) {

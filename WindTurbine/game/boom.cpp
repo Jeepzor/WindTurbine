@@ -18,6 +18,11 @@ Boom::Boom(double x, double y) {
 	wind::hibernate.it([=]() {this->destroy(); }, 2.5);
 }
 
+Boom::~Boom() {
+	std::cout << "boom deleted";
+	delete particles;
+}
+
 
 void Boom::update(double dt) {
 	particles->update(dt);
