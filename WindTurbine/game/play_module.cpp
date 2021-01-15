@@ -3,10 +3,7 @@
 #include "missile.h"
 #include "rock.h"
 #include "boom.h"
-
-double timer = 0;
-double rate = 0.3;
-
+#include "star.h"
 
 PlayModule::PlayModule() {
 	updateOn = { "play" };
@@ -15,10 +12,6 @@ PlayModule::PlayModule() {
 	initOn = { "play" };
 	cleanOn = { "restart" };
 
-
-
-	double our_dt = 0; // Debug, remove later
-
 	//TODO add removal of collider from physicsWorld in their destructor
 	world = new wind::PhysicsWorld(0, 0);
 
@@ -26,7 +19,10 @@ PlayModule::PlayModule() {
 
 	playerShip = new Player(world);
 
-
+	for (int i = 0; i < 100; i++)
+	{
+		entities.push_back(Star::getInstance(wind::turbine.getWindowWidth() * wind::math.random(), wind::turbine.getWindowHeight() * wind::math.random()) );
+	}
 	//wind::hibernate.it( [=]() mutable {}, 5);
 }
 
@@ -51,7 +47,7 @@ void PlayModule::keyReleased(std::string key) {
 
 void PlayModule::mousePressed(int button) {
 	if (button == 1) {
-		entities.push_back(Missile::getInstance(world, entities, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
+		entities.push_back(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
 	}
 	else if (button == 3) {
 		
@@ -62,13 +58,11 @@ void PlayModule::mouseReleased(int button) {
 	std::cout << "button [" << button << "] was released" << "\n";
 }
 
-void PlayModule::update(double dt) {
-	timer += dt;
-	if (timer >= rate) {
-		timer = 0;
-		our_dt = dt;
-	}
+void PlayModule::addEntity(wind::Entity* entity) {
+	entities.push_back(entity);
+}
 
+void PlayModule::update(double dt) {
 	updateSpawner(dt);
 	updateEntities(dt);
 	playerShip->update(dt);
@@ -102,15 +96,15 @@ void PlayModule::draw() {
 	wind::graphics.setColor(0, 0, 0,255);
 	wind::graphics.rectangle(0, 0, wind::turbine.getWindowWidth(), wind::turbine.getWindowHeight());
 	wind::graphics.setColor(255, 255, 255,255);
+	drawEntities();
 
 	playerShip->draw();
-	drawEntities();
 	world->draw();
 
 	wind::graphics.setColor(0, 0, 0);
-	fpsFont->draw("DT            " + std::to_string(our_dt), 32, 32);
+	fpsFont->draw("Health: " + std::to_string(playerShip->getHealth()), 32, 32);
 	wind::graphics.setColor(255, 255, 255);
-	fpsFont->draw("DT            " + std::to_string(our_dt), 30, 30);
+	fpsFont->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 30);
 }
 
 void PlayModule::drawEntities() {

@@ -10,9 +10,13 @@ public:
 	Player(wind::PhysicsWorld* world);
 	void draw()override;
 	void update(double dt)override;
-	double getAngle() const;
+	void takeDamage();
+	int getHealth() { return health; }
+	double getAngle()const { return aimAngle; };
+	double getShipAngle()const { return shipAngle; };
 	double getLaunchX() const;
 	double getLaunchY() const;
+
 private:
 	void updateThrusters();
 	void updateAim();
@@ -23,7 +27,11 @@ private:
 
 	double weaponX;
 	double weaponY;
+	double lifeTimer = 0;
 	double aimAngle = 0;
+	double shipAngle = 0;
+
+	int health = 10;
 
 
 	wind::Collider* collider;

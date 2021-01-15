@@ -152,6 +152,7 @@
     <ClCompile Include="game\boom.cpp" />
     <ClCompile Include="game\missile.cpp" />
     <ClCompile Include="game\rock.cpp" />
+    <ClCompile Include="game\star.cpp" />
     <ClCompile Include="game_module.cpp" />
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="hibernate.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="game\boom.h" />
     <ClInclude Include="game\missile.h" />
     <ClInclude Include="game\rock.h" />
+    <ClInclude Include="game\star.h" />
     <ClInclude Include="hibernate.h" />
     <ClInclude Include="hibernated.h" />
     <ClInclude Include="image.h" />

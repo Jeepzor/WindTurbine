@@ -20,7 +20,7 @@ Player::Player(wind::PhysicsWorld* world) {
 
 	//Dimensions
 	shipImg->getDimensions(width, height);
-	shipImg->setAngle(3.14);
+	shipImg->setAngle(wind::math.pi());
 	weaponImg->getDimensions(weaponWidth, weaponHeight);
 	
 	//Position
@@ -60,37 +60,36 @@ Player::Player(wind::PhysicsWorld* world) {
 
 }
 
-double timePassed = 0;
-double rot = 0;
+void Player::takeDamage() {
+	health -= 1;
+}
+
 void Player::update(double dt) {
-	timePassed += dt;
-	rot = 3.14 + sin(timePassed) * 0.6;
+	lifeTimer += dt;
+	shipAngle = wind::math.pi() + sin(lifeTimer) * 0.6; //Bind the angle to a sine wave
 	updateAim();
 	updateThrusters();
 	leftThruster->update(dt);
 	rightThruster->update(dt);
-	shipImg->setAngle(rot);
+	shipImg->setAngle(shipAngle);
 }
 
 void Player::updateThrusters() {
-	double tx = (xPos + width / 2) - 75 * std::cos(rot + 4.2 / 2);
-	double ty = (yPos + height / 2) - 75 * std::sin(rot + 4.2 / 2);
+	double tx = (xPos + width / 2) - 75 * std::cos(shipAngle + 4.2 / 2);
+	double ty = (yPos + height / 2) - 75 * std::sin(shipAngle + 4.2 / 2);
 	leftThruster->setPosition(tx, ty);
-	leftThruster->setDirection(rot - 3.14 / 2);
+	leftThruster->setDirection(shipAngle - wind::math.pi() / 2);
 	
-	double tx2 = (xPos + width / 2) - 75 * std::cos(rot + 2.3 / 2);
-	double ty2 = (yPos + height / 2) - 75 * std::sin(rot + 2.3 / 2);
+	double tx2 = (xPos + width / 2) - 75 * std::cos(shipAngle + 2.3 / 2);
+	double ty2 = (yPos + height / 2) - 75 * std::sin(shipAngle + 2.3 / 2);
 	rightThruster->setPosition(tx2, ty2);
-	rightThruster->setDirection(rot - 3.14 / 2);
+	rightThruster->setDirection(shipAngle - wind::math.pi() / 2);
 
 }
+
 
 void Player::updateAim() {
 	aimAngle = wind::math.getAngle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2, wind::turbine.getMouseX(), wind::turbine.getMouseY());
-}
-
-double Player::getAngle()const {
-	return aimAngle;
 }
 
 double Player::getLaunchX()const {
@@ -100,13 +99,13 @@ double Player::getLaunchX()const {
 
 double Player::getLaunchY()const {
 	double offset = 60;
-	return weaponY + weaponHeight / 2 + offset * sin(aimAngle) ;
+	return weaponY + weaponHeight / 2 + offset * sin(aimAngle);
 }
 
 void Player::draw() {
 	shipImg->draw(xPos, yPos);
 	weaponImg->draw(weaponX, weaponY);
-	weaponImg->setAngle(aimAngle - 3.14 / 2);
+	weaponImg->setAngle(aimAngle - wind::math.pi() / 2);
 	leftThruster->draw();
 	rightThruster->draw();
 	//wind::graphics.circle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2,10);

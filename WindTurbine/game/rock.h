@@ -33,6 +33,10 @@ private:
 	double rVel = 0;
 	double rotation = 0;
 
+	double digit1;
+	double digit2;
+	double result;
+
 	wind::Collider* collider;
 	wind::Voxel* asset;
 };

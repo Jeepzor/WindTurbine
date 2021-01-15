@@ -4,7 +4,7 @@
 Boom::Boom(double x, double y) {
 	xPos = x;
 	yPos = y;
-	std::cout << "woop woop";
+
 	//Particles
 	particles = new wind::ParticleEmitter("game/assets/white_particle.png", 0.5, 600);
 	particles->setDirection(wind::math.pi() / 2);

@@ -1,15 +1,17 @@
 #include <string>
+#include "play_module.h"
 #include "missile.h"
 #include "rock.h"
 #include "boom.h"
 
 
-Missile::Missile(wind::PhysicsWorld* world, std::vector<wind::Entity*> &ents,double x, double y, double a) {
+Missile::Missile(PlayModule* play_module, double x, double y, double a) {
 	xPos = x;
 	yPos = y;
 	angle = a;
 
-	entities = &ents;
+	playModule = play_module;
+
 	xVel = speed * cos(angle);
 	yVel = speed * sin(angle);
 
@@ -22,7 +24,7 @@ Missile::Missile(wind::PhysicsWorld* world, std::vector<wind::Entity*> &ents,dou
 	asset->getDimensions(width, height);
 
 	//Hitbox
-	collider = wind::CircleCollider::getInstance(world, xPos, yPos, 10);
+	collider = wind::CircleCollider::getInstance(playModule->getWorld(), xPos, yPos, 10);
 	//collider->setOnCollide(collisionCallbackFunction);
 	collider->setEntity(this);
 	collider->setVelocity(xVel, yVel);
@@ -30,7 +32,7 @@ Missile::Missile(wind::PhysicsWorld* world, std::vector<wind::Entity*> &ents,dou
 
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
 		if (Rock* rock = dynamic_cast<Rock*>(B->getEntity())) {
-				entities->push_back(Boom::getInstance(this->getX(), this->getY()));
+				playModule->addEntity(Boom::getInstance(this->getX(), this->getY()));
 				this->destroy();
 				rock->setFalling();
 				B->destroy();

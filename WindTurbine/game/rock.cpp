@@ -6,11 +6,17 @@ Rock::Rock(wind::PhysicsWorld* world, double x, double y, double direction) {
 	xPos = x;
 	yPos = y;
 	angle = direction;
-
 	xVel = speed * cos(angle);
 	yVel = speed * sin(angle);
 	rVel = 4 * wind::math.random() - 4; 
 	scale = 2 * wind::math.random() + 3;
+
+	//Math component
+	digit1 = 8 * wind::math.random() + 1;
+	digit2 = 8 * wind::math.random() + 1;
+	result = digit1 * digit2;
+
+	//Assets
 	asset = wind::Voxel::getInstance("game/assets/testrock.png", 25);
 	asset->setScale(scale);
 	asset->getDimensions(width, height);
@@ -22,8 +28,9 @@ Rock::Rock(wind::PhysicsWorld* world, double x, double y, double direction) {
 	collider->setVelocity(xVel, yVel);
 	collider->setFilterGroup(8);
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
-			if (Player* test = dynamic_cast<Player*>(B->getEntity())) {
-			
+			if (Player* player = dynamic_cast<Player*>(B->getEntity())) {
+				collider->setVelocity(speed * cos(player->getShipAngle() + wind::math.pi()), speed * sin(player->getShipAngle() + wind::math.pi()));
+				player->takeDamage();
 				//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
 			}
 		}
@@ -34,6 +41,7 @@ void Rock::draw() {
 	asset->draw(xPos, yPos);
 	
 	asset->setAngle(rotation);
+
 }
 
 void Rock::update(double dt) {

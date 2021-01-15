@@ -83,6 +83,7 @@
     <ClCompile Include="game\missile.cpp" />
     <ClCompile Include="game\rock.cpp" />
     <ClCompile Include="game\boom.cpp" />
+    <ClCompile Include="game\star.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -167,6 +168,7 @@
     <ClInclude Include="game\missile.h" />
     <ClInclude Include="game\rock.h" />
     <ClInclude Include="game\boom.h" />
+    <ClInclude Include="game\star.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

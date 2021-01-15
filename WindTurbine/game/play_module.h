@@ -17,6 +17,10 @@ public:
 	void update(double dt);
 	void draw();
 
+	void addEntity(wind::Entity* entity);
+
+	wind::PhysicsWorld* getWorld() { return world; };
+
 	void clean();
 	std::string getName() { return "playing"; };
 
@@ -29,7 +33,7 @@ private:
 
 	double spawnTimer = 0;
 	double spawnRate = 3;
-	double our_dt;
+
 	Player* playerShip;
 	wind::PhysicsWorld* world;
 	wind::Font* fpsFont;
