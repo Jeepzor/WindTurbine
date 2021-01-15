@@ -12,23 +12,28 @@ public:
 	Player(wind::PhysicsWorld* world);
 	void draw()override;
 	void update(double dt)override;
-	double getVelocityX() { return xVel; };
-	double getVelocityY() { return yVel; };
+	double getAngle() const;
+	double getLaunchX() const;
+	double getLaunchY() const;
 private:
-	void move(double dt);
-	void applyFriction(double dt);
-	void applyVelocity();
-	void syncPosition();
-	void updateDirection();
+	void updateThrusters();
+	void updateAim();
+	double width = 0;
+	double height = 0;
+	double weaponWidth = 0;
+	double weaponHeight = 0;
 
-	double xVel;
-	double yVel;
-	double acceleration;
-	double friction;
-	double maxSpeed;
-	double dir;
+	double weaponX;
+	double weaponY;
+	double aimAngle = 0;
+
+
 	wind::Collider* collider;
-	wind::Animation* sprite;
+	wind::Voxel* shipImg;
+	wind::Voxel* weaponImg;
+
+	wind::ParticleEmitter* leftThruster;
+	wind::ParticleEmitter* rightThruster;
 	
 };
 

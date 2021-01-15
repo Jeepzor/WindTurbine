@@ -1,7 +1,7 @@
 #include "animation.h"
 
 namespace wind {
-	Animation::Animation(std::string path, int amout_of_frames, double animation_rate) : wind::Drawable::Drawable(path) {
+	Animation::Animation(std::string path, int amout_of_frames, double animation_rate) : Drawable::Drawable(path) {
 		timer = 0;
 		rate = animation_rate;
 		frames = amout_of_frames;

@@ -142,19 +142,17 @@ namespace wind {
 		std::function<void(Collider* coll_a, Collider* coll_b)> callBack;
 
 		bool alive = true;
-		double angle;
 		double radius;
 		double yPos;
 		double xPos;
 		double centerX;
 		double centerY;
-		double xVel;
-		double yVel;
-		double rVel;
 		double nextX;
 		double nextY;
-
-
+		double angle = 0;
+		double xVel = 0;
+		double yVel = 0;
+		double rVel = 0;
 	};
 }
 #endif

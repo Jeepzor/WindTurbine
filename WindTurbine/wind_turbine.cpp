@@ -21,7 +21,8 @@ namespace wind {
 
 	//Initializes all of the essential SDL components.
 	void Turbine::create(const char* title, int screen_width, int screen_height) {
-		//Garbage -> Remove when done testing
+		width = static_cast<double>(screen_width);
+		height = static_cast<double>(screen_height);
 
 		//Initializes SDL-base and and validates it succeded.
 		if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
@@ -135,6 +136,7 @@ namespace wind {
 	void Turbine::updateMousePosition() {
 		int x, y;
 		SDL_GetMouseState(&x, &y);
+
 		mousePosition = Point(x, y);
 	}
 	
@@ -142,12 +144,20 @@ namespace wind {
 		return mousePosition;
 	}
 
-	int Turbine::getMouseX() const {
+	double Turbine::getMouseX() const {
 		return mousePosition.x;
 	}
 	
-	int Turbine::getMouseY() const  {
+	double Turbine::getMouseY() const  {
 		return mousePosition.y;
+	}
+
+	double Turbine::getWindowWidth() const {
+		return width;
+	}
+
+	double Turbine::getWindowHeight() const {
+		return height;
 	}
 
 	void Turbine::update() {

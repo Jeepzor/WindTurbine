@@ -1,94 +1,112 @@
 #include <string>
 #include "player.h"
 
-void help(wind::Collider* coll_a, wind::Collider* coll_b) {
+void collisionCallbackFunction(wind::Collider* coll_a, wind::Collider* coll_b) {
 	std::cout << "yey" << "\n";
 	if (Player* test = dynamic_cast<Player*>(coll_a->getEntity())) {
 		//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
-		coll_b->destroy();
+		//coll_b->destroy();
 	}
 }
+
 
 Player::Player(wind::PhysicsWorld* world) {
-	xPos = 300;
-	yPos = 40;
-	yVel = 0;
-	xVel = 0;
-	dir = 0;
-	maxSpeed = 300.0;
-	acceleration = 4000.0;
-	friction = 2000;
-	collider = wind::CircleCollider::getInstance(world,xPos, yPos, 30);
-	collider->setOnCollide(help);
+
+	//Assets
+	shipImg = wind::Voxel::getInstance("game/assets/ship.png", 24);
+	weaponImg = wind::Voxel::getInstance("game/assets/cannon.png", 9);
+	shipImg->setScale(2);
+	weaponImg->setScale(2);
+
+	//Dimensions
+	shipImg->getDimensions(width, height);
+	shipImg->setAngle(3.14);
+	weaponImg->getDimensions(weaponWidth, weaponHeight);
+	
+	//Position
+	xPos = 50;
+	yPos = (wind::turbine.getWindowHeight() / 2) - (height / 3);
+
+	//Weapon
+	weaponX = xPos + width / 2 - weaponWidth / 2;
+	weaponY = yPos + height / 2 - weaponHeight / 2 - 24 + 9;
+
+	//Hitbox
+	collider = wind::RectangleCollider::getInstance(world, xPos, yPos, width * 0.75, height);
+	collider->setOnCollide(collisionCallbackFunction);
 	collider->setEntity(this);
-	sprite = wind::Animation::getInstance("../assets/run.png", 6, 0.09);
+
+
+	//Particle effects
+	leftThruster = new wind::ParticleEmitter("game/assets/white_particle.png", 0, 750);
+	leftThruster->setDirection(wind::math.pi() / 2);
+	leftThruster->setSpread(wind::math.pi() / 5);
+	leftThruster->setParticleLife(3);
+	leftThruster->setEmission(250);
+	leftThruster->setSpeed(100,150);
+	leftThruster->setPosition(xPos + width / 2, yPos + height / 2 - 24);
+	leftThruster->setColors(254,253,189,255, 254,201,78,255, 176,57,0,255, 0,0,0,100, 0, 0, 0, 0);
+	
+	rightThruster = new wind::ParticleEmitter("game/assets/white_particle.png", 0, 750);
+	rightThruster->setDirection(wind::math.pi() / 2);
+	rightThruster->setSpread(wind::math.pi() / 5);
+	rightThruster->setParticleLife(3);
+	rightThruster->setEmission(250);
+	rightThruster->setSpeed(100,150);
+	rightThruster->setPosition(xPos + width / 2, yPos + height / 2 - 24);
+	rightThruster->setColors(254,253,189,255, 254,201,78,255, 176,57,0,255, 0,0,0,100, 0, 0, 0, 0);
+
+
 }
 
+double timePassed = 0;
+double rot = 0;
 void Player::update(double dt) {
-	sprite->update(dt);
-	move(dt);
-	applyVelocity();
-	syncPosition();
-	applyFriction(dt);
-	updateDirection();
+	timePassed += dt;
+	rot = 3.14 + sin(timePassed) * 0.6;
+	updateAim();
+	updateThrusters();
+	leftThruster->update(dt);
+	rightThruster->update(dt);
+	shipImg->setAngle(rot);
 }
 
-void Player::move(double dt) {
-	if (wind::turbine.keyDown("D")) {
-		xVel = std::min(xVel + acceleration * dt, maxSpeed);
-	}
+void Player::updateThrusters() {
+	double tx = (xPos + width / 2) - 75 * std::cos(rot + 4.2 / 2);
+	double ty = (yPos + height / 2) - 75 * std::sin(rot + 4.2 / 2);
+	leftThruster->setPosition(tx, ty);
+	leftThruster->setDirection(rot - 3.14 / 2);
 	
-	if (wind::turbine.keyDown("A")) {
-		xVel = std::max(xVel - acceleration * dt, -maxSpeed);
-	}
-	
-	if (wind::turbine.keyDown("S")) {
-		yVel = std::min(yVel + acceleration * dt, maxSpeed);
-	}
-	
-	if (wind::turbine.keyDown("W")) {
-		yVel = std::max(yVel - acceleration * dt, -maxSpeed);
-	}
-	if (wind::turbine.keyDown("R")) {
-		dir = dir + 1;
-		sprite->setAngle(dir);
-	}
+	double tx2 = (xPos + width / 2) - 75 * std::cos(rot + 2.1 / 2);
+	double ty2 = (yPos + height / 2) - 75 * std::sin(rot + 2.1 / 2);
+	rightThruster->setPosition(tx2, ty2);
+	rightThruster->setDirection(rot - 3.14 / 2);
+
 }
 
-void Player::applyVelocity() {
-	collider->setVelocity(xVel, yVel);
+void Player::updateAim() {
+	aimAngle = wind::math.getAngle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2, wind::turbine.getMouseX(), wind::turbine.getMouseY());
 }
 
-void Player::syncPosition() {
-	xPos = collider->getX() - 50;
-	yPos = collider->getY() - 50;
+double Player::getAngle()const {
+	return aimAngle;
 }
 
-void Player::applyFriction(double dt) {
-	if (xVel > 0) {
-		xVel = std::max(xVel - friction * dt, 0.0);
-	}
-	else if (xVel < 0) {
-		xVel = std::min(xVel + friction * dt, 0.0);
-	}
-	
-	if (yVel > 0) {
-		yVel = std::max(yVel - friction * dt, 0.0);
-	}
-	else if (yVel < 0) {
-		yVel = std::min(yVel + friction * dt, 0.0);
-	}
+double Player::getLaunchX()const {
+	double offset = 60;
+	return weaponX + weaponWidth / 2 + offset * cos(aimAngle);
 }
 
-void Player::updateDirection() {
-	if (xVel < 0) {
-		sprite->setFlip(true, false);
-	}else if (xVel > 0) {
-		sprite->setFlip(false, false);
-	}
+double Player::getLaunchY()const {
+	double offset = 60;
+	return weaponY + weaponHeight / 2 + offset * sin(aimAngle) ;
 }
 
 void Player::draw() {
-	sprite->draw(xPos, yPos);
-	//wind::graphics.line(xPos + 50, yPos + 50, wind::turbine.getMouseX(), wind::turbine.getMouseY());
+	shipImg->draw(xPos, yPos);
+	weaponImg->draw(weaponX, weaponY);
+	weaponImg->setAngle(aimAngle - 3.14 / 2);
+	leftThruster->draw();
+	rightThruster->draw();
+	//wind::graphics.circle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2,10);
 }

@@ -1,8 +1,10 @@
 #ifndef PLAY_MODULE_H
 #define PLAY_MODULE_H
 
+#include<vector>
+
 #include "../wind.h"
-#include<functional>
+#include "player.h"
 
 
 class PlayModule : public wind::GameModule {
@@ -15,23 +17,15 @@ public:
 	void update(double dt);
 	void draw();
 	void clean();
-	void test();
 	std::string getName() { return "playing"; };
 
 private:
 	double our_dt;
 	wind::Image* bg;
-	wind::Entity* testPlayer;
-	wind::PhysicsWorld* worldA;
-	wind::Collider* bodyA;
-	wind::Collider* bodyB;
-	wind::Collider* bodyC;
-	wind::Collider* bodyD;
-	wind::Collider* bodyE;
-	wind::Collider* bodyF;
-	wind::Collider* bodyG;
+	Player* playerShip;
+	wind::PhysicsWorld* world;
 	wind::Font* fpsFont;
-	wind::ParticleEmitter* particleEmitter;
+	std::vector<wind::Entity*> missiles;
 };
 
 #endif

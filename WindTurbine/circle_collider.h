@@ -27,7 +27,6 @@ namespace wind {
 		CircleCollider(PhysicsWorld* physics_world, double x, double y, double radius);
 	private:
 		CircleCollider(const CircleCollider& other) = delete;
-
 		const CircleCollider& operator=(const CircleCollider& other) = delete;
 
 		void draw() const override;

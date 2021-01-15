@@ -19,7 +19,7 @@ namespace wind {
 		/// <param name="physics_world">Pointer to the PhysicsWorld that the body will inhabit.</param>
 		/// <param name="x"> = Position on the X-axis</param>
 		/// <param name="y"> = Position on the Y-axis</param>
-		/// <param name="poly_points">PolyPoints Object which contains between 2-8 sets of X and Y coordinates</param>
+		/// <param name="poly_points"> = PolyPoints Object which contains between 2-8 sets of X and Y coordinates</param>
 		/// <returns>Pointer to a new PolygonCollider* instance.</returns>
 		static PolygonCollider* getInstance(PhysicsWorld* physics_world, double x, double y, PolyPoints poly_points) {
 			return new PolygonCollider(physics_world, x, y, poly_points);

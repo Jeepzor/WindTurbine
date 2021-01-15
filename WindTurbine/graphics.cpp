@@ -35,12 +35,12 @@ namespace wind {
 	}
 	
 	void Graphics::circle(double x, double y, int radius) const {
-		circle("fill", static_cast<int>(x + 0.5), static_cast<int>(y + 0.5), radius);
+		circle("fill", x , y, radius);
 	}
 	
 	void Graphics::circle(std::string mode, double x, double y, int radius) const {
 		int cx = static_cast<int>(x + 0.5);
-		int cy = static_cast<int>(x + 0.5);
+		int cy = static_cast<int>(y + 0.5);
 		if (mode == "line") {
 			double prev_x = x;
 			double prev_y = y;

@@ -16,7 +16,7 @@ namespace wind {
 		flip = SDL_FLIP_NONE;
 
 		portion = { 0,0, width, height };
-		destination = { 0, 0, width, height };
+		destination = { 0, 0, width, height};
 		originPoint = { width / 2, height / 2 };
 		asset = SDL_CreateTextureFromSurface(wind::turbine.getRenderer(), surface);
 		SDL_FreeSurface(surface);
@@ -63,24 +63,45 @@ namespace wind {
 		angle = new_angle;
 	}
 
+	void Drawable::setScale(double new_scale) {
+		scale = new_scale;
+		updateDestination();
+		updateOriginPoint();
+	}
+
+	void Drawable::updateDestination() {
+		destination.w = width * scale;
+		destination.h = height * scale;
+	}
+	
+	void Drawable::updateOriginPoint() {
+		originPoint.x = width / 2 * scale;
+		originPoint.y = height / 2 * scale;
+	}
+
 	SDL_Texture* Drawable::getAsset() const {
 		return asset;
 	}
 
 	double Drawable::getAngle() const {
-		return angle;
+		return angle * 57.29578;
+	}
+
+	void Drawable::getDimensions(double &w, double &h) const {
+		w = width;
+		h = height;
 	}
 
 	void Drawable::draw() {
 		setColor();
 		setPosition(0, 0);
-		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), getAngle(), getOriginPoint(), flip);
 	}
 
 	void Drawable::draw(double x, double y) {
 		setColor();
 		setPosition(static_cast<int>(x + 0.5), static_cast<int>(y + 0.5));
-		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), angle, getOriginPoint(), flip);
+		SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(), getDestination(), getAngle(), getOriginPoint(), flip);
 	}
 	
 	//Mainly for particles.

@@ -1,24 +1,33 @@
 #ifndef WIND_H
 #define WIND_H
 
-#include "collider.h"
-#include "animation.h"
-#include "circle_collider.h"
-#include "entity.h"
-#include "game_module.h"
+//Graphics
 #include "graphics.h"
+#include "drawable.h"
+#include "animation.h"
 #include "image.h"
+#include "voxel.h"
+#include "font.h"
+#include "particle_emitter.h"
+#include "particle.h"
+
+//Utility
 #include "math.h"
-#include "physics_world.h"
+#include "point.h"
 #include "poly_points.h"
+#include "hibernate.h"
+
+//Collision detection
+#include "physics_world.h"
+#include "collider.h"
+#include "circle_collider.h"
 #include "polygon_collider.h"
 #include "rectangle_collider.h"
-#include "state.h"
-#include "font.h"
-#include "point.h"
-#include "particle.h"
-#include "particle_emitter.h"
+
+//Engine
 #include "wind_turbine.h"
-#include "hibernate.h"
+#include "state.h"
+#include "game_module.h"
+#include "entity.h"
 
 #endif

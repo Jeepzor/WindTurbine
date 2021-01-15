@@ -79,6 +79,8 @@
     <ClCompile Include="game\player.cpp">
       <Filter>Game</Filter>
     </ClCompile>
+    <ClCompile Include="voxel.cpp" />
+    <ClCompile Include="game\missile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -159,6 +161,8 @@
     <ClInclude Include="game\play_module.h">
       <Filter>Game\header</Filter>
     </ClInclude>
+    <ClInclude Include="voxel.h" />
+    <ClInclude Include="game\missile.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

@@ -18,7 +18,7 @@ namespace wind {
 		/// </summary>
 		/// <param name="x"> = X-Position</param>
 		/// <param name="y"> = Y-Position</param>
-		void draw(double x, double y);
+		virtual void draw(double x, double y);
 
 		/// <summary>
 		/// Render it to the screen and override the global color. Useful for particles.
@@ -50,6 +50,15 @@ namespace wind {
 		/// <returns> Angle in Radians</returns>
 		double getAngle() const;
 
+		/// <summary>
+		/// Set the width and height of the image to the passed in variables
+		/// </summary>
+		/// <param name="width"> = Variable which should be set to the width of the image</param>
+		/// <param name="height"> = Variable which should be set to the height of the image</param>
+		virtual void getDimensions(double &width, double &height) const;
+
+		void setScale(double new_scale);
+
 	protected:
 		SDL_Rect* getDestination();
 		virtual SDL_Rect* getPortion();
@@ -63,6 +72,8 @@ namespace wind {
 
 		virtual void setPosition(double x, double y);
 		virtual void setColor();
+		virtual void updateDestination();
+		virtual void updateOriginPoint();
 		SDL_Surface* surface;
 		SDL_Rect destination;
 		SDL_Rect portion;
@@ -72,9 +83,11 @@ namespace wind {
 		SDL_Renderer* testRenderer;
 
 		double angle;
+		double scale;
 
 		int width;
 		int height;
+
 	};
 }
 

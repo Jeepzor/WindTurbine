@@ -50,13 +50,13 @@ namespace wind {
 		/// Returns the position of the mouse on the X-axis
 		/// </summary>
 		/// <returns>X-Position</returns>
-		int getMouseX() const;
+		double getMouseX() const;
 
 		/// <summary>
 		/// Returns the position of the mouse on the Y-axis
 		/// </summary>
 		/// <returns>Y-Position</returns>
-		int getMouseY() const;
+		double getMouseY() const;
 
 		/// <summary>
 		/// Returns the current FPS of the game (This value updates once every 0.3 seconds).
@@ -83,6 +83,10 @@ namespace wind {
 		/// </summary>
 		void toggleCursor();
 
+		double getWindowWidth() const;
+
+		double getWindowHeight() const;
+
 	private:
 		void handleEvents();
 		void update();
@@ -102,6 +106,9 @@ namespace wind {
 		double previousFrameTime;
 		double currentFrameTime;
 		double dt;
+
+		double width;
+		double height;
 		int fpsLimit;
 		bool isActive;
 		bool cursorVisible = true;
