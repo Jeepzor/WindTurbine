@@ -33,16 +33,8 @@ void PlayModule::keyPressed(std::string key) {
 
 	handleInput(key);
 
-	if (key == "1") {
+	if (key == "p") {
 		wind::state.setCurrentState("paused");
-	}
-	else if (key == "3") {
-		
-	}
-	else if (key == "8") {
-		world->toggleDebug();
-	}else if (key == "9") {
-		wind::turbine.toggleCursor();
 	}
 }
 

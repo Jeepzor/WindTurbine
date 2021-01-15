@@ -28,7 +28,7 @@ private:
 	double xVel = 0;
 	double yVel = 0;
 	double speed = 100;
-
+	int number;
 	std::string input;
 	PlayModule* playModule;
 	wind::Collider* collider;

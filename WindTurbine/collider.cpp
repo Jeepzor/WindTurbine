@@ -45,7 +45,7 @@ namespace wind {
 	void Collider::validateNextX(double dt) {
 		if (xVel == 0) return; //If it doesn't move, don't do costly hit detection.
 		nextX = xPos + xVel * dt;
-		if (!validateNextPosition() || isSensor()) { // Sensors ignore collisions
+		if (!validateNextPosition() && !isSensor() ) { // Sensors ignore collisions
 			nextX = xPos;
 		}
 	}
@@ -54,7 +54,7 @@ namespace wind {
 	void Collider::validateNextY(double dt) {
 		if (yVel == 0) return; //If it doesn't move, don't do costly hit detection.
 		nextY = yPos + yVel * dt;
-		if (!validateNextPosition() || isSensor()) { // Sensors ignore collisions.
+		if (!validateNextPosition() && !isSensor() ) { // Sensors ignore collisions.
 			nextY = yPos;
 		}
 	}

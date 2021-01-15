@@ -10,6 +10,7 @@ Missile::Missile(PlayModule* play_module, double x, double y, double a, std::str
 	yPos = y;
 	angle = a;
 	input = input_text;
+	number = std::stoi(input_text); // translate the string to an int
 	playModule = play_module;
 
 	xVel = speed * cos(angle);
@@ -29,14 +30,17 @@ Missile::Missile(PlayModule* play_module, double x, double y, double a, std::str
 	collider->setEntity(this);
 	collider->setVelocity(xVel, yVel);
 	collider->setFilterGroup(1);
+	collider->setSensor();
 
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
 		if (Rock* rock = dynamic_cast<Rock*>(B->getEntity())) {
-				playModule->addEntity(Boom::getInstance(this->getX(), this->getY()));
-				this->destroy();
-				rock->setFalling();
-				B->destroy();
-				A->destroy();
+				if (number == rock->getResult()) {
+					playModule->addEntity(Boom::getInstance(this->getX(), this->getY()));
+					this->destroy();
+					rock->setFalling();
+					B->destroy();
+					A->destroy();
+				}
 			}
 		}
 	);

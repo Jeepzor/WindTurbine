@@ -15,6 +15,7 @@ public:
 	void draw()override;
 	void update(double dt)override;
 	void setFalling() { falling = true; };
+	int getResult() { return result; };
 private:
 	Rock(PlayModule* play_module, double x, double y, double angle);
 	Rock(const Rock& other) = delete;

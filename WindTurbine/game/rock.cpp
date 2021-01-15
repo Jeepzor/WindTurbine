@@ -50,6 +50,7 @@ void Rock::draw() {
 }
 
 void Rock::drawText() const {
+	if (falling) return;
 	wind::graphics.setColor(0, 0, 0);
 	equationFont->draw(equation, xPos + 2, yPos + 2);
 
