@@ -35,6 +35,7 @@ Player::Player(wind::PhysicsWorld* world) {
 	collider = wind::RectangleCollider::getInstance(world, xPos, yPos, width * 0.75, height);
 	collider->setOnCollide(collisionCallbackFunction);
 	collider->setEntity(this);
+	collider->setFilterGroup(1);
 
 
 	//Particle effects
@@ -77,8 +78,8 @@ void Player::updateThrusters() {
 	leftThruster->setPosition(tx, ty);
 	leftThruster->setDirection(rot - 3.14 / 2);
 	
-	double tx2 = (xPos + width / 2) - 75 * std::cos(rot + 2.1 / 2);
-	double ty2 = (yPos + height / 2) - 75 * std::sin(rot + 2.1 / 2);
+	double tx2 = (xPos + width / 2) - 75 * std::cos(rot + 2.3 / 2);
+	double ty2 = (yPos + height / 2) - 75 * std::sin(rot + 2.3 / 2);
 	rightThruster->setPosition(tx2, ty2);
 	rightThruster->setDirection(rot - 3.14 / 2);
 

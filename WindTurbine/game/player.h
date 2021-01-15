@@ -5,8 +5,6 @@
 
 #include "../wind.h"
 
-class wind::PhysicsWorld;
-
 class Player : public wind::Entity {
 public:
 	Player(wind::PhysicsWorld* world);

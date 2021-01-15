@@ -30,11 +30,20 @@ namespace wind {
 		/// </summary>
 		/// <returns>Y Position</returns>
 		virtual double getY() { return yPos; };
+
+		/// <summary>
+		/// Returns false if the entity is not alive and should be cleaned up.
+		/// </summary>
+		/// <returns>bool alive</returns>
+		virtual bool isAlive() { return alive; };
+
+		virtual void destroy() { alive = false; };
 	protected:
 		Entity();
 
 		double xPos;
 		double yPos;
+		bool alive = true;
 
 	private:
 		Entity(const Entity&) = delete;

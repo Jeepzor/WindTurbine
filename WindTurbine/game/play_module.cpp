@@ -1,6 +1,7 @@
 #include "play_module.h"
 #include "player.h"
 #include "missile.h"
+#include "rock.h"
 
 double timer = 0;
 double rate = 0.3;
@@ -22,7 +23,6 @@ PlayModule::PlayModule() {
 
 	fpsFont = new wind::Font("../assets/bit.ttf", 32);
 
-	bg = wind::Image::getInstance("game/assets/universe.png");
 	playerShip = new Player(world);
 
 
@@ -50,7 +50,10 @@ void PlayModule::keyReleased(std::string key) {
 
 void PlayModule::mousePressed(int button) {
 	if (button == 1) {
-		missiles.push_back(Missile::getInstance(world, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
+		entities.push_back(Missile::getInstance(world, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
+	}
+	else if (button == 3) {
+		entities.push_back(Rock::getInstance(world, 700, 300, -playerShip->getAngle()));
 	}
 }
 
@@ -65,30 +68,46 @@ void PlayModule::update(double dt) {
 		our_dt = dt;
 	}
 
-	for (auto instance : missiles) {
-		instance->update(dt);
-	}
 	
+	updateEntities(dt);
 	playerShip->update(dt);
 	world->update(dt);
+}
+
+
+void PlayModule::updateEntities(double dt) {
+	for (auto instance : entities) {
+		instance->update(dt);
+	}
+	removeDeadEntities();
+}
+
+void PlayModule::removeDeadEntities() {
+	entities.erase(std::remove_if(entities.begin(), entities.end(), [](wind::Entity* i) { return !(i->isAlive()); }), entities.end());
 }
 
 void PlayModule::draw() {
 	wind::graphics.setColor(0, 0, 0,255);
 	wind::graphics.rectangle(0, 0, wind::turbine.getWindowWidth(), wind::turbine.getWindowHeight());
 	wind::graphics.setColor(255, 255, 255,255);
+
 	playerShip->draw();
+	drawEntities();
 	world->draw();
 
 	wind::graphics.setColor(0, 0, 0);
 	fpsFont->draw("DT            " + std::to_string(our_dt), 32, 32);
 	wind::graphics.setColor(255, 255, 255);
 	fpsFont->draw("DT            " + std::to_string(our_dt), 30, 30);
+}
 
-	for (auto instance : missiles) {
+void PlayModule::drawEntities() {
+	for (auto instance : entities) {
 		instance->draw();
 	}
 }
+
+
 
 void PlayModule::clean() {
 	//std::cout << "State was cleaned" << "\n";

@@ -16,16 +16,20 @@ public:
 	void mouseReleased(int button);
 	void update(double dt);
 	void draw();
+
 	void clean();
 	std::string getName() { return "playing"; };
 
 private:
+
+	void updateEntities(double dt);
+	void drawEntities();
+	void removeDeadEntities();
 	double our_dt;
-	wind::Image* bg;
 	Player* playerShip;
 	wind::PhysicsWorld* world;
 	wind::Font* fpsFont;
-	std::vector<wind::Entity*> missiles;
+	std::vector<wind::Entity*> entities;
 };
 
 #endif

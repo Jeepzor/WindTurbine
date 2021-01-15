@@ -14,16 +14,26 @@ namespace wind {
 	}
 
 	void Voxel::draw(double x, double y) {
+		//Loop through all layers and draw them individually
+		double shading = 255.0 / static_cast<double>(layers);
 		for (int i = 0; i < layers; i++)
 		{
-			SDL_SetTextureColorMod(asset, 255 - layers * 5 + i * 5, 255 - layers * 5 + i * 5, 255 - layers * 5 + i * 5);
+			
+			//Apply some very basic "shading", making lower layers slightly darker
+			SDL_SetTextureColorMod(asset, 0 + i * shading, 0 + i * shading, 0 + i * shading);
+			
+			//Reverse the order of drawing
 			int current_layer = layers - i;
+
+			//Offset the draw position by the layer number
 			setPosition(static_cast<int>(x + 0.5), static_cast<int>(y + 0.5 - i * scale * 0.85 + layers));
+
+			//Draw it
 			SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(current_layer), getDestination(), getAngle(), getOriginPoint(), flip);
 		}
 	}
 
-	//The following 3 functions need to be overriden in animation as well.
+	//TODO: The following 3 functions need to be overriden in animation as well.
 	void Voxel::updateDestination() {
 		destination.w = width * scale;
 		destination.h = layerHeight * scale;
@@ -38,7 +48,7 @@ namespace wind {
 		w = width * scale;
 		h = layerHeight * scale;
 	}
-	//The above 3 functions need to be overriden in animation as well.
+	//TODO: The above 3 functions need to be overriden in animation as well.
 
 
 	Voxel::~Voxel() {

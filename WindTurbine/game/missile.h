@@ -4,8 +4,6 @@
 
 #include "../wind.h"
 
-class wind::PhysicsWorld;
-
 class Missile : public wind::Entity {
 public:
 	static Missile* getInstance(wind::PhysicsWorld* physics_world, double x, double y, double angle) {

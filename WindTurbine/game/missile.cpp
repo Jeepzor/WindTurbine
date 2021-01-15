@@ -1,5 +1,6 @@
 #include <string>
 #include "missile.h"
+#include "rock.h"
 
 //void collisionCallbackFunction(wind::Collider* coll_a, wind::Collider* coll_b) {
 	//std::cout << "yey" << "\n";
@@ -31,6 +32,19 @@ Missile::Missile(wind::PhysicsWorld* world, double x, double y, double a) {
 	//collider->setOnCollide(collisionCallbackFunction);
 	collider->setEntity(this);
 	collider->setVelocity(xVel, yVel);
+	collider->setFilterGroup(1);
+
+	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
+		if (Rock* rock = dynamic_cast<Rock*>(B->getEntity())) {
+			this->destroy();
+			rock->destroy();
+			B->destroy();
+			A->destroy();
+			//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
+			//coll_b->destroy();
+		}
+		}
+	);
 
 	//Particles
 	thruster = new wind::ParticleEmitter("game/assets/white_particle.png", 0, 50);
