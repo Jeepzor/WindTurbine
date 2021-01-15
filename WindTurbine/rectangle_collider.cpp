@@ -34,7 +34,7 @@ namespace wind {
 	bool RectangleCollider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
-			if (this != other_collider) { // Don't collide with yourself
+			if (this != other_collider && this->differentFilterGroup(other_collider->getFilterGroup())) { // Don't collide with yourself or colliders of the same filter group.
 				if (toBoundry(other_collider)) {
 					if (other_collider->getShape() == rectangle) {
 						RectangleCollider* rectangle_object{ dynamic_cast<RectangleCollider*>(other_collider) };

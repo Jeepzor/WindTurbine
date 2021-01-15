@@ -92,7 +92,7 @@ namespace wind {
 	bool CircleCollider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
-			if (this != other_collider) { // Don't collide with yourself
+			if (this != other_collider && this->differentFilterGroup(other_collider->getFilterGroup()) ) { // Don't collide with yourself or colliders of the same filter group.
 				if (toBoundry(other_collider)) { // Is the shape near enough to warrant more expensive calculations?
 					if (other_collider->getShape() == circle) {
 						CircleCollider* other_circle{ dynamic_cast<CircleCollider*>(other_collider) };

@@ -12,10 +12,6 @@ namespace wind {
 		yPos = y;
 		centerX = y;
 		centerY = y;
-		xVel = 0;
-		yVel = 0;
-		rVel = 0;
-		angle = 0;
 		nextX = x;
 		nextY = y;
 		physics_world->addObject(this);
@@ -32,6 +28,18 @@ namespace wind {
 		validateNextX(dt);
 		validateNextY(dt);
 		move();
+	}
+
+	bool Collider::differentFilterGroup(int other) {
+		if (filterGroup == 0) {
+			return true;
+		}
+		else if (filterGroup == other) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	void Collider::validateNextX(double dt) {
@@ -102,6 +110,10 @@ namespace wind {
 
 	Shape Collider::getShape() const {
 		return shape;
+	}	
+	
+	void Collider::setFilterGroup(int new_group) {
+		filterGroup = new_group;
 	}
 
 	void Collider::setOnCollide(std::function<void(Collider* coll_a, Collider* coll_b)> call_back) {

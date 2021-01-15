@@ -117,6 +117,18 @@ namespace wind {
 		/// Used to flag the collider for destruction, when called it will be removed by the physics world the next frame.
 		/// </summary>
 		void destroy() { alive = false; }
+
+		/// <summary>
+		/// Collders that belong to the same filter group will ignore collisions with eachother
+		/// </summary>
+		/// <param name="new_filter"> = The group that this collider will belong to.</param>
+		void setFilterGroup(int new_filter);
+
+		/// <summary>
+		/// Get the filter group that the collider belongs to
+		/// </summary>
+		/// <returns>Filter group</returns>
+		int getFilterGroup() { return filterGroup; };
 		
 	protected:
 		void onCollide(Collider* coll_a, Collider* coll_b) const;
@@ -134,6 +146,8 @@ namespace wind {
 		void validateNextX(double dt);
 		void validateNextY(double dt);
 
+		bool differentFilterGroup(int other);
+
 		virtual bool validateNextPosition() = 0;
 		bool toBoundry(Collider* circle) const;
 		PhysicsWorld* world;
@@ -141,6 +155,7 @@ namespace wind {
 
 		std::function<void(Collider* coll_a, Collider* coll_b)> callBack;
 
+		int filterGroup = 0;
 		bool alive = true;
 		double radius;
 		double yPos;
