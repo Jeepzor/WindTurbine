@@ -8,14 +8,14 @@ class PlayModule;
 
 class Missile : public wind::Entity {
 public:
-	static Missile* getInstance(PlayModule* playModule, double x, double y, double angle) {
-		return new Missile(playModule, x, y, angle);
+	static Missile* getInstance(PlayModule* playModule, double x, double y, double angle, std::string input_text) {
+		return new Missile(playModule, x, y, angle, input_text);
 	}
 
 	void draw()override;
 	void update(double dt)override;
 private:
-	Missile(PlayModule* playModule, double x, double y, double angle);
+	Missile(PlayModule* playModule, double x, double y, double angle, std::string input_text);
 	Missile(const Missile& other) = delete;
 	const Missile& operator=(const Missile& other) = delete;
 
@@ -29,6 +29,7 @@ private:
 	double yVel = 0;
 	double speed = 100;
 
+	std::string input;
 	PlayModule* playModule;
 	wind::Collider* collider;
 	wind::Voxel* asset;

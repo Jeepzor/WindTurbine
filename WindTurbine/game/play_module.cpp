@@ -12,10 +12,12 @@ PlayModule::PlayModule() {
 	initOn = { "play" };
 	cleanOn = { "restart" };
 
+	cursor = wind::Image::getInstance("game/assets/xhair.png");
+
 	//TODO add removal of collider from physicsWorld in their destructor
 	world = new wind::PhysicsWorld(0, 0);
 
-	fpsFont = new wind::Font("../assets/bit.ttf", 32);
+	text = new wind::Font("../assets/bit.ttf", 32);
 
 	playerShip = new Player(world);
 
@@ -28,6 +30,9 @@ PlayModule::PlayModule() {
 
 void PlayModule::keyPressed(std::string key) {
 	std::cout << "Key [" << key << "] was pressed" << "\n";
+
+	handleInput(key);
+
 	if (key == "1") {
 		wind::state.setCurrentState("paused");
 	}
@@ -41,13 +46,31 @@ void PlayModule::keyPressed(std::string key) {
 	}
 }
 
+wind::Font* PlayModule::getFont() {
+	return text;
+}
+
+void PlayModule::handleInput(std::string key) {
+	if (std::isdigit(key[0])) {
+		if (input.size() < 3) { input += key;; };
+	}
+	else if (key == "Backspace") {
+		if (!input.empty()) {
+			input.resize(input.size() - 1);
+		}
+	}
+}
+
 void PlayModule::keyReleased(std::string key) {
 	std::cout << "Key [" << key << "] was released" << "\n";
 }
 
 void PlayModule::mousePressed(int button) {
 	if (button == 1) {
-		entities.push_back(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
+		if (!input.empty()) {
+			entities.push_back(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), input));
+			input = "";
+		}
 	}
 	else if (button == 3) {
 		
@@ -88,7 +111,7 @@ void PlayModule::updateSpawner(double dt) {
 		double position_x = 1400;
 		double position_y = 920.0 * wind::math.random() - 200;
 		double angle_to_player = wind::math.getAngle(position_x, position_y, playerShip->getX(), playerShip->getY());
-		entities.push_back(Rock::getInstance(world, position_x, position_y, angle_to_player));
+		entities.push_back(Rock::getInstance(this, position_x, position_y, angle_to_player));
 	}
 }
 
@@ -102,9 +125,33 @@ void PlayModule::draw() {
 	world->draw();
 
 	wind::graphics.setColor(0, 0, 0);
-	fpsFont->draw("Health: " + std::to_string(playerShip->getHealth()), 32, 32);
+	text->draw("Health: " + std::to_string(playerShip->getHealth()), 32, 32);
 	wind::graphics.setColor(255, 255, 255);
-	fpsFont->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 30);
+	text->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 30);
+	text->draw("Number: " + input, 30, 60);
+	drawCursor();
+}
+
+void PlayModule::drawCursor() {
+	double mouse_w;
+	double mouse_h;
+	cursor->getDimensions(mouse_w, mouse_h);
+	double mx = wind::turbine.getMouseX() ; // Just to shorten the line
+	double my = wind::turbine.getMouseY() ; // Just to shorten the line
+
+	if (input.size() > 0) {
+		wind::graphics.setColor(25, 255,25);
+		wind::graphics.rectangle("line", mx - 30, my - 50, 60, 30);
+		const char* c = input.c_str();
+		int text_width;
+		TTF_SizeText(text->getFont(), c, &text_width, NULL);
+		text->draw(input, wind::turbine.getMouseX() - text_width / 2, wind::turbine.getMouseY() - 50);
+	}else{ 
+		wind::graphics.setColor(255,25,25);
+	}
+
+	cursor->draw(mx - mouse_w / 2, my - mouse_h / 2);
+	wind::graphics.clearColor();
 }
 
 void PlayModule::drawEntities() {

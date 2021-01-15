@@ -94,7 +94,7 @@ namespace wind {
 	}
 
 	double Drawable::getAngle() const {
-		return angle * 57.29578;
+		return angle * 57.29578; // Translate from Degrees to Radians
 	}
 
 	void Drawable::getDimensions(double &w, double &h) const {

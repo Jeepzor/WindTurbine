@@ -5,11 +5,11 @@
 #include "boom.h"
 
 
-Missile::Missile(PlayModule* play_module, double x, double y, double a) {
+Missile::Missile(PlayModule* play_module, double x, double y, double a, std::string input_text) {
 	xPos = x;
 	yPos = y;
 	angle = a;
-
+	input = input_text;
 	playModule = play_module;
 
 	xVel = speed * cos(angle);
@@ -72,4 +72,7 @@ void Missile::updateThruster(double dt) {
 void Missile::draw() {
 	thruster->draw();
 	asset->draw(xPos, yPos);
+	double offsetX = 25 * cos(angle - wind::math.pi() / 2);
+	double offsetY = 25 * sin(angle - wind::math.pi() / 2);
+	playModule->getFont()->draw(input, xPos + offsetX, yPos + offsetY, angle);
 }

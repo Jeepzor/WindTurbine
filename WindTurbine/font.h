@@ -12,7 +12,8 @@ namespace wind {
 
 		Font(std::string path, int size);
 		void draw(std::string text, double x, double y);
-
+		void draw(std::string text, double x, double y, double angle);
+		TTF_Font* getFont() { return font; };
 	private:
 		SDL_Texture* texture = nullptr;
 		SDL_Surface* surface = nullptr;

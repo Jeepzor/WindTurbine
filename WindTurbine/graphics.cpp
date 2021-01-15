@@ -86,12 +86,12 @@ namespace wind {
 
 	void Graphics::setColor(Uint8 r, Uint8 g, Uint8 b) {
 		storeColors(r, g, b, 255);
-		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, b, g, 255);
+		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, g, b, 255);
 	}
 	
 	void Graphics::setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
 		storeColors(r, g, b, a);
-		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, b, g, a);
+		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, g, b, a);
 	}
 	
 	void Graphics::clearColor() {

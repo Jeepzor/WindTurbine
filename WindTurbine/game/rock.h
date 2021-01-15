@@ -4,20 +4,22 @@
 
 #include "../wind.h"
 
+class PlayModule;
 class Rock : public wind::Entity {
+
 public:
-	static Rock* getInstance(wind::PhysicsWorld* physics_world, double x, double y, double angle) {
-		return new Rock(physics_world, x, y, angle);
+	static Rock* getInstance(PlayModule* play_module, double x, double y, double angle) {
+		return new Rock(play_module, x, y, angle);
 	}
 
 	void draw()override;
 	void update(double dt)override;
 	void setFalling() { falling = true; };
 private:
-	Rock(wind::PhysicsWorld* world, double x, double y, double angle);
+	Rock(PlayModule* play_module, double x, double y, double angle);
 	Rock(const Rock& other) = delete;
 	const Rock& operator=(const Rock& other) = delete;
-
+	void drawText() const;
 	void fall(double dt);
 	void syncCollider();
 
@@ -33,10 +35,13 @@ private:
 	double rVel = 0;
 	double rotation = 0;
 
-	double digit1;
-	double digit2;
-	double result;
+	int digit1;
+	int digit2;
+	int result;
 
+	std::string equation;
+	wind::Font* equationFont;
+	PlayModule* playModule;
 	wind::Collider* collider;
 	wind::Voxel* asset;
 };

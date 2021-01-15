@@ -17,11 +17,16 @@ namespace wind {
 	}
 
 	void Font::draw(std::string text, double x, double y) {
+		draw(text, x, y, 0);
+	}
+	
+	void Font::draw(std::string text, double x, double y, double angle) {
 		surface = TTF_RenderText_Solid(font, text.c_str(), graphics.getColor());
 		texture = SDL_CreateTextureFromSurface(turbine.getRenderer(),surface);
 		destination = { static_cast<int>(x + 0.5),  static_cast<int>(y + 0.5), surface->w, surface->h };
 		SDL_FreeSurface(surface);
-		SDL_RenderCopy(turbine.getRenderer(), texture, NULL, &destination);
+		double angle_radians = angle * 57.29578; // Translate from Degrees to Radians
+		SDL_RenderCopyEx(turbine.getRenderer(), texture, NULL, &destination, angle_radians, NULL, SDL_FLIP_NONE);
 		SDL_DestroyTexture(texture);
 	}
 
