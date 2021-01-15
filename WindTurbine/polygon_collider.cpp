@@ -76,7 +76,11 @@ namespace wind {
 	bool PolygonCollider::validateNextPosition() {
 		bool legal = true;
 		for (auto other_collider : world->getColliders()) {
-			if (this != other_collider && this->differentFilterGroup(other_collider->getFilterGroup())) { // Don't collide with yourself or colliders of the same filter group.
+			// Ignore collision if:
+			//1. Other collider is this collider
+			//2. Other collider is of the same filterGroup
+			//3. Other collider is a sensor
+			if (this != other_collider && this->differentFilterGroup(other_collider->getFilterGroup()) && !other_collider->isSensor()) {
 				if (toBoundry(other_collider)) { // Is the shape near enough to warrant more expensive calculations?
 					if (other_collider->getShape() == polygon) {
 						PolygonCollider* other_polygon{ dynamic_cast<PolygonCollider*>(other_collider) };

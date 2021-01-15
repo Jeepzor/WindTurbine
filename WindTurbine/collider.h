@@ -114,6 +114,17 @@ namespace wind {
 		bool isAlive() {return alive;};
 
 		/// <summary>
+		/// Check wether or not a collider is a sensor. Sensors trigger collision callbacks but don't react to them.
+		/// </summary>
+		/// <returns>True if it is a sensor and vice versa</returns>
+		bool isSensor() { return sensor; };
+		
+		/// <summary>
+		/// Use to set the collider to be a sensor. Sensors trigger collision callbacks but don't react to them.
+		/// </summary>
+		void setSensor() { sensor = true; };
+
+		/// <summary>
 		/// Used to flag the collider for destruction, when called it will be removed by the physics world the next frame.
 		/// </summary>
 		void destroy() { alive = false; }
@@ -157,6 +168,7 @@ namespace wind {
 
 		int filterGroup = 0;
 		bool alive = true;
+		bool sensor = false;
 		double radius;
 		double yPos;
 		double xPos;
