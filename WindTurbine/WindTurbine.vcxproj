@@ -149,6 +149,7 @@
     <ClCompile Include="color.cpp" />
     <ClCompile Include="entity.cpp" />
     <ClCompile Include="font.cpp" />
+    <ClCompile Include="game\boom.cpp" />
     <ClCompile Include="game\missile.cpp" />
     <ClCompile Include="game\rock.cpp" />
     <ClCompile Include="game_module.cpp" />
@@ -177,6 +178,7 @@
     <ClInclude Include="animation.h" />
     <ClInclude Include="circle_collider.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="game\boom.h" />
     <ClInclude Include="game\missile.h" />
     <ClInclude Include="game\rock.h" />
     <ClInclude Include="hibernate.h" />

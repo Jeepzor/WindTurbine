@@ -1,21 +1,15 @@
 #include <string>
 #include "missile.h"
 #include "rock.h"
-
-//void collisionCallbackFunction(wind::Collider* coll_a, wind::Collider* coll_b) {
-	//std::cout << "yey" << "\n";
-	//if (Player* test = dynamic_cast<Player*>(coll_a->getEntity())) {
-		//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
-		//coll_b->destroy();
-	//}
-//}
+#include "boom.h"
 
 
-Missile::Missile(wind::PhysicsWorld* world, double x, double y, double a) {
+Missile::Missile(wind::PhysicsWorld* world, std::vector<wind::Entity*> &ents,double x, double y, double a) {
 	xPos = x;
 	yPos = y;
 	angle = a;
 
+	entities = &ents;
 	xVel = speed * cos(angle);
 	yVel = speed * sin(angle);
 
@@ -36,13 +30,12 @@ Missile::Missile(wind::PhysicsWorld* world, double x, double y, double a) {
 
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
 		if (Rock* rock = dynamic_cast<Rock*>(B->getEntity())) {
-			this->destroy();
-			rock->destroy();
-			B->destroy();
-			A->destroy();
-			//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
-			//coll_b->destroy();
-		}
+				entities->push_back(Boom::getInstance(this->getX(), this->getY()));
+				this->destroy();
+				rock->setFalling();
+				B->destroy();
+				A->destroy();
+			}
 		}
 	);
 

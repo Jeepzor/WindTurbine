@@ -82,6 +82,7 @@
     <ClCompile Include="voxel.cpp" />
     <ClCompile Include="game\missile.cpp" />
     <ClCompile Include="game\rock.cpp" />
+    <ClCompile Include="game\boom.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -165,6 +166,7 @@
     <ClInclude Include="voxel.h" />
     <ClInclude Include="game\missile.h" />
     <ClInclude Include="game\rock.h" />
+    <ClInclude Include="game\boom.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

@@ -2,6 +2,7 @@
 #include "player.h"
 #include "missile.h"
 #include "rock.h"
+#include "boom.h"
 
 double timer = 0;
 double rate = 0.3;
@@ -50,10 +51,10 @@ void PlayModule::keyReleased(std::string key) {
 
 void PlayModule::mousePressed(int button) {
 	if (button == 1) {
-		entities.push_back(Missile::getInstance(world, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
+		entities.push_back(Missile::getInstance(world, entities, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle()));
 	}
 	else if (button == 3) {
-		entities.push_back(Rock::getInstance(world, 700, 300, -playerShip->getAngle()));
+		
 	}
 }
 
@@ -68,7 +69,7 @@ void PlayModule::update(double dt) {
 		our_dt = dt;
 	}
 
-	
+	updateSpawner(dt);
 	updateEntities(dt);
 	playerShip->update(dt);
 	world->update(dt);
@@ -84,6 +85,17 @@ void PlayModule::updateEntities(double dt) {
 
 void PlayModule::removeDeadEntities() {
 	entities.erase(std::remove_if(entities.begin(), entities.end(), [](wind::Entity* i) { return !(i->isAlive()); }), entities.end());
+}
+
+void PlayModule::updateSpawner(double dt) {
+	spawnTimer -= dt;
+	if (spawnTimer <= 0) {
+		spawnTimer = spawnRate;
+		double position_x = 1400;
+		double position_y = 920.0 * wind::math.random() - 200;
+		double angle_to_player = wind::math.getAngle(position_x, position_y, playerShip->getX(), playerShip->getY());
+		entities.push_back(Rock::getInstance(world, position_x, position_y, angle_to_player));
+	}
 }
 
 void PlayModule::draw() {

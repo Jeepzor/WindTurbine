@@ -32,11 +32,14 @@ namespace wind {
 		virtual double getY() { return yPos; };
 
 		/// <summary>
-		/// Returns false if the entity is not alive and should be cleaned up.
+		/// Returns false if the entity is not alive and should be cleaned up
 		/// </summary>
 		/// <returns>bool alive</returns>
 		virtual bool isAlive() { return alive; };
 
+		/// <summary>
+		/// Flags the entity for removal
+		/// </summary>
 		virtual void destroy() { alive = false; };
 	protected:
 		Entity();

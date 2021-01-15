@@ -25,6 +25,10 @@ private:
 	void updateEntities(double dt);
 	void drawEntities();
 	void removeDeadEntities();
+	void updateSpawner(double dt);
+
+	double spawnTimer = 0;
+	double spawnRate = 3;
 	double our_dt;
 	Player* playerShip;
 	wind::PhysicsWorld* world;

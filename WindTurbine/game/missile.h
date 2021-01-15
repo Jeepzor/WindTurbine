@@ -6,17 +6,18 @@
 
 class Missile : public wind::Entity {
 public:
-	static Missile* getInstance(wind::PhysicsWorld* physics_world, double x, double y, double angle) {
-		return new Missile(physics_world, x, y, angle);
+	static Missile* getInstance(wind::PhysicsWorld* physics_world, std::vector<wind::Entity*> &entities, double x, double y, double angle) {
+		return new Missile(physics_world, entities, x, y, angle);
 	}
 
 	void draw()override;
 	void update(double dt)override;
 private:
-	Missile(wind::PhysicsWorld* world, double x, double y, double angle);
+	Missile(wind::PhysicsWorld* world, std::vector<wind::Entity*> &entities, double x, double y, double angle);
 	Missile(const Missile& other) = delete;
 	const Missile& operator=(const Missile& other) = delete;
 
+	void explode();
 	void syncCollider();
 	void updateThruster(double dt);
 
@@ -27,6 +28,7 @@ private:
 	double yVel = 0;
 	double speed = 100;
 
+	std::vector<wind::Entity*>* entities;
 	wind::Collider* collider;
 	wind::Voxel* asset;
 	wind::ParticleEmitter* thruster;

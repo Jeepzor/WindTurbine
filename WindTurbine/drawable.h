@@ -57,7 +57,18 @@ namespace wind {
 		/// <param name="height"> = Variable which should be set to the height of the image</param>
 		virtual void getDimensions(double &width, double &height) const;
 
+		/// <summary>
+		/// Sets the scale
+		/// </summary>
+		/// <param name="new_scale"> = new scale (1 = 100%)</param>
 		void setScale(double new_scale);
+
+		/// <summary>
+		/// Set the scale, with the posibility of ignoring the automatic update to the origin point
+		/// <param name="new_scale"> = new scale (1 = 100%)</param>
+		/// <param name="ignore_origin"> = If true the origin point wont be updated</param>
+		/// </summary>
+		void setScale(double new_scale, bool ignore_origin);
 
 	protected:
 		SDL_Rect* getDestination();

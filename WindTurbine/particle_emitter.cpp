@@ -65,6 +65,12 @@ namespace wind {
 	
 
 	void ParticleEmitter::update(double dt) {
+		duration -= dt;
+
+		if (duration <= 0) {
+			emissionRate = 0;
+		}
+
 		emissionTimer += dt;
 		int particles_per_frame = static_cast<int>(dt / emissionRate) + 1;
 		if (emissionTimer > emissionRate) {

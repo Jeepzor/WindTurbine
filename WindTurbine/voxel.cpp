@@ -26,7 +26,7 @@ namespace wind {
 			int current_layer = layers - i;
 
 			//Offset the draw position by the layer number
-			setPosition(static_cast<int>(x + 0.5), static_cast<int>(y + 0.5 - i * scale * 0.85 + layers));
+			setPosition(x, y - i * scale + layers);
 
 			//Draw it
 			SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(current_layer), getDestination(), getAngle(), getOriginPoint(), flip);
@@ -35,18 +35,18 @@ namespace wind {
 
 	//TODO: The following 3 functions need to be overriden in animation as well.
 	void Voxel::updateDestination() {
-		destination.w = width * scale;
-		destination.h = layerHeight * scale;
+		destination.w = static_cast<int>(width * scale + 0.5);
+		destination.h = static_cast<int>(layerHeight * scale + 0.5);
 	}
 
 	void Voxel::updateOriginPoint() {
-		originPoint.x = width / 2 * scale;
-		originPoint.y = layerHeight / 2 * scale;
+		originPoint.x = static_cast<int>(width / 2 * scale + 0.5);
+		originPoint.y = static_cast<int>(layerHeight / 2 * scale + 0.5);
 	}
 
 	void Voxel::getDimensions(double& w, double& h) const {
-		w = width * scale;
-		h = layerHeight * scale;
+		w = static_cast<int>(width * scale + 0.5);
+		h = static_cast<int>(layerHeight * scale + 0.5);
 	}
 	//TODO: The above 3 functions need to be overriden in animation as well.
 

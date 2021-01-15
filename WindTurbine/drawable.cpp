@@ -65,18 +65,28 @@ namespace wind {
 
 	void Drawable::setScale(double new_scale) {
 		scale = new_scale;
-		updateDestination();
 		updateOriginPoint();
+		updateDestination();
+	}
+
+	void Drawable::setScale(double new_scale, bool ignoreOrigin) {
+		if (ignoreOrigin){
+			scale = new_scale;
+			updateDestination();
+		}
+		else {
+			setScale(new_scale);
+		}
 	}
 
 	void Drawable::updateDestination() {
-		destination.w = width * scale;
-		destination.h = height * scale;
+		destination.w = static_cast<int>(width * scale + 0.5);
+		destination.h = static_cast<int>(height * scale + 0.5);
 	}
 	
 	void Drawable::updateOriginPoint() {
-		originPoint.x = width / 2 * scale;
-		originPoint.y = height / 2 * scale;
+		originPoint.x = static_cast<int>(width / 2 * scale + 0.5);
+		originPoint.y = static_cast<int>(height / 2 * scale + 0.5);
 	}
 
 	SDL_Texture* Drawable::getAsset() const {
