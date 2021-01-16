@@ -60,7 +60,8 @@ Player::Player(wind::PhysicsWorld* world) {
 }
 
 void Player::reset() {
-	health = 10;
+	health = 1;
+	damageAlpha = 0;
 }
 
 void Player::takeDamage() {

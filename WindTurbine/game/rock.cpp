@@ -79,10 +79,10 @@ void Rock::update(double dt) {
 }
 
 void Rock::checkOutOfBounds() {
-	if (xPos > wind::turbine.getWindowWidth() + 200 ||
-		xPos < -100 ||
-		yPos < -100 ||
-		yPos > wind::turbine.getWindowHeight() + 100) {
+	if (xPos > wind::turbine.getWindowWidth() + 300 ||
+		xPos < -300 ||
+		yPos < -300 ||
+		yPos > wind::turbine.getWindowHeight() + 300) {
 
 		destroy();
 	}

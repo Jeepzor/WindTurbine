@@ -15,6 +15,7 @@ public:
 	std::string getName() { return "paused"; }
 
 private:
+	double timeWave = 0;
 	wind::Font* endFont;
 };
 

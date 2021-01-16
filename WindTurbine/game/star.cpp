@@ -11,6 +11,10 @@ Star::Star(double x, double y) {
 	asset->setScale(scale);
 }
 
+Star::~Star() {
+	delete asset;
+}
+
 
 void Star::update(double dt) {
 	yPos += speed * dt;

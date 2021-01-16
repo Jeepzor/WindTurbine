@@ -20,6 +20,8 @@ PlayModule::PlayModule() {
 	text = new wind::Font("../assets/bit.ttf", 32);
 
 	playerShip = new Player(world);
+
+	world->toggleDebug();
 }
 
 
@@ -169,7 +171,7 @@ void PlayModule::drawEntities() {
 
 
 void PlayModule::clean() {
-	Rock::counter = 0;
+	spawnTimer = 0;
 	score = 0;
 	playerShip->reset();
 	input = "";
@@ -181,4 +183,6 @@ void PlayModule::init() {
 	{
 		addEntity(Star::getInstance(wind::turbine.getWindowWidth() * wind::math.random(), wind::turbine.getWindowHeight() * wind::math.random()));
 	}
+
+	Rock::counter = 0;
 }
