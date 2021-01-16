@@ -7,6 +7,7 @@
 
 #include "game/play_module.h"
 #include "game/pause_module.h"
+#include "arcade/arcade_module.h"
 
 int main(int argc, char* argv[]) {
 	wind::turbine.create("WindTurbine Test", 1280, 720); 
@@ -14,7 +15,8 @@ int main(int argc, char* argv[]) {
 	wind::turbine.toggleCursor();
 	wind::state.addModule(new PlayModule());
 	wind::state.addModule(new PauseModule());
-	wind::state.setCurrentState("paused");
+	wind::state.addModule(new ArcadeModule());
+	wind::state.setCurrentState("arcade");
 	wind::turbine.run();
 
 	return 0;

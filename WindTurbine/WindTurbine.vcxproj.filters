@@ -84,6 +84,8 @@
     <ClCompile Include="game\rock.cpp" />
     <ClCompile Include="game\boom.cpp" />
     <ClCompile Include="game\star.cpp" />
+    <ClCompile Include="arcade\arcade_module.cpp" />
+    <ClCompile Include="arcade\character.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -169,6 +171,8 @@
     <ClInclude Include="game\rock.h" />
     <ClInclude Include="game\boom.h" />
     <ClInclude Include="game\star.h" />
+    <ClInclude Include="arcade\arcade_module.h" />
+    <ClInclude Include="arcade\character.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

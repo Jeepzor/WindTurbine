@@ -18,7 +18,7 @@ namespace wind {
 		std::vector<std::shared_ptr<wind::Collider>> colliders;
 		double yVel;
 		double xVel;
-		bool debug = true;
+		bool debug = false;
 	};
 }
 

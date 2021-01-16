@@ -33,6 +33,12 @@ namespace wind {
 		Animation(const Animation& other) = delete;
 		const Animation& operator=(const Animation& other) = delete;
 
+		void getDimensions(double& w, double& h) const override;
+
+		void updateOriginPoint() override;
+
+		void updateDestination() override;
+
 		SDL_Rect* getPortion() override;
 		int frames;
 		int currentFrame;

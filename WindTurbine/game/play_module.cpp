@@ -117,7 +117,6 @@ void PlayModule::updateSpawner(double dt) {
 		double position_y = 920.0 * wind::math.random() - 200;
 		double angle_to_player = wind::math.getAngle(position_x, position_y, playerShip->getX(), playerShip->getY());
 		addEntity(Rock::getInstance(this, position_x, position_y, angle_to_player));
-		addEntity(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), "123"));
 	}
 }
 

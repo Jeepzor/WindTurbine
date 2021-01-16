@@ -144,6 +144,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="animation.cpp" />
+    <ClCompile Include="arcade\arcade_module.cpp" />
+    <ClCompile Include="arcade\character.cpp" />
     <ClCompile Include="circle_collider.cpp" />
     <ClCompile Include="collider.cpp" />
     <ClCompile Include="color.cpp" />
@@ -177,6 +179,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h" />
+    <ClInclude Include="arcade\arcade_module.h" />
+    <ClInclude Include="arcade\character.h" />
     <ClInclude Include="circle_collider.h" />
     <ClInclude Include="color.h" />
     <ClInclude Include="game\boom.h" />

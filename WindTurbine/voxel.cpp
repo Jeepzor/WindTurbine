@@ -37,7 +37,6 @@ namespace wind {
 		}
 	}
 
-	//TODO: The following 3 functions need to be overriden in animation as well.
 	void Voxel::updateDestination() {
 		destination.w = static_cast<int>(width * scale + 0.5);
 		destination.h = static_cast<int>(layerHeight * scale + 0.5);
@@ -52,7 +51,6 @@ namespace wind {
 		w = static_cast<int>(width * scale + 0.5);
 		h = static_cast<int>(layerHeight * scale + 0.5);
 	}
-	//TODO: The above 3 functions need to be overriden in animation as well.
 
 	SDL_Rect* Voxel::getPortion(int current_layer) {
 		portion.y = layerHeight * (current_layer - 1);

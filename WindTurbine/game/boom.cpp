@@ -19,7 +19,6 @@ Boom::Boom(double x, double y) {
 }
 
 Boom::~Boom() {
-	std::cout << "boom deleted";
 	delete particles;
 }
 
