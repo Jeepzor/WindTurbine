@@ -1,6 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 #include "wind_turbine.h"
+#include "hibernate.h"
 
 namespace wind {
 	class Entity
@@ -41,6 +42,7 @@ namespace wind {
 		/// Flags the entity for removal
 		/// </summary>
 		virtual void destroy() { alive = false; };
+
 	protected:
 		Entity();
 

@@ -23,7 +23,7 @@ PlayModule::PlayModule() {
 
 	for (int i = 0; i < 100; i++)
 	{
-		entities.push_back(Star::getInstance(wind::turbine.getWindowWidth() * wind::math.random(), wind::turbine.getWindowHeight() * wind::math.random()) );
+		addEntity(Star::getInstance(wind::turbine.getWindowWidth() * wind::math.random(), wind::turbine.getWindowHeight() * wind::math.random()) );
 	}
 	//wind::hibernate.it( [=]() mutable {}, 5);
 }
@@ -35,6 +35,9 @@ void PlayModule::keyPressed(std::string key) {
 
 	if (key == "p") {
 		wind::state.setCurrentState("paused");
+	}
+	else if (key == "o") {
+		world->toggleDebug();
 	}
 }
 
@@ -60,13 +63,12 @@ void PlayModule::keyReleased(std::string key) {
 void PlayModule::mousePressed(int button) {
 	if (button == 1) {
 		if (!input.empty()) {
-			entities.push_back(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), input));
+			addEntity(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), input));
 			input = "";
 		}
 	}
 	else if (button == 3) {
-		//wind::Entity* kebab = Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), "2");
-		//delete kebab;
+
 	}
 }
 
@@ -75,7 +77,8 @@ void PlayModule::mouseReleased(int button) {
 }
 
 void PlayModule::addEntity(wind::Entity* entity) {
-	entities.push_back(entity);
+	std::shared_ptr<wind::Entity> unique_ptr(entity);
+	entities.push_back(unique_ptr);
 }
 
 void PlayModule::update(double dt) {
@@ -87,15 +90,23 @@ void PlayModule::update(double dt) {
 
 
 void PlayModule::updateEntities(double dt) {
-	for (auto instance : entities) {
+	for (auto& instance : entities) {
 		instance->update(dt);
 	}
 	removeDeadEntities();
 }
 
 void PlayModule::removeDeadEntities() {
-	
-	entities.erase(std::remove_if(entities.begin(), entities.end(), [](wind::Entity* i) { return !(i->isAlive()); }), entities.end());
+	std::vector<std::shared_ptr<wind::Entity>>::iterator iter;
+	for (iter = entities.begin(); iter != entities.end(); ) {
+		if (!(*iter)->isAlive()) {
+
+			iter = entities.erase(iter);
+		}
+		else {
+			++iter;
+		}
+	}
 }
 
 void PlayModule::updateSpawner(double dt) {
@@ -105,7 +116,7 @@ void PlayModule::updateSpawner(double dt) {
 		double position_x = 1400;
 		double position_y = 920.0 * wind::math.random() - 200;
 		double angle_to_player = wind::math.getAngle(position_x, position_y, playerShip->getX(), playerShip->getY());
-		entities.push_back(Rock::getInstance(this, position_x, position_y, angle_to_player));
+		addEntity(Rock::getInstance(this, position_x, position_y, angle_to_player));
 	}
 }
 
@@ -116,7 +127,6 @@ void PlayModule::draw() {
 	drawEntities();
 
 	playerShip->draw();
-	world->draw();
 
 	wind::graphics.setColor(0, 0, 0);
 	text->draw("Health: " + std::to_string(playerShip->getHealth()), 32, 32);
@@ -124,6 +134,7 @@ void PlayModule::draw() {
 	text->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 30);
 	text->draw("Number: " + input, 30, 60);
 	drawCursor();
+	world->draw();
 }
 
 void PlayModule::drawCursor() {
@@ -149,7 +160,7 @@ void PlayModule::drawCursor() {
 }
 
 void PlayModule::drawEntities() {
-	for (auto instance : entities) {
+	for (auto& instance : entities) {
 		instance->draw();
 	}
 }
