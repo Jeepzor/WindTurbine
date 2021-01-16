@@ -12,13 +12,13 @@ namespace wind {
 		void update(double dt);
 		void draw() const;
 		void toggleDebug() { debug = !debug; };
-		std::vector<Collider*> getColliders() const;
+		std::vector<std::shared_ptr<wind::Collider>> getColliders() const;
 	private:
 		void removeDead();
-		std::vector<Collider*> colliders;
+		std::vector<std::shared_ptr<wind::Collider>> colliders;
 		double yVel;
 		double xVel;
-		bool debug = false;
+		bool debug = true;
 	};
 }
 

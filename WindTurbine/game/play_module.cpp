@@ -77,8 +77,8 @@ void PlayModule::mouseReleased(int button) {
 }
 
 void PlayModule::addEntity(wind::Entity* entity) {
-	std::shared_ptr<wind::Entity> unique_ptr(entity);
-	entities.push_back(unique_ptr);
+	std::shared_ptr<wind::Entity> smart_ptr(entity);
+	entities.push_back(smart_ptr);
 }
 
 void PlayModule::update(double dt) {
@@ -107,6 +107,8 @@ void PlayModule::removeDeadEntities() {
 			++iter;
 		}
 	}
+
+	//entities.erase(std::remove_if(entities.begin(), entities.end(), [](wind::Entity* i) { return !((i)->isAlive()); }), entities.end());
 }
 
 void PlayModule::updateSpawner(double dt) {
@@ -117,6 +119,7 @@ void PlayModule::updateSpawner(double dt) {
 		double position_y = 920.0 * wind::math.random() - 200;
 		double angle_to_player = wind::math.getAngle(position_x, position_y, playerShip->getX(), playerShip->getY());
 		addEntity(Rock::getInstance(this, position_x, position_y, angle_to_player));
+		addEntity(Missile::getInstance(this, playerShip->getLaunchX(), playerShip->getLaunchY(), playerShip->getAngle(), "123"));
 	}
 }
 

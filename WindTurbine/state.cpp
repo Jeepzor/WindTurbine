@@ -127,7 +127,9 @@ namespace wind {
 	}
 
 	void State::update(double dt) const {
-		if (dt > 0.1) { dt = 0.1; };
+		// States are capped at a minimum of 10 FPS
+		//if (dt > 0.1) { dt = 0.1; }; 
+		dt = 2;
 		for (auto current_game_module : game_modules) {
 			if (current_game_module->inUpdateStates(currentState)) {
 				current_game_module->update(dt);

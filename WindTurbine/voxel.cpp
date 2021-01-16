@@ -13,6 +13,10 @@ namespace wind {
 		originPoint = { width / 2, layerHeight / 2 };
 	}
 
+	Voxel::~Voxel() {
+		SDL_DestroyTexture(asset);
+	}
+
 	void Voxel::draw(double x, double y) {
 		//Loop through all layers and draw them individually
 		double shading = 255.0 / static_cast<double>(layers);
@@ -49,11 +53,6 @@ namespace wind {
 		h = static_cast<int>(layerHeight * scale + 0.5);
 	}
 	//TODO: The above 3 functions need to be overriden in animation as well.
-
-
-	Voxel::~Voxel() {
-		SDL_DestroyTexture(asset);
-	}
 
 	SDL_Rect* Voxel::getPortion(int current_layer) {
 		portion.y = layerHeight * (current_layer - 1);

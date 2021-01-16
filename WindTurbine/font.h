@@ -11,6 +11,7 @@ namespace wind {
 	public:
 
 		Font(std::string path, int size);
+		~Font();
 		void draw(std::string text, double x, double y);
 		void draw(std::string text, double x, double y, double angle);
 		TTF_Font* getFont() { return font; };

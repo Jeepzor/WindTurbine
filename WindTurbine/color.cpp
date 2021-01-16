@@ -7,4 +7,11 @@ namespace wind {
 		blue = b;
 		alpha = a;
 	}
+
+	Color::Color() {
+		red = 255;
+		green = 255;
+		blue = 255;
+		alpha = 255;
+	}
 }

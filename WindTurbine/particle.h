@@ -11,6 +11,7 @@ namespace wind {
 	{
 	public:
 		Particle(double xPos, double yPos, double life_time);
+		~Particle();
 
 		void draw(Image* asset);
 		void setColor(double r, double g, double b, double a);
@@ -25,9 +26,10 @@ namespace wind {
 		void updateLife(double dt);
 		void tweenColors(double dt);
 
+		int colorCount = 1;
+		
 		double duration;
 		double lifeTimer;
-		double colorCount;
 		double currentColor;
 		double interval; //How much time it should spend on each color. 
 

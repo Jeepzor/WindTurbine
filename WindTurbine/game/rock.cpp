@@ -43,7 +43,7 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 }
 
 Rock::~Rock() {
-	std::cout << "rock deleted";
+	collider->destroy();
 	delete equationFont;
 	delete asset;
 }

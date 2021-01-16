@@ -21,8 +21,15 @@ namespace wind {
 		Color* temp_color = new Color(0, 0, 0, 0);
 		colors = new Color * [1];
 		colors[0] = temp_color;
+		delete temp_color;
 	}
 	
+	ParticleEmitter::~ParticleEmitter() {
+		delete asset;
+		delete[] particles;
+		delete[] colors;
+	}
+
 	void ParticleEmitter::setEmission(double amount) {
 		emissionAmount = amount;
 		emissionRate = 1 / emissionAmount;
@@ -143,6 +150,7 @@ namespace wind {
 		Color* temp_color = new Color(r2, g2, b2, a2);
 		colors = new Color * [1];
 		colors[0] = temp_color;
+		delete temp_color;
 		colorCount = 1;
 	}
 

@@ -23,11 +23,16 @@ namespace wind {
 		Color* temp_color = new Color(0, 0, 0, 0);
 		targetColors = new Color * [1];
 		targetColors[0] = temp_color;
+		delete temp_color;
 
-		colorCount = 1;
 		currentColor = -1;
 
 		interval = duration / colorCount;
+	}
+
+	Particle::~Particle() {
+		delete[] targetColors;
+		std::cout << "deleeeeeeeeeeeeeeeeeeeet";
 	}
 
 	void Particle::update(double dt) {

@@ -22,6 +22,9 @@ namespace wind {
 		/// <param name="buffer">Maximum number of particles that can be active at any given moment.</param>
 		ParticleEmitter(std::string path, double duration, double buffer);
 
+		///Destructor
+		~ParticleEmitter();
+
 		//Update the emitter, pass in delta-time.
 		void update(double dt);
 

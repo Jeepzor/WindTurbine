@@ -5,6 +5,7 @@ namespace wind {
 	{
 		// (0-255)
 		Color(double red, double green, double blue, double alpha); 
+		Color(); 
 
 		double red; // (0-255)
 		double green; // (0-255)

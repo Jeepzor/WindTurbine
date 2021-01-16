@@ -16,6 +16,10 @@ namespace wind {
 		}
 	}
 
+	Font::~Font() {
+		TTF_CloseFont(font);
+	}
+
 	void Font::draw(std::string text, double x, double y) {
 		draw(text, x, y, 0);
 	}

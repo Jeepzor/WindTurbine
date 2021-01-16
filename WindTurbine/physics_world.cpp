@@ -12,30 +12,43 @@ namespace wind {
 	}
 	
 	void PhysicsWorld::addObject(Collider* new_object) {
-		colliders.push_back(new_object);
+		std::shared_ptr<wind::Collider> smart_ptr(new_object);
+		colliders.push_back(smart_ptr);
 	}
 
 	void PhysicsWorld::update(double dt)  {
 		removeDead();
 
-		for (auto currrent_object : colliders) {
-			currrent_object->update(dt);
+		for (auto &current_object : colliders) {
+			if (current_object->isAlive()) {
+
+				current_object->update(dt);
+			}
 		}
 	}
 
 	void PhysicsWorld::removeDead() {
-		colliders.erase(std::remove_if(colliders.begin(), colliders.end(), [](Collider* i) { return !(i->isAlive()); }), colliders.end());
+		std::vector<std::shared_ptr<wind::Collider>>::iterator iter;
+		for (iter = colliders.begin(); iter != colliders.end(); ) {
+			if (!(*iter)->isAlive()) {
+
+				iter = colliders.erase(iter);
+			}
+			else {
+				++iter;
+			}
+		}
 	}
 	
 	void PhysicsWorld::draw() const {
 		if (debug) {
-			for (auto currrent_object : colliders) {
+			for (auto &currrent_object : colliders) {
 				currrent_object->draw();
 			}
 		}
 	}
 
-	std::vector<Collider*> PhysicsWorld::getColliders() const {
+	std::vector<std::shared_ptr<wind::Collider>> PhysicsWorld::getColliders() const {
 		return colliders;
 	}
 

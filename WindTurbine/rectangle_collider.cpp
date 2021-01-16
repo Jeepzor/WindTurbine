@@ -33,7 +33,9 @@ namespace wind {
 
 	bool RectangleCollider::validateNextPosition() {
 		bool legal = true;
-		for (auto other_collider : world->getColliders()) {
+		for (auto other_smart_collider : world->getColliders()) {
+			auto other_collider = other_smart_collider.get();
+
 			// Ignore collision if:
 			// 1. Other collider is this collider
 			// 2. Other collider is of the same filterGroup

@@ -57,9 +57,9 @@ Missile::Missile(PlayModule* play_module, double x, double y, double a, std::str
 }
 
 Missile::~Missile() {
-	std::cout << "missile deleted";
 	delete asset;
 	delete thruster;
+	collider->destroy();
 }
 
 
