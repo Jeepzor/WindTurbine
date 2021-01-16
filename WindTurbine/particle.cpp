@@ -19,11 +19,8 @@ namespace wind {
 
 		xVel = 0;
 		yVel = 0;
-
-		Color* temp_color = new Color(0, 0, 0, 0);
-		targetColors = new Color * [1];
-		targetColors[0] = temp_color;
-		delete temp_color;
+		std::shared_ptr<wind::Color> smart_ptr();
+		addColor(new Color(0, 0, 0, 0));
 
 		currentColor = -1;
 
@@ -31,8 +28,12 @@ namespace wind {
 	}
 
 	Particle::~Particle() {
-		delete[] targetColors;
-		std::cout << "deleeeeeeeeeeeeeeeeeeeet";
+
+	}
+
+	void Particle::addColor(Color* new_color) {
+		std::shared_ptr<wind::Color> smart_ptr(new_color);
+		targetColors.push_back(smart_ptr);
 	}
 
 	void Particle::update(double dt) {
@@ -148,12 +149,11 @@ namespace wind {
 		alpha = a;
 	}
 	
-	void Particle::setTargetColor(Color* target[], int size) {
-		delete[] targetColors;
-		targetColors = new Color * [size];
+	void Particle::setTargetColor(std::vector<std::shared_ptr<Color>>& target, int size) {
+		targetColors.clear();
 		for (int i = 0; i < size; i++)
 		{
-			targetColors[i] = target[i];
+			targetColors.push_back(target[i]);
 		}
 		colorCount = size;
 		interval = duration / colorCount;

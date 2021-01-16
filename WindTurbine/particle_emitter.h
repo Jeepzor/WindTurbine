@@ -131,8 +131,8 @@ namespace wind {
 
 		Image* asset;
 
-		Particle** particles; 
-		Color** colors; 
+		std::vector<std::shared_ptr<wind::Particle>> particles;;
+		std::vector<std::shared_ptr<wind::Color>> colors;;
 	};
 }
 

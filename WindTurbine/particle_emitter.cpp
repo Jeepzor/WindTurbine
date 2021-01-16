@@ -15,19 +15,14 @@ namespace wind {
 		asset = Image::getInstance(asset_path);
 
 		maxParticles = buffer; // Maximum allowed particles
-	
-		particles = new Particle * [maxParticles];
 
-		Color* temp_color = new Color(0, 0, 0, 0);
-		colors = new Color * [1];
-		colors[0] = temp_color;
-		delete temp_color;
+		std::shared_ptr<wind::Color> smart_ptr(new Color(0, 0, 0, 0));
+		colors.push_back(smart_ptr);
+		colorCount = 1;
 	}
 	
 	ParticleEmitter::~ParticleEmitter() {
 		delete asset;
-		delete[] particles;
-		delete[] colors;
 	}
 
 	void ParticleEmitter::setEmission(double amount) {
@@ -135,10 +130,11 @@ namespace wind {
 		double y_vel = speed_current * std::sin(angle);
 		next_particle->setVelcoity(x_vel, y_vel);
 
-		particles[currentParticles] = next_particle;
+		particles.push_back(std::shared_ptr<wind::Particle>(next_particle));
 	}
 
 	void ParticleEmitter::setStartColor(double r, double g, double b, double a) {
+		colors.clear();
 		startRed = r;
 		startGreen = g;
 		startBlue = b;
@@ -147,19 +143,18 @@ namespace wind {
 	
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2) {
 		setStartColor(r, g, b, a);
-		Color* temp_color = new Color(r2, g2, b2, a2);
-		colors = new Color * [1];
-		colors[0] = temp_color;
-		delete temp_color;
+		std::shared_ptr<wind::Color> smart_ptr(new Color(r2, g2, b2, a2));
+		colors.push_back(smart_ptr);
 		colorCount = 1;
 	}
 
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3) {
 		setStartColor(r, g, b, a);
 		
-		colors = new Color * [2];
-		colors[0] = new Color(r2, g2, b2, a2);
-		colors[1] = new Color(r3, g3, b3, a3);
+		
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r2, g2, b2, a2)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r3, g3, b3, a3)));
+
 		colorCount = 2;
 
 	}
@@ -167,60 +162,58 @@ namespace wind {
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4) {
 		setStartColor(r, g, b, a);
 
-		colors = new Color * [3];
-		colors[0] = new Color(r2, g2, b2, a2);
-		colors[1] = new Color(r3, g3, b3, a3);
-		colors[2] = new Color(r4, g4, b4, a4);
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r2, g2, b2, a2)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r3, g3, b3, a3)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r4, g4, b4, a4)));
+
 		colorCount = 3;
 	}
 
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5) {
 		setStartColor(r, g, b, a);
 
-		colors = new Color * [4];
-		colors[0] = new Color(r2, g2, b2, a2);
-		colors[1] = new Color(r3, g3, b3, a3);
-		colors[2] = new Color(r4, g4, b4, a4);
-		colors[3] = new Color(r5, g5, b5, a5);
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r2, g2, b2, a2)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r3, g3, b3, a3)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r4, g4, b4, a4)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r5, g5, b5, a5)));
 		colorCount = 4;
 	}
 
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5, double r6, double g6, double b6, double a6) {
 		setStartColor(r, g, b, a);
 
-		colors = new Color * [5];
-		colors[0] = new Color(r2, g2, b2, a2);
-		colors[1] = new Color(r3, g3, b3, a3);
-		colors[2] = new Color(r4, g4, b4, a4);
-		colors[3] = new Color(r5, g5, b5, a5);
-		colors[4] = new Color(r6, g6, b6, a6);
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r2, g2, b2, a2)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r3, g3, b3, a3)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r4, g4, b4, a4)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r5, g5, b5, a5)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r6, g6, b6, a6)));
+
 		colorCount = 5;
 	}
 
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5, double r6, double g6, double b6, double a6, double r7, double g7, double b7, double a7) {
 		setStartColor(r, g, b, a);
 
-		colors = new Color * [6];
-		colors[0] = new Color(r2, g2, b2, a2);
-		colors[1] = new Color(r3, g3, b3, a3);
-		colors[2] = new Color(r4, g4, b4, a4);
-		colors[3] = new Color(r5, g5, b5, a5);
-		colors[4] = new Color(r6, g6, b6, a6);
-		colors[5] = new Color(r7, g7, b7, a7);
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r2, g2, b2, a2)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r3, g3, b3, a3)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r4, g4, b4, a4)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r5, g5, b5, a5)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r6, g6, b6, a6)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r7, g7, b7, a7)));
+
 		colorCount = 6;
 	}
 
 	void ParticleEmitter::setColors(double r, double g, double b, double a, double r2, double g2, double b2, double a2, double r3, double g3, double b3, double a3, double r4, double g4, double b4, double a4, double r5, double g5, double b5, double a5, double r6, double g6, double b6, double a6, double r7, double g7, double b7, double a7, double r8, double g8, double b8, double a8) {
 		setStartColor(r, g, b, a);
 
-		colors = new Color * [7];
-		colors[0] = new Color(r2, g2, b2, a2);
-		colors[1] = new Color(r3, g3, b3, a3);
-		colors[2] = new Color(r4, g4, b4, a4);
-		colors[3] = new Color(r5, g5, b5, a5);
-		colors[4] = new Color(r6, g6, b6, a6);
-		colors[5] = new Color(r7, g7, b7, a7);
-		colors[6] = new Color(r8, g8, b8, a8);
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r2, g2, b2, a2)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r3, g3, b3, a3)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r4, g4, b4, a4)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r5, g5, b5, a5)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r6, g6, b6, a6)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r7, g7, b7, a7)));
+		colors.push_back(std::shared_ptr<wind::Color>(new Color(r8, g8, b8, a8)));
 		colorCount = 7;
 	}
 }

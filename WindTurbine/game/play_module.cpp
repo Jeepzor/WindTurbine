@@ -33,10 +33,10 @@ void PlayModule::keyPressed(std::string key) {
 
 	handleInput(key);
 
-	if (key == "p") {
+	if (key == "P") {
 		wind::state.setCurrentState("paused");
 	}
-	else if (key == "o") {
+	else if (key == "O") {
 		world->toggleDebug();
 	}
 }
@@ -107,8 +107,6 @@ void PlayModule::removeDeadEntities() {
 			++iter;
 		}
 	}
-
-	//entities.erase(std::remove_if(entities.begin(), entities.end(), [](wind::Entity* i) { return !((i)->isAlive()); }), entities.end());
 }
 
 void PlayModule::updateSpawner(double dt) {
@@ -171,6 +169,5 @@ void PlayModule::drawEntities() {
 
 
 void PlayModule::clean() {
-	//std::cout << "State was cleaned" << "\n";
 
 }

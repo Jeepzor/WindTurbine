@@ -2,11 +2,13 @@
 #define PARTICLE_H
 
 #include<vector> 
+#include <memory>
 
 #include "image.h"
 #include "color.h"
 
 namespace wind {
+	struct Color;
 	class Particle 
 	{
 	public:
@@ -15,7 +17,7 @@ namespace wind {
 
 		void draw(Image* asset);
 		void setColor(double r, double g, double b, double a);
-		void setTargetColor(Color* target[], int size);
+		void setTargetColor(std::vector<std::shared_ptr<Color>>& target, int size);
 		void setVelcoity(double xVel, double yVel);
 		void resetPosition(double x, double y);
 		void refresh();
@@ -25,6 +27,7 @@ namespace wind {
 		void move(double dt);
 		void updateLife(double dt);
 		void tweenColors(double dt);
+		void addColor(Color* new_color);
 
 		int colorCount = 1;
 		
@@ -48,7 +51,8 @@ namespace wind {
 		double green_speed = 0;
 		double blue_speed = 0;
 		double alpha_speed = 0;
-		Color** targetColors;
+		std::vector<std::shared_ptr<wind::Color>> targetColors;
+		//Color** targetColors;
 
 	};
 }
