@@ -20,6 +20,7 @@ public:
 private:
 	void updateThrusters();
 	void updateAim();
+	void reduceDamageAlpha(double dt);
 	double width = 0;
 	double height = 0;
 	double weaponWidth = 0;
@@ -30,6 +31,7 @@ private:
 	double lifeTimer = 0;
 	double aimAngle = 0;
 	double shipAngle = 0;
+	double damageAlpha = 0;
 
 	int health = 10;
 
@@ -37,7 +39,7 @@ private:
 	wind::Collider* collider;
 	wind::Voxel* shipImg;
 	wind::Voxel* weaponImg;
-
+	wind::Image* damaged;
 	wind::ParticleEmitter* leftThruster;
 	wind::ParticleEmitter* rightThruster;
 	

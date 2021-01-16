@@ -131,5 +131,4 @@ void Character::draw() {
 			runUp->draw(xPos, yPos);
 		}
 	}
-	//wind::graphics.line(xPos + 50, yPos + 50, wind::turbine.getMouseX(), wind::turbine.getMouseY());
 }

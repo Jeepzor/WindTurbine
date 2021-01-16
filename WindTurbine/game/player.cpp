@@ -15,6 +15,7 @@ Player::Player(wind::PhysicsWorld* world) {
 	//Assets
 	shipImg = wind::Voxel::getInstance("game/assets/ship.png", 24);
 	weaponImg = wind::Voxel::getInstance("game/assets/cannon.png", 9);
+	damaged = wind::Image::getInstance("game/assets/damaged.png");
 	shipImg->setScale(2);
 	weaponImg->setScale(2);
 
@@ -56,12 +57,11 @@ Player::Player(wind::PhysicsWorld* world) {
 	rightThruster->setSpeed(100,150);
 	rightThruster->setPosition(xPos + width / 2, yPos + height / 2 - 24);
 	rightThruster->setColors(254,253,189,255, 254,201,78,255, 176,57,0,255, 0,0,0,100, 0, 0, 0, 0);
-
-
 }
 
 void Player::takeDamage() {
 	health -= 1;
+	damageAlpha = 155;
 }
 
 void Player::update(double dt) {
@@ -69,9 +69,19 @@ void Player::update(double dt) {
 	shipAngle = wind::math.pi() + sin(lifeTimer) * 0.6; //Bind the angle to a sine wave
 	updateAim();
 	updateThrusters();
+	reduceDamageAlpha(dt);
 	leftThruster->update(dt);
 	rightThruster->update(dt);
 	shipImg->setAngle(shipAngle);
+}
+
+void Player::reduceDamageAlpha(double dt) {
+	if (damageAlpha > 0) {
+		damageAlpha -= 255 * dt;
+		if (damageAlpha < 0) {
+			damageAlpha = 0;
+		}
+	}
 }
 
 void Player::updateThrusters() {
@@ -86,7 +96,6 @@ void Player::updateThrusters() {
 	rightThruster->setDirection(shipAngle - wind::math.pi() / 2);
 
 }
-
 
 void Player::updateAim() {
 	aimAngle = wind::math.getAngle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2, wind::turbine.getMouseX(), wind::turbine.getMouseY());
@@ -109,4 +118,8 @@ void Player::draw() {
 	leftThruster->draw();
 	rightThruster->draw();
 	//wind::graphics.circle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2,10);
+
+	wind::graphics.setColor(255, 255, 255, damageAlpha);
+	damaged->draw();
+	wind::graphics.clearColor();
 }

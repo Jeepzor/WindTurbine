@@ -21,6 +21,7 @@ private:
 	wind::PhysicsWorld* world;
 	Character* character;
 	wind::Image* bg;
+	wind::Image* damaged;
 	wind::Font* arcadeFont;
 };
 
