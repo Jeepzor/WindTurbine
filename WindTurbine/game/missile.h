@@ -30,7 +30,7 @@ private:
 	double angle = 0;
 	double xVel = 0;
 	double yVel = 0;
-	double speed = 100;
+	double speed = 200;
 	int number;
 	std::string input;
 	PlayModule* playModule;

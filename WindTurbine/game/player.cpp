@@ -59,9 +59,20 @@ Player::Player(wind::PhysicsWorld* world) {
 	rightThruster->setColors(254,253,189,255, 254,201,78,255, 176,57,0,255, 0,0,0,100, 0, 0, 0, 0);
 }
 
+void Player::reset() {
+	health = 10;
+}
+
 void Player::takeDamage() {
 	health -= 1;
 	damageAlpha = 155;
+	checkAlive();
+}
+
+void Player::checkAlive() {
+	if (health == 0) {
+		wind::hibernate.it([=]() {wind::state.setCurrentState("gameover"); }, 0.1);
+	}
 }
 
 void Player::update(double dt) {
@@ -76,7 +87,7 @@ void Player::update(double dt) {
 }
 
 void Player::reduceDamageAlpha(double dt) {
-	if (damageAlpha > 0) {
+	if (damageAlpha > 0 && health > 0) {
 		damageAlpha -= 255 * dt;
 		if (damageAlpha < 0) {
 			damageAlpha = 0;
@@ -117,7 +128,6 @@ void Player::draw() {
 	weaponImg->setAngle(aimAngle - wind::math.pi() / 2);
 	leftThruster->draw();
 	rightThruster->draw();
-	//wind::graphics.circle(weaponX + weaponWidth / 2, weaponY + weaponHeight / 2,10);
 
 	wind::graphics.setColor(255, 255, 255, damageAlpha);
 	damaged->draw();

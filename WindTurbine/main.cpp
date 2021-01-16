@@ -7,6 +7,7 @@
 
 #include "game/play_module.h"
 #include "game/pause_module.h"
+#include "game/gameover_module.h"
 #include "arcade/arcade_module.h"
 
 int main(int argc, char* argv[]) {
@@ -16,6 +17,7 @@ int main(int argc, char* argv[]) {
 	wind::state.addModule(new PlayModule());
 	wind::state.addModule(new PauseModule());
 	wind::state.addModule(new ArcadeModule());
+	wind::state.addModule(new GameoverModule());
 	wind::state.setCurrentState("arcade");
 	wind::turbine.run();
 

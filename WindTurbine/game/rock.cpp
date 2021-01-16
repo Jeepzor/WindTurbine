@@ -2,6 +2,7 @@
 #include "rock.h"
 #include "player.h"
 #include "play_module.h"
+int Rock::counter = 1;
 
 Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	playModule = play_module;
@@ -14,8 +15,10 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	rVel = 4 * wind::math.random() - 4; 
 	scale = 2 * wind::math.random() + 3;
 
+	counter++;
+
 	//Math component
-	digit1 = floor(8 * wind::math.random() + 1 + 0.5);
+	digit1 = counter;
 	digit2 = floor(8 * wind::math.random() + 1 + 0.5);
 	
 	equation = std::to_string(digit1) + " X " + std::to_string(digit2);

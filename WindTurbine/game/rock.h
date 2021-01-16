@@ -8,6 +8,8 @@ class PlayModule;
 class Rock : public wind::Entity {
 
 public:
+	static int counter;
+
 	static Rock* getInstance(PlayModule* play_module, double x, double y, double angle) {
 		return new Rock(play_module, x, y, angle);
 	}

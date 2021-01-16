@@ -16,11 +16,13 @@ public:
 	double getShipAngle()const { return shipAngle; };
 	double getLaunchX() const;
 	double getLaunchY() const;
+	void reset();
 
 private:
 	void updateThrusters();
 	void updateAim();
 	void reduceDamageAlpha(double dt);
+	void checkAlive();
 	double width = 0;
 	double height = 0;
 	double weaponWidth = 0;

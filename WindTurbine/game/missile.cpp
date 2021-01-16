@@ -86,7 +86,7 @@ void Missile::syncCollider() {
 
 void Missile::updateThruster(double dt) {
 	thruster->update(dt);
-	thruster->setPosition(xPos + width / 2 - xVel * 0.2, yPos + height / 2 + 5 - yVel * 0.2);
+	thruster->setPosition(xPos + width / 2 - xVel * 0.1, yPos + height / 2 + 5 - yVel * 0.1);
 	thruster->setDirection(angle);
 }
 

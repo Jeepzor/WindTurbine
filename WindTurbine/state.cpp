@@ -39,7 +39,7 @@ namespace wind {
 			}
 			
 			if (current_game_module->inInitStates(next_active_state)) {
-				if (current_game_module->isInitialized()) {
+				if (!current_game_module->isInitialized()) {
 					current_game_module->setInitialized(true);
 					current_game_module->init();
 				}

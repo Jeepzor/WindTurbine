@@ -7,10 +7,10 @@
 
 PlayModule::PlayModule() {
 	updateOn = { "play" };
-	drawOn = { "play","paused" };
+	drawOn = { "play","paused", "gameover" };
 	eventOn = { "play" };
 	initOn = { "play" };
-	cleanOn = { "restart" };
+	cleanOn = { "arcade" };
 
 	cursor = wind::Image::getInstance("game/assets/xhair.png");
 
@@ -20,13 +20,9 @@ PlayModule::PlayModule() {
 	text = new wind::Font("../assets/bit.ttf", 32);
 
 	playerShip = new Player(world);
-
-	for (int i = 0; i < 100; i++)
-	{
-		addEntity(Star::getInstance(wind::turbine.getWindowWidth() * wind::math.random(), wind::turbine.getWindowHeight() * wind::math.random()) );
-	}
-	//wind::hibernate.it( [=]() mutable {}, 5);
 }
+
+
 
 void PlayModule::keyPressed(std::string key) {
 	std::cout << "Key [" << key << "] was pressed" << "\n";
@@ -82,10 +78,15 @@ void PlayModule::addEntity(wind::Entity* entity) {
 }
 
 void PlayModule::update(double dt) {
+	incrementScore(dt);
 	updateSpawner(dt);
 	updateEntities(dt);
 	playerShip->update(dt);
 	world->update(dt);
+}
+
+void PlayModule::incrementScore(double dt) {
+	score += dt;
 }
 
 
@@ -132,7 +133,7 @@ void PlayModule::draw() {
 	text->draw("Health: " + std::to_string(playerShip->getHealth()), 32, 32);
 	wind::graphics.setColor(255, 255, 255);
 	text->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 30);
-	text->draw("Number: " + input, 30, 60);
+	text->draw("Score: " + std::to_string(static_cast<int>(score)), 30, 60);
 	drawCursor();
 	world->draw();
 }
@@ -168,5 +169,16 @@ void PlayModule::drawEntities() {
 
 
 void PlayModule::clean() {
+	Rock::counter = 0;
+	score = 0;
+	playerShip->reset();
+	input = "";
+	entities.clear();
+}
 
+void PlayModule::init() {
+	for (int i = 0; i < 100; i++)
+	{
+		addEntity(Star::getInstance(wind::turbine.getWindowWidth() * wind::math.random(), wind::turbine.getWindowHeight() * wind::math.random()));
+	}
 }
