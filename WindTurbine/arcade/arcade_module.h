@@ -5,6 +5,7 @@
 
 #include "../wind.h"
 #include "character.h"
+#include "ball.h"
 
 class ArcadeModule : public wind::GameModule {
 public:
@@ -26,6 +27,7 @@ private:
 	bool inRange = false;
 	wind::PhysicsWorld* world;
 	Character* character;
+	Ball* ball;
 	wind::Image* bg;
 	wind::Image* damaged;
 	wind::Font* arcadeFont;

@@ -8,6 +8,7 @@ ArcadeModule::ArcadeModule() {
 	arcadeFont = new wind::Font("arcade/assets/bit.ttf", 24);
 	world = new wind::PhysicsWorld(0,0);
 	character = Character::getInstance(world);
+	ball = Ball::getInstance(world, 400, 400);
 	bg = wind::Image::getInstance("arcade/assets/bg.png");
 
 	//Walls
@@ -22,6 +23,7 @@ ArcadeModule::ArcadeModule() {
 	world->addObject(wind::RectangleCollider::getInstance(world, 775, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1000, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1100, 320, 70, 90));
+	world->toggleDebug();
 }
 
 void ArcadeModule::keyPressed(std::string key) {
@@ -33,6 +35,7 @@ void ArcadeModule::keyPressed(std::string key) {
 
 void ArcadeModule::update(double dt) {
 	character->update(dt);
+	ball->update(dt);
 	world->update(dt);
 	
 	if (wind::math.distance(character->getX(), character->getY(),820, 100) < 100) {
@@ -46,6 +49,7 @@ void ArcadeModule::update(double dt) {
 void ArcadeModule::draw() {
 	wind::graphics.setColor(255, 255, 255, 255);
 	bg->draw();
+	ball->draw();
 	character->draw();
 	world->draw();
 

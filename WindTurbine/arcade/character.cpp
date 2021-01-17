@@ -1,5 +1,6 @@
 #include <string>
 #include "character.h"
+#include "ball.h"
 
 Character::Character(wind::PhysicsWorld* world) {
 	xPos = 800;
@@ -14,6 +15,16 @@ Character::Character(wind::PhysicsWorld* world) {
 	acceleration = 4000.0;
 	friction = 2000;
 	collider = wind::CircleCollider::getInstance(world, xPos, yPos, 10);
+	collider->setEntity(this);
+	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
+		if (Ball* ball = dynamic_cast<Ball*>(B->getEntity())) {
+			ball->setVelocity(xVel * 3, yVel * 3);
+			std::cout << "hello";
+		}
+		}
+	);
+
+
 	runUp = wind::Animation::getInstance("arcade/assets/run_up.png", 8, 0.09);
 	runDown = wind::Animation::getInstance("arcade/assets/run_down.png", 8, 0.09);
 	idleUp = wind::Animation::getInstance("arcade/assets/idle_up.png", 5, 0.1);
@@ -66,12 +77,20 @@ void Character::move(double dt) {
 	}
 }
 
-double Character::getX() {
+double Character::getX() const {
 	return collider->getX();
 }
 
-double Character::getY() {
+double Character::getY() const {
 	return collider->getY();
+}
+
+double Character::getVelX() const {
+	return xVel;
+}
+
+double Character::getVelY() const{
+	return yVel;
 }
 
 void Character::applyVelocity() {

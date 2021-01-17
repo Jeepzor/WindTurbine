@@ -24,10 +24,18 @@ namespace wind {
 	}
 
 	void Collider::update(double dt) {
-		rotateVertices(dt);
-		validateNextX(dt);
-		validateNextY(dt);
-		move();
+		if (!isStatic) {
+			resetNormals();
+			rotateVertices(dt);
+			validateNextX(dt);
+			validateNextY(dt);
+			move();
+		}
+	}
+
+	void Collider::resetNormals() {
+		nx = 1;
+		ny = 1;
 	}
 
 	bool Collider::differentFilterGroup(int other) {
@@ -43,18 +51,18 @@ namespace wind {
 	}
 
 	void Collider::validateNextX(double dt) {
-		if (xVel == 0) return; //If it doesn't move, don't do costly hit detection.
-		nextX = xPos + xVel * dt;
+		nextX = xPos + (xVel + world->getGravityX()) * dt;
 		if (!validateNextPosition() && !isSensor() ) { // Sensors ignore collisions
+			nx = 0;
 			nextX = xPos;
 		}
 	}
 
 	
 	void Collider::validateNextY(double dt) {
-		if (yVel == 0) return; //If it doesn't move, don't do costly hit detection.
-		nextY = yPos + yVel * dt;
+		nextY = yPos + (yVel + world->getGravityY()) * dt;
 		if (!validateNextPosition() && !isSensor() ) { // Sensors ignore collisions.
+			ny = 0;
 			nextY = yPos;
 		}
 	}

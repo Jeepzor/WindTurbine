@@ -13,8 +13,10 @@ public:
 		return new Character(world);
 	}
 
-	double getX() override;
-	double getY() override;
+	double getX() const override;
+	double getY() const override;
+	double getVelX() const;
+	double getVelY() const;
 
 private:
 	Character(wind::PhysicsWorld* world);

@@ -24,13 +24,13 @@ namespace wind {
 		/// Return the X position of the Entity
 		/// </summary>
 		/// <returns>X Position</returns>
-		virtual double getX() { return xPos; };
+		virtual double getX() const { return xPos; };
 
 		/// <summary>
 		/// Return the Y position of the Entity
 		/// </summary>
 		/// <returns>Y Position</returns>
-		virtual double getY() { return yPos; };
+		virtual double getY() const { return yPos; };
 
 		/// <summary>
 		/// Returns false if the entity is not alive and should be cleaned up

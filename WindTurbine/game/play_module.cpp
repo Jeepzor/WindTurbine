@@ -14,7 +14,6 @@ PlayModule::PlayModule() {
 
 	cursor = wind::Image::getInstance("game/assets/xhair.png");
 
-	//TODO add removal of collider from physicsWorld in their destructor
 	world = new wind::PhysicsWorld(0, 0);
 
 	text = new wind::Font("game/assets/bit.ttf", 32);

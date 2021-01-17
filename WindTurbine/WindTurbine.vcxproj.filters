@@ -88,6 +88,7 @@
     <ClCompile Include="arcade\character.cpp" />
     <ClCompile Include="game\gameover_module.cpp" />
     <ClCompile Include="fade.cpp" />
+    <ClCompile Include="arcade\ball.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -177,6 +178,7 @@
     <ClInclude Include="arcade\character.h" />
     <ClInclude Include="game\gameover_module.h" />
     <ClInclude Include="fade.h" />
+    <ClInclude Include="arcade\ball.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

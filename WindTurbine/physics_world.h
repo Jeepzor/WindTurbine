@@ -12,6 +12,8 @@ namespace wind {
 		void update(double dt);
 		void draw() const;
 		void toggleDebug() { debug = !debug; };
+		double getGravityX() { return xVel; };
+		double getGravityY() { return yVel; };
 		std::vector<std::shared_ptr<wind::Collider>> getColliders() const;
 	private:
 		void removeDead();

@@ -146,8 +146,30 @@ namespace wind {
 		/// </summary>
 		/// <returns>Filter group</returns>
 		int getFilterGroup() { return filterGroup; };
+
+		/// <summary>
+		/// Sets the collider to be unmovable and unaffected by gravity.
+		/// </summary>
+		void setStatic() { isStatic = true; };
+
+		/// <summary>
+		/// Sets the collider to be movable and affected by gravity.
+		/// </summary>
+		void setDynamic() { isStatic = false; };
+
+		/// <summary>
+		/// Get the normal X
+		/// </summary>
+		double getNormalX() { return nx; };
+
+		/// <summary>
+		/// Get the normal Y
+		/// </summary>
+		double getNormalY() { return ny; };
 		
 	protected:
+
+		void resetNormals();
 		void onCollide(Collider* coll_a, Collider* coll_b) const;
 		Entity* connectedEntity;
 
@@ -172,7 +194,10 @@ namespace wind {
 
 		std::function<void(Collider* coll_a, Collider* coll_b)> callBack;
 
+		double nx = 0;
+		double ny = 0;
 		int filterGroup = 0;
+		bool isStatic = false;
 		bool alive = true;
 		bool sensor = false;
 		double radius;
