@@ -11,25 +11,22 @@ ArcadeModule::ArcadeModule() {
 	character = Character::getInstance(world);
 	bg = wind::Image::getInstance("arcade/assets/bg.png");
 
+	//Walls
 	world->addObject(wind::RectangleCollider::getInstance(world, 0,0, 1280, 100));
 	world->addObject(wind::RectangleCollider::getInstance(world, 0, 620, 1280, 100));
 	world->addObject(wind::RectangleCollider::getInstance(world, 0, 0, 130, 720));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1150, 0, 130, 720));
 
+	//Arcade hitboxes
 	world->addObject(wind::RectangleCollider::getInstance(world, 170, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 575, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 775, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1000, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1100, 320, 70, 90));
-
-
-
-	//world->toggleDebug();
 }
 
 void ArcadeModule::keyPressed(std::string key) {
 	if (key == "E" && inRange) {
-
 		wind::state.setCurrentState("play");
 	}
 }

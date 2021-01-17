@@ -83,8 +83,14 @@ namespace wind {
 		/// </summary>
 		void toggleCursor();
 
+		/// <summary>
+		/// Get the Window width in pixels
+		/// </summary>
 		double getWindowWidth() const;
 
+		/// <summary>
+		/// Get the Window height in pixels
+		/// </summary>
 		double getWindowHeight() const;
 
 	private:

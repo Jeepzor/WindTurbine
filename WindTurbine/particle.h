@@ -8,22 +8,21 @@
 #include "color.h"
 
 namespace wind {
-	struct Color;
 	class Particle 
 	{
 	public:
-		Particle(double xPos, double yPos, double life_time);
+		friend class ParticleEmitter;
 		~Particle();
-
+	private:
+		void setTargetColor(std::vector<std::shared_ptr<Color>>& target, int size);
+		Particle(double xPos, double yPos, double life_time);
+		void update(double dt);
 		void draw(Image* asset);
 		void setColor(double r, double g, double b, double a);
-		void setTargetColor(std::vector<std::shared_ptr<Color>>& target, int size);
 		void setVelcoity(double xVel, double yVel);
 		void resetPosition(double x, double y);
 		void refresh();
-		void update(double dt);
 		bool alive() { return lifeTimer < duration; };
-	private:
 		void move(double dt);
 		void updateLife(double dt);
 		void tweenColors(double dt);

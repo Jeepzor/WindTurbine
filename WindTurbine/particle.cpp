@@ -19,7 +19,7 @@ namespace wind {
 
 		xVel = 0;
 		yVel = 0;
-		std::shared_ptr<wind::Color> smart_ptr();
+
 		addColor(new Color(0, 0, 0, 0));
 
 		currentColor = -1;

@@ -105,7 +105,7 @@ namespace wind {
 	}
 	
 	int Collider::getRadius() const {
-		return radius;
+		return static_cast<int>(radius);
 	}
 
 	Shape Collider::getShape() const {
