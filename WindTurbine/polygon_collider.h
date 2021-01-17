@@ -39,6 +39,12 @@ namespace wind {
 		/// <param name="amount"> = Radians</param>
 		void setRotation(double amount) override;
 
+		/// <summary>
+		/// Sets the rotation speed of the collider (Only affects Polygons).
+		/// </summary>
+		/// <param name="amount"> = Change in Radians per second</param>
+		void setAngle(double new_angle) override;
+
 
 	protected: 
 		void rotateVertices(double dt) override;

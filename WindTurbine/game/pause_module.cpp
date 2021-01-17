@@ -6,13 +6,18 @@ PauseModule::PauseModule() {
 	updateOn = { "paused" };
 	drawOn = { "paused" };
 	eventOn = { "paused"};
-	pauseFont = new wind::Font("../assets/5x5.ttf", 64);
 	pauseImg = wind::Image::getInstance("../assets/paused.png");
 }
 
 void PauseModule::keyPressed(std::string key) {
-	if (key == "2") {
-		wind::state.setCurrentState("play");
+	if (key == "P") {
+		if (!lock) {
+			lock = !lock;
+			wind::state.setCurrentState("play");
+		}
+		else {
+			lock = !lock;
+		}
 	}
 }
 
@@ -25,8 +30,6 @@ void PauseModule::update(double dt) {
 void PauseModule::draw() {
 	wind::graphics.setColor(255, 255, 255, 155);
 	pauseImg->draw(0, 0);
-	wind::graphics.setColor(255, 0, 0, 255);
-	pauseFont->draw("hello", 200, 200);
 	//std::cout << "State is drawing" << "\n";
 }
 

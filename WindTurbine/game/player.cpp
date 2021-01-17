@@ -11,7 +11,6 @@ void collisionCallbackFunction(wind::Collider* coll_a, wind::Collider* coll_b) {
 
 
 Player::Player(wind::PhysicsWorld* world) {
-
 	//Assets
 	shipImg = wind::Voxel::getInstance("game/assets/ship.png", 24);
 	weaponImg = wind::Voxel::getInstance("game/assets/cannon.png", 9);
@@ -33,11 +32,11 @@ Player::Player(wind::PhysicsWorld* world) {
 	weaponY = yPos + height / 2 - weaponHeight / 2 - 24 + 9;
 
 	//Hitbox
-	collider = wind::RectangleCollider::getInstance(world, xPos, yPos, width * 0.75, height);
+	//collider = wind::RectangleCollider::getInstance(world, xPos, yPos, width * 0.75, height);
+	collider = wind::PolygonCollider::getInstance(world, xPos, yPos, wind::PolyPoints(0,0, width,0, width, height * 0.5, width * 0.75, height * 0.5, width * 0.75, height, width * 0.25, height, width * 0.25, height * 0.5, 0, height * 0.5));
 	collider->setOnCollide(collisionCallbackFunction);
 	collider->setEntity(this);
 	collider->setFilterGroup(1);
-
 
 	//Particle effects
 	leftThruster = new wind::ParticleEmitter("game/assets/white_particle.png", 0, 750);
@@ -60,7 +59,7 @@ Player::Player(wind::PhysicsWorld* world) {
 }
 
 void Player::reset() {
-	health = 1;
+	health = 10;
 	damageAlpha = 0;
 }
 
@@ -85,6 +84,7 @@ void Player::update(double dt) {
 	leftThruster->update(dt);
 	rightThruster->update(dt);
 	shipImg->setAngle(shipAngle);
+	collider->setAngle(-shipAngle);
 }
 
 void Player::reduceDamageAlpha(double dt) {
@@ -106,7 +106,6 @@ void Player::updateThrusters() {
 	double ty2 = (yPos + height / 2) - 75 * std::sin(shipAngle + 2.3 / 2);
 	rightThruster->setPosition(tx2, ty2);
 	rightThruster->setDirection(shipAngle - wind::math.pi() / 2);
-
 }
 
 void Player::updateAim() {

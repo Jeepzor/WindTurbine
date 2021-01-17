@@ -84,26 +84,31 @@ namespace wind {
 		}
 	}
 
-	void Graphics::setColor(Uint8 r, Uint8 g, Uint8 b) {
+	void Graphics::setColor(double r, double g, double b) {
 		storeColors(r, g, b, 255);
+		changeColor();
 		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, g, b, 255);
 	}
 	
-	void Graphics::setColor(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
+	void Graphics::setColor(double r, double g, double b, double a) {
 		storeColors(r, g, b, a);
-		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, g, b, a);
+		changeColor();
 	}
 	
 	void Graphics::clearColor() {
 		storeColors(255, 255, 255, 255);
-		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), 255, 255, 255, 255);
+		changeColor();
 	}
 
-	void Graphics::storeColors(Uint8 r, Uint8 g, Uint8 b, Uint8 a) {
-		red = r;
-		green = g;
-		blue = b;
-		alpha = a;
+	void Graphics::changeColor() const {
+		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), red, green, blue, alpha);
+	}
+
+	void Graphics::storeColors(double r, double g, double b, double a) {
+		red = static_cast<Uint8>(r);
+		green = static_cast<Uint8>(g);
+		blue = static_cast<Uint8>(b);
+		alpha = static_cast<Uint8>(a);
 	}
 
 	Graphics graphics;

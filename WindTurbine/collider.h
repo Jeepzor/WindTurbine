@@ -36,10 +36,16 @@ namespace wind {
 		virtual void setVelocity(double x, double y);
 
 		/// <summary>
-		/// Sets the rotation of the collider (Only affects Polygons).
+		/// Sets the rotation speed of the collider (Only affects Polygons).
 		/// </summary>
-		/// <param name="amount"></param>
+		/// <param name="amount"> = Change in Radians per second</param>
 		virtual void setRotation(double amount) {};
+
+		/// <summary>
+		/// Sets the rotation speed of the collider (Only affects Polygons).
+		/// </summary>
+		/// <param name="new_angle"> = Angle in Radians</param>
+		virtual void setAngle(double new_angle) {};
 
 		/// <summary>
 		/// Get the X position of the collider.

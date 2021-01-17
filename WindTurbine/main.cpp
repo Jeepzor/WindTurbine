@@ -19,7 +19,7 @@ int main(int argc, char* argv[]) {
 	wind::state.addModule(new ArcadeModule());
 	wind::state.addModule(new GameoverModule());
 	wind::state.setCurrentState("arcade");
-	wind::turbine.run();
+	wind::turbine.run(); 
 
 	return 0;
 }

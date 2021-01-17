@@ -19,7 +19,7 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 
 	//Math component
 	digit1 = counter;
-	digit2 = floor(8 * wind::math.random() + 1 + 0.5);
+	digit2 = static_cast<int>(8 * wind::math.random() + 1 + 0.5);
 	
 	equation = std::to_string(digit1) + " X " + std::to_string(digit2);
 	result = digit1 * digit2;
@@ -59,22 +59,25 @@ void Rock::draw() {
 }
 
 void Rock::drawText() const {
-	if (falling) return;
-	wind::graphics.setColor(0, 0, 0);
-	equationFont->draw(equation, xPos + 2, yPos + 2);
+	if (!falling) {
+		wind::graphics.setColor(0, 0, 0);
+		equationFont->draw(equation, xPos + 2, yPos + 2);
 
-	wind::graphics.setColor(225, 25, 25);
-	equationFont->draw(equation, xPos, yPos);
-	wind::graphics.clearColor();
+		wind::graphics.setColor(225, 25, 25);
+		equationFont->draw(equation, xPos, yPos);
+		wind::graphics.clearColor();
+	}
 }
 
 void Rock::update(double dt) {
-	rotation += rVel * dt;
-	xPos = collider->getX() - width / 2;
-	yPos = collider->getY() - height / 2;
-	asset->setScale(scale, true);
 	fall(dt);
-	checkOutOfBounds();
+	rotation += rVel * dt;
+	asset->setScale(scale, true);
+	if (!falling) {
+		xPos = collider->getX() - width / 2;
+		yPos = collider->getY() - height / 2;
+		checkOutOfBounds();
+	}
 
 }
 

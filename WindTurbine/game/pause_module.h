@@ -16,7 +16,7 @@ public:
 
 private: 
 	wind::Image* pauseImg;
-	wind::Font* pauseFont;
+	bool lock = true;
 };
 
 #endif

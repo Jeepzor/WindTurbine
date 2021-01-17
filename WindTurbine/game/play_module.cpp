@@ -20,8 +20,6 @@ PlayModule::PlayModule() {
 	text = new wind::Font("../assets/bit.ttf", 32);
 
 	playerShip = new Player(world);
-
-	world->toggleDebug();
 }
 
 
@@ -131,11 +129,11 @@ void PlayModule::draw() {
 
 	playerShip->draw();
 
-	wind::graphics.setColor(0, 0, 0);
-	text->draw("Health: " + std::to_string(playerShip->getHealth()), 32, 32);
 	wind::graphics.setColor(255, 255, 255);
-	text->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 30);
-	text->draw("Score: " + std::to_string(static_cast<int>(score)), 30, 60);
+	text->draw("Press O for debug-mode", 30, 10);
+	text->draw("Press P for pause", 30, 40);
+	text->draw("Health: " + std::to_string(playerShip->getHealth()), 30, 70);
+	text->draw("Score: " + std::to_string(static_cast<int>(score)), 30, 100);
 	drawCursor();
 	world->draw();
 }
