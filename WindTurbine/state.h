@@ -11,11 +11,24 @@
 
 namespace wind {
 	class State {
+		friend class Turbine;
 	public:
 		State();
-		std::string getActiveState() const;
+
+		/// <summary>
+		/// Set the state, which determins what module(s) 
+		/// will Update, Draw and litsen for Event callbacks
+		/// </summary>
+		/// <param name="state"> = Next state</param>
 		void setCurrentState(std::string state);
-		void addModule(GameModule*);
+
+		/// <summary>
+		/// Insert a new module into the State manager
+		/// </summary>
+		/// <param name="new_module"> = Pointer to the Game Module which you wish to add</param>
+		void addModule(GameModule* new_module);
+	private:
+		std::string getActiveState() const;
 
 		void keyPressed(std::string key) const;
 		void keyReleased(std::string key) const;
@@ -24,7 +37,6 @@ namespace wind {
 		
 		void update(double) const;
 		void draw() const;
-	private:
 		void changed(std::string state)const;
 		bool exist(std::string state) const;
 		void extractStates(GameModule*);

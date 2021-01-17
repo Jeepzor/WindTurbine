@@ -74,7 +74,7 @@ void Rock::update(double dt) {
 	asset->setScale(scale, true);
 	if (!falling) {
 		xPos = collider->getX() - width / 2;
-		yPos = collider->getY() - height / 2;
+		yPos = collider->getY() - height / 2.5;
 		checkOutOfBounds();
 	}
 }

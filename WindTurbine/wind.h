@@ -9,7 +9,6 @@
 #include "voxel.h"
 #include "font.h"
 #include "particle_emitter.h"
-#include "particle.h"
 
 //Utility
 #include "math.h"
