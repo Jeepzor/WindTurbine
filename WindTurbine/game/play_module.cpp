@@ -25,10 +25,7 @@ PlayModule::PlayModule() {
 
 
 void PlayModule::keyPressed(std::string key) {
-	std::cout << "Key [" << key << "] was pressed" << "\n";
-
 	handleInput(key);
-
 	if (key == "P") {
 		wind::state.setCurrentState("paused");
 	}
@@ -52,9 +49,7 @@ void PlayModule::handleInput(std::string key) {
 	}
 }
 
-void PlayModule::keyReleased(std::string key) {
-	std::cout << "Key [" << key << "] was released" << "\n";
-}
+void PlayModule::keyReleased(std::string key) {}
 
 void PlayModule::mousePressed(int button) {
 	if (button == 1) {
@@ -63,14 +58,9 @@ void PlayModule::mousePressed(int button) {
 			input = "";
 		}
 	}
-	else if (button == 3) {
-
-	}
 }
 
-void PlayModule::mouseReleased(int button) {
-	std::cout << "button [" << button << "] was released" << "\n";
-}
+void PlayModule::mouseReleased(int button) {}
 
 void PlayModule::addEntity(wind::Entity* entity) {
 	std::shared_ptr<wind::Entity> smart_ptr(entity);
@@ -165,7 +155,6 @@ void PlayModule::drawEntities() {
 		instance->draw();
 	}
 }
-
 
 
 void PlayModule::clean() {

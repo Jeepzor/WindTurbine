@@ -9,11 +9,11 @@
 namespace wind {
 
 	enum Shape {base, circle, rectangle, polygon };
-	class PhysicsWorld; // Is this forward declaration?
+	class PhysicsWorld;
 	class RectangleCollider;
+	class CircleCollider;
 
 	class Collider{
-	typedef std::function<void(Collider* coll_a, Collider* coll_b)> Callback;
 	public:
 		virtual ~Collider()= 0 {};
 

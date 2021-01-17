@@ -129,6 +129,6 @@ namespace wind {
 	}
 
 	void CircleCollider::draw() const {
-		graphics.circle("line", xPos, yPos, radius);
+		graphics.circle("line", xPos, yPos, static_cast<int>(radius));
 	}
 }

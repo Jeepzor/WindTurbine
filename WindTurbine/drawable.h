@@ -21,7 +21,7 @@ namespace wind {
 		virtual void draw(double x, double y);
 
 		/// <summary>
-		/// Render it to the screen and override the global color. Useful for particles.
+		/// Render it to the screen and override the global color. Useful for particles and other performance intense cases
 		/// </summary>
 		/// <param name="x"> = X-Position</param>
 		/// <param name="y"> = Y-Position</param>

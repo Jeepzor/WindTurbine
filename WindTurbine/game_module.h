@@ -9,6 +9,7 @@
 namespace wind {
 	class GameModule {
 	public:
+		friend class State; // State manages all modules
 
 		/// <summary>
 		/// Callback function, triggers when a key is pressed down
@@ -62,6 +63,12 @@ namespace wind {
 		/// <returns>string name</returns>
 		virtual std::string getName() = 0; //Explicitly abstract; needs to be overridden in child.
 
+
+		
+
+		virtual ~GameModule() = 0 {};
+	protected:
+		//The following functions are for the friend class State
 		virtual bool inUpdateStates(std::string state);
 		virtual bool inDrawStates(std::string state);
 		virtual bool inEventStates(std::string state);
@@ -76,9 +83,9 @@ namespace wind {
 		
 		bool isInitialized() { return initialized; };
 		void setInitialized(bool flag) {initialized = flag; };
-		virtual ~GameModule() = 0 {};
-	protected:
 		virtual bool exist(std::vector<std::string> list, std::string state);
+		//The above functions are for the friend class State
+
 		GameModule();
 		GameModule(const GameModule& other) = delete;
 		const GameModule& operator=(const GameModule& other) = delete;

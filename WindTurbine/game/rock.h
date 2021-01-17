@@ -24,7 +24,6 @@ private:
 	const Rock& operator=(const Rock& other) = delete;
 	void drawText() const;
 	void fall(double dt);
-	void syncCollider();
 	void checkOutOfBounds();
 
 	bool falling = false;

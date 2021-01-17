@@ -18,14 +18,11 @@ public:
 	void draw() override;
 	void clean() override;
 	void init() override;
-
 	void addEntity(wind::Entity* entity);
 
 	wind::PhysicsWorld* getWorld() { return world; };
 	wind::Font* getFont();
-
 	std::string getName() { return "playing"; };
-
 private:
 	void drawCursor();
 	void updateEntities(double dt);
@@ -41,9 +38,9 @@ private:
 
 	std::string input;
 	wind::Image* cursor;
-	Player* playerShip;
 	wind::PhysicsWorld* world;
 	wind::Font* text;
+	Player* playerShip;
 
 	std::vector<std::shared_ptr<wind::Entity>> entities;
 };

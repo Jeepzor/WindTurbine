@@ -8,12 +8,14 @@ namespace wind {
 	class Hibernated
 	{
 	public:
-		Hibernated(std::function<void()>  target, double duration);
+		//Hibernate handles the creation, updates and removes all instances of this class.
+		friend class Hibernate; 
 
-		bool isAlive() { return alive; };
-		void update(double dt);
 
 	private:
+		Hibernated(std::function<void()>  target, double duration);
+		void update(double dt);
+		bool isAlive() { return alive; };
 		void checkDeath();
 		std::function<void()>  target;
 		bool alive = true;

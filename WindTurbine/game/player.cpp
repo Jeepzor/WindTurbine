@@ -1,15 +1,6 @@
 #include <string>
 #include "player.h"
 
-void collisionCallbackFunction(wind::Collider* coll_a, wind::Collider* coll_b) {
-	std::cout << "yey" << "\n";
-	if (Player* test = dynamic_cast<Player*>(coll_a->getEntity())) {
-		//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
-		//coll_b->destroy();
-	}
-}
-
-
 Player::Player(wind::PhysicsWorld* world) {
 	//Assets
 	shipImg = wind::Voxel::getInstance("game/assets/ship.png", 24);
@@ -32,9 +23,8 @@ Player::Player(wind::PhysicsWorld* world) {
 	weaponY = yPos + height / 2 - weaponHeight / 2 - 24 + 9;
 
 	//Hitbox
-	//collider = wind::RectangleCollider::getInstance(world, xPos, yPos, width * 0.75, height);
-	collider = wind::PolygonCollider::getInstance(world, xPos, yPos, wind::PolyPoints(0,0, width,0, width, height * 0.5, width * 0.75, height * 0.5, width * 0.75, height, width * 0.25, height, width * 0.25, height * 0.5, 0, height * 0.5));
-	collider->setOnCollide(collisionCallbackFunction);
+	collider = wind::PolygonCollider::getInstance(world, xPos, yPos, 
+		wind::PolyPoints(0,0, width,0, width, height * 0.5, width * 0.75, height * 0.5, width * 0.75, height, width * 0.25, height, width * 0.25, height * 0.5, 0, height * 0.5));
 	collider->setEntity(this);
 	collider->setFilterGroup(1);
 

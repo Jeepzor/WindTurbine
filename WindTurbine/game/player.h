@@ -23,6 +23,7 @@ private:
 	void updateAim();
 	void reduceDamageAlpha(double dt);
 	void checkAlive();
+
 	double width = 0;
 	double height = 0;
 	double weaponWidth = 0;
@@ -37,14 +38,12 @@ private:
 
 	int health = 10;
 
-
 	wind::Collider* collider;
 	wind::Voxel* shipImg;
 	wind::Voxel* weaponImg;
 	wind::Image* damaged;
 	wind::ParticleEmitter* leftThruster;
 	wind::ParticleEmitter* rightThruster;
-	
 };
 
 #endif

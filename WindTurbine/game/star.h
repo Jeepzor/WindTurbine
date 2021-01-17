@@ -9,7 +9,9 @@ public:
 	static Star* getInstance(double x, double y) {
 		return new Star(x, y);
 	}
+
 	~Star() override;
+
 	void draw()override;
 	void update(double dt)override;
 private:
@@ -20,7 +22,6 @@ private:
 	wind::Image* asset;
 
 	double scale;
-	
 	double speed;
 	double xVel = 0;
 	double yVel = 0;

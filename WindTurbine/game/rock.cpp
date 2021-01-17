@@ -5,6 +5,8 @@
 int Rock::counter = 1;
 
 Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
+	counter++;
+
 	playModule = play_module;
 	equationFont = new wind::Font("../assets/bit.ttf", 42);
 	xPos = x;
@@ -15,12 +17,9 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	rVel = 4 * wind::math.random() - 4; 
 	scale = 2 * wind::math.random() + 3;
 
-	counter++;
-
 	//Math component
 	digit1 = counter;
 	digit2 = static_cast<int>(8 * wind::math.random() + 1 + 0.5);
-	
 	equation = std::to_string(digit1) + " X " + std::to_string(digit2);
 	result = digit1 * digit2;
 
@@ -35,11 +34,12 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	collider->setEntity(this);
 	collider->setVelocity(xVel, yVel);
 	collider->setFilterGroup(8);
+
+	//Collision Callback Function
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
 			if (Player* player = dynamic_cast<Player*>(B->getEntity())) {
 				collider->setVelocity(speed * cos(player->getShipAngle() + wind::math.pi()), speed * sin(player->getShipAngle() + wind::math.pi()));
 				player->takeDamage();
-				//coll_b->setVelocity(test->getVelocityX() * 0.5, test->getVelocityY() * 0.5);
 			}
 		}
 	);
@@ -53,7 +53,6 @@ Rock::~Rock() {
 
 void Rock::draw() {
 	asset->draw(xPos, yPos);
-	
 	asset->setAngle(rotation);
 	drawText();
 }
@@ -62,7 +61,6 @@ void Rock::drawText() const {
 	if (!falling) {
 		wind::graphics.setColor(0, 0, 0);
 		equationFont->draw(equation, xPos + 2, yPos + 2);
-
 		wind::graphics.setColor(225, 25, 25);
 		equationFont->draw(equation, xPos, yPos);
 		wind::graphics.clearColor();
@@ -78,7 +76,6 @@ void Rock::update(double dt) {
 		yPos = collider->getY() - height / 2;
 		checkOutOfBounds();
 	}
-
 }
 
 void Rock::checkOutOfBounds() {
@@ -86,8 +83,7 @@ void Rock::checkOutOfBounds() {
 		xPos < -300 ||
 		yPos < -300 ||
 		yPos > wind::turbine.getWindowHeight() + 300) {
-
-		destroy();
+			destroy();
 	}
 }
 
@@ -99,8 +95,4 @@ void Rock::fall(double dt) {
 			destroy();
 		}
 	}
-}
-
-void Rock::syncCollider() {
-
 }
