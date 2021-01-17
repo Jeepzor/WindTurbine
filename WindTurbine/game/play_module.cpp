@@ -39,10 +39,12 @@ wind::Font* PlayModule::getFont() {
 }
 
 void PlayModule::handleInput(std::string key) {
-	if (std::isdigit(key[0])) {
-		if (input.size() < 3) { input += key;; };
-	}
-	else if (key == "Backspace") {
+	if (key.size() == 1) { // Prevent crashes when inputting symbols like § and ´
+		if (std::isdigit(key[0])) {
+			if (input.size() < 3) { input += key;; };
+		}
+		
+	}else if (key == "Backspace") {
 		if (!input.empty()) {
 			input.resize(input.size() - 1);
 		}
