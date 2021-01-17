@@ -23,7 +23,6 @@ ArcadeModule::ArcadeModule() {
 	world->addObject(wind::RectangleCollider::getInstance(world, 775, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1000, 100, 90, 40));
 	world->addObject(wind::RectangleCollider::getInstance(world, 1100, 320, 70, 90));
-	world->toggleDebug();
 }
 
 void ArcadeModule::keyPressed(std::string key) {

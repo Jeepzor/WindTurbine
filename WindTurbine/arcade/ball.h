@@ -16,7 +16,6 @@ public:
 	double getX() const override;
 	double getY() const override;
 	void setVelocity(double x, double y);
-	void bounce();
 
 private:
 	Ball(wind::PhysicsWorld* world, double x, double y);

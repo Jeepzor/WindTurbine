@@ -34,8 +34,8 @@ namespace wind {
 	}
 
 	void Collider::resetNormals() {
-		nx = 1;
-		ny = 1;
+		nx = 0;
+		ny = 0;
 	}
 
 	bool Collider::differentFilterGroup(int other) {
@@ -53,7 +53,6 @@ namespace wind {
 	void Collider::validateNextX(double dt) {
 		nextX = xPos + (xVel + world->getGravityX()) * dt;
 		if (!validateNextPosition() && !isSensor() ) { // Sensors ignore collisions
-			nx = 0;
 			nextX = xPos;
 		}
 	}
@@ -62,7 +61,6 @@ namespace wind {
 	void Collider::validateNextY(double dt) {
 		nextY = yPos + (yVel + world->getGravityY()) * dt;
 		if (!validateNextPosition() && !isSensor() ) { // Sensors ignore collisions.
-			ny = 0;
 			nextY = yPos;
 		}
 	}

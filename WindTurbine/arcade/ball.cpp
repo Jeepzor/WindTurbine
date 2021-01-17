@@ -22,7 +22,16 @@ Ball::Ball(wind::PhysicsWorld* world, double x, double y) {
 			setVelocity(character->getVelX() * 3, character->getVelY() * 3);
 		}
 		else {
-			bounce();
+			if (allowed) {
+				allowed = false;
+				wind::hibernate.it([=]() mutable {allowed = true;}, 0.3);
+				if (A->getNormalX() == 0) {
+					setVelocity(-xVel * elasticity, yVel * elasticity);
+				}
+				if (A->getNormalY() == 0) {
+					setVelocity(xVel * elasticity, -yVel * elasticity);
+				}
+			}
 		}
 		}
 	);
@@ -38,13 +47,6 @@ void Ball::update(double dt) {
 	applyFriction(dt);
 }
 
-void Ball::bounce() {
-	if (allowed) {
-		allowed = false;
-		wind::hibernate.it([=]() mutable {allowed = true;}, 0.3);
-		setVelocity(-xVel * elasticity, -yVel * elasticity);
-	}
-}
 
 void Ball::setVelocity(double x, double y) {
 	xVel = x;
