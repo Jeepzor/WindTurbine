@@ -14,10 +14,10 @@ int main(int argc, char* argv[]) {
 	wind::turbine.create("WindTurbine Test", 1280, 720); 
 	//wind::turbine.setMaxFPS(60);
 	wind::turbine.toggleCursor();
-	wind::state.addModule(new PlayModule());
-	wind::state.addModule(new PauseModule());
-	wind::state.addModule(new ArcadeModule());
-	wind::state.addModule(new GameoverModule());
+	wind::state.addModule(PlayModule::getInstance());
+	wind::state.addModule(PauseModule::getInstance());
+	wind::state.addModule(ArcadeModule::getInstance());
+	wind::state.addModule(GameoverModule::getInstance());
 	wind::state.setCurrentState("arcade");
 	wind::turbine.run(); 
 

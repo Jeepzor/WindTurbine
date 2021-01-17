@@ -8,7 +8,10 @@
 
 class ArcadeModule : public wind::GameModule {
 public:
-	ArcadeModule();
+	static ArcadeModule* getInstance() {
+		return new ArcadeModule();
+	}
+
 	void keyPressed(std::string key);
 	void update(double dt);
 	void draw();
@@ -16,6 +19,9 @@ public:
 	std::string getName() { return "arcade"; }
 
 private:	
+	ArcadeModule();
+	ArcadeModule(const ArcadeModule& other) = delete;
+	const ArcadeModule& operator=(const ArcadeModule& other) = delete;
 
 	bool inRange = false;
 	wind::PhysicsWorld* world;

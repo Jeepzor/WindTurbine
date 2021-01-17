@@ -9,7 +9,10 @@
 
 class PlayModule : public wind::GameModule {
 public:
-	PlayModule();
+	static PlayModule* getInstance() {
+		return new PlayModule();
+	}
+
 	void keyPressed(std::string key) override;
 	void keyReleased(std::string key) override;
 	void mousePressed(int button) override;
@@ -24,6 +27,11 @@ public:
 	wind::Font* getFont();
 	std::string getName() { return "playing"; };
 private:
+
+	PlayModule();
+	PlayModule(const PlayModule& other) = delete;
+	const PlayModule& operator=(const PlayModule& other) = delete;
+
 	void drawCursor();
 	void updateEntities(double dt);
 	void incrementScore(double dt);

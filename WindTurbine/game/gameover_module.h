@@ -7,7 +7,10 @@
 
 class GameoverModule : public wind::GameModule {
 public:
-	GameoverModule();
+	static GameoverModule* getInstance() {
+		return new GameoverModule();
+	}
+
 	void keyPressed(std::string key);
 	void update(double dt);
 	void draw();
@@ -15,6 +18,10 @@ public:
 	std::string getName() { return "paused"; }
 
 private:
+	GameoverModule();
+	GameoverModule(const GameoverModule& other) = delete;
+	const GameoverModule& operator=(const GameoverModule& other) = delete;
+
 	double timeWave = 0;
 	wind::Font* endFont;
 };

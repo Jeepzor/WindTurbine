@@ -7,7 +7,9 @@
 
 class PauseModule : public wind::GameModule {
 public:
-	PauseModule();
+	static PauseModule* getInstance() {
+		return new PauseModule();
+	}
 	void keyPressed(std::string key);
 	void update(double dt);
 	void draw();
@@ -15,6 +17,10 @@ public:
 	std::string getName() { return "paused"; }
 
 private: 
+	PauseModule();
+	PauseModule(const PauseModule& other) = delete;
+	const PauseModule& operator=(const PauseModule& other) = delete;
+
 	wind::Image* pauseImg;
 	bool lock = true;
 };
