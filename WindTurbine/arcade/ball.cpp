@@ -42,11 +42,7 @@ void Ball::bounce() {
 	if (allowed) {
 		allowed = false;
 		wind::hibernate.it([=]() mutable {allowed = true;}, 0.3);
-		std::cout << collider->getNormalY() << " " << collider->getNormalX();
-		if (abs(xVel) > abs(yVel)) {
-			setVelocity(-xVel * elasticity, yVel * elasticity);
-		}else
-			setVelocity(xVel * elasticity, -yVel * elasticity);
+		setVelocity(-xVel * elasticity, -yVel * elasticity);
 	}
 }
 
