@@ -108,10 +108,10 @@ namespace wind {
 		double fpsTimer = 0.0; //Time since last update of FPS counter (in seconds)
 		double fpsRate = 1.0; //How often should the FPS counter update (in seconds)
 
-		double fpsCurrent;
-		double previousFrameTime;
-		double currentFrameTime;
-		double dt;
+		double fpsCurrent = 0;
+		double previousFrameTime = 0;
+		double currentFrameTime = 0;
+		double dt = 0;
 
 		double width;
 		double height;
@@ -121,7 +121,7 @@ namespace wind {
 
 
 		const Uint8* keyboard_state;
-		Uint32 mouse_state;
+		Uint32 mouse_state = 0;
 		Point mousePosition;
 
 		SDL_Renderer* renderer;

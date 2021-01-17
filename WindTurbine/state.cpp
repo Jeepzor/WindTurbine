@@ -10,8 +10,6 @@
 
 namespace wind {
 	State::State() {
-		states;
-		game_modules;
 		currentState = "";
 	}
 

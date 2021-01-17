@@ -1,12 +1,11 @@
 #include <string>
 #include "arcade_module.h"
 
-
 ArcadeModule::ArcadeModule() {
 	updateOn = { "arcade" };
 	drawOn = { "arcade" };
 	eventOn = { "arcade" };
-	arcadeFont = new wind::Font("../assets/bit.ttf", 24);
+	arcadeFont = new wind::Font("arcade/assets/bit.ttf", 24);
 	world = new wind::PhysicsWorld(0,0);
 	character = Character::getInstance(world);
 	bg = wind::Image::getInstance("arcade/assets/bg.png");
@@ -27,7 +26,8 @@ ArcadeModule::ArcadeModule() {
 
 void ArcadeModule::keyPressed(std::string key) {
 	if (key == "E" && inRange) {
-		wind::state.setCurrentState("play");
+		wind::fade.in(0.3);
+		wind::hibernate.it([=]() {wind::state.setCurrentState("play"); wind::fade.out(0.3);}, 0.3);
 	}
 }
 
@@ -52,6 +52,7 @@ void ArcadeModule::draw() {
 	if (inRange) {
 		arcadeFont->draw("PRESS [E] TO PLAY", 745, 15);
 	}
+
 	//wind::graphics.circle("line", 820, 100, 100); // Debugg for visualizing arcade range
 }
 

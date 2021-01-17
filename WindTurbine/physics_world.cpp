@@ -31,7 +31,6 @@ namespace wind {
 		std::vector<std::shared_ptr<wind::Collider>>::iterator iter;
 		for (iter = colliders.begin(); iter != colliders.end(); ) {
 			if (!(*iter)->isAlive()) {
-
 				iter = colliders.erase(iter);
 			}
 			else {

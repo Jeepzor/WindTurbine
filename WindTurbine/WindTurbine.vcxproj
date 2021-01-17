@@ -150,6 +150,7 @@
     <ClCompile Include="collider.cpp" />
     <ClCompile Include="color.cpp" />
     <ClCompile Include="entity.cpp" />
+    <ClCompile Include="fade.cpp" />
     <ClCompile Include="font.cpp" />
     <ClCompile Include="game\boom.cpp" />
     <ClCompile Include="game\gameover_module.cpp" />
@@ -184,6 +185,7 @@
     <ClInclude Include="arcade\character.h" />
     <ClInclude Include="circle_collider.h" />
     <ClInclude Include="color.h" />
+    <ClInclude Include="fade.h" />
     <ClInclude Include="game\boom.h" />
     <ClInclude Include="game\gameover_module.h" />
     <ClInclude Include="game\missile.h" />

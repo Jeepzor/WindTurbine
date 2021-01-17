@@ -6,9 +6,8 @@ int Rock::counter = 1;
 
 Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	counter++;
-
 	playModule = play_module;
-	equationFont = new wind::Font("../assets/bit.ttf", 42);
+	equationFont = new wind::Font("game/assets/bit.ttf", 42);
 	xPos = x;
 	yPos = y;
 	angle = direction;
@@ -46,7 +45,9 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 }
 
 Rock::~Rock() {
-	collider->destroy();
+	if (!falling) { // Falling rocks already have had their bodies destroyed.
+		collider->destroy();
+	}
 	delete equationFont;
 	delete asset;
 }

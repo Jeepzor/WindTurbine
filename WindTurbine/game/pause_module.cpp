@@ -6,7 +6,7 @@ PauseModule::PauseModule() {
 	updateOn = { "paused" };
 	drawOn = { "paused" };
 	eventOn = { "paused"};
-	pauseImg = wind::Image::getInstance("../assets/paused.png");
+	pauseImg = wind::Image::getInstance("game/assets/paused.png");
 }
 
 void PauseModule::keyPressed(std::string key) {

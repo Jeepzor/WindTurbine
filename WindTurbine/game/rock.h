@@ -37,7 +37,7 @@ private:
 	double yVel = 0;
 	double rVel = 0;
 	double rotation = 0;
-
+	int id;
 	int digit1;
 	int digit2;
 	int result;

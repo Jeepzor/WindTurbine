@@ -16,6 +16,7 @@
 #include "point.h"
 #include "poly_points.h"
 #include "hibernate.h"
+#include "fade.h"
 
 //Collision detection
 #include "physics_world.h"

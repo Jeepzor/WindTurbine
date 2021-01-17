@@ -2,6 +2,7 @@
 #include "state.h"
 #include "image.h"
 #include "hibernate.h"
+#include "fade.h"
 
 namespace wind {
 	Turbine::Turbine() {
@@ -56,6 +57,7 @@ namespace wind {
 
 		//Initializes the renderer and validates it succeded.
 		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+		SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 		if (renderer == nullptr) {
 			std::cerr << "SDL ERROR: " << SDL_GetError() << "\n";
 			SDL_DestroyWindow(window);
@@ -164,6 +166,7 @@ namespace wind {
 		updateDeltaTime();
 		updateCurrentFPS(dt);
 		state.update(dt);
+		fade.update(dt);
 		hibernate.update(dt);
 
 		previousFrameTime = currentFrameTime;
@@ -201,6 +204,7 @@ namespace wind {
 	void Turbine::draw() const {
 		SDL_RenderClear(renderer);
 		state.draw();
+		fade.draw();
 		SDL_RenderPresent(renderer);
 	}
 
@@ -217,7 +221,6 @@ namespace wind {
 	void Turbine::clean() {
 		SDL_DestroyRenderer(renderer);
 		SDL_DestroyWindow(window);
-
 		Mix_CloseAudio();
 		TTF_Quit();
 		SDL_Quit();

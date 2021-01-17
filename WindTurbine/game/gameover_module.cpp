@@ -6,12 +6,13 @@ GameoverModule::GameoverModule() {
 	updateOn = { "gameover" };
 	drawOn = { "gameover" };
 	eventOn = { "gameover" };
-	endFont = new wind::Font("../assets/bit.ttf", 64);
+	endFont = new wind::Font("game/assets/bit.ttf", 64);
 }
 
 void GameoverModule::keyPressed(std::string key) {
 	if (key == "Space") {
-		wind::state.setCurrentState("arcade");
+		wind::fade.in(0.3);
+		wind::hibernate.it([=]() {wind::state.setCurrentState("arcade"); wind::fade.out(0.3);}, 0.3);
 	}
 }
 

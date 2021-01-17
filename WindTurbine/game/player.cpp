@@ -54,9 +54,11 @@ void Player::reset() {
 }
 
 void Player::takeDamage() {
-	health -= 1;
-	damageAlpha = 155;
-	checkAlive();
+	if (health > 0) {
+		health -= 1;
+		damageAlpha = 155;
+		checkAlive();
+	}
 }
 
 void Player::checkAlive() {
