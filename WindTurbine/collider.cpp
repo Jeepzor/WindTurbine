@@ -4,7 +4,7 @@
 #include "graphics.h"
 
 namespace wind {
-	Collider::Collider(PhysicsWorld* physics_world, double x, double y, int circle_radius) {
+	Collider::Collider(PhysicsWorld* physics_world, double x, double y, double circle_radius) {
 		shape = base;
 		world = physics_world;
 		radius = circle_radius;

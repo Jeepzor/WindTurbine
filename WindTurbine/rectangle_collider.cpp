@@ -114,7 +114,7 @@ namespace wind {
 	bool RectangleCollider::toPolygon(PolygonCollider* other_polygon) const {
 		std::vector<wind::Point> ov = other_polygon->getVertices();
 		bool coll = false;
-		for (int i = 0; i <= vertices.size() - 1; i++)
+		for (unsigned int i = 0; i <= vertices.size() - 1; i++)
 		{
 			double x1;
 			double x2;
@@ -133,7 +133,7 @@ namespace wind {
 				y2 = vertices[i + 1].y + getNextY();
 			}
 
-			for (int j = 0; j <= ov.size() - 1; j++) {
+			for (unsigned int j = 0; j <= ov.size() - 1; j++) {
 				if (j == ov.size() - 1) {
 					double x3 = ov[0].x + other_polygon->getX();
 					double x4 = ov[ov.size() - 1].x + other_polygon->getX();

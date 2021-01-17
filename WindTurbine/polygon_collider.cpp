@@ -15,7 +15,7 @@ namespace wind {
 		double smallestY = vertices[0].y;
 		double largestX = vertices[0].x;
 		double largestY = vertices[0].y;
-		for (int i = 0; i < vertices.size(); i++) {
+		for (unsigned int i = 0; i < vertices.size(); i++) {
 			if (vertices[i].x < smallestX){
 				smallestX = vertices[i].x;
 			}
@@ -53,7 +53,7 @@ namespace wind {
 		double center_x = -centerX; // Todo, fix this, stupid to have to negate all the time...
 		double center_y = -centerY;
 		double angle_change = rVel * dt;
-		for (int i = 0; i < vertices.size(); i++) {
+		for (unsigned int i = 0; i < vertices.size(); i++) {
 			double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
 			double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
 			double next_angle = current_angle + angle_change;
@@ -63,7 +63,7 @@ namespace wind {
 
 		if (!validateNextPosition()) {
 			double angle_change = -rVel * dt;
-			for (int i = 0; i < vertices.size(); i++) {
+			for (unsigned int i = 0; i < vertices.size(); i++) {
 				double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
 				double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
 				double next_angle = current_angle + angle_change;
@@ -76,7 +76,7 @@ namespace wind {
 	void PolygonCollider::setAngle(double new_angle) {
 		double center_x = -centerX; // Todo, fix this, stupid to have to negate all the time...
 		double center_y = -centerY;
-		for (int i = 0; i < vertices.size(); i++) {
+		for (unsigned int i = 0; i < vertices.size(); i++) {
 			double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
 			double angle_change = angle - new_angle;
 			double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
@@ -90,7 +90,7 @@ namespace wind {
 		/*
 		if (!validateNextPosition()) {
 			double angle_change = -rVel * dt;
-			for (int i = 0; i < vertices.size(); i++) {
+			for (unsigned int i = 0; i < vertices.size(); i++) {
 				double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
 				double distance = math.distance(center_x, center_y, vertices[i].x, vertices[i].y);
 				double next_angle = current_angle + angle_change;
@@ -156,7 +156,7 @@ namespace wind {
 
 	bool PolygonCollider::polygonIntersect(std::vector<wind::Point> ov, double other_x, double other_y) const {
 		bool coll = false;
-		for (int i = 0; i <= vertices.size() - 1; i++)
+		for (unsigned int i = 0; i <= vertices.size() - 1; i++)
 		{
 			double x1;
 			double x2;
@@ -175,7 +175,7 @@ namespace wind {
 				y2 = vertices[i + 1].y + getNextY();
 			}
 
-			for (int j = 0; j <= ov.size() - 1; j++) {
+			for (unsigned int j = 0; j <= ov.size() - 1; j++) {
 				if (j == ov.size() - 1) {
 					double x3 = ov[0].x + other_x;
 					double x4 = ov[ov.size() - 1].x + other_x;
@@ -207,7 +207,7 @@ namespace wind {
 	}
 
 	bool PolygonCollider::toCircle(CircleCollider* circle) const{
-		for (int i = 0; i < vertices.size(); i++)
+		for (unsigned int i = 0; i < vertices.size(); i++)
 		{
 			double x1;
 			double x2;
@@ -253,7 +253,7 @@ namespace wind {
 
 	void PolygonCollider::draw() const {
 		graphics.line(vertices[0].x + xPos, vertices[0].y + yPos, vertices[vertices.size() - 1].x + xPos, vertices[vertices.size() - 1].y + yPos);
-		for (int i = 0; i < vertices.size() - 1; i++)
+		for (unsigned int i = 0; i < vertices.size() - 1; i++)
 		{
 			graphics.line(vertices[i].x + xPos, vertices[i].y + yPos, vertices[i + 1].x + xPos, vertices[i + 1].y + yPos);
 		};

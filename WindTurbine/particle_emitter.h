@@ -20,7 +20,7 @@ namespace wind {
 		/// <param name="path">File-Path to an image.png.</param>
 		/// <param name="duration">Sets the duration for the emitter. Passing in '0' makes it infinite</param>
 		/// <param name="buffer">Maximum number of particles that can be active at any given moment.</param>
-		ParticleEmitter(std::string path, double duration, double buffer);
+		ParticleEmitter(std::string path, double duration, int buffer);
 
 		///Destructor
 		~ParticleEmitter();

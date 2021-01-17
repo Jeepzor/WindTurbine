@@ -156,7 +156,7 @@ namespace wind {
 		virtual void move();
 		virtual void rotateVertices(double dt) {};
 
-		Collider(PhysicsWorld* world, double x, double y, int radius); 
+		Collider(PhysicsWorld* world, double x, double y, double radius); 
 		Collider(const Collider& other) = delete;
 		const Collider& operator=(const Collider& other) = delete;
 

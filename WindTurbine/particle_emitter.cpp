@@ -4,9 +4,9 @@
 #include "math.h"
 
 namespace wind {
-	ParticleEmitter::ParticleEmitter(std::string asset_path, double emitter_duration, double buffer) {
+	ParticleEmitter::ParticleEmitter(std::string asset_path, double emitter_duration, int buffer) {
 		if (emitter_duration == 0) {
-			duration = 99999999999999999;
+			duration = 99999999999999;
 		}
 		else {
 			duration = emitter_duration;

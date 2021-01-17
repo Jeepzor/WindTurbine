@@ -1,4 +1,4 @@
-#include "color.h";
+#include "color.h"
 
 namespace wind {
 	Color::Color(double r, double g, double b, double a) {

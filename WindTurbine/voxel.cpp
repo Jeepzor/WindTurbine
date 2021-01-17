@@ -24,7 +24,7 @@ namespace wind {
 		{
 			
 			//Apply some very basic "shading", making lower layers slightly darker
-			SDL_SetTextureColorMod(asset, 0 + i * shading, 0 + i * shading, 0 + i * shading);
+			SDL_SetTextureColorMod(asset, static_cast<Uint8>(0 + i * shading), static_cast<Uint8>(0 + i * shading), static_cast<Uint8>(0 + i * shading));
 			
 			//Reverse the order of drawing
 			int current_layer = layers - i;

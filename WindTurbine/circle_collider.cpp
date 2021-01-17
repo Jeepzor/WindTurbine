@@ -46,7 +46,7 @@ namespace wind {
 
 	bool CircleCollider::toPolygon(PolygonCollider* polygon) const {
 		std::vector<wind::Point> ov = polygon->getVertices();
-		for (int i = 0; i <= ov.size() - 1; i++)
+		for (unsigned int i = 0; i <= ov.size() - 1; i++)
 		{
 			double x1;
 			double x2;

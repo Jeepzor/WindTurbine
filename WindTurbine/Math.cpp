@@ -3,7 +3,7 @@
 namespace wind {
 
 	Math::Math() {
-		std::srand(time(0));
+		std::srand(static_cast<unsigned int>(time(0)));
 	}
 	double Math::distance(double x1, double y1, double x2, double y2) const { //return distance between two points
 		double dx = x1 - x2;

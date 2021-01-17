@@ -87,7 +87,6 @@ namespace wind {
 	void Graphics::setColor(double r, double g, double b) {
 		storeColors(r, g, b, 255);
 		changeColor();
-		SDL_SetRenderDrawColor(wind::turbine.getRenderer(), r, g, b, 255);
 	}
 	
 	void Graphics::setColor(double r, double g, double b, double a) {
