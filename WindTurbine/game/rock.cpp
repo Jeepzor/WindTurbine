@@ -13,7 +13,7 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	angle = direction;
 	xVel = speed * cos(angle);
 	yVel = speed * sin(angle);
-	rVel = 4 * wind::math.random() - 4; 
+	rVel = 8 * wind::math.random() - 4; 
 	scale = 2 * wind::math.random() + 3;
 
 	//Math component
@@ -23,7 +23,8 @@ Rock::Rock(PlayModule* play_module, double x, double y, double direction) {
 	result = digit1 * digit2;
 
 	//Assets
-	asset = wind::Voxel::getInstance("game/assets/testrock.png", 25);
+	int asset_number = static_cast<int>(13 * wind::math.random() + 1.5);
+	asset = wind::Voxel::getInstance("game/assets/rock/" + std::to_string(asset_number) +".png", 25);
 	asset->setScale(scale);
 	asset->getDimensions(width, height);
 
