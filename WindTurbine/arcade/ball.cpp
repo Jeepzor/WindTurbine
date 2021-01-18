@@ -13,11 +13,12 @@ Ball::Ball(wind::PhysicsWorld* world, double x, double y) {
 	//Elasticity multiplier.
 	elasticity = 0.7;
 
-	friction = 70;
+	friction = 0.5;
 	collider = wind::CircleCollider::getInstance(world, xPos, yPos, 15);
 	collider->setEntity(this);
 
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
+		//if (Character* character = dynamic_cast<Character*>(B->getEntity())) return;
 			if (A->getNormalX() == 1 && A->getNormalY() == 0) {
 				setVelX(-xVel * elasticity);
 			}
@@ -33,7 +34,6 @@ Ball::Ball(wind::PhysicsWorld* world, double x, double y) {
 }
 
 void Ball::update(double dt) {
-	std::cout << xVel << "\n";
 	rotation += xVel / 35 * dt;
 	applyVelocity();
 	syncPosition();
@@ -70,17 +70,17 @@ void Ball::syncPosition() {
 
 void Ball::applyFriction(double dt) {
 	if (xVel > 0) {
-		xVel = std::max(xVel - friction * dt, 0.0);
+		xVel = std::max(xVel - (xVel * friction) * dt, 0.0);
 	}
 	else if (xVel < 0) {
-		xVel = std::min(xVel + friction * dt, 0.0);
+		xVel = std::min(xVel + (abs(xVel) * friction) * dt, 0.0);
 	}
 
 	if (yVel > 0) {
-		yVel = std::max(yVel - friction * dt, 0.0);
+		yVel = std::max(yVel - (yVel * friction) * dt, 0.0);
 	}
 	else if (yVel < 0) {
-		yVel = std::min(yVel + friction * dt, 0.0);
+		yVel = std::min(yVel + (abs(yVel) * friction) * dt, 0.0);
 	}
 }
 
