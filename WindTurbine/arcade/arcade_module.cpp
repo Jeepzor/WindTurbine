@@ -7,8 +7,8 @@ ArcadeModule::ArcadeModule() {
 	eventOn = { "arcade" };
 	arcadeFont = new wind::Font("arcade/assets/bit.ttf", 24);
 	world = new wind::PhysicsWorld(0,0);
-	character = Character::getInstance(world);
 	ball = Ball::getInstance(world, 400, 400);
+	character = Character::getInstance(world);
 	bg = wind::Image::getInstance("arcade/assets/bg.png");
 
 	//Walls
