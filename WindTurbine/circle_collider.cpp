@@ -89,7 +89,7 @@ namespace wind {
 		return false;
 	}
 
-	bool CircleCollider::validateNextPosition() {
+	bool CircleCollider::validateNextPosition(int normal_x, int normal_y) {
 		bool legal = true;
 		for (auto other_smart_collider : world->getColliders()) {
 			auto other_collider = other_smart_collider.get();
@@ -119,7 +119,9 @@ namespace wind {
 						}
 					}
 
-					if (!legal) {
+					if (!legal)  {
+						nx += normal_x;
+						ny += normal_y;
 						onCollide(this, other_collider);
 					}
 				}

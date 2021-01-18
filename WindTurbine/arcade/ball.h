@@ -15,7 +15,8 @@ public:
 
 	double getX() const override;
 	double getY() const override;
-	void setVelocity(double x, double y);
+	void setVelX(double x);
+	void setVelY(double x);
 
 private:
 	Ball(wind::PhysicsWorld* world, double x, double y);
@@ -25,13 +26,13 @@ private:
 	void applyFriction(double dt);
 	void applyVelocity();
 	void syncPosition();
-	bool allowed = true;
 	double xVel;
 	double yVel;
 	double friction;
 	double elasticity;
 	double width;
 	double height;
+	double rotation;
 
 	wind::Collider* collider;
 	wind::Image* asset;

@@ -187,7 +187,7 @@ namespace wind {
 
 		bool differentFilterGroup(int other);
 
-		virtual bool validateNextPosition() = 0;
+		virtual bool validateNextPosition(int nx, int ny) = 0;
 		bool toBoundry(Collider* circle) const;
 		PhysicsWorld* world;
 		Shape shape;

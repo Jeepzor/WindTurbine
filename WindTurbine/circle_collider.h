@@ -31,7 +31,7 @@ namespace wind {
 
 		void draw() const override;
 
-		bool validateNextPosition() override;
+		bool validateNextPosition(int nx, int ny) override;
 		bool toRectangle(wind::RectangleCollider* rectangle) const;
 		bool toPolygon(wind::PolygonCollider* polygon) const;
 	};

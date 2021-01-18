@@ -18,21 +18,12 @@ Ball::Ball(wind::PhysicsWorld* world, double x, double y) {
 	collider->setEntity(this);
 
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
-		if (Character* character = dynamic_cast<Character*>(B->getEntity())) {
-			setVelocity(character->getVelX() * 3, character->getVelY() * 3);
-		}
-		else {
-			if (allowed) {
-				allowed = false;
-				wind::hibernate.it([=]() mutable {allowed = true;}, 0.3);
-				if (A->getNormalX() == 0) {
-					setVelocity(-xVel * elasticity, yVel * elasticity);
-				}
-				if (A->getNormalY() == 0) {
-					setVelocity(xVel * elasticity, -yVel * elasticity);
-				}
+			if (A->getNormalX() == 1 && A->getNormalY() == 0) {
+				setVelX(-xVel * elasticity);
 			}
-		}
+			if (A->getNormalY() == 1 && A->getNormalX() == 0) {
+				setVelY(-yVel * elasticity);
+			}
 		}
 	);
 
@@ -42,14 +33,21 @@ Ball::Ball(wind::PhysicsWorld* world, double x, double y) {
 }
 
 void Ball::update(double dt) {
+	std::cout << xVel << "\n";
+	rotation += xVel / 35 * dt;
 	applyVelocity();
 	syncPosition();
 	applyFriction(dt);
+	asset->setAngle(rotation);
 }
 
 
-void Ball::setVelocity(double x, double y) {
+
+void Ball::setVelX(double x) {
 	xVel = x;
+}
+
+void Ball::setVelY(double y) {
 	yVel = y;
 }
 

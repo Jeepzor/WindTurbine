@@ -57,7 +57,7 @@ namespace wind {
 		int height;
 		int width;
 
-		bool validateNextPosition() override;
+		bool validateNextPosition(int nx, int ny) override;
 		bool toCircle(Collider* circle) const;
 		bool aabb(RectangleCollider* rectangle) const;
 		bool toPolygon(PolygonCollider* other_polygon) const;

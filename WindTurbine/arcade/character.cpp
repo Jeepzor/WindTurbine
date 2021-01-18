@@ -18,8 +18,8 @@ Character::Character(wind::PhysicsWorld* world) {
 	collider->setEntity(this);
 	collider->setOnCollide([=](wind::Collider* A, wind::Collider* B) mutable {
 		if (Ball* ball = dynamic_cast<Ball*>(B->getEntity())) {
-			ball->setVelocity(xVel * 3, yVel * 3);
-			std::cout << "hello";
+				ball->setVelX(xVel * 3);
+				ball->setVelY(yVel * 3);
 		}
 		}
 	);

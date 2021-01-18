@@ -61,7 +61,7 @@ namespace wind {
 			vertices[i].y = center_y + distance * sin(next_angle);
 		}
 
-		if (!validateNextPosition()) {
+		if (!validateNextPosition(0, 0)) {
 			double angle_change = -rVel * dt;
 			for (unsigned int i = 0; i < vertices.size(); i++) {
 				double current_angle = math.getAngle(center_x, center_y, vertices[i].x, vertices[i].y); //Remove this code repetition
@@ -101,7 +101,7 @@ namespace wind {
 		*/
 	}
 
-	bool PolygonCollider::validateNextPosition() {
+	bool PolygonCollider::validateNextPosition(int normal_x, int normal_y) {
 		bool legal = true;
 		for (auto& other_smart_collider : world->getColliders()) {
 			auto other_collider = other_smart_collider.get();
@@ -130,7 +130,9 @@ namespace wind {
 							legal = false;
 						}
 					}
-					if (!legal) {
+					if (!legal && (nx != ny)) {
+						nx += normal_x;
+						ny += normal_y;
 						onCollide(this, other_collider);
 					}
 				}
