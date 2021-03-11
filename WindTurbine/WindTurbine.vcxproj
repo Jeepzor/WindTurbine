@@ -163,6 +163,8 @@
     <ClCompile Include="hibernate.cpp" />
     <ClCompile Include="hibernated.cpp" />
     <ClCompile Include="image.cpp" />
+    <ClCompile Include="othello\board.cpp" />
+    <ClCompile Include="othello\othello_module.cpp" />
     <ClCompile Include="particle.cpp" />
     <ClCompile Include="particle_emitter.cpp" />
     <ClCompile Include="physics_world.cpp" />
@@ -197,6 +199,8 @@
     <ClInclude Include="hibernated.h" />
     <ClInclude Include="image.h" />
     <ClInclude Include="math.h" />
+    <ClInclude Include="othello\board.h" />
+    <ClInclude Include="othello\othello_module.h" />
     <ClInclude Include="particle.h" />
     <ClInclude Include="particle_emitter.h" />
     <ClInclude Include="polygon_collider.h" />

@@ -30,7 +30,7 @@ namespace wind {
 			int current_layer = layers - i;
 
 			//Offset the draw position by the layer number
-			setPosition(x, y - i * scale + layers);
+			setPosition(x, y - i * scale / 2 + layers);
 
 			//Draw it
 			SDL_RenderCopyEx(wind::turbine.getRenderer(), getAsset(), getPortion(current_layer), getDestination(), getAngle(), getOriginPoint(), flip);

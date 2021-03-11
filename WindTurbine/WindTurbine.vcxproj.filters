@@ -89,6 +89,8 @@
     <ClCompile Include="game\gameover_module.cpp" />
     <ClCompile Include="fade.cpp" />
     <ClCompile Include="arcade\ball.cpp" />
+    <ClCompile Include="othello\othello_module.cpp" />
+    <ClCompile Include="othello\board.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -179,6 +181,8 @@
     <ClInclude Include="game\gameover_module.h" />
     <ClInclude Include="fade.h" />
     <ClInclude Include="arcade\ball.h" />
+    <ClInclude Include="othello\othello_module.h" />
+    <ClInclude Include="othello\board.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

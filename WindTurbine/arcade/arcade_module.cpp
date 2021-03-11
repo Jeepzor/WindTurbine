@@ -56,7 +56,7 @@ void ArcadeModule::draw() {
 		arcadeFont->draw("PRESS [E] TO PLAY", 745, 15);
 	}
 
-	//wind::graphics.circle("line", 820, 100, 100); // Debugg for visualizing arcade range
+	wind::graphics.circle("line", 820, 100, 100); // Debugg for visualizing arcade range
 }
 
 void ArcadeModule::clean() {
