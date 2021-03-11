@@ -91,6 +91,7 @@
     <ClCompile Include="arcade\ball.cpp" />
     <ClCompile Include="othello\othello_module.cpp" />
     <ClCompile Include="othello\board.cpp" />
+    <ClCompile Include="othello\position.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="animation.h">
@@ -183,6 +184,7 @@
     <ClInclude Include="arcade\ball.h" />
     <ClInclude Include="othello\othello_module.h" />
     <ClInclude Include="othello\board.h" />
+    <ClInclude Include="othello\position.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">

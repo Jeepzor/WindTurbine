@@ -1,8 +1,6 @@
 #include <string>
 #include "board.h"
 
-
-
 Board::Board(double x, double y) {
 	xPos = x - size * column / 2;
 	yPos = y - size * row / 2;
@@ -11,6 +9,8 @@ Board::Board(double x, double y) {
 	yHover = 6;
 	p1 = wind::Image::getInstance("othello/assets/1.png");
 	p2 = wind::Image::getInstance("othello/assets/2.png");
+
+	currentPosition = Position();
 
 	for (int i = 0; i < column; i++)
 	{
@@ -43,8 +43,8 @@ void Board::update(double dt) {
 	}
 
 	if (currentTurn == COMPUTER) {
-		xHover = 7 * wind::math.random();
-		yHover = 7 * wind::math.random();
+		xHover = 8 * wind::math.random();
+		yHover = 8 * wind::math.random();
 		placeDisc();
 	}
 }
@@ -90,6 +90,7 @@ void Board::placeDisc() {
 	}
 	
 	swapTurn();
+	calculateScores();
 }
 
 void Board::swapTurn() {
@@ -165,11 +166,35 @@ int Board::getOponent() {
 	}
 }
 
+void Board::calculateScores() {
+	scoreP1 = 0;
+	scoreP2 = 0;
+	for (int r = 0; r < row; r++)
+	{
+		for (int c = 0; c < column; c++)
+		{
+			if (discs[r][c] == PLAYER) {
+				scoreP1 += 1;
+			}
+			else if (discs[r][c] == COMPUTER) {
+				scoreP2 += 1;
+			}
+		}
+	}
+}
+
 
 void Board::draw() {
 	drawSquares();
 	drawChars();
 	drawDiscs();
+	drawScore();
+}
+
+void Board::drawScore() {
+	wind::graphics.setColor(0, 0, 0, 255);
+	text->draw("Player Score: " + std::to_string(scoreP1), 50, 10);
+	text->draw("Computer Score: " + std::to_string(scoreP2), 700, 10);
 }
 
 void Board::drawSquares() {

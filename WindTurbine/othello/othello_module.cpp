@@ -7,7 +7,7 @@ OthelloModule::OthelloModule() {
 	drawOn = { "othello" };
 	eventOn = { "othello" };
 
-	board = Board::getInstance(wind::turbine.getWindowWidth() / 2, wind::turbine.getWindowHeight() / 2);
+	board = Board::getInstance(wind::turbine.getWindowWidth() / 2, wind::turbine.getWindowHeight() / 1.75);
 
 }
 
