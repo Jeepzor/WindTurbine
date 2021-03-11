@@ -30,16 +30,9 @@ Board::~Board() {
 	delete text;
 }
 
-
 void Board::update(double dt) {
 	double mouseX = wind::turbine.getMouseX();
 	double mouseY = wind::turbine.getMouseY();
-
-	xHover = 8 * wind::math.random();
-	yHover = 8 * wind::math.random();
-	placeDisc();
-	
-	/*
 	if (mouseX > xPos && mouseX < xPos + width && mouseY > yPos && mouseY < yPos + height) {
 		xHover = (mouseX - xPos) / size;
 		yHover = (mouseY - yPos) / size;
@@ -48,14 +41,12 @@ void Board::update(double dt) {
 		xHover = -1;
 		yHover = -1;
 	}
-	
 
 	if (currentTurn == COMPUTER) {
 		xHover = 7 * wind::math.random();
 		yHover = 7 * wind::math.random();
 		placeDisc();
 	}
-	*/
 }
 
 void Board::placeDisc() {
