@@ -201,6 +201,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="math.h" />
     <ClInclude Include="othello\board.h" />
+    <ClInclude Include="othello\move.h" />
     <ClInclude Include="othello\othello_module.h" />
     <ClInclude Include="othello\position.h" />
     <ClInclude Include="particle.h" />

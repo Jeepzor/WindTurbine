@@ -16,9 +16,8 @@ void OthelloModule::keyPressed(std::string key) {
 }
 
 void OthelloModule::mousePressed(int button) {
-	std::cout << button;
 	if (button == 1) {
-		board->placeDisc();
+		board->click();
 	}
 }
 

@@ -11,19 +11,7 @@ Board::Board(double x, double y) {
 	p2 = wind::Image::getInstance("othello/assets/2.png");
 
 	currentPosition = Position();
-
-	for (int i = 0; i < column; i++)
-	{
-		for (int j = 0; j < row; j++)
-		{
-			discs[i][j] == 0;
-		}
-	}
-
-	discs[4][4] = 1;
-	discs[3][3] = 1;
-	discs[3][4] = 2;
-	discs[4][3] = 2;
+	findLegalMoves(currentPosition);
 }
 
 Board::~Board() {
@@ -42,96 +30,169 @@ void Board::update(double dt) {
 		yHover = -1;
 	}
 
+	/*
 	if (currentTurn == COMPUTER) {
 		xHover = 8 * wind::math.random();
 		yHover = 8 * wind::math.random();
-		placeDisc();
+		placeDisc(xHover, yHover, currentPosition);
+		calculateScores();
+	}
+	*/
+}
+
+std::vector<Move> Board::findLegalMoves(Position& pos) {
+	std::vector<Move> legalMoves;
+	for (int x = 0; x < row; x++)
+	{
+		for (int y = 0; y < column; y++)
+		{
+			if (isLegalMove(x, y, pos)) {
+				Move newMove = Move(x, y);
+				legalMoves.push_back(newMove);
+			}
+		}
+	}
+
+	return legalMoves;
+}
+
+void Board::click() {
+	placeDisc(xHover, yHover, currentPosition);
+	calculateScores();
+	std::cout << currentPosition.getTurn();
+	if (currentPosition.getTurn() == COMPUTER) {
+		Move bestMove = findBestMove(currentPosition, 7, false);
+		std::cout <<"Player will be ahead by: " << bestMove.value << "\n";
+		placeDisc(bestMove.x, bestMove.y, currentPosition);
 	}
 }
 
-void Board::placeDisc() {
-	if (isLegalMove()) {
-		discs[xHover][yHover] = currentTurn;
+Move Board::findBestMove(Position& pos, int depth, bool maxPlayer) {
+	if (depth == 0) {
+		return Move(0,0,pos.evaluate());
+	}
+	else if (maxPlayer) {
+		findLegalMoves(pos);
+		std::vector<Move> legalMoves = findLegalMoves(pos);
+		Move bestValue = Move(0, 0, -68);
+		for (int i = 0; i < legalMoves.size(); i++)
+		{
+			Position* newPosition = new Position();
+			*newPosition = currentPosition;
+			placeDisc(legalMoves[i].x, legalMoves[i].y, *newPosition);
+			Move childEval = findBestMove(*newPosition, depth - 1, false);
+			if (childEval.value > bestValue.value) {
+				bestValue = childEval;
+				bestValue.x = legalMoves[i].x;
+				bestValue.y = legalMoves[i].y;
+			}
+			delete newPosition;
+		}
+		return bestValue;
+	}
+	else {
+		findLegalMoves(pos);
+		std::vector<Move> legalMoves = findLegalMoves(pos);
+		Move bestValue = Move(0, 0, 68);
+		for (int i = 0; i < legalMoves.size(); i++)
+		{
+			Position* newPosition = new Position();
+			*newPosition = currentPosition;
+			placeDisc(legalMoves[i].x, legalMoves[i].y, *newPosition);
+			Move childEval = findBestMove(*newPosition, depth - 1, true);
+			if (childEval.value < bestValue.value) {
+				bestValue = childEval;
+				bestValue.x = legalMoves[i].x;
+				bestValue.y = legalMoves[i].y;
+			}
+			delete newPosition;
+		}
+		return bestValue;
+	}
+}
+
+int Board::minimax(Position& pos, int depth, bool maxPlayer) {
+	return 0;
+}
+
+void Board::placeDisc(int x, int y, Position& pos) {
+	if (isLegalMove(x, y, pos)) {
+		pos.setDisc(x, y, pos.getTurn());
 	}
 	else {
 		return;
 	}
 
-	if (checkFlip(1, 0)) {
-		flipDiscs(1, 0);
+	if (checkFlip(x, y, 1, 0, pos)) {
+		flipDiscs(x, y, 1, 0, pos);
 	}
 	
-	if (checkFlip(0, 1)) {
-		flipDiscs(0, 1);
+	if (checkFlip(x, y, 0, 1, pos)) {
+		flipDiscs(x, y, 0, 1, pos);
 	}
 	
-	if (checkFlip(-1, 0)) {
-		flipDiscs(-1, 0);
+	if (checkFlip(x, y, -1, 0, pos)) {
+		flipDiscs(x, y, -1, 0, pos);
 	}
 	
-	if (checkFlip(0, -1)) {
-		flipDiscs(0, -1);
+	if (checkFlip(x, y, 0, -1, pos)) {
+		flipDiscs(x, y, 0, -1, pos);
 	}
 	
-	if (checkFlip(1, 1)) {
-		flipDiscs(1, 1);
+	if (checkFlip(x, y, 1, 1, pos)) {
+		flipDiscs(x, y, 1, 1, pos);
 	}
 	
-	if (checkFlip(-1, -1)) {
-		flipDiscs(-1, -1);
+	if (checkFlip(x, y, -1, -1, pos)) {
+		flipDiscs(x, y, -1, -1, pos);
 	}
 	
-	if (checkFlip(-1, 1)) {
-		flipDiscs(-1, 1);
+	if (checkFlip(x, y, -1, 1, pos)) {
+		flipDiscs(x, y, -1, 1, pos);
 	}
 	
-	if (checkFlip(1, -1)) {
-		flipDiscs(1, -1);
+	if (checkFlip(x, y, 1, -1, pos)) {
+		flipDiscs(x, y, 1, -1, pos);
 	}
-	
-	swapTurn();
-	calculateScores();
+
+	pos.swapTurn();
 }
 
-void Board::swapTurn() {
-	currentTurn = PLAYER * (currentTurn != PLAYER) + COMPUTER * (currentTurn != COMPUTER);
-}
-
-bool Board::isLegalMove() {
-	if (xHover < 0 || xHover > 7 || yHover < 0 || yHover > 7) {
+bool Board::isLegalMove(int x, int y, Position& pos) {
+	if (x < 0 || x > 7 || y < 0 || y > 7) {
 		return false;
 	}
-	else if (discs[xHover][yHover] != 0) {
+	else if (pos.getDisc(x,y) != 0) {
 		return false;
 	}
 	else {
-		return wouldFlipDiscs();
+		return wouldFlipDiscs(x, y, pos);
 	}
 }
 
-bool Board::wouldFlipDiscs() {
-	return checkFlip(1, 0) || checkFlip(-1, 0) || checkFlip(0, 1) || checkFlip(0, -1) 
-		|| checkFlip(1, 1) || checkFlip(-1, -1) || checkFlip(-1, 1) || checkFlip(1, -1);
+bool Board::wouldFlipDiscs(int x, int y, Position& pos) {
+	return checkFlip(x, y, 1, 0, pos) || checkFlip(x, y, -1, 0, pos) || checkFlip(x, y, 0, 1, pos) || checkFlip(x, y, 0, -1, pos)
+		|| checkFlip(x, y, 1, 1, pos) || checkFlip(x, y, -1, -1, pos) || checkFlip(x, y, -1, 1, pos) || checkFlip(x, y, 1, -1, pos);
 }
 
-bool Board::checkFlip(int x, int y) {
-	if (y == 1 && yHover == 7 || y == -1 && yHover == 0) {
+bool Board::checkFlip(int x, int y, int dx, int dy, Position& pos) {
+	if (dy == 1 && y == 7 || dy == -1 && y == 0) {
 		return false;
 	}
-	else if (x == 1 && xHover == 7 || x == -1 && xHover == 0) {
+	else if (dx == 1 && x == 7 || dx == -1 && x == 0) {
 		return false;
 	}
-	else if (discs[xHover + x][yHover + y] != getOponent()) {
+	else if (pos.getDisc(x + dx, y + dy) != getOponent(pos)) {
 		return false;
 	}
 	else {
 		int i = 1;
-		while(xHover + x * i >= 0 && xHover + x * i < row && yHover + y * i >= 0 && yHover + y * i < column)
+		while(x + dx * i >= 0 && x + dx * i < row && y + dy * i >= 0 && y + dy * i < column)
 		{
-			if (discs[xHover + x * i][yHover + y * i] == 0) {
+			if (pos.getDisc(x + dx * i,y + dy * i) == 0) {
 				return false;
 			}
-			else if (discs[xHover + x * i][yHover + y * i] == currentTurn) {
+			else if (pos.getDisc(x + dx * i, y + dy * i) == pos.getTurn()) {
 				return true;
 			}
 			i++;
@@ -140,25 +201,25 @@ bool Board::checkFlip(int x, int y) {
 	}
 }
 
-void Board::flipDiscs(int x, int y) {
+void Board::flipDiscs(int x, int y, int dx, int dy, Position& pos) {
 	int i = 1;
-	while (xHover + x * i >= 0 && xHover + x * i < row && yHover + y * i >= 0 && yHover + y * i < column)
+	while (x + dx * i >= 0 && x + dx * i < row && y + dy * i >= 0 && y + dy * i < column)
 	{
-		if (discs[xHover + x * i][yHover + y * i] == 0) {
+		if (pos.getDisc(x + dx * i, y + dy * i) == 0) {
 			return;
 		}
-		else if (discs[xHover + x * i][yHover + y * i] == currentTurn) {
+		else if (pos.getDisc(x + dx * i, y + dy * i) == pos.getTurn()) {
 			return;
 		}
 		else {
-			discs[xHover + x * i][yHover + y * i] = currentTurn;
+			pos.setDisc(x + dx * i, y + dy * i, pos.getTurn());
 		}
 		i++;
 	}
 }
 
-int Board::getOponent() {
-	if (currentTurn == PLAYER) {
+int Board::getOponent(Position& pos) {
+	if (pos.getTurn() == PLAYER) {
 		return COMPUTER;
 	}
 	else {
@@ -167,20 +228,7 @@ int Board::getOponent() {
 }
 
 void Board::calculateScores() {
-	scoreP1 = 0;
-	scoreP2 = 0;
-	for (int r = 0; r < row; r++)
-	{
-		for (int c = 0; c < column; c++)
-		{
-			if (discs[r][c] == PLAYER) {
-				scoreP1 += 1;
-			}
-			else if (discs[r][c] == COMPUTER) {
-				scoreP2 += 1;
-			}
-		}
-	}
+	currentPosition.getScores(scoreP1, scoreP2);
 }
 
 
@@ -218,10 +266,10 @@ void Board::drawDiscs() {
 	for (int r = 0; r < row; r++) {
 		for (int c = 0; c < column; c++)
 		{
-			if (discs[r][c] == 1) {
+			if (currentPosition.getDisc(r, c) == 1) {
 				p1->draw(xPos + size * r, yPos + size * c);
 			}
-			else if (discs[r][c] == 2) {
+			else if (currentPosition.getDisc(r, c) == 2) {
 				p2->draw(xPos + size * r, yPos + size * c);
 			}
 		}

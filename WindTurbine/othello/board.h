@@ -13,7 +13,8 @@ public:
 		return new Board(xPos, yPos);
 	}
 
-	void placeDisc();
+	void click();
+	void placeDisc(int x, int y, Position& pos);
 	void draw();
 	void update(double dt);
 	
@@ -25,14 +26,16 @@ private:
 	Board(const Board& other) = delete;
 	const Board& operator=(const Board& other) = delete;
 
-	bool isLegalMove();
-	bool wouldFlipDiscs();
-	bool checkFlip(int x, int y);
-	void flipDiscs(int x, int y);
-	void swapTurn();
+	bool isLegalMove(int x, int y, Position& pos);
+	bool wouldFlipDiscs(int x, int y, Position& pos);
+	bool checkFlip(int x, int y, int dx, int dy, Position& pos);
+	void flipDiscs(int x, int y, int dx, int dy, Position& pos);
 	void calculateScores();
 
-	int getOponent();
+	std::vector<Move> findLegalMoves(Position& pos);
+	Move findBestMove(Position& pos, int depth, bool maxPlayer);
+	int minimax(Position& pos, int depth, bool maxPlayer);
+	int getOponent(Position& pos);
 
 	void drawSquares();
 	void drawChars();
@@ -40,7 +43,6 @@ private:
 	void drawScore();
 
 	std::string characters[8] = {"A", "B", "C", "D", "E", "F", "G", "H" };
-	int discs[8][8];
 	double column = 8;
 	double row = 8;
 	double size = 64;

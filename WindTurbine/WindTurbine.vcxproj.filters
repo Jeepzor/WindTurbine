@@ -185,6 +185,7 @@
     <ClInclude Include="othello\othello_module.h" />
     <ClInclude Include="othello\board.h" />
     <ClInclude Include="othello\position.h" />
+    <ClInclude Include="othello\move.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game">
