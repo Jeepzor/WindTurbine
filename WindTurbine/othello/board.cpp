@@ -61,7 +61,7 @@ void Board::click() {
 	calculateScores();
 	std::cout << currentPosition.getTurn();
 	if (currentPosition.getTurn() == COMPUTER) {
-		Move bestMove = findBestMove(currentPosition, 7, false);
+		Move bestMove = findBestMove(currentPosition, 5, false);
 		std::cout <<"Player will be ahead by: " << bestMove.value << "\n";
 		placeDisc(bestMove.x, bestMove.y, currentPosition);
 	}
