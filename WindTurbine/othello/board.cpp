@@ -29,22 +29,13 @@ void Board::update(double dt) {
 		xHover = -1;
 		yHover = -1;
 	}
-
-	/*
-	if (currentTurn == COMPUTER) {
-		xHover = 8 * wind::math.random();
-		yHover = 8 * wind::math.random();
-		placeDisc(xHover, yHover, currentPosition);
-		calculateScores();
-	}
-	*/
 }
 
 std::vector<Move> Board::findLegalMoves(Position& pos) {
 	std::vector<Move> legalMoves;
-	for (int x = 0; x < row; x++)
+	for (int x = 0; x <= row; x++)
 	{
-		for (int y = 0; y < column; y++)
+		for (int y = 0; y <= column; y++)
 		{
 			if (isLegalMove(x, y, pos)) {
 				Move newMove = Move(x, y);
@@ -56,106 +47,169 @@ std::vector<Move> Board::findLegalMoves(Position& pos) {
 	return legalMoves;
 }
 
-void Board::click() {
-	placeDisc(xHover, yHover, currentPosition);
-	calculateScores();
-	std::cout << currentPosition.getTurn();
-	if (currentPosition.getTurn() == COMPUTER) {
-		Move bestMove = findBestMove(currentPosition, 5, false);
-		std::cout <<"Player will be ahead by: " << bestMove.value << "\n";
-		placeDisc(bestMove.x, bestMove.y, currentPosition);
+int Board::getNumberOfLegalMoves(Position& pos) {
+	std::vector<Move> legalMoves;
+	for (int x = 0; x <= row; x++)
+	{
+		for (int y = 0; y <= column; y++)
+		{
+			if (isLegalMove(x, y, pos)) {
+				Move newMove = Move(x, y);
+				legalMoves.push_back(newMove);
+			}
+		}
 	}
+
+	return legalMoves.size();
 }
 
-Move Board::findBestMove(Position& pos, int depth, bool maxPlayer) {
-	if (depth == 0) {
-		return Move(0,0,pos.evaluate());
-	}
-	else if (maxPlayer) {
-		findLegalMoves(pos);
-		std::vector<Move> legalMoves = findLegalMoves(pos);
-		Move bestValue = Move(0, 0, -68);
-		for (int i = 0; i < legalMoves.size(); i++)
-		{
-			Position* newPosition = new Position();
-			*newPosition = currentPosition;
-			placeDisc(legalMoves[i].x, legalMoves[i].y, *newPosition);
-			Move childEval = findBestMove(*newPosition, depth - 1, false);
-			if (childEval.value > bestValue.value) {
-				bestValue = childEval;
-				bestValue.x = legalMoves[i].x;
-				bestValue.y = legalMoves[i].y;
-			}
-			delete newPosition;
-		}
-		return bestValue;
+int counter = 0;
+bool swap = true;
+void Board::click() {
+	if (swap) {
+		placeDisc(xHover, yHover, currentPosition);
+		
 	}
 	else {
-		findLegalMoves(pos);
+		if (currentPosition.getTurn() == COMPUTER) {
+			std::cout << "COMPUTER \n";
+			Move bestMove = findBestMove(currentPosition, 5, -999999, 999999, false);
+			std::cout << "Looked at " << counter << " positions \n";
+			std::cout << "Value: " << bestMove.value << "\n";
+			placeDisc(bestMove.x, bestMove.y, currentPosition);
+			calculateScores();
+		}
+	}
+	swap = !swap;
+	calculateScores();
+	counter = 0;
+}
+
+
+Move Board::test(int depth) {
+	if (depth == 0) {
+		return Move(13, 3, 1337);
+	}
+	return test(depth - 1);
+}
+
+Move Board::findBestMove(Position& pos, int depth, int alpha, int beta, bool maxPlayer) {
+	if (depth == 0 || getNumberOfLegalMoves(pos) == 0) {
+		counter++;
+		return Move(0,0, pos.evaluate());
+	}
+	else if (maxPlayer == true) {
+		pos.setTurn(1);
 		std::vector<Move> legalMoves = findLegalMoves(pos);
-		Move bestValue = Move(0, 0, 68);
+		Move bestValue = Move(0, 0, -99999);
 		for (int i = 0; i < legalMoves.size(); i++)
 		{
-			Position* newPosition = new Position();
-			*newPosition = currentPosition;
-			placeDisc(legalMoves[i].x, legalMoves[i].y, *newPosition);
-			Move childEval = findBestMove(*newPosition, depth - 1, true);
-			if (childEval.value < bestValue.value) {
-				bestValue = childEval;
+			Position newPosition = Position();
+			newPosition.deepCopy(pos);
+			placeDisc(legalMoves[i].x, legalMoves[i].y, newPosition);
+			Move maxEval = findBestMove(newPosition, depth - 1, alpha, beta, false);
+			if (maxEval.value >= bestValue.value) {
+				bestValue.value = maxEval.value;
 				bestValue.x = legalMoves[i].x;
 				bestValue.y = legalMoves[i].y;
 			}
-			delete newPosition;
+
+			if (maxEval.value > alpha) {
+				alpha = maxEval.value;
+			}
+
+			if (beta <= alpha) {
+				break;
+			}
 		}
 		return bestValue;
 	}
-}
+	else if (maxPlayer == false){
+		pos.setTurn(2);
+		std::vector<Move> legalMoves = findLegalMoves(pos);
+		Move bestValue = Move(0, 0, 99999);
+		for (int i = 0; i < legalMoves.size(); i++)
+		{
+			Position newPosition = Position();
+			newPosition.deepCopy(pos);
+			placeDisc(legalMoves[i].x, legalMoves[i].y, newPosition);
+			Move minEval = findBestMove(newPosition, depth - 1, alpha, beta, true);
+			if (minEval.value < bestValue.value) {
+				bestValue.value = minEval.value;
+				bestValue.x = legalMoves[i].x;
+				bestValue.y = legalMoves[i].y;
+			}
 
-int Board::minimax(Position& pos, int depth, bool maxPlayer) {
-	return 0;
+			if (minEval.value < beta) {
+				beta = minEval.value;
+			}
+
+			if (beta <= alpha) {
+				break;
+			}
+
+		}
+		return bestValue;
+	}
 }
 
 void Board::placeDisc(int x, int y, Position& pos) {
-	if (isLegalMove(x, y, pos)) {
-		pos.setDisc(x, y, pos.getTurn());
+	
+	if (x < 0 || x > 7 || y < 0 || y > 7) {
+		return;
 	}
-	else {
+	else if (pos.getDisc(x, y) != 0) {
 		return;
 	}
 
+	bool legal = false;
+	
+
 	if (checkFlip(x, y, 1, 0, pos)) {
+		legal = true;
 		flipDiscs(x, y, 1, 0, pos);
 	}
 	
 	if (checkFlip(x, y, 0, 1, pos)) {
+		legal = true;
 		flipDiscs(x, y, 0, 1, pos);
 	}
 	
 	if (checkFlip(x, y, -1, 0, pos)) {
+		legal = true;
 		flipDiscs(x, y, -1, 0, pos);
 	}
 	
 	if (checkFlip(x, y, 0, -1, pos)) {
+		legal = true;
 		flipDiscs(x, y, 0, -1, pos);
 	}
 	
 	if (checkFlip(x, y, 1, 1, pos)) {
+		legal = true;
 		flipDiscs(x, y, 1, 1, pos);
 	}
 	
 	if (checkFlip(x, y, -1, -1, pos)) {
+		legal = true;
 		flipDiscs(x, y, -1, -1, pos);
 	}
 	
 	if (checkFlip(x, y, -1, 1, pos)) {
+		legal = true;
 		flipDiscs(x, y, -1, 1, pos);
 	}
 	
 	if (checkFlip(x, y, 1, -1, pos)) {
+		legal = true;
 		flipDiscs(x, y, 1, -1, pos);
 	}
 
-	pos.swapTurn();
+	if (legal) {
+		pos.setDisc(x, y, pos.getTurn());
+		pos.swapTurn();
+	}
+
 }
 
 bool Board::isLegalMove(int x, int y, Position& pos) {
@@ -186,7 +240,7 @@ bool Board::checkFlip(int x, int y, int dx, int dy, Position& pos) {
 		return false;
 	}
 	else {
-		int i = 1;
+		int i = 2;
 		while(x + dx * i >= 0 && x + dx * i < row && y + dy * i >= 0 && y + dy * i < column)
 		{
 			if (pos.getDisc(x + dx * i,y + dy * i) == 0) {

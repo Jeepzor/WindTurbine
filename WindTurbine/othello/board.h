@@ -15,8 +15,9 @@ public:
 
 	void click();
 	void placeDisc(int x, int y, Position& pos);
-	void draw();
+	void draw(); 
 	void update(double dt);
+	Move test(int depth);
 	
 	~Board();
 	
@@ -31,9 +32,10 @@ private:
 	bool checkFlip(int x, int y, int dx, int dy, Position& pos);
 	void flipDiscs(int x, int y, int dx, int dy, Position& pos);
 	void calculateScores();
+	int getNumberOfLegalMoves(Position& pos);
 
 	std::vector<Move> findLegalMoves(Position& pos);
-	Move findBestMove(Position& pos, int depth, bool maxPlayer);
+	Move findBestMove(Position& pos, int depth, int alpha, int beta, bool maxPlayer);
 	int minimax(Position& pos, int depth, bool maxPlayer);
 	int getOponent(Position& pos);
 

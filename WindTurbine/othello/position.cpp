@@ -2,6 +2,7 @@
 #include "Position.h"
 
 Position::Position() {
+	//counter++;
 	for (int i = 0; i < row; i++)
 	{
 		std::vector<int> row = { 0, 0, 0, 0, 0, 0, 0, 0 };
@@ -43,6 +44,19 @@ void Position::getScores(int& p1, int& p2) {
 	}
 }
 
+void Position::deepCopy(Position other) {
+	for (int r = 0; r < row; r++)
+	{
+		for (int c = 0; c < column; c++)
+		{
+			discs[r][c] = other.getDisc(r, c);
+		}
+	}
+	currentTurn = other.currentTurn;
+}
+
+
+
 void Position::swapTurn() {
 	currentTurn = 1 * (currentTurn != 1) + 2 * (currentTurn != 2);
 }
@@ -56,14 +70,24 @@ int Position::evaluate() {
 		{
 			if (discs[r][c] == 1) {
 				p1 += 1;
+				if (isCorner(r, c)) {
+					p1 += 100;
+				}
 			}
 			else if (discs[r][c] == 2) {
 				p2 += 1;
+				if (isCorner(r, c)) {
+					p2 += 100;
+				}
 			}
 		}
 	}
 
 	return p1 - p2;
+}
+
+bool Position::isCorner(int x, int y) {
+	return ((x == 0 && y == 0) || (x == 7 && y == 7) || (x == 0 && y == 7) || (x == 7 && y == 0));
 }
 
 

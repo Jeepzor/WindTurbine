@@ -7,6 +7,7 @@
 
 class Position {
 public:
+	static int counter;
 	Position();
 	void setTurn(int t) { currentTurn = t; };
 	void swapTurn();
@@ -15,8 +16,10 @@ public:
 	int getTurn() { return currentTurn; };
 	int getDisc(int x, int y);
 	int evaluate();
+	void deepCopy(Position other);
 
 private:
+	bool isCorner(int x, int y);
 	int column = 8;
 	int row = 8;
 	std::vector<std::vector<int>> discs;
