@@ -14,7 +14,6 @@ public:
 	}
 
 	void click();
-	void placeDisc(int x, int y, Position& pos);
 	void draw(); 
 	void update(double dt);
 	Move test(int depth);
@@ -27,6 +26,7 @@ private:
 	Board(const Board& other) = delete;
 	const Board& operator=(const Board& other) = delete;
 
+	void placeDisc(int x, int y, Position& pos);
 	bool isLegalMove(int x, int y, Position& pos);
 	bool wouldFlipDiscs(int x, int y, Position& pos);
 	bool checkFlip(int x, int y, int dx, int dy, Position& pos);
@@ -38,26 +38,33 @@ private:
 	Move findBestMove(Position& pos, int depth, int alpha, int beta, bool maxPlayer);
 	int minimax(Position& pos, int depth, bool maxPlayer);
 	int getOponent(Position& pos);
-
+	
+	void drawBackground();
 	void drawSquares();
 	void drawChars();
 	void drawDiscs();
 	void drawScore();
 
-	std::string characters[8] = {"A", "B", "C", "D", "E", "F", "G", "H" };
-	double column = 8;
-	double row = 8;
-	double size = 64;
-	double width = row * size;
-	double height = column * size;
-	double xPos;
-	double yPos;
 	Position currentPosition;
+	std::string characters[8] = {"A", "B", "C", "D", "E", "F", "G", "H" };
+	int column = 8;
+	int row = 8;
+	int size = 64;
+	int width = row * size;
+	int height = column * size;
+	int xPos;
+	int yPos;
 	int xHover;
 	int yHover;
 	int currentTurn = PLAYER;
 	int scoreP1 = 2;
 	int scoreP2 = 2;
+
+	std::vector<Move> cornerMoves;
+	std::vector<Move> wallMoves;
+	std::vector<Move> centerMoves;
+	std::vector<Move> terribleMoves;
+	std::vector<Move> badMoves;
 
 	wind::Font* text;
 	wind::Image* p1;

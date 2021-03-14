@@ -10,6 +10,34 @@ Board::Board(double x, double y) {
 	p1 = wind::Image::getInstance("othello/assets/1.png");
 	p2 = wind::Image::getInstance("othello/assets/2.png");
 
+	cornerMoves = {Move(0,0), Move(7,7), Move(7,0), Move(0,7)};
+
+	terribleMoves = { Move(1,1), Move(6,6), Move(6,1), Move(1,6), 
+					Move(0,1), Move(1,0), Move(0,6), Move(6,0),
+					Move(7,1), Move(1,7), Move(7,6), Move(6,7),
+	};
+
+	badMoves = { Move(1,2), Move(1,3), Move(1,4), Move(1,5),
+				  Move(6,2), Move(6,3), Move(6,4), Move(6,5),
+				  Move(2,1), Move(3,1), Move(4,1), Move(5,1),
+				  Move(2,6), Move(3,6), Move(4,6), Move(5,6),
+
+	};
+
+	wallMoves = { Move(0,2), Move(0,3), Move(0,4), Move(0,5),
+				  Move(7,2), Move(7,3), Move(7,4), Move(7,5),
+				  Move(2,0), Move(3,0), Move(4,0), Move(5,0),
+				  Move(2,7), Move(3,7), Move(4,7), Move(5,7),
+
+	};
+
+	for (int x = 2; x <= 5; x++)
+	{
+		for (int y = 2; y <= 5; y++) {
+			centerMoves.push_back(Move(x, y));
+		}
+	}
+
 	currentPosition = Position();
 	findLegalMoves(currentPosition);
 }
@@ -33,6 +61,7 @@ void Board::update(double dt) {
 
 std::vector<Move> Board::findLegalMoves(Position& pos) {
 	std::vector<Move> legalMoves;
+	/*
 	for (int x = 0; x <= row; x++)
 	{
 		for (int y = 0; y <= column; y++)
@@ -41,6 +70,47 @@ std::vector<Move> Board::findLegalMoves(Position& pos) {
 				Move newMove = Move(x, y);
 				legalMoves.push_back(newMove);
 			}
+		}
+	}
+	*/
+
+	for (int i = 0; i < cornerMoves.size(); i++)
+	{
+		if (isLegalMove(cornerMoves[i].x, cornerMoves[i].y, pos)) {
+			Move newMove = Move(cornerMoves[i].x, cornerMoves[i].y);
+			legalMoves.push_back(newMove);
+		}
+	}
+	
+	for (int i = 0; i < wallMoves.size(); i++)
+	{
+		if (isLegalMove(wallMoves[i].x, wallMoves[i].y, pos)) {
+			Move newMove = Move(wallMoves[i].x, wallMoves[i].y);
+			legalMoves.push_back(newMove);
+		}
+	}
+	
+	for (int i = 0; i < centerMoves.size(); i++)
+	{
+		if (isLegalMove(centerMoves[i].x, centerMoves[i].y, pos)) {
+			Move newMove = Move(centerMoves[i].x, centerMoves[i].y);
+			legalMoves.push_back(newMove);
+		}
+	}
+	
+	for (int i = 0; i < badMoves.size(); i++)
+	{
+		if (isLegalMove(badMoves[i].x, badMoves[i].y, pos)) {
+			Move newMove = Move(badMoves[i].x, badMoves[i].y);
+			legalMoves.push_back(newMove);
+		}
+	}
+	
+	for (int i = 0; i < terribleMoves.size(); i++)
+	{
+		if (isLegalMove(terribleMoves[i].x, terribleMoves[i].y, pos)) {
+			Move newMove = Move(terribleMoves[i].x, terribleMoves[i].y);
+			legalMoves.push_back(newMove);
 		}
 	}
 
@@ -73,7 +143,7 @@ void Board::click() {
 	else {
 		if (currentPosition.getTurn() == COMPUTER) {
 			std::cout << "COMPUTER \n";
-			Move bestMove = findBestMove(currentPosition, 5, -999999, 999999, false);
+			Move bestMove = findBestMove(currentPosition, 7, -999999, 999999, false);
 			std::cout << "Looked at " << counter << " positions \n";
 			std::cout << "Value: " << bestMove.value << "\n";
 			placeDisc(bestMove.x, bestMove.y, currentPosition);
@@ -83,14 +153,6 @@ void Board::click() {
 	swap = !swap;
 	calculateScores();
 	counter = 0;
-}
-
-
-Move Board::test(int depth) {
-	if (depth == 0) {
-		return Move(13, 3, 1337);
-	}
-	return test(depth - 1);
 }
 
 Move Board::findBestMove(Position& pos, int depth, int alpha, int beta, bool maxPlayer) {
@@ -287,14 +349,20 @@ void Board::calculateScores() {
 
 
 void Board::draw() {
+	drawBackground();
 	drawSquares();
 	drawChars();
 	drawDiscs();
 	drawScore();
 }
 
+void Board::drawBackground() {
+	wind::graphics.setColor(72, 93, 63, 255);
+	wind::graphics.rectangle("fill", 0,0, 1280, 720);
+}
+
 void Board::drawScore() {
-	wind::graphics.setColor(0, 0, 0, 255);
+	wind::graphics.setColor(225, 255, 225);
 	text->draw("Player Score: " + std::to_string(scoreP1), 50, 10);
 	text->draw("Computer Score: " + std::to_string(scoreP2), 700, 10);
 }
@@ -304,11 +372,11 @@ void Board::drawSquares() {
 		for (int c = 0; c < column; c++)
 		{
 			if (r == xHover && c == yHover) {
-				wind::graphics.setColor(255, 0, 0, 55);
+				wind::graphics.setColor(55, 55, 55, 125);
 				wind::graphics.rectangle("fill", xPos + size * r, yPos + size * c, size, size);
 			}
 			else {
-				wind::graphics.setColor(0, 0, 0);
+				wind::graphics.setColor(25,55,25);
 				wind::graphics.rectangle("line", xPos + size * r, yPos + size * c, size, size);
 			}			
 		}
@@ -331,7 +399,7 @@ void Board::drawDiscs() {
 }
 
 void Board::drawChars() {	
-	wind::graphics.setColor(0, 0, 0);
+	wind::graphics.setColor(225, 255, 225);
 	for (int r = 0; r < row; r++) {
 		std::string s = "A";
 		text->draw(characters[r], xPos + size * r + size / 4, yPos - size);

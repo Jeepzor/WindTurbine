@@ -69,16 +69,10 @@ int Position::evaluate() {
 		for (int c = 0; c < column; c++)
 		{
 			if (discs[r][c] == 1) {
-				p1 += 1;
-				if (isCorner(r, c)) {
-					p1 += 100;
-				}
+				p1 += 1 + isCorner(r, c) + isEdge(r, c) + isBad(r, c);
 			}
 			else if (discs[r][c] == 2) {
-				p2 += 1;
-				if (isCorner(r, c)) {
-					p2 += 100;
-				}
+				p2 += 1 + isCorner(r, c) + isEdge(r, c) + isBad(r,c);
 			}
 		}
 	}
@@ -86,8 +80,16 @@ int Position::evaluate() {
 	return p1 - p2;
 }
 
-bool Position::isCorner(int x, int y) {
-	return ((x == 0 && y == 0) || (x == 7 && y == 7) || (x == 0 && y == 7) || (x == 7 && y == 0));
+int Position::isCorner(int x, int y) {
+	return cornerValue * ((x == 0 && y == 0) || (x == 7 && y == 7) || (x == 0 && y == 7) || (x == 7 && y == 0));
+}
+
+int Position::isEdge(int x, int y) {
+	return edgeValue * ( (x > 1 && x < 6 && (y == 0 || y == 7) ) || (y > 1 && y < 6 && (x == 0 || x == 7)) );
+}
+
+int Position::isBad(int x, int y) {
+	return  badValue * ((x > 0 && x < 7 && (y == 1 || y == 6)) || (y > 0 && y < 7 && (x == 1 || x == 6)));
 }
 
 
