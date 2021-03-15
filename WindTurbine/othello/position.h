@@ -11,12 +11,12 @@ public:
 	Position();
 	void setTurn(int t) { currentTurn = t; };
 	void swapTurn();
+	void setStartPosition(bool playerBlack);
 	void getScores(int& p1, int& p2);
 	void setDisc(int x, int y, int disc);
 	int getTurn() { return currentTurn; };
 	int getDisc(int x, int y);
 	int evaluate();
-	void deepCopy(Position other);
 
 private:
 	int isCorner(int x, int y);

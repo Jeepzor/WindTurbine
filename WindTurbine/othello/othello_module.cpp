@@ -12,7 +12,12 @@ OthelloModule::OthelloModule() {
 }
 
 void OthelloModule::keyPressed(std::string key) {
-	
+	if (key == "1") {
+		board->restart(false);
+	}
+	else if (key == "2") {
+		board->restart(true);
+	}
 }
 
 void OthelloModule::mousePressed(int button) {

@@ -1,7 +1,7 @@
 #include <string>
 #include "board.h"
 
-Board::Board(double x, double y) {
+Board::Board(int x, int y) {
 	xPos = x - size * column / 2;
 	yPos = y - size * row / 2;
 	text = new wind::Font("game/assets/bit.ttf", 64);
@@ -42,10 +42,16 @@ Board::Board(double x, double y) {
 	findLegalMoves(currentPosition);
 }
 
+void Board::restart(bool playerBlack) {
+	currentPosition.setStartPosition(playerBlack);
+	playerIsBlack = playerBlack;
+}
+
 Board::~Board() {
 	delete text;
 }
 
+bool justSwapped = false;
 void Board::update(double dt) {
 	double mouseX = wind::turbine.getMouseX();
 	double mouseY = wind::turbine.getMouseY();
@@ -57,22 +63,21 @@ void Board::update(double dt) {
 		xHover = -1;
 		yHover = -1;
 	}
+
+	AI();
+
+	
+	if (getNumberOfLegalMoves(currentPosition) == 0 && !justSwapped) {
+		justSwapped = true;
+		currentPosition.swapTurn();
+	}
+	else {
+		justSwapped = false;
+	}
 }
 
 std::vector<Move> Board::findLegalMoves(Position& pos) {
 	std::vector<Move> legalMoves;
-	/*
-	for (int x = 0; x <= row; x++)
-	{
-		for (int y = 0; y <= column; y++)
-		{
-			if (isLegalMove(x, y, pos)) {
-				Move newMove = Move(x, y);
-				legalMoves.push_back(newMove);
-			}
-		}
-	}
-	*/
 
 	for (int i = 0; i < cornerMoves.size(); i++)
 	{
@@ -134,15 +139,21 @@ int Board::getNumberOfLegalMoves(Position& pos) {
 }
 
 int counter = 0;
-bool swap = true;
 void Board::click() {
-	if (swap) {
+	if (currentTurn == PLAYER){
 		placeDisc(xHover, yHover, currentPosition);
-		
+		calculateScores();
+		skipFrame = true;
+	}
+	counter = 0;
+}
+
+void Board::AI() {
+	if (skipFrame) {
+		skipFrame = false;
 	}
 	else {
 		if (currentPosition.getTurn() == COMPUTER) {
-			std::cout << "COMPUTER \n";
 			Move bestMove = findBestMove(currentPosition, 7, -999999, 999999, false);
 			std::cout << "Looked at " << counter << " positions \n";
 			std::cout << "Value: " << bestMove.value << "\n";
@@ -150,13 +161,22 @@ void Board::click() {
 			calculateScores();
 		}
 	}
-	swap = !swap;
-	calculateScores();
-	counter = 0;
 }
 
 Move Board::findBestMove(Position& pos, int depth, int alpha, int beta, bool maxPlayer) {
-	if (depth == 0 || getNumberOfLegalMoves(pos) == 0) {
+	if (getNumberOfLegalMoves(pos) == 0){
+		counter++;
+		pos.swapTurn();
+		if (getNumberOfLegalMoves(pos) == 0) {
+			int p1;
+			int p2;
+			pos.getScores(p1, p2);
+			return Move(0, 0, -99999 * (p1 < p2) + 99999 * (p2 < p1));
+		}
+		pos.swapTurn();
+		return Move(0, 0, -99999 * pos.getTurn() == 1 + 99999 * pos.getTurn() == 2);
+	}
+	else if (depth == 0) {
 		counter++;
 		return Move(0,0, pos.evaluate());
 	}
@@ -166,11 +186,10 @@ Move Board::findBestMove(Position& pos, int depth, int alpha, int beta, bool max
 		Move bestValue = Move(0, 0, -99999);
 		for (int i = 0; i < legalMoves.size(); i++)
 		{
-			Position newPosition = Position();
-			newPosition.deepCopy(pos);
+			Position newPosition = Position(pos);
 			placeDisc(legalMoves[i].x, legalMoves[i].y, newPosition);
 			Move maxEval = findBestMove(newPosition, depth - 1, alpha, beta, false);
-			if (maxEval.value >= bestValue.value) {
+			if (maxEval.value > bestValue.value) {
 				bestValue.value = maxEval.value;
 				bestValue.x = legalMoves[i].x;
 				bestValue.y = legalMoves[i].y;
@@ -192,8 +211,7 @@ Move Board::findBestMove(Position& pos, int depth, int alpha, int beta, bool max
 		Move bestValue = Move(0, 0, 99999);
 		for (int i = 0; i < legalMoves.size(); i++)
 		{
-			Position newPosition = Position();
-			newPosition.deepCopy(pos);
+			Position newPosition = Position(pos);
 			placeDisc(legalMoves[i].x, legalMoves[i].y, newPosition);
 			Move minEval = findBestMove(newPosition, depth - 1, alpha, beta, true);
 			if (minEval.value < bestValue.value) {
@@ -216,7 +234,6 @@ Move Board::findBestMove(Position& pos, int depth, int alpha, int beta, bool max
 }
 
 void Board::placeDisc(int x, int y, Position& pos) {
-	
 	if (x < 0 || x > 7 || y < 0 || y > 7) {
 		return;
 	}
@@ -352,6 +369,7 @@ void Board::draw() {
 	drawBackground();
 	drawSquares();
 	drawChars();
+	drawTarget();
 	drawDiscs();
 	drawScore();
 }
@@ -367,18 +385,22 @@ void Board::drawScore() {
 	text->draw("Computer Score: " + std::to_string(scoreP2), 700, 10);
 }
 
+void Board::drawTarget() {
+	wind::graphics.setColor(255, 255, 255, 80);
+	if (playerIsBlack) {
+		p1->draw(xHover * size + xPos, yHover * size + yPos);
+	}
+	else {
+		p2->draw(xHover * size + xPos, yHover * size + yPos);
+	}
+}
+
 void Board::drawSquares() {
 	for (int r = 0; r < row; r++) {
 		for (int c = 0; c < column; c++)
 		{
-			if (r == xHover && c == yHover) {
-				wind::graphics.setColor(55, 55, 55, 125);
-				wind::graphics.rectangle("fill", xPos + size * r, yPos + size * c, size, size);
-			}
-			else {
-				wind::graphics.setColor(25,55,25);
-				wind::graphics.rectangle("line", xPos + size * r, yPos + size * c, size, size);
-			}			
+			wind::graphics.setColor(25,55,25);
+			wind::graphics.rectangle("line", xPos + size * r, yPos + size * c, size, size);			
 		}
 	}
 }
@@ -389,10 +411,22 @@ void Board::drawDiscs() {
 		for (int c = 0; c < column; c++)
 		{
 			if (currentPosition.getDisc(r, c) == 1) {
-				p1->draw(xPos + size * r, yPos + size * c);
+				if (playerIsBlack) {
+
+					p1->draw(xPos + size * r, yPos + size * c);
+				}
+				else {
+					p2->draw(xPos + size * r, yPos + size * c);
+				}
 			}
 			else if (currentPosition.getDisc(r, c) == 2) {
-				p2->draw(xPos + size * r, yPos + size * c);
+				if (playerIsBlack) {
+
+					p2->draw(xPos + size * r, yPos + size * c);
+				}
+				else {
+					p1->draw(xPos + size * r, yPos + size * c);
+				}
 			}
 		}
 	}
@@ -406,7 +440,6 @@ void Board::drawChars() {
 	}
 
 	for (int c = 0; c < column; c++) {
-		std::string s = "A";
 		text->draw(std::to_string(c + 1), xPos - size / 2, yPos + size * c);
 	}
 }

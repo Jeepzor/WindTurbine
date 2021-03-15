@@ -8,15 +8,36 @@ Position::Position() {
 		std::vector<int> row = { 0, 0, 0, 0, 0, 0, 0, 0 };
 		discs.push_back(row);
 	}
-	discs[4][4] = 1;
-	discs[4][3] = 2;
-	discs[3][4] = 2;
-	discs[3][3] = 1;
-	/*
-	discs[2][3] = 1;
-	discs[1][3] = 1;
-	discs[2][4] = 1;
-	*/
+	discs[4][4] = 2;
+	discs[4][3] = 1;
+	discs[3][4] = 1;
+	discs[3][3] = 2;
+	
+}
+
+void Position::setStartPosition(bool playerBlack) {
+	for (int r = 0; r < row; r++)
+	{
+		for (int c = 0; c < column; c++)
+		{
+			discs[r][c] = 0;
+		}
+	}
+
+	if (playerBlack) {
+		discs[4][4] = 1;
+		discs[4][3] = 2;
+		discs[3][4] = 2;
+		discs[3][3] = 1;
+		setTurn(2);
+	}
+	else {
+		discs[4][4] = 2;
+		discs[4][3] = 1;
+		discs[3][4] = 1;
+		discs[3][3] = 2;
+		setTurn(1);
+	}
 }
 
 int Position::getDisc(int x, int y) {
@@ -43,19 +64,6 @@ void Position::getScores(int& p1, int& p2) {
 		}
 	}
 }
-
-void Position::deepCopy(Position other) {
-	for (int r = 0; r < row; r++)
-	{
-		for (int c = 0; c < column; c++)
-		{
-			discs[r][c] = other.getDisc(r, c);
-		}
-	}
-	currentTurn = other.currentTurn;
-}
-
-
 
 void Position::swapTurn() {
 	currentTurn = 1 * (currentTurn != 1) + 2 * (currentTurn != 2);

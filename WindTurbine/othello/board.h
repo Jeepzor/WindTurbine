@@ -9,23 +9,22 @@ constexpr int PLAYER = 1;
 constexpr int COMPUTER = 2;
 class Board{
 public:
-	static Board* getInstance(double xPos, double yPos) {
+	static Board* getInstance(int xPos, int yPos) {
 		return new Board(xPos, yPos);
 	}
-
 	void click();
 	void draw(); 
 	void update(double dt);
-	Move test(int depth);
+	void restart(bool playerBlack);
 	
 	~Board();
 	
 
 private:
-	Board(double xPos, double yPos);
+	Board(int xPos, int yPos);
 	Board(const Board& other) = delete;
 	const Board& operator=(const Board& other) = delete;
-
+	void AI();
 	void placeDisc(int x, int y, Position& pos);
 	bool isLegalMove(int x, int y, Position& pos);
 	bool wouldFlipDiscs(int x, int y, Position& pos);
@@ -36,9 +35,9 @@ private:
 
 	std::vector<Move> findLegalMoves(Position& pos);
 	Move findBestMove(Position& pos, int depth, int alpha, int beta, bool maxPlayer);
-	int minimax(Position& pos, int depth, bool maxPlayer);
 	int getOponent(Position& pos);
 	
+	void drawTarget();
 	void drawBackground();
 	void drawSquares();
 	void drawChars();
@@ -59,6 +58,8 @@ private:
 	int currentTurn = PLAYER;
 	int scoreP1 = 2;
 	int scoreP2 = 2;
+	bool skipFrame = false;
+	bool playerIsBlack = false;
 
 	std::vector<Move> cornerMoves;
 	std::vector<Move> wallMoves;
