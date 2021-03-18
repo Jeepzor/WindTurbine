@@ -40,7 +40,7 @@ void Position::setStartPosition(bool playerBlack) {
 	}
 }
 
-int Position::getDisc(int x, int y) {
+int Position::getDisc(int x, int y) const {
 	return discs[x][y];
 }
 
@@ -48,7 +48,7 @@ void Position::setDisc(int x, int y, int disc) {
 	discs[x][y] = disc;
 }
 
-void Position::getScores(int& p1, int& p2) {
+void Position::getScores(int& p1, int& p2) const{
 	p1 = 0;
 	p2 = 0;
 	for (int r = 0; r < row; r++)
@@ -69,7 +69,7 @@ void Position::swapTurn() {
 	currentTurn = 1 * (currentTurn != 1) + 2 * (currentTurn != 2);
 }
 
-int Position::evaluate() {
+int Position::evaluate() const{
 	int p1 = 0;
 	int p2 = 0;
 	for (int r = 0; r < row; r++)
@@ -88,15 +88,15 @@ int Position::evaluate() {
 	return p1 - p2;
 }
 
-int Position::isCorner(int x, int y) {
+int Position::isCorner(int x, int y) const{
 	return cornerValue * ((x == 0 && y == 0) || (x == 7 && y == 7) || (x == 0 && y == 7) || (x == 7 && y == 0));
 }
 
-int Position::isEdge(int x, int y) {
+int Position::isEdge(int x, int y) const{
 	return edgeValue * ( (x > 1 && x < 6 && (y == 0 || y == 7) ) || (y > 1 && y < 6 && (x == 0 || x == 7)) );
 }
 
-int Position::isBad(int x, int y) {
+int Position::isBad(int x, int y) const{
 	return  badValue * ((x > 0 && x < 7 && (y == 1 || y == 6)) || (y > 0 && y < 7 && (x == 1 || x == 6)));
 }
 
